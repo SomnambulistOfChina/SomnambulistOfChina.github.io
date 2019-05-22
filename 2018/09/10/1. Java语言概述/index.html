@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>1. Java语言概述 | Hexo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java 工具,">
+  
+
+  <meta name="description" content="1.1 软件开发介绍软件开发软件，即一系列按照特定顺序组织的计算机数据和指令的集合。有系统软件和应用软件之分。   人机交互方式图形化界面(Graphical User Interface GUI)这种方式简单直观，使用者易于接受，容易上手操作。命令行方式(Command Line Interface CLI)：需要有一个控制台，输入特定的指令，让计算机完成一些操作。较为麻烦，需要记录住一些命令。">
+<meta name="keywords" content="Java 工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1. Java语言概述">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/1. Java语言概述/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.1 软件开发介绍软件开发软件，即一系列按照特定顺序组织的计算机数据和指令的集合。有系统软件和应用软件之分。   人机交互方式图形化界面(Graphical User Interface GUI)这种方式简单直观，使用者易于接受，容易上手操作。命令行方式(Command Line Interface CLI)：需要有一个控制台，输入特定的指令，让计算机完成一些操作。较为麻烦，需要记录住一些命令。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDJj1J.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDYdEV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDaaM4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDaHW8.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDaves.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDdpF0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDdVm9.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDdnFx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDd16e.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDdaff.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDdqtx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDwOVs.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/ED0S2T.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/ED0CMF.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/ED0Dds.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/ED06J0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/ED0fL4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/ED0LQO.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDBuYq.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDBJ0J.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDBgAA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDBh1f.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDDnDe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDDDCq.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDDqqe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDDxPI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDrPsS.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDrAaj.png">
+<meta property="og:updated_time" content="2019-05-22T22:55:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1. Java语言概述">
+<meta name="twitter:description" content="1.1 软件开发介绍软件开发软件，即一系列按照特定顺序组织的计算机数据和指令的集合。有系统软件和应用软件之分。   人机交互方式图形化界面(Graphical User Interface GUI)这种方式简单直观，使用者易于接受，容易上手操作。命令行方式(Command Line Interface CLI)：需要有一个控制台，输入特定的指令，让计算机完成一些操作。较为麻烦，需要记录住一些命令。">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/06/EDJj1J.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-1-软件开发介绍"><span class="toc-text">1.1 软件开发介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#软件开发"><span class="toc-text">软件开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#人机交互方式"><span class="toc-text">人机交互方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的DOS命令"><span class="toc-text">常用的DOS命令</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-2-计算机编程语言介绍"><span class="toc-text">1-2 计算机编程语言介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是计算机语言"><span class="toc-text">什么是计算机语言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Java语言概述"><span class="toc-text">1-3 Java语言概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java语言概述-Java简史"><span class="toc-text">Java语言概述:Java简史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java技术体系平台"><span class="toc-text">Java技术体系平台</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-3-Java在各领域的应用"><span class="toc-text">1-3 Java在各领域的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Java语言的诞生"><span class="toc-text">Java语言的诞生</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要特性"><span class="toc-text">主要特性</span></a></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#1-4-Java程序运行机制及运行过程"><span class="toc-text">1-4 Java程序运行机制及运行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java语言的特点"><span class="toc-text">Java语言的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java两种核心机制"><span class="toc-text">Java两种核心机制</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-5-Java语言的环境搭建"><span class="toc-text">1-5 Java语言的环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#明确什么是JDK-JRE"><span class="toc-text">明确什么是JDK, JRE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载-JDK"><span class="toc-text">下载 JDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装JDK"><span class="toc-text">安装JDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置环境变量"><span class="toc-text">配置环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置环境变量-path"><span class="toc-text">配置环境变量 path</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一个Java程序"><span class="toc-text">第一个Java程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤二：编译"><span class="toc-text">步骤二：编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#步骤三：运行"><span class="toc-text">步骤三：运行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-7-常见问题及解决方法"><span class="toc-text">1-7 常见问题及解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#小总结："><span class="toc-text">小总结：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-8-注释-Comment"><span class="toc-text">1-8 注释(Comment)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#小结第一个程序"><span class="toc-text">小结第一个程序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-9-Java-API文档"><span class="toc-text">1-9 Java API文档</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-10-良好的编程风格"><span class="toc-text">1.10 良好的编程风格</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#正确的注释和注释风格"><span class="toc-text">正确的注释和注释风格</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#选择合适的文本编辑器或-IDE-开发"><span class="toc-text">选择合适的文本编辑器或 IDE 开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JBuilder"><span class="toc-text">JBuilder</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NetBeans"><span class="toc-text">NetBeans</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Eclipse"><span class="toc-text">Eclipse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MyEclipse"><span class="toc-text">MyEclipse</span></a></li></ol></li>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-1. Java语言概述" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">1. Java语言概述</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.09.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>John Doe</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="1-1-软件开发介绍"><a href="#1-1-软件开发介绍" class="headerlink" title="1.1 软件开发介绍"></a>1.1 软件开发介绍</h1><h2 id="软件开发"><a href="#软件开发" class="headerlink" title="软件开发"></a>软件开发</h2><p>软件，即一系列按照特定顺序组织的计算机数据和指令的集合。有系统软件和应用软件之分。  </p>
+<h2 id="人机交互方式"><a href="#人机交互方式" class="headerlink" title="人机交互方式"></a>人机交互方式</h2><p>图形化界面(Graphical User Interface GUI)这种方式简单直观，使用者易于接受，容易上手操作。<br>命令行方式(Command Line Interface CLI)：需要有一个控制台，输入特定的指令，让计算机完成一些操作。较为麻烦，需要记录住一些命令。<br>==Pascal之父Nicklaus Wirth： “Algorithms+Data Structures=Programs”==</p>
+<h2 id="常用的DOS命令"><a href="#常用的DOS命令" class="headerlink" title="常用的DOS命令"></a>常用的DOS命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dir :    列出当前目录下的文件以及文件夹</span><br><span class="line">md :   创建目录</span><br><span class="line">rd :     删除目录</span><br><span class="line">cd :    进入指定目录</span><br><span class="line">cd.. :  退回到上一级目录</span><br><span class="line">cd\:    退回到根目录</span><br><span class="line">del :    删除文件</span><br><span class="line">exit :   退出 dos 命令行</span><br><span class="line">补充：echo javase&gt;1.doc</span><br><span class="line">常用快捷键</span><br><span class="line">←   →：移动光标</span><br><span class="line">↑   ↓：调阅历史操作命令</span><br><span class="line">Delete和Backspace：删除字符</span><br></pre></td></tr></table></figure>
+<h1 id="1-2-计算机编程语言介绍"><a href="#1-2-计算机编程语言介绍" class="headerlink" title="1-2 计算机编程语言介绍"></a>1-2 计算机编程语言介绍</h1><h2 id="什么是计算机语言"><a href="#什么是计算机语言" class="headerlink" title="什么是计算机语言"></a>什么是计算机语言</h2><ul>
+<li>语言：是人与人之间用于沟通的一种方式。例如：中国人与中国人用普通话沟通。而中国人要和英国人交流，就要学习英语。</li>
+<li><p>计算机语言：人与计算机交流的方式。<br>   如果人要与计算机交流，那么就要学习计算机语言。<br>   计算机语言有很多种。如：C ,C++ ,Java ,PHP ,  Kotlin，Python，Scala等。  </p>
+</li>
+<li><p>第一代语言<br>机器语言。指令以二进制代码形式存在。</p>
+</li>
+<li>第二代语言<br>汇编语言。使用助记符表示一条机器指令。</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDJj1J.png" alt="EDJj1J.png"></p>
+<ul>
+<li>第三代语言：高级语言</li>
+</ul>
+<blockquote>
+<p>C、Pascal、Fortran面向过程的语言<br>C++面向过程/面向对象<br>Java跨平台的纯面向对象的语言<br>.NET跨语言的平台<br>Python、Scala…  </p>
+</blockquote>
+<h2 id="1-3-Java语言概述"><a href="#1-3-Java语言概述" class="headerlink" title="1-3 Java语言概述"></a>1-3 Java语言概述</h2><ul>
+<li>是SUN(Stanford University Network，斯坦福大学网络公司 ) 1995年推出的一门高级编程语言。</li>
+<li>是一种面向Internet的编程语言。Java一开始富有吸引力是因为Java程序可以在Web浏览器中运行。这些Java程序被称为Java小程序（applet）。applet使用现代的图形用户界面与Web用户进行交互。 applet内嵌在HTML代码中。</li>
+<li>随着Java技术在web方面的不断成熟，已经成为Web应用程序的首选开发语言<br>   <strong>后台开发：Java、PHP、Python、Go、Node.js</strong><h3 id="Java语言概述-Java简史"><a href="#Java语言概述-Java简史" class="headerlink" title="Java语言概述:Java简史"></a>Java语言概述:Java简史</h3><blockquote>
+<p>1991年 Green项目，开发语言最初命名为Oak (橡树)<br>1994年，开发组意识到Oak 非常适合于互联网<br>1996年，发布JDK 1.0，约8.3万个网页应用Java技术来制作<br>1997年，发布JDK 1.1，JavaOne会议召开，创当时全球同类会议规模之最<br>1998年，发布JDK 1.2，同年发布企业平台J2EE<br>1999年，Java分成J2SE、J2EE和J2ME，JSP/Servlet技术诞生<br>2004年，发布里程碑式版本：JDK 1.5，为突出此版本的重要性，更名为JDK 5.0<br>2005年，J2SE -&gt; JavaSE，J2EE -&gt; JavaEE，J2ME -&gt; JavaME<br>2009年，Oracle公司收购SUN，交易价格74亿美元<br>2011年，发布JDK 7.0<br>2014年，发布JDK 8.0，是继JDK 5.0以来变化最大的版本<br>2017年，发布JDK 9.0，最大限度实现模块化<br>2018年3月，发布JDK 10.0，版本号也称为18.3<br>2018年9月，发布JDK 11.0，版本号也称为18.9     </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Java技术体系平台"><a href="#Java技术体系平台" class="headerlink" title="Java技术体系平台"></a>Java技术体系平台</h3><p><img src="https://s2.ax1x.com/2019/05/06/EDYdEV.png" alt="EDYdEV.png"></p>
+<h1 id="1-3-Java在各领域的应用"><a href="#1-3-Java在各领域的应用" class="headerlink" title="1-3 Java在各领域的应用"></a>1-3 Java在各领域的应用</h1><p>从Java的应用领域来分，Java语言的应用方向主要表现在以下几个方面：</p>
+<ul>
+<li>企业级应用：主要指复杂的大企业的软件系统、各种类型的网站。Java的安全机制以及它的跨平台的优势，使它在分布式系统领域开发中有广泛应用。应用领域包括金融、电信、交通、电子商务等。</li>
+<li>Android平台应用：Android应用程序使用Java语言编写。Android开发水平的高低很大程度上取决于Java语言核心能力是否扎实。</li>
+<li>大数据平台开发：各类框架有Hadoop，spark，storm，flink等，就这类技术生态圈来讲，还有各种中间件如flume，kafka，sqoop等等 ，这些框架以及工具大多数是用Java编写而成，但提供诸如Java，scala，Python，R等各种语言API供编程。</li>
+<li>移动领域应用：主要表现在消费和嵌入式领域，是指在各种小型设备上的应用，包括手机、PDA、机顶盒、汽车通信设备等。<h3 id="Java语言的诞生"><a href="#Java语言的诞生" class="headerlink" title="Java语言的诞生"></a>Java语言的诞生</h3>java之父James Gosling团队在开发”Green”项目时，发现C缺少垃圾回收系统，还有可移植的安全性、分布程序设计和多线程功能。最后，他们想要一种易于移植到各种设备上的平台。<br><img src="https://s2.ax1x.com/2019/05/06/EDaaM4.png" alt="EDaaM4.png"><br>Java确实是从C语言和C++语言继承了许多成份，甚至可以将Java看成是类C语言发展和衍生的产物。比如Java语言的变量声明，操作符形式，参数传递，流程控制等方面和C语言、C++语言完全相同。但同时，Java是一个纯粹的面向对象的程序设计语言，它继承了C++语言面向对象技术的核心。Java舍弃了C语言中容易引起错误的指针（以引用取代）、运算符重载（operator overloading）、多重继承（以接口取代）等特性，增加了垃圾回收器功能用于回收不再被引用的对象所占据的内存空间。<br>JDK1.5又引入了泛型编程（Generic Programming）、类型安全的枚举、不定长参数和自动装/拆箱<h2 id="主要特性"><a href="#主要特性" class="headerlink" title="主要特性"></a>主要特性</h2></li>
+<li>Java语言是易学的。Java语言的语法与C语言和C++语言很接近，使得大多数程序员很容易学习和使用Java。</li>
+<li>Java语言是强制面向对象的。Java语言提供类、接口和继承等原语，为了简单起见，只支持类之间的单继承，但支持接口之间的多继承，并支持类与接口之间的实现机制（关键字为implements）。</li>
+<li>Java语言是分布式的。Java语言支持Internet应用的开发，在基本的Java应用编程接口中有一个网络应用编程接口（java net），它提供了用于网络应用编程的类库，包括URL、URLConnection、Socket、ServerSocket等。Java的RMI（远程方法激活）机制也是开发分布式应用的重要手段。</li>
+<li>Java语言是健壮的。Java的强类型机制、异常处理、垃圾的自动收集等是Java程序健壮性的重要保证。对指针的丢弃是Java的明智选择。</li>
+<li>Java语言是安全的。Java通常被用在网络环境中，为此，Java提供了一个安全机制以防恶意代码的攻击。如：安全防范机制（类ClassLoader），如分配不同的名字空间以防替代本地的同名类、字节代码检查。</li>
+<li>Java语言是体系结构中立的。Java程序（后缀为java的文件）在Java平台上被编译为体系结构中立的字节码格式（后缀为class的文件），然后可以在实现这个Java平台的任何系统中运行。</li>
+<li>Java语言是解释型的。如前所述，Java程序在Java平台上被编译为字节码格式，然后可以在实现这个Java平台的任何系统的解释器中运行。</li>
+<li>Java是性能略高的。与那些解释型的高级脚本语言相比，Java的性能还是较优的。</li>
+<li>Java语言是原生支持多线程的。在Java语言中，线程是一种特殊的对象，它必须由Thread类或其子（孙）类来创建。<h1 id="1-4-Java程序运行机制及运行过程"><a href="#1-4-Java程序运行机制及运行过程" class="headerlink" title="1-4 Java程序运行机制及运行过程"></a>1-4 Java程序运行机制及运行过程</h1><h2 id="Java语言的特点"><a href="#Java语言的特点" class="headerlink" title="Java语言的特点"></a>Java语言的特点</h2></li>
+<li>特点一：面向对象<br>两个基本概念：类、对象<br>三大特性：封装、继承、多态  </li>
+<li>特点二：健壮性<br>吸收了C/C++语言的优点，但去掉了其影响程序健壮性的部分（如指针、内存的申请与释放等），提供了一个相对安全的内存管理和访问机制</li>
+<li>特点三：跨平台性<br>跨平台性：通过Java语言编写的应用程序在不同的系统平台上都可以运行。“Write once , Run Anywhere”<br>原理：只要在需要运行 java 应用程序的操作系统上，先安装一个Java虚拟机 (JVM Java Virtual Machine) 即可。由JVM来负责Java程序在该系统中的运行。</li>
+</ul>
+<p><a href="https://imgchr.com/i/EDaHW8" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/06/EDaHW8.md.png" alt="EDaHW8.md.png"></a></p>
+<h2 id="Java两种核心机制"><a href="#Java两种核心机制" class="headerlink" title="Java两种核心机制"></a>Java两种核心机制</h2><ul>
+<li>Java虚拟机  (Java Virtal Machine)<br>JVM是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指令，管理数据、内存、寄存器。<br>对于不同的平台，有不同的虚拟机。<br>只有某平台提供了对应的java虚拟机，java程序才可在此平台运行<br>Java虚拟机机制屏蔽了底层运行平台的差别，实现了“一次编译，到处运行”  </li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDaves.png" alt="EDaves.png"></p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDdpF0.png" alt="EDdpF0.png"></p>
+<ul>
+<li>垃圾收集机制  (Garbage Collection)<br>不再使用的内存空间应回收—— 垃圾回收。</li>
+</ul>
+<blockquote>
+<ul>
+<li>在C/C++等语言中，由程序员负责回收无用内存。</li>
+<li>Java 语言消除了程序员回收无用内存空间的责任：它提供一种系统级线程跟踪存储空间的分配情况。并在JVM空闲时，检查并释放那些可被释放的存储空间。<br>垃圾回收在Java程序运行过程中自动进行，程序员无法精确控制和干预。</li>
+</ul>
+</blockquote>
+<p><strong>Java程序还会出现内存泄漏和内存溢出问题吗？</strong>==Yes!==</p>
+<h1 id="1-5-Java语言的环境搭建"><a href="#1-5-Java语言的环境搭建" class="headerlink" title="1-5 Java语言的环境搭建"></a>1-5 Java语言的环境搭建</h1><h2 id="明确什么是JDK-JRE"><a href="#明确什么是JDK-JRE" class="headerlink" title="明确什么是JDK, JRE"></a>明确什么是JDK, JRE</h2><p><img src="https://s2.ax1x.com/2019/05/06/EDdVm9.png" alt="EDdVm9.png"></p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDdnFx.png" alt="EDdnFx.png"></p>
+<p>==简单而言，使用JDK的开发工具完成的java程序，交给JRE去运行。==</p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDd16e.png" alt="EDd16e.png"></p>
+<ul>
+<li>JDK = JRE + 开发工具集（例如Javac编译工具等）</li>
+<li>JRE = JVM + Java SE标准类库<h2 id="下载-JDK"><a href="#下载-JDK" class="headerlink" title="下载 JDK"></a>下载 JDK</h2>官方网址：</li>
+<li><a href="http://www.oracle.com" target="_blank" rel="noopener">http://www.oracle.com</a></li>
+<li><a href="http://java.sun.com" target="_blank" rel="noopener">http://java.sun.com</a></li>
+</ul>
+<h2 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h2><ul>
+<li>傻瓜式安装，下一步即可。</li>
+<li>建议：安装路径不要有中文或者空格等特殊符号。</li>
+<li>如果操作系统是64位的，软件尽量选择支持64位的（除非软件本身不区分）。</li>
+<li>当提示安装 JRE 时，正常在JDK安装时已经装过了，但是为了后续使用Eclipse等开发工具不报错，建议也根据提示安装JRE。</li>
+<li>安装 JDK</li>
+</ul>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>在dos命令行中敲入javac，出现错误提示：</p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDdaff.png" alt="EDdaff.png"></p>
+<p>错误原因：当前执行的程序在当前目录下如果不存在，windows系统会在系统中已有的一个名为path的环境变量指定的目录中查找。如果仍未找到，会出现以上的错误提示。所以进入到  jdk安装路径\bin目录下，执行javac，会看到javac参数提示信息。</p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDdqtx.png" alt="EDdqtx.png"></p>
+<h2 id="配置环境变量-path"><a href="#配置环境变量-path" class="headerlink" title="配置环境变量 path"></a>配置环境变量 path</h2><ul>
+<li>path：windows系统执行命令时要搜寻的路径。<br>每次执行 java 的工具都要进入到bin目录下，是非常麻烦的。可不可以在任何目录下都可以执行java的工具呢？<br>根据windows系统在查找可执行程序的原理，可以将java工具所在路径定义到 path 环境变量中，让系统帮我们去找运行执行的程序。<br><strong>配置方法</strong>：</li>
+<li>我的电脑–属性–高级系统设置–环境变量</li>
+<li>编辑 path 环境变量，在变量值开始处加上java工具所在目录，后面用 “ ; ”和其他值分隔开即可。</li>
+<li>打开DOS命令行，任意目录下敲入javac。如果出现javac 的参数信息，配置成功。</li>
+</ul>
+<p>注：  具体操作流程，参看JDK8下载_安装_配置(点击跳转)</p>
+<p><a href="https://imgchr.com/i/EDwOVs" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/06/EDwOVs.md.png" alt="EDwOVs.md.png"></a></p>
+<p>验证是否成功：javac   java</p>
+<p><img src="https://s2.ax1x.com/2019/05/06/ED0S2T.png" alt="ED0S2T.png"></p>
+<p><img src="https://s2.ax1x.com/2019/05/06/ED0CMF.png" alt="ED0CMF.png"></p>
+<p>#1-6 开发体验— HelloWorld</p>
+<ul>
+<li>步骤：<br>1.将 Java 代码编写到扩展名为 .java 的文件中。<br>2.通过 javac 命令对该 java 文件进行编译。<br>通过 java 命令对生成的 class 文件进行运行  </li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/05/06/ED0Dds.png" alt="ED0Dds.png"></p>
+<ul>
+<li>步骤一：编写<br>选择最简单的编辑器：记事本。<br>敲入代码    class Test{  }<br>将文件保存成Test.java，这个文件是存放java代码的文件，称为源文件。</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/05/06/ED06J0.png" alt="ED06J0.png"></p>
+<h3 id="第一个Java程序"><a href="#第一个Java程序" class="headerlink" title="第一个Java程序"></a>第一个Java程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Test&#123;</span><br><span class="line">      public static void main(String[] args) &#123;</span><br><span class="line">             System.out.println(“Hello World!”);</span><br><span class="line">       &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="步骤二：编译"><a href="#步骤二：编译" class="headerlink" title="步骤二：编译"></a>步骤二：编译</h3><p><img src="https://s2.ax1x.com/2019/05/06/ED0fL4.png" alt="ED0fL4.png"></p>
+<ul>
+<li>有了java源文件，通过编译器将其编译成JVM可以识别的字节码文件。</li>
+<li>在该源文件目录下，通过javac编译工具对Test.java文件进行编译。</li>
+<li>如果程序没有错误，没有任何提示，但在当前目录下会出现一个Test.class文件，该文件称为字节码文件，也是可以执行的java的程序。<h3 id="步骤三：运行"><a href="#步骤三：运行" class="headerlink" title="步骤三：运行"></a>步骤三：运行</h3></li>
+<li>有了可执行的java程序(Test.class字节码文件)</li>
+<li>通过运行工具java.exe对字节码文件进行执行。</li>
+<li>出现提示：缺少一个名称为main的方法。</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/05/06/ED0LQO.png" alt="ED0LQO.png"></p>
+<ul>
+<li>因为一个程序的执行需要一个起始点或者入口，所以在Test类中的加入public static void main(String[] args){  }</li>
+<li>对修改后的Test.java源文件需要重新编译，生成新的class文件后，再进行执行。</li>
+<li>发现没有编译失败，但也没有任何效果，因为并没有告诉JVM要帮我们做什么事情，也就是没有可以具体执行的语句。</li>
+<li>想要和JVM来个互动，只要在main方法中加入一句System.out.println(“Hello World”);因为程序进行改动，所以再重新编译，运行即可。<h1 id="1-7-常见问题及解决方法"><a href="#1-7-常见问题及解决方法" class="headerlink" title="1-7 常见问题及解决方法"></a>1-7 常见问题及解决方法</h1></li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDBuYq.png" alt="EDBuYq.png"></p>
+<p>Ø源文件名不存在或者写错<br>Ø当前路径错误<br>Ø后缀名隐藏问题</p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDBJ0J.png" alt="EDBJ0J.png"></p>
+<p>Ø类文件名写错，尤其文件名与类名不一致时，要小心<br>Ø类文件不在当前路径下，或者不在classpath指定路径下</p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDBgAA.png" alt="EDBgAA.png"></p>
+<p>Ø声明为public的类应与文件名一致，否知编译失败</p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDBh1f.png" alt="EDBh1f.png"></p>
+<p>Ø编译失败，注意错误出现的行数，再到源代码中指定位置改错</p>
+<h2 id="小总结："><a href="#小总结：" class="headerlink" title="小总结："></a>小总结：</h2><p>学习编程最容易犯的错是语法错误。Java要求你必须按照语法规则编写代码。如果你的程序违反了语法规则，例如：忘记了分号、大括号、引号，或者拼错了单词，java编译器都会报语法错误。尝试着去看懂编译器会报告的错误信息。</p>
+<h1 id="1-8-注释-Comment"><a href="#1-8-注释-Comment" class="headerlink" title="1-8 注释(Comment)"></a>1-8 注释(Comment)</h1><p>用于注解说明解释程序的文字就是注释。<br>Java中的注释类型：</p>
+<ul>
+<li>单行注释    格式： //注释文字</li>
+<li>多行注释    格式：   /<em>  注释文字 </em>/</li>
+<li><p>文档注释 (java特有)</p>
+</li>
+<li><p>对于单行和多行注释，被注释的文字，不会被JVM（java虚拟机）解释执行。</p>
+</li>
+<li>多行注释里面不允许有多行注释嵌套。</li>
+<li>格式：/**  <pre><code>@author  指定java程序的作者  
+@version  指定源文件的版本                 
+       */
+</code></pre></li>
+</ul>
+<p>注释内容可以被JDK提供的工具 javadoc 所解析，生成一套以网页文件形式体现的该程序的说明文档。<br>提高了代码的阅读性；调试程序的重要方法。<br>注释是一个程序员必须要具有的良好编程习惯。<br>将自己的思想通过注释先整理出来，再用代码去体现</p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDDnDe.png" alt="EDDnDe.png"></p>
+<h2 id="小结第一个程序"><a href="#小结第一个程序" class="headerlink" title="小结第一个程序"></a>小结第一个程序</h2><ul>
+<li>Java源文件以“java”为扩展名。源文件的基本组成部分是类（class），如本例中的HelloWorld类。</li>
+<li>Java应用程序的执行入口是main()方法。它有固定的书写格式：<br> public static void main(String[] args)  {…}</li>
+<li>Java语言严格区分大小写。</li>
+<li>Java方法由一条条语句构成，每个语句以“;”结束。</li>
+<li>大括号都是成对出现的，缺一不可。</li>
+<li>一个源文件中最多只能有一个public类。其它类的个数不限，如果源文件包含一个public类，则文件名必须按该类名命名。<h1 id="1-9-Java-API文档"><a href="#1-9-Java-API文档" class="headerlink" title="1-9 Java API文档"></a>1-9 Java API文档</h1>API （Application Programming Interface,应用程序编程接口）是 Java 提供的基本编程接口。<br>Java语言提供了大量的基础类，因此 Oracle 也为这些基础类提供了相应的API文档，用于告诉开发者如何使用这些类，以及这些类里包含的方法。<br>下载API：<a href="https://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">https://www.oracle.com/technetwork/java/javase/downloads/index.html</a><br>Additional Resources-Java SE 8 Documentation下载。  <h1 id="1-10-良好的编程风格"><a href="#1-10-良好的编程风格" class="headerlink" title="1.10 良好的编程风格"></a>1.10 良好的编程风格</h1><h2 id="正确的注释和注释风格"><a href="#正确的注释和注释风格" class="headerlink" title="正确的注释和注释风格"></a>正确的注释和注释风格</h2></li>
+<li>使用文档注释来注释整个类或整个方法。</li>
+<li>如果注释方法中的某一个步骤，使用单行或多行注释。<br>正确的缩进和空白</li>
+<li>使用一次tab操作，实现缩进</li>
+<li>运算符两边习惯性各加一个空格。比如：2 + 4 * 5。<br>块的风格</li>
+<li>Java API 源代码选择了行尾风格</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">行尾风格</span><br><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        System.out.println(&quot;Block Style!&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">次行风格</span><br><span class="line">public class Test</span><br><span class="line">&#123;</span><br><span class="line">    public static void main(String[] args)</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(&quot;Block Style!&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="选择合适的文本编辑器或-IDE-开发"><a href="#选择合适的文本编辑器或-IDE-开发" class="headerlink" title="选择合适的文本编辑器或 IDE 开发"></a>选择合适的文本编辑器或 IDE 开发</h1><h2 id="JBuilder"><a href="#JBuilder" class="headerlink" title="JBuilder"></a>JBuilder</h2><p>JBuilder是Borland公司开发的针对java的开发工具，使用JBuilder将可以快速，有效的开发各类java应用。 Jbuilder支持各种应用服务器。Jbuilder与Inprise Application Server紧密集成，同时支持WebLogic Server，支持EJB 1.1和EJB 2.0，可以快速开发J2EE的电子商务应用。支持远程调试和多线程调试，调试器支持各种JDK版本<br><a href="https://edn.embarcadero.com/cn/jbuilder" target="_blank" rel="noopener">https://edn.embarcadero.com/cn/jbuilder</a></p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDDDCq.png" alt="EDDDCq.png"></p>
+<h2 id="NetBeans"><a href="#NetBeans" class="headerlink" title="NetBeans"></a>NetBeans</h2><p>NetBeans是一款用Java编写的开源IDE。既可用于Java开发，也支持其他语言，特别是PHP、C/C ++，和HTML5。NetBeans开发环境提供了丰富的产品文档和培训资源以及大量的第三方插件。<br><a href="https://netbeans.org/features/index.html" target="_blank" rel="noopener">https://netbeans.org/features/index.html</a></p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDDqqe.png" alt="EDDqqe.png"></p>
+<h2 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h2><p>Eclipse应该是大多数Java程序员使用的第一个IDE。众所周知的、最流行、也最受欢迎的Java开发工具。优点很多：免费、更新快、代码智能化、ANT构建等，拥有众多插件，完全免费、有中文版、上手比较快。缺点也非常明显，安装插件麻烦、插件对版本要求比较严格。</p>
+<p><a href="https://eclipse.org/" target="_blank" rel="noopener">https://eclipse.org/</a></p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDDxPI.png" alt="EDDxPI.png"></p>
+<h2 id="MyEclipse"><a href="#MyEclipse" class="headerlink" title="MyEclipse"></a>MyEclipse</h2><p>MyEclipse也是一款功能强大的J2EE集成开发环境，由Genuitec公司发布，提供免费版和收费版。但免费版，只能满足基本开发需求<br><a href="https://www.myeclipsecn.com/" target="_blank" rel="noopener">https://www.myeclipsecn.com/</a></p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDrPsS.png" alt="EDrPsS.png"></p>
+<p>ØIntelliJ IDEA<br>IntelliJ IDEA被认为是目前Java开发效率最快的IDE工具。是JetBrains公司的产品，这家公司总部位于捷克共和国的首都布拉格。它整合了开发过程中实用的众多功能，智能提示错误，强大的调试工具，Ant，JavaEE支持，CVS整合，最大程度的加快开发的速度。简单而又功能强大。与其他的一些繁冗而复杂的IDE工具有鲜明的对比。<br><a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">https://www.jetbrains.com/idea/</a></p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDrAaj.png" alt="EDrAaj.png"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/09/10/2. Java基本语法(上)变量与运算符/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/09/10/0. hello-world/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '277317290454635afa73',
+  clientSecret: '78223c859304da5e8d71bfce136d436c6ff95c37',
+  repo: 'blog-comment',
+  owner: 'forsigner',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['forsigner'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

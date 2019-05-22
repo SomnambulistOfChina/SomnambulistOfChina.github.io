@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Maven | Hexo</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java 工具,">
+  
+
+  <meta name="description" content="第一章 Why Maven是干什么用的？即使不使用Maven我们仍然可以进行B/S结构项目的开发。从表述层、业务逻辑层到持久化层再到数据库都有成熟的解决方案。但是通过企业开发中的实际需求来看，不使用Maven是不足的。     1.1 添加第三方jar包 在今天的JavaEE开发领域，有大量的第三方框架和工具可以供我们使用。要使用这些jar包最简单的方法就是复制粘贴到WEB-INF目录下的lib目">
+<meta name="keywords" content="Java 工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven">
+<meta property="og:url" content="http://yoursite.com/2018/09/10/Maven/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第一章 Why Maven是干什么用的？即使不使用Maven我们仍然可以进行B/S结构项目的开发。从表述层、业务逻辑层到持久化层再到数据库都有成熟的解决方案。但是通过企业开发中的实际需求来看，不使用Maven是不足的。     1.1 添加第三方jar包 在今天的JavaEE开发领域，有大量的第三方框架和工具可以供我们使用。要使用这些jar包最简单的方法就是复制粘贴到WEB-INF目录下的lib目">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/18/EOj6ER.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/18/EOj6ER.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/18/EOxwm4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/18/EOxB79.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/18/EOxyfx.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/18/EOx26O.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EXfPY9.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EXh34J.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjupHs.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/Ejui40.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/Ejuf5q.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjKgSK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjKWOe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjKvwj.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjMpYq.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjMPpV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjMnt1.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjQnbQ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjQMUs.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjQGvT.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjQIRP.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjQw5R.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/19/EjQWad.png">
+<meta property="og:updated_time" content="2019-05-22T23:40:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven">
+<meta name="twitter:description" content="第一章 Why Maven是干什么用的？即使不使用Maven我们仍然可以进行B/S结构项目的开发。从表述层、业务逻辑层到持久化层再到数据库都有成熟的解决方案。但是通过企业开发中的实际需求来看，不使用Maven是不足的。     1.1 添加第三方jar包 在今天的JavaEE开发领域，有大量的第三方框架和工具可以供我们使用。要使用这些jar包最简单的方法就是复制粘贴到WEB-INF目录下的lib目">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/18/EOj6ER.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-Why"><span class="toc-text">第一章 Why</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-添加第三方jar包"><span class="toc-text">1.1 添加第三方jar包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-jar包之间的依赖关系"><span class="toc-text">1.2 jar包之间的依赖关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-处理jar包之间的冲突"><span class="toc-text">1.3 处理jar包之间的冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-获取第三方jar包"><span class="toc-text">1.4 获取第三方jar包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-实现项目的分布式部署"><span class="toc-text">1.6 实现项目的分布式部署</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二章-What"><span class="toc-text">第二章 What</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-自动化构建工具"><span class="toc-text">2.1 自动化构建工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-构建的概念"><span class="toc-text">2.2 构建的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-构建环节"><span class="toc-text">2.3 构建环节</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-自动化构建"><span class="toc-text">2.4 自动化构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-Maven核心概念（重点）"><span class="toc-text">2.5 Maven核心概念（重点）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三章-How"><span class="toc-text">第三章 How</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第四章-第一个Maven程序-练习常用命令"><span class="toc-text">第四章 第一个Maven程序(练习常用命令)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第五章-POM"><span class="toc-text">第五章 POM</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第六章-约定的目录结构"><span class="toc-text">第六章 约定的目录结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第七章-坐标"><span class="toc-text">第七章 坐标</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-几何中的坐标"><span class="toc-text">7.1 几何中的坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-Maven的坐标"><span class="toc-text">7.2 Maven的坐标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-如何通过坐标到仓库中查找jar包"><span class="toc-text">7.3 如何通过坐标到仓库中查找jar包</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第八章-第二个Maven工程-练习依赖引用"><span class="toc-text">第八章 第二个Maven工程(练习依赖引用)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-目录结构"><span class="toc-text">8.1 目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-POM文件"><span class="toc-text">8.2 POM文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-主程序"><span class="toc-text">8.3 主程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-4-测试程序"><span class="toc-text">8.4 测试程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-关键：对Hello的依赖"><span class="toc-text">8.5 关键：对Hello的依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第九章-依赖管理"><span class="toc-text">第九章 依赖管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-基本概念"><span class="toc-text">9.1 基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-直接依赖和间接依赖"><span class="toc-text">9.2 直接依赖和间接依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-依赖的范围"><span class="toc-text">9.3 依赖的范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-4-依赖的传递性"><span class="toc-text">9.4 依赖的传递性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-5-依赖的原则：解决jar包冲突"><span class="toc-text">9.5 依赖的原则：解决jar包冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-6-依赖的排除"><span class="toc-text">9.6 依赖的排除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-7-统一管理目标jar包的版本"><span class="toc-text">9.7 统一管理目标jar包的版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第十章-仓库"><span class="toc-text">第十章 仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-分类"><span class="toc-text">10.1 分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-仓库中的文件"><span class="toc-text">10.2 仓库中的文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第十一章-生命周期"><span class="toc-text">第十一章 生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#11-1-什么是Maven的生命周期"><span class="toc-text">11.1 什么是Maven的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-2-clean生命周期"><span class="toc-text">11.2 clean生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-3-Site生命周期"><span class="toc-text">11.3 Site生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-4-Default生命周期"><span class="toc-text">11.4 Default生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-5-生命周期与自动化构建"><span class="toc-text">11.5 生命周期与自动化构建</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第十二章-插件和目标"><span class="toc-text">第十二章 插件和目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第十三章-STS整合Maven"><span class="toc-text">第十三章 STS整合Maven</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#13-1-Maven插件安装"><span class="toc-text">13.1 Maven插件安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-2-Maven插件的设置"><span class="toc-text">13.2 Maven插件的设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-2-第三个Maven工程"><span class="toc-text">14.2 第三个Maven工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-2-创建父工程"><span class="toc-text">15.2 创建父工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-3-在子工程中引用父工程"><span class="toc-text">15.3 在子工程中引用父工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-4-在父工程中管理依赖"><span class="toc-text">15.4 在父工程中管理依赖</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第十六章-聚合"><span class="toc-text">第十六章 聚合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#16-1-为什么要使用聚合"><span class="toc-text">16.1 为什么要使用聚合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-1-如何配置聚合"><span class="toc-text">16.1 如何配置聚合</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第十七章-第四个Maven工程-war工程"><span class="toc-text">第十七章 第四个Maven工程(war工程)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#17-1-创建步骤"><span class="toc-text">17.1 创建步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#17-2-Web工程自动部署"><span class="toc-text">17.2 Web工程自动部署</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第十八章-创建MavenWeb工程的完美方式"><span class="toc-text">第十八章 创建MavenWeb工程的完美方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第十九章-Maven酷站"><span class="toc-text">第十九章 Maven酷站</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-Maven" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">Maven</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.09.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>John Doe</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="第一章-Why"><a href="#第一章-Why" class="headerlink" title="第一章 Why"></a>第一章 Why</h1><blockquote>
+<p>Maven是干什么用的？<br>即使不使用Maven我们仍然可以进行B/S结构项目的开发。<br>从表述层、业务逻辑层到持久化层再到数据库都有成熟的解决方案。<br>但是通过企业开发中的实际需求来看，不使用Maven是不足的。   </p>
+</blockquote>
+<h2 id="1-1-添加第三方jar包"><a href="#1-1-添加第三方jar包" class="headerlink" title="1.1 添加第三方jar包"></a>1.1 添加第三方jar包</h2><ul>
+<li>在今天的JavaEE开发领域，有大量的第三方框架和工具可以供我们使用。要使用这些jar包最简单的方法就是复制粘贴到WEB-INF目录下的lib目录下。但是这会导致每次创建一个新的工程就需要将jar包重复复制到lib目录下，从而造成工作区中存在大量重复的文件。</li>
+<li>而使用Maven后每个jar包只在本地仓库中保存一份，需要jar包的工程只需要维护一个文本形式的jar包的引用</li>
+</ul>
+<blockquote>
+<p>我们称之为“坐标”。不仅极大的节约了存储空间，让项目更轻巧，更避免了重复文件太多而造成的混乱。</p>
+</blockquote>
+<h2 id="1-2-jar包之间的依赖关系"><a href="#1-2-jar包之间的依赖关系" class="headerlink" title="1.2 jar包之间的依赖关系"></a>1.2 jar包之间的依赖关系</h2><ul>
+<li>jar包往往不是孤立存在的，很多jar包都需要在其他jar包的支持下才能够正常工作，我们称之为jar包之间的依赖关系。最典型的例子是：commons-fileupload-1.3.jar依赖于commons-io-2.0.1.jar，如果没有IO包，FileUpload包就不能正常工作。</li>
+<li>那么问题来了，你知道你所使用的所有jar包的依赖关系吗？当你拿到一个新的从未使用过的jar包，你如何得知他需要哪些jar包的支持呢？如果不了解这个情况，导入的jar包不够，那么现有的程序将不能正常工作。再进一步，当你的项目中需要用到上百个jar包时，你还会人为的，手工的逐一确认它们依赖的其他jar包吗？这简直是不可想象的。</li>
+<li>而引入Maven后，Maven就可以替我们自动的将当前jar包所依赖的其他所有jar包全部导入进来，无需人工参与，节约了我们大量的时间和精力。用实际例子来说明就是：通过Maven导入commons-fileupload-1.3.jar后，commons-io-2.0.1.jar会被自动导入，程序员不必了解这个依赖关系。</li>
+<li><h2 id="1-3-处理jar包之间的冲突"><a href="#1-3-处理jar包之间的冲突" class="headerlink" title="1.3 处理jar包之间的冲突"></a>1.3 处理jar包之间的冲突</h2></li>
+<li>jar包不足项目无法正常工作，但其实有的时候jar包多了项目仍然无法正常工作，这就是jar包之间的冲突。<blockquote>
+<p>举个例子：我们现在有三个工程MakeFriend、HelloFriend、和Hello。<br>MakeFriend依赖HelloFriend，HelloFriend依赖Hello。<br>而Hello依赖log4j.1.2.17.jar，HelloFriend依赖log4j.1.2.14.jar。<br>如下图所示：</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/05/18/EOj6ER.png" alt="EOj6ER.png"></p>
+<blockquote>
+<p>那么MakeFriend工程的运行时环境中该导入log4j.1.2.14.jar呢还是log4j.1.2.17.jar呢?<br>这样的问题一个两个还可以手工解决，但如果系统中存在几十上百的jar包，他们之间的依赖关系会非常复杂，几乎不可能手工实现依赖关系的梳理。<br>使用Maven就可以自动的处理jar包之间的冲突问题。<br>因为Maven中内置了两条依赖原则：</p>
+<ul>
+<li>最短路径者优先和先声明者优先.  </li>
+</ul>
+</blockquote>
+<blockquote>
+<p>上述问题MakeFriend工程会自动使用log4j.1.2.14.jar。</p>
+</blockquote>
+<h2 id="1-4-获取第三方jar包"><a href="#1-4-获取第三方jar包" class="headerlink" title="1.4 获取第三方jar包"></a>1.4 获取第三方jar包</h2><blockquote>
+<ul>
+<li>JavaEE开发中需要使用到的jar包种类繁多，几乎每个jar包在其本身的官网上的获取方式都不尽相同。<br>为了查找一个jar包找遍互联网，身心俱疲，没有经历过的人或许体会不到这种折磨。<br>不仅如此，费劲心血找的jar包里有的时候并没有你需要的那个类，又或者又同名的类没有你要的方法——以不规范的方式获取的jar包也往往是不规范的。  </li>
+<li>使用Maven我们可以享受到一个完全统一规范的jar包管理体系。<br>你只需要在你的项目中以坐标的方式依赖一个jar包，Maven就会自动从中央仓库进行下载，并同时下载这个jar包所依赖的其他jar包。<br>规范、完整、准确！一次性解决所有问题！   </li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>Tips</strong>：统一的规范几乎可以说成是程序员的最高信仰。<br>        如果没有统一的规范，就意味着每个具体的技术都各自为政，需要以诸多不同的特殊的方式加入到项目中；<br>        好不容易加入进来还会和其他技术格格不入，最终受苦的是我们。<br>        而任何一个领域的统一规范都能够极大的降低程序员的工作难度，减少工作量。<br>        例如：USB接口可以外接各种设备，如果每个设备都有自己独特的接口，那么不仅制造商需要维护各个接口的设计方案，使用者也需要详细了解每个设备对应的接口，无疑是非常繁琐的。</p>
+</blockquote>
+<p>1.5 将项目拆分成多个工程模块<br>随着JavaEE项目的规模越来越庞大，开发团队的规模也与日俱增。一个项目上千人的团队持续开发很多年对于JavaEE项目来说再正常不过。那么我们想象一下：几百上千的人开发的项目是同一个Web工程。那么架构师、项目经理该如何划分项目的模块、如何分工呢？这么大的项目已经不可能通过package结构来划分模块，必须将项目拆分成多个工程协同开发。多个模块工程中有的是Java工程，有的是Web工程。<br>那么工程拆分后又如何进行互相调用和访问呢？这就需要用到Maven的依赖管理机制。大家请看我们的Survey调查项目拆分的情况：</p>
+<p>上层模块依赖下层，所以下层模块中定义的API都可以为上层所调用和访问。</p>
+<h2 id="1-6-实现项目的分布式部署"><a href="#1-6-实现项目的分布式部署" class="headerlink" title="1.6 实现项目的分布式部署"></a>1.6 实现项目的分布式部署</h2><p>在实际生产环境中，项目规模增加到一定程度后，可能每个模块都需要运行在独立的服务器上，我们称之为分布式部署，这里同样需要用到Maven。</p>
+<h1 id="第二章-What"><a href="#第二章-What" class="headerlink" title="第二章 What"></a>第二章 What</h1><p>如果上面的描述能够使你认识到使用Maven是多么的重要，我们下面就来介绍一下Maven是什么。</p>
+<h2 id="2-1-自动化构建工具"><a href="#2-1-自动化构建工具" class="headerlink" title="2.1 自动化构建工具"></a>2.1 自动化构建工具</h2><blockquote>
+<p>Maven这个单词的本意是：专家，内行。读音是[‘meɪv(ə)n]或[‘mevn]，不要读作“妈文”。<br>Maven是一款自动化构建工具，专注服务于Java平台的项目构建和依赖管理。在JavaEE开发的历史上构建工具的发展也经历了一系列的演化和变迁：<br>Make→Ant→Maven→Gradle→其他……</p>
+</blockquote>
+<h2 id="2-2-构建的概念"><a href="#2-2-构建的概念" class="headerlink" title="2.2 构建的概念"></a>2.2 构建的概念</h2><p>构建并不是创建，创建一个工程并不等于构建一个项目。<br>由浅入深的从以下三个层面来看：  </p>
+<blockquote>
+<ul>
+<li>①纯Java代码<br>大家都知道，我们Java是一门编译型语言.java扩展名的源文件需要编译成.class扩展名的字节码文件才能够执行。所以编写任何Java代码想要执行的话就必须经过编译得到对应的.class文件。</li>
+<li>②Web工程<br>当我们需要通过浏览器访问Java程序时就必须将包含Java程序的Web工程编译的结果“拿”到服务器上的指定目录下，并启动服务器才行。这个“拿”的过程我们叫部署。  </li>
+</ul>
+</blockquote>
+<blockquote>
+<p>我们可以将未编译的Web工程比喻为一只生的鸡，编译好的Web工程是一只煮熟的鸡，编译部署的过程就是将鸡炖熟。<br>Web工程和其编译结果的目录结构对比见下图：</p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/05/18/EOj6ER.png" alt="EOj6ER.png"></p>
+<blockquote>
+<ul>
+<li>③实际项目<br>在实际项目中整合第三方框架，Web工程中除了Java程序和JSP页面、图片等静态资源之外，还包括第三方框架的jar包以及各种各样的配置文件。所有这些资源都必须按照正确的目录结构部署到服务器上，项目才可以运行。<br>所以综上所述：构建就是以我们编写的Java代码、框架配置文件、国际化等其他资源文件、JSP页面和图片等静态资源作为“原材料”，去“生产”出一个可以运行的项目的过程。  </li>
+</ul>
+</blockquote>
+<h2 id="2-3-构建环节"><a href="#2-3-构建环节" class="headerlink" title="2.3 构建环节"></a>2.3 构建环节</h2><p>①清理：删除以前的编译结果，为重新编译做好准备。<br>②编译：将Java源程序编译为字节码文件。<br>③测试：针对项目中的关键点进行测试，确保项目在迭代开发过程中关键点的正确性。<br>④报告：在每一次测试后以标准的格式记录和展示测试结果。<br>⑤打包：将一个包含诸多文件的工程封装为一个压缩文件用于安装或部署。Java工程对应jar包，Web工程对应war包。<br>⑥安装：在Maven环境下特指将打包的结果——jar包或war包安装到本地仓库中。<br>⑦部署：将打包的结果部署到远程仓库或将war包部署到服务器上运行。  </p>
+<h2 id="2-4-自动化构建"><a href="#2-4-自动化构建" class="headerlink" title="2.4 自动化构建"></a>2.4 自动化构建</h2><p>其实上述环节我们在Eclipse中都可以找到对应的操作，只是不太标准。那么既然IDE已经可以进行构建了我们为什么还要使用Maven这样的构建工具呢？我们来看一个小故事：  </p>
+<blockquote>
+<p>这是阳光明媚的一天。托马斯向往常一样早早的来到了公司，冲好一杯咖啡，进入了自己的邮箱——很不幸，QA小组发来了一封邮件，报告了他昨天提交的模块的测试结果——有BUG。“好吧，反正也不是第一次”，托马斯摇摇头，进入IDE，运行自己的程序，编译、打包、部署到服务器上，然后按照邮件中的操作路径进行测试。“嗯，没错，这个地方确实有问题”，托马斯说道。于是托马斯开始尝试修复这个BUG，当他差不多有眉目的时候已经到了午饭时间。<br>下午继续工作。BUG很快被修正了，接着托马斯对模块重新进行了编译、打包、部署，测试之后确认没有问题了，回复了QA小组的邮件。<br>一天就这样过去了，明媚的阳光化作了美丽的晚霞，托马斯却觉得生活并不像晚霞那样美好啊。  </p>
+</blockquote>
+<p>让我们来梳理一下托马斯这一天中的工作内容</p>
+<p><img src="https://s2.ax1x.com/2019/05/18/EOxwm4.png" alt="EOxwm4.png"></p>
+<p>从中我们发现，托马斯的很大一部分时间花在了“编译、打包、部署、测试”这些程式化的工作上面，而真正需要由“人”的智慧实现的分析问题和编码却只占了很少一部分。</p>
+<p><img src="https://s2.ax1x.com/2019/05/18/EOxB79.png" alt="EOxB79.png"></p>
+<p>能否将这些程式化的工作交给机器自动完成呢？——当然可以！这就是自动化构建。</p>
+<p><a href="https://imgchr.com/i/EOxyfx" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/18/EOxyfx.md.png" alt="EOxyfx.md.png"></a></p>
+<p>那么Maven又是如何实现自动化构建的呢？简单的说来就是它可以自动的从构建过程的起点一直执行到终点：</p>
+<p><a href="https://imgchr.com/i/EOx26O" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/18/EOx26O.md.png" alt="EOx26O.md.png"></a></p>
+<h2 id="2-5-Maven核心概念（重点）"><a href="#2-5-Maven核心概念（重点）" class="headerlink" title="2.5 Maven核心概念（重点）"></a>2.5 Maven核心概念（重点）</h2><p>（学会9个重要概念就学会Maven）<br>Maven之所以能够实现自动化的构建，和它的设计是紧密相关的。我们对Maven的学习就围绕它的九个核心概念展开：<br>①POM<br>②约定的目录结构<br>③坐标<br>④依赖管理<br>⑤仓库管理<br>⑥生命周期<br>⑦插件和目标<br>⑧继承<br>⑨聚合  </p>
+<h2 id="第三章-How"><a href="#第三章-How" class="headerlink" title="第三章 How"></a>第三章 How</h2><p>在这一节中，我们来看看Maven核心程序的安装和本地仓库的必要设置。然后我们就可以编写第一个Maven程序了。  </p>
+<blockquote>
+<p>①检查JAVA_HOME环境变量。<br>Maven是使用Java开发的，所以必须知道当前系统环境中JDK的安装目录。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32&gt;echo %JAVA_HOME%</span><br><span class="line">C:\Java\jdk1.8.0_45</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>②解压Maven的核心程序。<br>将apache-maven-3.5.0-bin.zip解压到一个非中文无空格的目录下。例如：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\Server\apache-maven-3.5.0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>③配置环境变量。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">M2_HOME</span><br><span class="line">D:\Server\ apache-maven-3.5.0</span><br><span class="line">path</span><br><span class="line">%M2_HOME%\bin或D:\Server\ apache-maven-3.5.0\bin</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>④查看Maven版本信息验证安装是否正确</p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/05/19/EXfPY9.png" alt="EXfPY9.png"></p>
+<blockquote>
+<p>⑤配置本地仓库  </p>
+<ul>
+<li>[1]Maven默认的本地仓库：</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~\.m2\repository目录。</span><br><span class="line">Tips：~表示当前用户的家目录。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>[2]Maven的核心程序并不包含具体功能，仅负责宏观调度。具体功能由插件来完成。Maven核心程序会到本地仓库中查找插件。如果本地仓库中没有就会从远程中央仓库下载。此时如果不能上网则无法执行Maven的具体功能。为了解决这个问题，我们可以将Maven的本地仓库指向一个在联网情况下下载好的目录。</li>
+<li>[3]Maven的核心配置文件位置：<br>解压目录</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\D:\Server\ apache-maven-3.5.0\conf\settings.xml</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>[4]设置方式</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;localRepository&gt;以及准备好的仓库位置&lt;/localRepository&gt;</span><br><span class="line">&lt;localRepository&gt;D:/RepMaven&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="第四章-第一个Maven程序-练习常用命令"><a href="#第四章-第一个Maven程序-练习常用命令" class="headerlink" title="第四章 第一个Maven程序(练习常用命令)"></a>第四章 第一个Maven程序(练习常用命令)</h1><p>●第一步：创建约定的目录结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Hello</span><br><span class="line">	 src</span><br><span class="line">	 ——main</span><br><span class="line">	 ————java</span><br><span class="line">	 ————resources</span><br><span class="line">	 ——test</span><br><span class="line">	 ————java</span><br><span class="line">	 ————resources</span><br><span class="line">	 pom.xml</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">main目录用于存放主程序。  </span><br><span class="line">test目录用于存放测试程序。  </span><br><span class="line">java目录用于存放源代码文件。    </span><br><span class="line">resources目录用于存放配置文件和资源文件。</span><br></pre></td></tr></table></figure>
+<p>●第二步：创建Maven的核心配置文件pom.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; ?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">	&lt;groupId&gt;com.atguigu.maven&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;Hello&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">	&lt;name&gt;Hello&lt;/name&gt;</span><br><span class="line">	&lt;dependencies&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.9&lt;/version&gt;</span><br><span class="line">			&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">	&lt;/dependencies&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<p>●第三步：编写主代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在src/main/java/com/atguigu/maven目录下新建文件Hello.java</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">package com.maven;</span><br><span class="line">public class Hello &#123;</span><br><span class="line">	public String sayHello(String name)&#123;</span><br><span class="line">		return &quot;Hello &quot;+name+&quot;!&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>●第四步：编写测试代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在/src/test/java/com/atguigu/maven目录下新建测试文件HelloTest.java</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package com.maven;	</span><br><span class="line">import org.junit.Test;</span><br><span class="line">import static junit.framework.Assert.*;</span><br><span class="line">public class HelloTest &#123;</span><br><span class="line">	@Test</span><br><span class="line">	public void testHello()&#123;</span><br><span class="line">		Hello hello = new Hello();</span><br><span class="line">		String results = hello.sayHello(&quot;litingwei&quot;);</span><br><span class="line">		assertEquals(&quot;Hello litingwei!&quot;,results);	 //断言</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>●第五步：运行几个基本的Maven命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">①打开cmd命令行，进入Hello项目根目录(pom.xml文件所在目录)</span><br><span class="line">    执行mvn compile命令，查看根目录变化</span><br><span class="line">④cmd 中继续录入mvn clean命令，然后再次查看根目录变化</span><br><span class="line">⑤cmd 中录入 mvn clean compile命令, 查看根目录变化</span><br><span class="line">⑥cmd 中录入 mvn test-compile命令,查看target目录变化</span><br><span class="line">⑦cmd 中录入 mvn clean test命令，查看target目录变化</span><br><span class="line">⑧cmd 中录入mvn clean package命令,查看target目录变化</span><br><span class="line">⑨cmd中录入mvn source:jar命令，查看target目录变化</span><br></pre></td></tr></table></figure>
+<p>注意：运行Maven命令时一定要进入pom.xml文件所在的目录！</p>
+<h1 id="第五章-POM"><a href="#第五章-POM" class="headerlink" title="第五章 POM"></a>第五章 POM</h1><blockquote>
+<p>Project Object Model：项目对象模型。将Java工程的相关信息封装为对象作为便于操作和管理的模型。<br>Maven工程的核心配置。可以说学习Maven就是学习pom.xml文件中的配置。</p>
+</blockquote>
+<h1 id="第六章-约定的目录结构"><a href="#第六章-约定的目录结构" class="headerlink" title="第六章 约定的目录结构"></a>第六章 约定的目录结构</h1><p>现在JavaEE开发领域普遍认同一个观点：<br><code>约定&gt;配置&gt;编码</code>。<br>意思就是能用配置解决的问题就不编码，能基于约定的就不进行配置。<br>而Maven正是因为指定了特定文件保存的目录才能够对我们的Java工程进行自动化构建。<br>目录结构含义参见前面的描述。</p>
+<h1 id="第七章-坐标"><a href="#第七章-坐标" class="headerlink" title="第七章 坐标"></a>第七章 坐标</h1><h2 id="7-1-几何中的坐标"><a href="#7-1-几何中的坐标" class="headerlink" title="7.1 几何中的坐标"></a>7.1 几何中的坐标</h2><blockquote>
+<ul>
+<li>[1]在一个平面中使用x、y两个向量可以唯一的确定平面中的一个点。</li>
+<li>[2]在空间中使用x、y、z三个向量可以唯一的确定空间中的一个点。</li>
+</ul>
+</blockquote>
+<h2 id="7-2-Maven的坐标"><a href="#7-2-Maven的坐标" class="headerlink" title="7.2 Maven的坐标"></a>7.2 Maven的坐标</h2><p>使用如下三个向量在Maven的仓库中唯一的确定一个Maven工程。</p>
+<blockquote>
+<ul>
+<li>[1]groupId：公司或组织的域名倒序+当前项目名称</li>
+<li>[2]artifactId：当前项目的模块名称</li>
+<li>[3]version：当前模块的版本</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.atguigu.maven&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;Hello&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="7-3-如何通过坐标到仓库中查找jar包"><a href="#7-3-如何通过坐标到仓库中查找jar包" class="headerlink" title="7.3 如何通过坐标到仓库中查找jar包"></a>7.3 如何通过坐标到仓库中查找jar包</h2><p>[1]将gav三个向量连起来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com.maven+Hello+0.0.1-SNAPSHOT</span><br></pre></td></tr></table></figure>
+<p>[2]以连起来的字符串作为目录结构到仓库中查找</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">com/maven/Hello/0.0.1-SNAPSHOT/Hello-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+<p>※注意：我们自己的Maven工程必须执行安装操作才会进入仓库。安装的命令是：<code>mvn install</code></p>
+<h1 id="第八章-第二个Maven工程-练习依赖引用"><a href="#第八章-第二个Maven工程-练习依赖引用" class="headerlink" title="第八章 第二个Maven工程(练习依赖引用)"></a>第八章 第二个Maven工程(练习依赖引用)</h1><h2 id="8-1-目录结构"><a href="#8-1-目录结构" class="headerlink" title="8.1 目录结构"></a>8.1 目录结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HelloFriend</span><br><span class="line">	 src</span><br><span class="line">	 ——main</span><br><span class="line">	 ————java</span><br><span class="line">	 ————resources</span><br><span class="line">	 ——test</span><br><span class="line">	 ————java</span><br><span class="line">	 ————resources</span><br><span class="line">	 pom.xml</span><br></pre></td></tr></table></figure>
+<h2 id="8-2-POM文件"><a href="#8-2-POM文件" class="headerlink" title="8.2 POM文件"></a>8.2 POM文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; ?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">	  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">	  &lt;groupId&gt;com.maven&lt;/groupId&gt;</span><br><span class="line">	  &lt;artifactId&gt;HelloFriend&lt;/artifactId&gt;</span><br><span class="line">	  &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">	  &lt;name&gt;HelloFriend&lt;/name&gt;</span><br><span class="line">	  </span><br><span class="line">		&lt;dependencies&gt;</span><br><span class="line">			&lt;dependency&gt;</span><br><span class="line">				&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">				&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">				&lt;version&gt;4.9&lt;/version&gt;</span><br><span class="line">				&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">			&lt;/dependency&gt;		</span><br><span class="line">			</span><br><span class="line">			&lt;dependency&gt;</span><br><span class="line">				&lt;groupId&gt;com.maven&lt;/groupId&gt;</span><br><span class="line">				&lt;artifactId&gt;Hello&lt;/artifactId&gt;</span><br><span class="line">				&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">				&lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">			&lt;/dependency&gt;</span><br><span class="line">			</span><br><span class="line">		&lt;/dependencies&gt;</span><br><span class="line">	&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="8-3-主程序"><a href="#8-3-主程序" class="headerlink" title="8.3 主程序"></a>8.3 主程序</h2><p>在src/main/java/com/atguigu/maven目录下新建文件HelloFriend.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.maven;	</span><br><span class="line">	import com.atguigu.maven.Hello;</span><br><span class="line">	public class HelloFriend &#123;</span><br><span class="line">		public String sayHelloToFriend(String name)&#123;</span><br><span class="line">			Hello hello = new Hello();</span><br><span class="line">			String str = hello.sayHello(name)+&quot; I am &quot;+this.getMyName();</span><br><span class="line">			System.out.println(str);</span><br><span class="line">			return str;</span><br><span class="line">		&#125;</span><br><span class="line">		public String getMyName()&#123;</span><br><span class="line">			return &quot;John&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="8-4-测试程序"><a href="#8-4-测试程序" class="headerlink" title="8.4 测试程序"></a>8.4 测试程序</h2><p>在/src/test/java/com/atguigu/maven目录下新建测试文件HelloFriendTest.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package com.maven;	</span><br><span class="line">import static junit.framework.Assert.assertEquals;</span><br><span class="line">import org.junit.Test;</span><br><span class="line">import com.atguigu.maven.Hello;</span><br><span class="line">	</span><br><span class="line">public class HelloFriendTest &#123;</span><br><span class="line">	@Test</span><br><span class="line">	public void testHelloFriend()&#123;</span><br><span class="line">		HelloFriend helloFriend = new HelloFriend();</span><br><span class="line">		String results = helloFriend.sayHelloToFriend(&quot;litingwei&quot;);</span><br><span class="line">		assertEquals(&quot;Hello litingwei! I am John&quot;,results);	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="8-5-关键：对Hello的依赖"><a href="#8-5-关键：对Hello的依赖" class="headerlink" title="8.5 关键：对Hello的依赖"></a>8.5 关键：对Hello的依赖</h2><blockquote>
+<ul>
+<li>这里Hello就是我们的第一个Maven工程，现在HelloFriend对它有依赖。那么这个依赖能否成功呢？更进一步的问题是：HelloFriend工程会到哪里去找Hello呢？  </li>
+<li>答案是：本地仓库。任何一个Maven工程会根据坐标到本地仓库中去查找它所依赖的jar包。如果能够找到则可以正常工作，否则就不行。</li>
+</ul>
+</blockquote>
+<h1 id="第九章-依赖管理"><a href="#第九章-依赖管理" class="headerlink" title="第九章 依赖管理"></a>第九章 依赖管理</h1><h2 id="9-1-基本概念"><a href="#9-1-基本概念" class="headerlink" title="9.1 基本概念"></a>9.1 基本概念</h2><p>当A jar包需要用到B jar包中的类时，我们就说A对B有依赖。<br>例如：<code>commons-fileupload-1.3.jar依赖于commons-io-2.0.1.jar</code>。<br>通过第二个Maven工程我们已经看到，当前工程会到本地仓库中根据坐标查找它所依赖的jar包。<br>配置的基本形式是使用dependency标签指定目标jar包的坐标。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;!—坐标 --&gt;</span><br><span class="line">			&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.10&lt;/version&gt;</span><br><span class="line">			&lt;!-- 依赖的范围 --&gt;</span><br><span class="line">			&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">	&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="9-2-直接依赖和间接依赖"><a href="#9-2-直接依赖和间接依赖" class="headerlink" title="9.2 直接依赖和间接依赖"></a>9.2 直接依赖和间接依赖</h2><p>如果A依赖B，B依赖C，那么A→B和B→C都是直接依赖，而A→C是间接依赖。</p>
+<h2 id="9-3-依赖的范围"><a href="#9-3-依赖的范围" class="headerlink" title="9.3 依赖的范围"></a>9.3 依赖的范围</h2><p>当一个Maven工程添加了对某个jar包的依赖后，这个被依赖的jar包可以对应下面几个可选的范围：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">①compile  </span><br><span class="line">[1]main目录下的Java代码可以访问这个范围的依赖</span><br><span class="line">[2]test目录下的Java代码可以访问这个范围的依赖</span><br><span class="line">[3]部署到Tomcat服务器上运行时要放在WEB-INF的lib目录下</span><br><span class="line">例如：对Hello的依赖。主程序、测试程序和服务器运行时都需要用到。</span><br><span class="line">②test</span><br><span class="line">[1]main目录下的Java代码不能访问这个范围的依赖</span><br><span class="line">[2]test目录下的Java代码可以访问这个范围的依赖</span><br><span class="line">[3]部署到Tomcat服务器上运行时不会放在WEB-INF的lib目录下</span><br><span class="line">例如：对junit的依赖。仅仅是测试程序部分需要。</span><br><span class="line">③provided</span><br><span class="line">[1]main目录下的Java代码可以访问这个范围的依赖</span><br><span class="line">[2]test目录下的Java代码可以访问这个范围的依赖</span><br><span class="line">[3]部署到Tomcat服务器上运行时不会放在WEB-INF的lib目录下</span><br><span class="line">例如：servlet-api在服务器上运行时，Servlet容器会提供相关API，所以部署的时候不需要。</span><br><span class="line">④runtime[了解]</span><br><span class="line">[1]main目录下的Java代码不能访问这个范围的依赖</span><br><span class="line">[2]test目录下的Java代码可以访问这个范围的依赖</span><br><span class="line">[3]部署到Tomcat服务器上运行时会放在WEB-INF的lib目录下</span><br><span class="line">例如：JDBC驱动。只有在测试运行和在服务器运行的时候才决定使用什么样的数据库连接。</span><br><span class="line">⑤其他：import、system等。</span><br></pre></td></tr></table></figure>
+<p>各个依赖范围的作用可以概括为下图：</p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EXh34J.png" alt="EXh34J.png"></p>
+<h2 id="9-4-依赖的传递性"><a href="#9-4-依赖的传递性" class="headerlink" title="9.4 依赖的传递性"></a>9.4 依赖的传递性</h2><p>当存在间接依赖的情况时，主工程对间接依赖的jar可以访问吗？<br>这要看间接依赖的jar包引入时的依赖范围——只有依赖范围为compile时可以访问。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Maven工程	依赖范围	对A的可见性</span><br><span class="line">A	B	C	compile 	√</span><br><span class="line">		D	test    	×</span><br><span class="line">		E	provided	×</span><br></pre></td></tr></table></figure>
+<h2 id="9-5-依赖的原则：解决jar包冲突"><a href="#9-5-依赖的原则：解决jar包冲突" class="headerlink" title="9.5 依赖的原则：解决jar包冲突"></a>9.5 依赖的原则：解决jar包冲突</h2><p>①路径最短者优先</p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjupHs.png" alt="EjupHs.png"></p>
+<p>②路径相同时先声明者优先</p>
+<p><img src="https://s2.ax1x.com/2019/05/19/Ejui40.png" alt="Ejui40.png"></p>
+<p>这里“声明”的先后顺序指的是dependency标签配置的先后顺序。</p>
+<h2 id="9-6-依赖的排除"><a href="#9-6-依赖的排除" class="headerlink" title="9.6 依赖的排除"></a>9.6 依赖的排除</h2><p>有的时候为了确保程序正确可以将有可能重复的间接依赖排除。请看如下的例子：<br>●假设当前工程为survey_public，直接依赖survey_environment。<br>●survey_environment依赖commons-logging的1.1.1对于survey_public来说是间接依赖。<br>●当前工程survey_public直接依赖commons-logging的1.1.2<br>●加入exclusions配置后可以在依赖survey_environment的时候排除版本为1.1.1的commons-logging的间接依赖  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.maven&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;Survey160225_4_Environment&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">	&lt;!-- 依赖排除 --&gt;</span><br><span class="line">	&lt;exclusions&gt;</span><br><span class="line">		&lt;exclusion&gt;</span><br><span class="line">			&lt;groupId&gt;commons-logging&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;commons-logging&lt;/artifactId&gt;</span><br><span class="line">		&lt;/exclusion&gt;</span><br><span class="line">	&lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;commons-logging&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;commons-logging&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.1.2&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="9-7-统一管理目标jar包的版本"><a href="#9-7-统一管理目标jar包的版本" class="headerlink" title="9.7 统一管理目标jar包的版本"></a>9.7 统一管理目标jar包的版本</h2><p>以对Spring的jar包依赖为例：Spring的每一个版本中都包含spring-core、spring-context等jar包。我们应该导入版本一致的Spring jar包，而不是使用4.0.0的spring-core的同时使用4.1.1的spring-context。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-core&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;4.0.0.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-context&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;4.0.0.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;4.0.0.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-orm&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;4.0.0.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-web&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;4.0.0.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;4.0.0.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>问题是如果我们想要将这些jar包的版本统一升级为4.1.1，是不是要手动一个个修改呢？显然，我们有统一配置的方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">	&lt;spring.version&gt;4.1.1.RELEASE&lt;/spring.version&gt;</span><br><span class="line">&lt;/properties&gt;</span><br><span class="line">……</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-core&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-context&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-orm&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-web&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>这样一来，进行版本调整的时候只改一改地方就行了。</p>
+<h1 id="第十章-仓库"><a href="#第十章-仓库" class="headerlink" title="第十章 仓库"></a>第十章 仓库</h1><h2 id="10-1-分类"><a href="#10-1-分类" class="headerlink" title="10.1 分类"></a>10.1 分类</h2><p>[1]本地仓库：为当前本机电脑上的所有Maven工程服务。<br>[2]远程仓库  </p>
+<blockquote>
+<p>(1)私服：架设在当前局域网环境下，为当前局域网范围内的所有Maven工程服务。  </p>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/05/19/Ejuf5q.png" alt="Ejuf5q.png"></p>
+<blockquote>
+<p>(2)中央仓库：架设在Internet上，为全世界所有Maven工程服务。<br>(3)中央仓库的镜像：架设在各个大洲，为中央仓库分担流量。减轻中央仓库的压力，同时更快的响应用户请求。  </p>
+</blockquote>
+<h2 id="10-2-仓库中的文件"><a href="#10-2-仓库中的文件" class="headerlink" title="10.2 仓库中的文件"></a>10.2 仓库中的文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[1]Maven的插件</span><br><span class="line">[2]我们自己开发的项目的模块</span><br><span class="line">[3]第三方框架或工具的jar包</span><br></pre></td></tr></table></figure>
+<p>※不管是什么样的jar包，在仓库中都是按照坐标生成目录结构，所以可以通过统一的方式查询或依赖。</p>
+<h1 id="第十一章-生命周期"><a href="#第十一章-生命周期" class="headerlink" title="第十一章 生命周期"></a>第十一章 生命周期</h1><h2 id="11-1-什么是Maven的生命周期"><a href="#11-1-什么是Maven的生命周期" class="headerlink" title="11.1 什么是Maven的生命周期"></a>11.1 什么是Maven的生命周期</h2><p>●Maven生命周期定义了各个构建环节的执行顺序，有了这个清单，Maven就可以自动化的执行构建命令了。<br>●Maven有三套相互独立的生命周期，分别是： </p>
+<blockquote>
+<p>①Clean Lifecycle在进行真正的构建之前进行一些清理工作。<br>②Default Lifecycle构建的核心部分，编译，测试，打包，安装，部署等等。<br>③Site Lifecycle生成项目报告，站点，发布站点。</p>
+</blockquote>
+<blockquote>
+<p>再次强调一下它们是相互独立的，你可以仅仅调用clean来清理工作目录，仅仅调用site来生成站点。当然你也可以直接运行 mvn clean install site 运行所有这三套生命周期。  </p>
+</blockquote>
+<blockquote>
+<p>每套生命周期都由一组阶段(Phase)组成，我们平时在命令行输入的命令总会对应于一个特定的阶段。比如，运行mvn clean，这个clean是Clean生命周期的一个阶段。有Clean生命周期，也有clean阶段。</p>
+</blockquote>
+<h2 id="11-2-clean生命周期"><a href="#11-2-clean生命周期" class="headerlink" title="11.2 clean生命周期"></a>11.2 clean生命周期</h2><p>Clean生命周期一共包含了三个阶段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">①pre-clean 执行一些需要在clean之前完成的工作 </span><br><span class="line">②clean 移除所有上一次构建生成的文件 </span><br><span class="line">③post-clean 执行一些需要在clean之后立刻完成的工作</span><br></pre></td></tr></table></figure>
+<h2 id="11-3-Site生命周期"><a href="#11-3-Site生命周期" class="headerlink" title="11.3 Site生命周期"></a>11.3 Site生命周期</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">①pre-site 执行一些需要在生成站点文档之前完成的工作</span><br><span class="line">②site 生成项目的站点文档</span><br><span class="line">③post-site 执行一些需要在生成站点文档之后完成的工作，并且为部署做准备</span><br><span class="line">④site-deploy 将生成的站点文档部署到特定的服务器上</span><br></pre></td></tr></table></figure>
+<p>这里经常用到的是site阶段和site-deploy阶段，用以生成和发布Maven站点，这可是Maven相当强大的功能，Manager比较喜欢，文档及统计数据自动生成，很好看。</p>
+<h2 id="11-4-Default生命周期"><a href="#11-4-Default生命周期" class="headerlink" title="11.4 Default生命周期"></a>11.4 Default生命周期</h2><p>Default生命周期是Maven生命周期中最重要的一个，绝大部分工作都发生在这个生命周期中。这里，只解释一些比较重要和常用的阶段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">validate</span><br><span class="line">generate-sources</span><br><span class="line">process-sources</span><br><span class="line">generate-resources</span><br><span class="line">process-resources 复制并处理资源文件，至目标目录，准备打包。</span><br><span class="line">compile 编译项目的源代码。</span><br><span class="line">process-classes</span><br><span class="line">generate-test-sources</span><br><span class="line">process-test-sources</span><br><span class="line">generate-test-resources</span><br><span class="line">process-test-resources 复制并处理资源文件，至目标测试目录。</span><br><span class="line">test-compile 编译测试源代码。</span><br><span class="line">process-test-classes</span><br><span class="line">test 使用合适的单元测试框架运行测试。这些测试代码不会被打包或部署。</span><br><span class="line">prepare-package</span><br><span class="line">package 接受编译好的代码，打包成可发布的格式，如JAR。</span><br><span class="line">pre-integration-test</span><br><span class="line">integration-test</span><br><span class="line">post-integration-test</span><br><span class="line">verify</span><br><span class="line">install将包安装至本地仓库，以让其它项目依赖。</span><br><span class="line">deploy将最终的包复制到远程的仓库，</span><br><span class="line">    以让其它开发人员与项目共享或部署到服务器上运行。</span><br></pre></td></tr></table></figure>
+<h2 id="11-5-生命周期与自动化构建"><a href="#11-5-生命周期与自动化构建" class="headerlink" title="11.5 生命周期与自动化构建"></a>11.5 生命周期与自动化构建</h2><p><strong>运行任何一个阶段的时候，它前面的所有阶段都会被运行</strong>，<br>例如我们运行mvn install 的时候，代码会被编译，测试，打包。这就是Maven为什么能够自动执行构建过程的各个环节的原因。<br>此外，Maven的插件机制是完全依赖Maven的生命周期的，因此理解生命周期至关重要。</p>
+<h1 id="第十二章-插件和目标"><a href="#第十二章-插件和目标" class="headerlink" title="第十二章 插件和目标"></a>第十二章 插件和目标</h1><p>●Maven的核心仅仅定义了抽象的生命周期，具体的任务都是交由插件完成的。<br>●每个插件都能实现多个功能，每个功能就是一个插件目标。<br>●Maven的生命周期与插件目标相互绑定，以完成某个具体的构建任务。<br>例如：compile就是插件maven-compiler-plugin的一个功能；<br>pre-clean是插件maven-clean-plugin的一个目标。</p>
+<h1 id="第十三章-STS整合Maven"><a href="#第十三章-STS整合Maven" class="headerlink" title="第十三章 STS整合Maven"></a>第十三章 STS整合Maven</h1><h2 id="13-1-Maven插件安装"><a href="#13-1-Maven插件安装" class="headerlink" title="13.1 Maven插件安装"></a>13.1 Maven插件安装</h2><p>STS内置Maven插件，可以使用默认插件。但是我们推荐配置自己的Maven插件，这样可以控制Maven版本以及仓库位置。</p>
+<h2 id="13-2-Maven插件的设置"><a href="#13-2-Maven插件的设置" class="headerlink" title="13.2 Maven插件的设置"></a>13.2 Maven插件的设置</h2><p>①指定Maven核心程序的位置<br>[1]操作路径：Window→Preferences→Maven→Installations<br>[2]图解</p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjKgSK.png" alt="EjKgSK.png"></p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjKWOe.png" alt="EjKWOe.png"></p>
+<p>第十四章 第三个Maven项目(Jar工程)<br>14.1 在Eclipse中创建Maven工程</p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjKvwj.png" alt="EjKvwj.png"></p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjMpYq.png" alt="EjMpYq.png"></p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjMPpV.png" alt="EjMPpV.png"></p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjMnt1.png" alt="EjMnt1.png"></p>
+<h2 id="14-2-第三个Maven工程"><a href="#14-2-第三个Maven工程" class="headerlink" title="14.2 第三个Maven工程"></a>14.2 第三个Maven工程</h2><p>①坐标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">groupId：com.maven</span><br><span class="line">ArtifactId：MakeFriends</span><br><span class="line">Package：com.maven</span><br></pre></td></tr></table></figure>
+<p>②在src/main/java中新建类com.atguigu.maven.MakeFriends<br>在类中创建如下方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public String makeFriends(String name)&#123;		</span><br><span class="line">HelloFriend friend = new HelloFriend();</span><br><span class="line">friend.sayHelloToFriend(&quot;litingwei&quot;);</span><br><span class="line">String str = &quot;Hey,&quot;+friend.getMyName()+&quot; make a friend please.&quot;;</span><br><span class="line">System.out.println(str);</span><br><span class="line">return str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>③在src/test/java中新建类com.maven.MakeFriendsTest</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package com.maven;</span><br><span class="line">import static junit.framework.Assert.assertEquals;</span><br><span class="line">import org.junit.Test;</span><br><span class="line">public class MakeFriendsTest &#123;</span><br><span class="line">	@Test</span><br><span class="line">	public void testMakeFriends()&#123;		</span><br><span class="line">		MakeFriends makeFriend = new MakeFriends();</span><br><span class="line">		String str = makeFriend.makeFriends(&quot;litingwei&quot;);</span><br><span class="line">		assertEquals(&quot;Hey,John make a friend please.&quot;,str);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>④打开根目录pom.xml添加依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.9&lt;/version&gt;</span><br><span class="line">			&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">	    	&lt;groupId&gt;com.maven&lt;/groupId&gt;</span><br><span class="line">	    	&lt;artifactId&gt;HelloFriend&lt;/artifactId&gt;</span><br><span class="line">	    	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">	    	&lt;type&gt;jar&lt;/type&gt;</span><br><span class="line">	    	&lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<p>⑤在Eclipse环境下执行Maven命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">右击pom.xml选择run as 中的命令执行即可</span><br></pre></td></tr></table></figure>
+<p>⑥此时可以测试依赖原则，需要的依赖信息如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;1.2.14&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">		&lt;version&gt;1.2.17&lt;/version&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>第十五章 继承<br>15.1 为什么需要继承机制<br>由于非compile范围的依赖信息是不能在“依赖链”中传递的，所以有需要的工程只能单独配置。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Hello	       \  &lt;dependency&gt;</span><br><span class="line">                	&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                	&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">                	&lt;version&gt;4.9&lt;/version&gt;</span><br><span class="line">                	&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">                &lt;/dependency&gt;</span><br><span class="line">HelloFriend	    &lt;dependency&gt;</span><br><span class="line">        	        &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">        	        &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">                	&lt;version&gt;4.9&lt;/version&gt;</span><br><span class="line">                	&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">              &lt;/dependency&gt;</span><br><span class="line">MakeFriend	    &lt;dependency&gt;</span><br><span class="line">                	&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">                	&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">                	&lt;version&gt;4.9&lt;/version&gt;</span><br><span class="line">                	&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">                &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>此时如果项目需要将各个模块的junit版本统一为4.9，那么到各个工程中手动修改无疑是非常不可取的。使用继承机制就可以将这样的依赖信息统一提取到父工程模块中进行统一管理。</p>
+<h2 id="15-2-创建父工程"><a href="#15-2-创建父工程" class="headerlink" title="15.2 创建父工程"></a>15.2 创建父工程</h2><p>创建父工程和创建一般的Java工程操作一致，唯一需要注意的是：打包方式处要设置为pom。</p>
+<h2 id="15-3-在子工程中引用父工程"><a href="#15-3-在子工程中引用父工程" class="headerlink" title="15.3 在子工程中引用父工程"></a>15.3 在子工程中引用父工程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">	&lt;!-- 父工程坐标 --&gt;</span><br><span class="line">	&lt;groupId&gt;...&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;...&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;...&lt;/version&gt;</span><br><span class="line">	&lt;relativePath&gt;从当前目录到父项目的pom.xml文件的相对路径&lt;/relativePath&gt;</span><br><span class="line">&lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">&lt;parent&gt;</span><br><span class="line">	&lt;groupId&gt;com.maven&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;Parent&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;!-- 指定从当前子工程的pom.xml文件出发，查找父工程的pom.xml的路径 --&gt;</span><br><span class="line">	&lt;relativePath&gt;../Parent/pom.xml&lt;/relativePath&gt;</span><br><span class="line">&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
+<p>此时如果子工程的groupId和version如果和父工程重复则可以删除。</p>
+<h2 id="15-4-在父工程中管理依赖"><a href="#15-4-在父工程中管理依赖" class="headerlink" title="15.4 在父工程中管理依赖"></a>15.4 在父工程中管理依赖</h2><p>将Parent项目中的dependencies标签，用dependencyManagement标签括起来</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">	&lt;dependencies&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.9&lt;/version&gt;</span><br><span class="line">			&lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">	&lt;/dependencies&gt;</span><br><span class="line">&lt;/dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+<p>在子项目中重新指定需要的依赖，删除范围和版本号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">	&lt;dependency&gt;</span><br><span class="line">		&lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">		&lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">	&lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="第十六章-聚合"><a href="#第十六章-聚合" class="headerlink" title="第十六章 聚合"></a>第十六章 聚合</h1><h2 id="16-1-为什么要使用聚合"><a href="#16-1-为什么要使用聚合" class="headerlink" title="16.1 为什么要使用聚合"></a>16.1 为什么要使用聚合</h2><p>将多个工程拆分为模块后，需要手动逐个安装到仓库后依赖才能够生效。修改源码后也需要逐个手动进行clean操作。而使用了聚合之后就可以批量进行Maven工程的安装、清理工作。</p>
+<h2 id="16-1-如何配置聚合"><a href="#16-1-如何配置聚合" class="headerlink" title="16.1 如何配置聚合"></a>16.1 如何配置聚合</h2><p>在总的聚合工程中使用modules/module标签组合，指定模块工程的相对路径即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;modules&gt;</span><br><span class="line">	&lt;module&gt;../Hello&lt;/module&gt;</span><br><span class="line">	&lt;module&gt;../HelloFriend&lt;/module&gt;</span><br><span class="line">	&lt;module&gt;../MakeFriends&lt;/module&gt;</span><br><span class="line">&lt;/modules&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="第十七章-第四个Maven工程-war工程"><a href="#第十七章-第四个Maven工程-war工程" class="headerlink" title="第十七章 第四个Maven工程(war工程)"></a>第十七章 第四个Maven工程(war工程)</h1><h2 id="17-1-创建步骤"><a href="#17-1-创建步骤" class="headerlink" title="17.1 创建步骤"></a>17.1 创建步骤</h2><p>①第一步：创建maven web工程<br>②第二步：修改web.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">	xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot;</span><br><span class="line">	xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot;</span><br><span class="line">	id=&quot;WebApp_ID&quot; version=&quot;2.5&quot;&gt;</span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
+<p>③找不到HttpServlet错误<br>如果看到JSP报错：The superclass “javax.servlet.http.HttpServlet” was not found on the Java Build Path可以加入如下依赖解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;servlet-api&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">	&lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>④第二步：依赖MakeFriends<br>⑤第三步：建立测试JSP  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;</span><br><span class="line">	pageEncoding=&quot;UTF-8&quot;%&gt;</span><br><span class="line">&lt;%@ page import=&quot;com.atguigu.maven.MakeFriends&quot;%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">    MakeFriends makeFriends=new MakeFriends();</span><br><span class="line">    out.println(makeFriends.makeFriends(&quot;wanglipeng&quot;));</span><br><span class="line">%&gt;</span><br></pre></td></tr></table></figure>
+<p>⑥EL表达式没有提示问题<br>${pageContext}这个EL表达式中通过pageContext对象访问reuqest属性时本身是应该有提示的，但如果没有的话加入下面依赖即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">     &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;</span><br><span class="line">     &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;</span><br><span class="line">     &lt;version&gt;2.1.3-b06&lt;/version&gt;</span><br><span class="line">     &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="17-2-Web工程自动部署"><a href="#17-2-Web工程自动部署" class="headerlink" title="17.2 Web工程自动部署"></a>17.2 Web工程自动部署</h2><p>除了在Eclipse中使用Run as→run on server的方式运行Web工程，还可以配置Web工程的自动部署。<br>①配置自动部署</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;finalName&gt;web&lt;/finalName&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">          &lt;plugin&gt;</span><br><span class="line">              &lt;groupId&gt;org.codehaus.cargo&lt;/groupId&gt;</span><br><span class="line">              &lt;artifactId&gt;cargo-maven2-plugin&lt;/artifactId&gt;</span><br><span class="line">  			  &lt;version&gt;1.2.3&lt;/version&gt;</span><br><span class="line">  			  &lt;configuration&gt;</span><br><span class="line">  			      &lt;container&gt;</span><br><span class="line">  			          &lt;containerId&gt;tomcat6x&lt;/containerId&gt;</span><br><span class="line">  			          &lt;home&gt;D:\DevInstall\apache-tomcat-6.0.39&lt;/home&gt;</span><br><span class="line">  			      &lt;/container&gt;</span><br><span class="line">  			      &lt;configuration&gt;</span><br><span class="line">  			          &lt;type&gt;existing&lt;/type&gt;</span><br><span class="line">  			          &lt;home&gt;D:\DevInstall\apache-tomcat-6.0.39&lt;/home&gt;</span><br><span class="line">  			          &lt;!-- 如果Tomcat端口为默认值8080则不必设置该属性 --&gt;</span><br><span class="line">  			          &lt;properties&gt;</span><br><span class="line">  			                &lt;cargo.servlet.port&gt;8989&lt;/cargo.servlet.port&gt;</span><br><span class="line">  			          &lt;/properties&gt;</span><br><span class="line">  			      &lt;/configuration&gt;</span><br><span class="line">  			  &lt;/configuration&gt;</span><br><span class="line">  			  &lt;executions&gt;  </span><br><span class="line">                  &lt;execution&gt;  </span><br><span class="line">                      &lt;id&gt;cargo-run&lt;/id&gt;  </span><br><span class="line">                      &lt;phase&gt;install&lt;/phase&gt;  </span><br><span class="line">                      &lt;goals&gt;  </span><br><span class="line">                          &lt;goal&gt;run&lt;/goal&gt;  </span><br><span class="line">                      &lt;/goals&gt;  </span><br><span class="line">                  &lt;/execution&gt;  </span><br><span class="line">              &lt;/executions&gt;</span><br><span class="line">          &lt;/plugin&gt;</span><br><span class="line">      &lt;/plugins&gt;</span><br><span class="line">  &lt;/build&gt;</span><br></pre></td></tr></table></figure>
+<p>②部署Web项目的命令：mvn deploy  </p>
+<h1 id="第十八章-创建MavenWeb工程的完美方式"><a href="#第十八章-创建MavenWeb工程的完美方式" class="headerlink" title="第十八章 创建MavenWeb工程的完美方式"></a>第十八章 创建MavenWeb工程的完美方式</h1><p>①创建简单的Maven工程，打包方式选war包</p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjQnbQ.png" alt="EjQnbQ.png"></p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjQMUs.png" alt="EjQMUs.png"></p>
+<p>②调整JRE版本<br>③取消Dynamic Web Module的勾选  </p>
+<p><a href="https://imgchr.com/i/EjQGvT" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/19/EjQGvT.png" alt="EjQGvT.png"></a></p>
+<p>④重新勾选Dynamic Web Module</p>
+<p><a href="https://imgchr.com/i/EjQIRP" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/19/EjQIRP.md.png" alt="EjQIRP.md.png"></a></p>
+<p>⑤点超链接进行必须设置</p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjQw5R.png" alt="EjQw5R.png"></p>
+<p>⑥最终生成的工程的结构  </p>
+<p><img src="https://s2.ax1x.com/2019/05/19/EjQWad.png" alt="EjQWad.png"></p>
+<h1 id="第十九章-Maven酷站"><a href="#第十九章-Maven酷站" class="headerlink" title="第十九章 Maven酷站"></a>第十九章 Maven酷站</h1><p>我们可以到<br><a href="http://mvnrepository.com/" target="_blank" rel="noopener">http://mvnrepository.com/</a>  搜索需要的jar包的依赖信息。<br><a href="http://search.maven.org/" target="_blank" rel="noopener">http://search.maven.org/</a><br><a href="http://repo.maven.apache.org/maven2" target="_blank" rel="noopener">http://repo.maven.apache.org/maven2</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="hide pull-left" href="/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/09/10/2. Java基本语法(上)变量与运算符/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '277317290454635afa73',
+  clientSecret: '78223c859304da5e8d71bfce136d436c6ff95c37',
+  repo: 'blog-comment',
+  owner: 'forsigner',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['forsigner'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
