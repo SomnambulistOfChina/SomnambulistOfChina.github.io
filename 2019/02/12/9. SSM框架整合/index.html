@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>9. SSM框架整合 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java 工具,">
+  
+
+  <meta name="description" content="9.1 整合注意事项1)查看不同MyBatis版本整合Spring时使用的适配包； 2)下载整合适配包https://github.com/mybatis/spring/releases3)官方整合示例，jpetstorehttps://github.com/mybatis/jpetstore-6 9.2整合思路、步骤1)搭建环境  创建一个动态的WEB工程 导入SSM（Spring+Spring">
+<meta name="keywords" content="Java 工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9. SSM框架整合">
+<meta property="og:url" content="http://yoursite.com/2019/02/12/9. SSM框架整合/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="9.1 整合注意事项1)查看不同MyBatis版本整合Spring时使用的适配包； 2)下载整合适配包https://github.com/mybatis/spring/releases3)官方整合示例，jpetstorehttps://github.com/mybatis/jpetstore-6 9.2整合思路、步骤1)搭建环境  创建一个动态的WEB工程 导入SSM（Spring+Spring">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/07/EsXmUe.md.png">
+<meta property="og:updated_time" content="2019-05-24T08:14:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9. SSM框架整合">
+<meta name="twitter:description" content="9.1 整合注意事项1)查看不同MyBatis版本整合Spring时使用的适配包； 2)下载整合适配包https://github.com/mybatis/spring/releases3)官方整合示例，jpetstorehttps://github.com/mybatis/jpetstore-6 9.2整合思路、步骤1)搭建环境  创建一个动态的WEB工程 导入SSM（Spring+Spring">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/07/EsXmUe.md.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#9-1-整合注意事项"><span class="toc-text">9.1 整合注意事项</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2整合思路、步骤"><span class="toc-text">9.2整合思路、步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-搭建环境"><span class="toc-text">1)搭建环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-搭建Spring-Springmvc的环境"><span class="toc-text">2)搭建Spring + Springmvc的环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-MyBatis"><span class="toc-text">3)MyBatis</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Spring-整合-MyBatis-："><span class="toc-text">4)Spring 整合 MyBatis ：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-测试-REST-CRUD"><span class="toc-text">5)测试:  REST CRUD</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-3整合的配置"><span class="toc-text">9.3整合的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-0-数据源文件db-properties"><span class="toc-text">9.3.0 数据源文件db.properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-1-web-xml"><span class="toc-text">9.3.1 web.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-2-Spring配置-spring-xml"><span class="toc-text">9.3.2 Spring配置 spring.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-3-SpringMVC配置-SpringMVC-xml"><span class="toc-text">9.3.3 SpringMVC配置 SpringMVC.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-4-MyBatis配置"><span class="toc-text">9.3.4 MyBatis配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-全局文件的配置"><span class="toc-text">1)全局文件的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-SQL映射文件配置"><span class="toc-text">2)SQL映射文件配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-5-Spring-整合MyBatis-配置"><span class="toc-text">9.3.5 Spring 整合MyBatis 配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-4-整合测试"><span class="toc-text">9.4 整合测试</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-9. SSM框架整合" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">9. SSM框架整合</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2019.02.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="9-1-整合注意事项"><a href="#9-1-整合注意事项" class="headerlink" title="9.1 整合注意事项"></a>9.1 整合注意事项</h1><p>1)查看不同MyBatis版本整合Spring时使用的适配包；<br><a href="https://imgchr.com/i/EsXmUe" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/07/EsXmUe.md.png" alt="EsXmUe.md.png"></a></p>
+<p>2)下载整合适配包<br><a href="https://github.com/mybatis/spring/releases" target="_blank" rel="noopener">https://github.com/mybatis/spring/releases</a><br>3)官方整合示例，jpetstore<br><a href="https://github.com/mybatis/jpetstore-6" target="_blank" rel="noopener">https://github.com/mybatis/jpetstore-6</a></p>
+<h1 id="9-2整合思路、步骤"><a href="#9-2整合思路、步骤" class="headerlink" title="9.2整合思路、步骤"></a>9.2整合思路、步骤</h1><h2 id="1-搭建环境"><a href="#1-搭建环境" class="headerlink" title="1)搭建环境"></a>1)搭建环境</h2><blockquote>
+<ol>
+<li>创建一个动态的WEB工程</li>
+<li>导入SSM（Spring+SpringMvc+MyBatis）需要使用的jar包<br> 整合ssm需要的基础jar包名字（<a href="https://pan.baidu.com/s/1N9xmgsfVw7jGRIwIvbGPug/" target="_blank" rel="noopener">点击下载</a>）<br> 整合ssm需要的基础jar包(<a href="https://pan.baidu.com/s/1IsQX5KPlnuZn6uHy0Pkn-A/" target="_blank" rel="noopener">点击下载</a>)</li>
+<li>导入Spring与MyBatis整合适配包</li>
+<li>导入其他技术的一些支持包  连接池 数据库驱动  日志….  </li>
+</ol>
+</blockquote>
+<h2 id="2-搭建Spring-Springmvc的环境"><a href="#2-搭建Spring-Springmvc的环境" class="headerlink" title="2)搭建Spring + Springmvc的环境"></a>2)搭建Spring + Springmvc的环境</h2><pre><code>1. 在web.xml中配置:   Springmvc的前端控制器   实例化Spring容器的监听器 （contextLoaderListener）  字符编码过滤器  REST 过滤器
+2.创建Spring的配置文件(springMmvc.xml)-&gt; applicationContext.xml:组件扫描、 连接池、 事务.....
+</code></pre><ol start="3">
+<li>创建Springmvc的配置文件: springmvc.xml : 组件扫描、 视图解析器 <a href="mvc:..." target="_blank" rel="noopener">mvc:...</a><h2 id="3-MyBatis"><a href="#3-MyBatis" class="headerlink" title="3)MyBatis"></a>3)MyBatis</h2> 创建MyBatis的全局配置文件 mybatis-config,xml<br> 准备JavaBean 、测试表、 Mapper接口、 Mapper映射文件<h2 id="4-Spring-整合-MyBatis-："><a href="#4-Spring-整合-MyBatis-：" class="headerlink" title="4)Spring 整合 MyBatis ："></a>4)Spring 整合 MyBatis ：</h2> MyBatis的 SqlSession对象的创建 .<br> MyBatis的 Mapper接口的代理实现类得创建及管理<h2 id="5-测试-REST-CRUD"><a href="#5-测试-REST-CRUD" class="headerlink" title="5)测试:  REST CRUD"></a>5)测试:  REST CRUD</h2><ol>
+<li>查询所有的员工信息,列表显示</li>
+<li>添加新员工</li>
+<li>修改员工</li>
+<li>删除员工</li>
+</ol>
+</li>
+</ol>
+<h1 id="9-3整合的配置"><a href="#9-3整合的配置" class="headerlink" title="9.3整合的配置"></a>9.3整合的配置</h1><p>创建web动态工程 2.5（基本操作22个包）<br>最基本得spring得jar包在——Mybatis里support</p>
+<h2 id="9-3-0-数据源文件db-properties"><a href="#9-3-0-数据源文件db-properties" class="headerlink" title="9.3.0 数据源文件db.properties"></a>9.3.0 数据源文件db.properties</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driver=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.url=jdbc:mysql://localhost:3306/lidaxiongdesql</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=root</span><br></pre></td></tr></table></figure>
+<h2 id="9-3-1-web-xml"><a href="#9-3-1-web-xml" class="headerlink" title="9.3.1 web.xml"></a>9.3.1 web.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd&quot; id=&quot;WebApp_ID&quot; version=&quot;2.5&quot;&gt;</span><br><span class="line"> &lt;!-- 字符编码过滤器 --&gt;</span><br><span class="line"> &lt;filter&gt;</span><br><span class="line"> 	&lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;</span><br><span class="line"> 	&lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;</span><br><span class="line"> 	&lt;init-param&gt;</span><br><span class="line"> 		&lt;param-name&gt;encoding&lt;/param-name&gt;</span><br><span class="line"> 		&lt;param-value&gt;UTF-8&lt;/param-value&gt;</span><br><span class="line"> 	&lt;/init-param&gt;</span><br><span class="line"> &lt;/filter&gt;</span><br><span class="line"> &lt;filter-mapping&gt;</span><br><span class="line"> 	&lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;</span><br><span class="line"> 	&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line"> &lt;/filter-mapping&gt;</span><br><span class="line"> </span><br><span class="line"> &lt;!-- REST 过滤器 --&gt;</span><br><span class="line"> &lt;filter&gt;</span><br><span class="line"> 	&lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;</span><br><span class="line"> 	&lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filter-class&gt;</span><br><span class="line"> &lt;/filter&gt;</span><br><span class="line"> &lt;filter-mapping&gt;</span><br><span class="line"> 	&lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;</span><br><span class="line"> 	&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line"> &lt;/filter-mapping&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- 实例化SpringIOC容器的监听器 --&gt;</span><br><span class="line">	&lt;context-param&gt;</span><br><span class="line">		&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">		&lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;</span><br><span class="line">	&lt;/context-param&gt;</span><br><span class="line"></span><br><span class="line">	&lt;listener&gt;</span><br><span class="line">	&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;</span><br><span class="line">    &lt;/listener&gt;</span><br><span class="line"> </span><br><span class="line"> &lt;!-- Springmvc的前端控制器 --&gt;</span><br><span class="line">	&lt;servlet&gt;</span><br><span class="line">		&lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;</span><br><span class="line">		&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</span><br><span class="line">		&lt;init-param&gt;</span><br><span class="line">			&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">			&lt;param-value&gt;classpath:springmvc.xml&lt;/param-value&gt;</span><br><span class="line">		&lt;/init-param&gt;</span><br><span class="line">		&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br><span class="line">	&lt;/servlet&gt;</span><br><span class="line">	&lt;servlet-mapping&gt;</span><br><span class="line">		&lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;</span><br><span class="line">		&lt;url-pattern&gt;/&lt;/url-pattern&gt;</span><br><span class="line">	&lt;/servlet-mapping&gt;</span><br><span class="line">&lt;/web-app&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="9-3-2-Spring配置-spring-xml"><a href="#9-3-2-Spring配置-spring-xml" class="headerlink" title="9.3.2 Spring配置 spring.xml"></a>9.3.2 Spring配置 spring.xml</h2><p>(new一个Spring BeanConfiguration File 加组件context，事物的tx)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">	xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">	xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</span><br><span class="line">	xmlns:mybatis-spring=&quot;http://mybatis.org/schema/mybatis-spring&quot;</span><br><span class="line">	xsi:schemaLocation=&quot;http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd</span><br><span class="line">		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd</span><br><span class="line">		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd&quot;&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;!-- 组件扫描 expression排除掉不能运行的类如jpg，mp3等静态文件--&gt;</span><br><span class="line">	&lt;context:component-scan base-package=&quot;com.lbb.ssm&quot;&gt;</span><br><span class="line">		&lt;context:exclude-filter type=&quot;annotation&quot; </span><br><span class="line">		expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;</span><br><span class="line">	&lt;/context:component-scan&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;!-- 数据源 连接池 --&gt;</span><br><span class="line">	&lt;context:property-placeholder location=&quot;classpath:db.properties&quot;/&gt;</span><br><span class="line">	&lt;bean id=&quot;mydataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;</span><br><span class="line">		&lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;jdbc.driver&#125;&quot;&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot;&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot;&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;&gt;&lt;/property&gt;</span><br><span class="line">		</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;!-- 事务 --&gt;</span><br><span class="line">	&lt;bean id=&quot;dataSourceTransactionManager&quot; </span><br><span class="line">		class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</span><br><span class="line">		&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line">	&lt;tx:annotation-driven transaction-manager=&quot;dataSourceTransactionManager&quot;/&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<!--整合mybatis-->
+<!--AOP-->
+<h2 id="9-3-3-SpringMVC配置-SpringMVC-xml"><a href="#9-3-3-SpringMVC配置-SpringMVC-xml" class="headerlink" title="9.3.3 SpringMVC配置 SpringMVC.xml"></a>9.3.3 SpringMVC配置 SpringMVC.xml</h2><p>一个Spring BeanConfiguration File 加组件context和mvc)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">	xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">	xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">	xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</span><br><span class="line">	xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd</span><br><span class="line">		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd&quot;&gt;</span><br><span class="line">  &lt;!-- 组件扫描 expression排除掉不能运行的类如jpg，mp3等静态文件--&gt;</span><br><span class="line">  &lt;context:component-scan base-package=&quot;com.lbb.ssm&quot; use-default-filters=&quot;false&quot;&gt;</span><br><span class="line">	  &lt;context:include-filter type=&quot;annotation&quot; </span><br><span class="line">         expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;</span><br><span class="line">  &lt;/context:component-scan&gt;</span><br><span class="line">   &lt;!--视图解析器 --&gt;</span><br><span class="line">   &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</span><br><span class="line">	&lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;&gt;&lt;/property&gt;</span><br><span class="line">	&lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;</span><br><span class="line">   &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">   &lt;mvc:default-servlet-handler/&gt;</span><br><span class="line">   &lt;mvc:annotation-driven/&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="9-3-4-MyBatis配置"><a href="#9-3-4-MyBatis配置" class="headerlink" title="9.3.4 MyBatis配置"></a>9.3.4 MyBatis配置</h2><h3 id="1-全局文件的配置"><a href="#1-全局文件的配置" class="headerlink" title="1)全局文件的配置"></a>1)全局文件的配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!--  Spring 整合 MyBatis 后， MyBatis中配置数据源，事务等一些配置都可以</span><br><span class="line">         迁移到Spring的整合配置中。MyBatis配置文件中只需要配置与MyBatis相关</span><br><span class="line">         的即可。</span><br><span class="line">	 --&gt;</span><br><span class="line">	 &lt;!-- settings: 包含很多重要的设置项 	--&gt;</span><br><span class="line">	   &lt;settings&gt;</span><br><span class="line">	 	&lt;!-- 映射下划线到驼峰命名 --&gt;</span><br><span class="line">	 	&lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">	 	&lt;!-- 设置Mybatis对null值的默认处理 --&gt;</span><br><span class="line">	 	&lt;setting name=&quot;jdbcTypeForNull&quot; value=&quot;NULL&quot;/&gt;</span><br><span class="line">	 	&lt;!-- 开启延迟加载 --&gt;</span><br><span class="line">	 	&lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">	 	&lt;!-- 设置加载的数据是按需还是全部 --&gt;</span><br><span class="line">	 	&lt;setting name=&quot;aggressiveLazyLoading&quot; value=&quot;false&quot;/&gt;	</span><br><span class="line">	 	&lt;!-- 配置开启二级缓存 --&gt;</span><br><span class="line">	 	&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">	 &lt;/settings&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-SQL映射文件配置"><a href="#2-SQL映射文件配置" class="headerlink" title="2)SQL映射文件配置"></a>2)SQL映射文件配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span><br><span class="line">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;mapper namespace=&quot;com.atguigu.ssm.mapper.EmployeeMapper&quot;&gt;</span><br><span class="line">	&lt;!-- public List&lt;Employee&gt; getAllEmps(); --&gt;</span><br><span class="line">	&lt;select id=&quot;getAllEmps&quot; resultMap=&quot;myEmpsAndDept&quot; &gt;</span><br><span class="line">		select e.id eid, e.last_name,e.email,e.gender, d.id did, d.dept_name</span><br><span class="line">		from tbl_employee e ,tbl_dept d </span><br><span class="line">		where e.d_id = d.id </span><br><span class="line">	&lt;/select&gt;</span><br><span class="line">	&lt;resultMap type=&quot;com.atguigu.ssm.beans.Employee&quot; id=&quot;myEmpsAndDept&quot;&gt;</span><br><span class="line">		&lt;id column=&quot;eid&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;last_name&quot; property=&quot;lastName&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;email&quot; property=&quot;email&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;gender&quot; property=&quot;gender&quot;/&gt;</span><br><span class="line">		</span><br><span class="line">		&lt;association property=&quot;dept&quot; javaType=&quot;com.atguigu.ssm.beans.Department&quot;&gt;</span><br><span class="line">			&lt;id column=&quot;did&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">			&lt;result column=&quot;dept_name&quot; property=&quot;departmentName&quot;/&gt;</span><br><span class="line">		&lt;/association&gt;</span><br><span class="line">	&lt;/resultMap&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="9-3-5-Spring-整合MyBatis-配置"><a href="#9-3-5-Spring-整合MyBatis-配置" class="headerlink" title="9.3.5 Spring 整合MyBatis 配置"></a>9.3.5 Spring 整合MyBatis 配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Spring 整合 Mybatis --&gt;</span><br><span class="line">	&lt;!--1. SqlSession  --&gt;</span><br><span class="line">	&lt;bean class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;</span><br><span class="line">		&lt;!-- 指定数据源 --&gt;</span><br><span class="line">		&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;</span><br><span class="line">		&lt;!-- MyBatis的配置文件 --&gt;</span><br><span class="line">		&lt;property name=&quot;configLocation&quot; </span><br><span class="line">                 value=&quot;classpath:mybatis-config.xml&quot;&gt;&lt;/property&gt;</span><br><span class="line">		&lt;!-- MyBatis的SQL映射文件 --&gt;</span><br><span class="line">		&lt;property name=&quot;mapperLocations&quot; </span><br><span class="line">                 value=&quot;classpath:mybatis/mapper/*.xml&quot;&gt;&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;typeAliasesPackage&quot; </span><br><span class="line">                 value=&quot;com.atguigu.ssm.beans&quot;&gt;&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line">	&lt;!-- Mapper接口</span><br><span class="line">		MapperScannerConfigurer 为指定包下的Mapper接口批量生成代理实现类.bean的默认id是接口名首字母小写. </span><br><span class="line">	 --&gt;</span><br><span class="line">	&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;</span><br><span class="line">		&lt;property name=&quot;basePackage&quot; value=&quot;com.atguigu.ssm.mapper&quot;&gt;&lt;/property&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br><span class="line">	&lt;!-- &lt;mybatis-spring:scan base-package=&quot;com.atguigu.ssm.mapper&quot;/&gt; --&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="9-4-整合测试"><a href="#9-4-整合测试" class="headerlink" title="9.4 整合测试"></a>9.4 整合测试</h1><pre><code>1)编写页面，发送请求：
+http://localhost:8888/ssm/employees
+2)编写Handler,处理请求，完成响应
+3)在页面中获取数据，显示数据
+</code></pre>
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2019/02/12/1. Java语言概述/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2019/03/19/2. Java基本语法(上)变量与运算符/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '277317290454635afa73',
+  clientSecret: '78223c859304da5e8d71bfce136d436c6ff95c37',
+  repo: 'blog-comment',
+  owner: 'forsigner',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['forsigner'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
