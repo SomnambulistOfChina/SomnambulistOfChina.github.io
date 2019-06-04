@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>10. JavaSE-常用类 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java SE,">
+  
+
+  <meta name="description" content="10.1包装类Wrapper学习API更深的意义在于复习面向对象的知识。查看源代码，学习源代码。 10.1.1 为什么需要包装类Java并不是纯面向对象的语言。Java语言是一个面向对象的语言，但是Java中的基本数据类型却是不面向对象的。基本数据类型有它的优势：性能（效率高，节省空间）。但是我们在实际使用中经常需要将基本数据类型转化成对象，便于操作。比如： 123（1）集合的操作，（2）使用Ob">
+<meta name="keywords" content="Java SE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10. JavaSE-常用类">
+<meta property="og:url" content="http://yoursite.com/2017/01/01/10. JavaSE-常用类/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="10.1包装类Wrapper学习API更深的意义在于复习面向对象的知识。查看源代码，学习源代码。 10.1.1 为什么需要包装类Java并不是纯面向对象的语言。Java语言是一个面向对象的语言，但是Java中的基本数据类型却是不面向对象的。基本数据类型有它的优势：性能（效率高，节省空间）。但是我们在实际使用中经常需要将基本数据类型转化成对象，便于操作。比如： 123（1）集合的操作，（2）使用Ob">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530233521.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530234032.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235002.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235346.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235426.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235538.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235559.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000436.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000517.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000702.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000722.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000744.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000842.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531001054.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531001631.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531001747.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531002016.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531003328.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531003703.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531004049.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531004148.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531004958.png">
+<meta property="og:updated_time" content="2019-06-04T01:25:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10. JavaSE-常用类">
+<meta name="twitter:description" content="10.1包装类Wrapper学习API更深的意义在于复习面向对象的知识。查看源代码，学习源代码。 10.1.1 为什么需要包装类Java并不是纯面向对象的语言。Java语言是一个面向对象的语言，但是Java中的基本数据类型却是不面向对象的。基本数据类型有它的优势：性能（效率高，节省空间）。但是我们在实际使用中经常需要将基本数据类型转化成对象，便于操作。比如： 123（1）集合的操作，（2）使用Ob">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530233521.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#10-1包装类Wrapper"><span class="toc-text">10.1包装类Wrapper</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-1-为什么需要包装类"><span class="toc-text">10.1.1 为什么需要包装类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-2-包装类"><span class="toc-text">10.1.2 包装类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-3自动装箱（auto-boxing）与自动拆箱（unboxing）"><span class="toc-text">10.1.3自动装箱（auto_boxing）与自动拆箱（unboxing）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自动装箱"><span class="toc-text">. 自动装箱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-自动拆箱"><span class="toc-text">2. 自动拆箱</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-4-包装类的作用"><span class="toc-text">10.1.4 包装类的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据类型的范围"><span class="toc-text">1 数据类型的范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-数据类型的转换"><span class="toc-text">2 数据类型的转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、字符串转成包装类对象"><span class="toc-text">1、字符串转成包装类对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、字符串转成基本数据类型"><span class="toc-text">2、字符串转成基本数据类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-包装类的其他方法"><span class="toc-text">3. 包装类的其他方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-1-5-缓存问题"><span class="toc-text">10.1.5 缓存问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-2-字符串String类"><span class="toc-text">10.2 字符串String类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-1-字符串String类的特点"><span class="toc-text">10.2.1 字符串String类的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-String是个final类"><span class="toc-text">1 String是个final类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-String是不可变的字符序列"><span class="toc-text">2 String是不可变的字符序列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-String对象的创建"><span class="toc-text">3 String对象的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-字符串对象是如何存储的"><span class="toc-text">4 字符串对象是如何存储的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-String的拼接"><span class="toc-text">5 String的拼接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6、String对象的比较"><span class="toc-text">6、String对象的比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-2-2-String类的常用方法"><span class="toc-text">10.2.2 String类的常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、常用方法系列之一"><span class="toc-text">1、常用方法系列之一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-String类和字符相关操作"><span class="toc-text">2 String类和字符相关操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-String类字节与字符串操作方法"><span class="toc-text">3 String类字节与字符串操作方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-String类判断是否以指定内容开头或结尾"><span class="toc-text">4 String类判断是否以指定内容开头或结尾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-String类字符串查找操作"><span class="toc-text">5 String类字符串查找操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-String类字符串截取操作"><span class="toc-text">6 String类字符串截取操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-String类是否匹配正则"><span class="toc-text">7 String类是否匹配正则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-String类替换操作"><span class="toc-text">8 String类替换操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-String类字符串拆分操作"><span class="toc-text">9 String类字符串拆分操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-3-可变字符序列：字符串缓冲区"><span class="toc-text">10.3 可变字符序列：字符串缓冲区</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-1-StringBuffer、StringBuilder、String的区别"><span class="toc-text">10.3.1 StringBuffer、StringBuilder、String的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-一个类似于-String"><span class="toc-text">1 一个类似于 String</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-StringBuilder："><span class="toc-text">2 StringBuilder：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-2-StringBuffer和StringBuilder不同的API"><span class="toc-text">10.3.2 StringBuffer和StringBuilder不同的API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、构造器"><span class="toc-text">1、构造器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、和字符序列改变有关的方法"><span class="toc-text">2、和字符序列改变有关的方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-3-3-效率测试"><span class="toc-text">10.3.3 效率测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-4-System系统类"><span class="toc-text">10.4 System系统类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-4-1-标准输入、标准输出和错误输出流对象"><span class="toc-text">10.4.1 标准输入、标准输出和错误输出流对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-4-2-常用方法"><span class="toc-text">10.4.2 常用方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-5-JDK1-8之前日期时间类"><span class="toc-text">10.5 JDK1.8之前日期时间类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-5-1-java-lang-System类"><span class="toc-text">10.5.1 java.lang.System类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-5-2-java-util-Date"><span class="toc-text">10.5.2 java.util.Date</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#构造方法："><span class="toc-text">构造方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用方法："><span class="toc-text">常用方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#已过时的方法："><span class="toc-text">已过时的方法：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-5-3-java-util-TimeZone和Locale"><span class="toc-text">10.5.3 java.util.TimeZone和Locale</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-5-4-java-util-Calendar"><span class="toc-text">10.5.4 java.util.Calendar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-5-5-java-text-DateFormat和SimpleDateFormat"><span class="toc-text">10.5.5 java.text.DateFormat和SimpleDateFormat</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-6-数学相关类Math、BigInteger、BigDecimal"><span class="toc-text">10.6 数学相关类Math、BigInteger、BigDecimal</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-6-1-java-lang-Math类"><span class="toc-text">10.6.1 java.lang.Math类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-6-2-java-math包的BigInteger和BigDecimal"><span class="toc-text">10.6.2 java.math包的BigInteger和BigDecimal</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-7-比较器：自然排序与定制排序"><span class="toc-text">10.7 比较器：自然排序与定制排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-7-1-自然排序：java-lang-Comparable"><span class="toc-text">10.7.1 自然排序：java.lang.Comparable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-7-2-定制排序：java-util-Compartor"><span class="toc-text">10.7.2 定制排序：java.util.Compartor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-7-3-示例"><span class="toc-text">10.7.3 示例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#10-8-JDK1-8新增日期时间类型"><span class="toc-text">10.8 JDK1.8新增日期时间类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#10-8-1-java-time"><span class="toc-text">10.8.1 java.time</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、本地日期（LocalDate）、本地时间（LocalTime）、本地日期时间（LocalDateTime）"><span class="toc-text">1、本地日期（LocalDate）、本地时间（LocalTime）、本地日期时间（LocalDateTime）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、瞬时：Instant"><span class="toc-text">2、瞬时：Instant</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、带时区的日期、时间的处理"><span class="toc-text">3、带时区的日期、时间的处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、持续时间：Duration"><span class="toc-text">4、持续时间：Duration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、日期间隔：Period"><span class="toc-text">5、日期间隔：Period</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-8-2-java-time-temporal-TemporalAdjuster-时间校正器"><span class="toc-text">10.8.2 java.time.temporal.TemporalAdjuster : 时间校正器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-8-3-java-time-format-DateTimeFormatter-类"><span class="toc-text">10.8.3 java.time.format.DateTimeFormatter 类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-8-4-与传统日期处理的转换"><span class="toc-text">10.8.4 与传统日期处理的转换</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-10. JavaSE-常用类" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">10. JavaSE-常用类</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.01.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaSE基础笔记/">JavaSE基础笔记</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="10-1包装类Wrapper"><a href="#10-1包装类Wrapper" class="headerlink" title="10.1包装类Wrapper"></a>10.1包装类Wrapper</h1><p>学习API更深的意义在于复习面向对象的知识。查看源代码，学习源代码。</p>
+<h2 id="10-1-1-为什么需要包装类"><a href="#10-1-1-为什么需要包装类" class="headerlink" title="10.1.1 为什么需要包装类"></a>10.1.1 为什么需要包装类</h2><p>Java并不是纯面向对象的语言。Java语言是一个面向对象的语言，但是Java中的基本数据类型却是不面向对象的。基本数据类型有它的优势：性能（效率高，节省空间）。<br>但是我们在实际使用中经常需要将基本数据类型转化成对象，便于操作。比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（1）集合的操作，</span><br><span class="line">（2）使用Object类型接收任意类型的数据等，</span><br><span class="line">（3）泛型实参，这时，我们就需要将基本数据类型数据转化为对象。</span><br></pre></td></tr></table></figure>
+<h2 id="10-1-2-包装类"><a href="#10-1-2-包装类" class="headerlink" title="10.1.2 包装类"></a>10.1.2 包装类</h2><p>包装类均位于java.lang包，包装类和基本数据类型的对应关系，如图10-1：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530233521.png" alt></p>
+<p>其中有六个都是继承自java.lang.Number类：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530234032.png" alt></p>
+<h2 id="10-1-3自动装箱（auto-boxing）与自动拆箱（unboxing）"><a href="#10-1-3自动装箱（auto-boxing）与自动拆箱（unboxing）" class="headerlink" title="10.1.3自动装箱（auto_boxing）与自动拆箱（unboxing）"></a>10.1.3自动装箱（auto_boxing）与自动拆箱（unboxing）</h2><p>JDK1.5之前需要手动装箱与拆箱，JDK1.5之后支持自动装箱与自动拆箱。</p>
+<h3 id="自动装箱"><a href="#自动装箱" class="headerlink" title=". 自动装箱"></a>. 自动装箱</h3><p>基本数据类型就自动的封装到与它相同类型的包装中，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer i = 100;</span><br></pre></td></tr></table></figure>
+<p>本质上是，编译器编译时为我们添加了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer i = new Integer(100);</span><br></pre></td></tr></table></figure>
+<h3 id="2-自动拆箱"><a href="#2-自动拆箱" class="headerlink" title="2. 自动拆箱"></a>2. 自动拆箱</h3><p>包装类对象自动转换成基本类型数据。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int a = new Integer(100);</span><br></pre></td></tr></table></figure>
+<p>本质上，编译器编译时为我们添加了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int a = new Integer(100).intValue();</span><br></pre></td></tr></table></figure>
+<h2 id="10-1-4-包装类的作用"><a href="#10-1-4-包装类的作用" class="headerlink" title="10.1.4 包装类的作用"></a>10.1.4 包装类的作用</h2><h3 id="1-数据类型的范围"><a href="#1-数据类型的范围" class="headerlink" title="1 数据类型的范围"></a>1 数据类型的范围</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MIN_VALUE、MAX_VALUE</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Float和Double中还有正无穷大POSITIVE_INFINITY、负无穷大NEGATIVE_INFINITY，还NaN，是Not a Number的缩写。NaN 用于处理计算中出现的错误情况，比如 0.0 除以 0.0 或者求负数的平方根。</li>
+<li>程序员可以利用这种定制的 NaN 值中的特定位模式来表达某些诊断信息。</li>
+</ul>
+<h3 id="2-数据类型的转换"><a href="#2-数据类型的转换" class="headerlink" title="2 数据类型的转换"></a>2 数据类型的转换</h3><h4 id="1、字符串转成包装类对象"><a href="#1、字符串转成包装类对象" class="headerlink" title="1、字符串转成包装类对象"></a>1、字符串转成包装类对象</h4><p>（1）使用包装类型的构造方法<br>除了Character类型，其他7中类型都有1个构造方法，其参数是字符串类型<br>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer t2=new Integer(&quot;500&quot;);//参数是字符串，字符串的值是必须对应的数值</span><br><span class="line">Integer t3=new Integer(&quot;abc&quot;);// java.lang.NumberFormatException: For input string: &quot;abc&quot;</span><br></pre></td></tr></table></figure>
+<p>（2）使用包装类的valueOf方法<br>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Integer i=Integer.valueOf(&quot;500&quot;);</span><br></pre></td></tr></table></figure>
+<h4 id="2、字符串转成基本数据类型"><a href="#2、字符串转成基本数据类型" class="headerlink" title="2、字符串转成基本数据类型"></a>2、字符串转成基本数据类型</h4><p>通过包装类的parseXxx(String s)静态方法<br>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int i=Integer.parseInt(&quot;500&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="3-包装类的其他方法"><a href="#3-包装类的其他方法" class="headerlink" title="3. 包装类的其他方法"></a>3. 包装类的其他方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1、Integer类型</span><br><span class="line">public static String toBinaryString(int i)  //把十进制转成二进制</span><br><span class="line">public static String toHexString(int i)     //把十进制转成十六进制</span><br><span class="line">public static String toOctalString(int i)   //把十进制转成八进制</span><br><span class="line">2、Character类型</span><br><span class="line">public static char toUpperCase(char ch)  //转成大写字母</span><br><span class="line">public static char toLowerCase(char ch)  //转成小写字母</span><br><span class="line">其他的查看相关API文档即可</span><br><span class="line">3、equals</span><br><span class="line">按照包装的基本数据类型的值比较</span><br><span class="line">4、compareTo</span><br><span class="line">按照包装的基本数据类型的值比较</span><br></pre></td></tr></table></figure>
+<h2 id="10-1-5-缓存问题"><a href="#10-1-5-缓存问题" class="headerlink" title="10.1.5 缓存问题"></a>10.1.5 缓存问题</h2><p>我们在编程时大量需要值在-128到127范围之间的Integer对象。如果只能通过new来创建，需要在堆中开辟大量值一样的Integer对象。这是相当不划算的，IntegerCache.cache很好的起到了缓存的作用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">缓存</span><br><span class="line">byte Byte -128–127</span><br><span class="line">short Short -128–127</span><br><span class="line">int Integer -128—127</span><br><span class="line">long Long -128—127</span><br><span class="line">float Float 不缓存</span><br><span class="line">double Double 不缓存</span><br><span class="line">char Character 0–127</span><br><span class="line">boolean Boolean TURE，FALSE</span><br></pre></td></tr></table></figure>
+<h1 id="10-2-字符串String类"><a href="#10-2-字符串String类" class="headerlink" title="10.2 字符串String类"></a>10.2 字符串String类</h1><h2 id="10-2-1-字符串String类的特点"><a href="#10-2-1-字符串String类的特点" class="headerlink" title="10.2.1 字符串String类的特点"></a>10.2.1 字符串String类的特点</h2><p>字符串的学习，有的同学就看看API，记下方法，有的同学看看源代码，还有的同学画画图，自然学的深度是不一样的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * The &#123;@code String&#125; class represents character strings. All</span><br><span class="line"> * string literals in Java programs, such as &#123;@code &quot;abc&quot;&#125;, are</span><br><span class="line"> * implemented as instances of this class.</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * Strings are constant; their values cannot be changed after they</span><br><span class="line"> * are created. String buffers support mutable strings.</span><br><span class="line"> * Because String objects are immutable they can be shared. For example:</span><br><span class="line"> * &lt;blockquote&gt;&lt;pre&gt;</span><br><span class="line"> *     String str = &quot;abc&quot;;</span><br><span class="line"> * &lt;/pre&gt;&lt;/blockquote&gt;&lt;p&gt;</span><br><span class="line"> * is equivalent to:</span><br><span class="line"> * &lt;blockquote&gt;&lt;pre&gt;</span><br><span class="line"> *     char data[] = &#123;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&#125;;</span><br><span class="line"> *     String str = new String(data);</span><br><span class="line"> * &lt;/pre&gt;&lt;/blockquote&gt;&lt;p&gt;</span><br><span class="line"> * Here are some more examples of how strings can be used:</span><br><span class="line"> * &lt;blockquote&gt;&lt;pre&gt;</span><br><span class="line"> *     System.out.println(&quot;abc&quot;);</span><br><span class="line"> *     String cde = &quot;cde&quot;;</span><br><span class="line"> *     System.out.println(&quot;abc&quot; + cde);</span><br><span class="line"> *     String c = &quot;abc&quot;.substring(2,3);</span><br><span class="line"> *     String d = cde.substring(1, 2);</span><br><span class="line"> * &lt;/pre&gt;&lt;/blockquote&gt;</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * The class &#123;@code String&#125; includes methods for examining</span><br><span class="line"> * individual characters of the sequence, for comparing strings, for</span><br><span class="line"> * searching strings, for extracting substrings, and for creating a</span><br><span class="line"> * copy of a string with all characters translated to uppercase or to</span><br><span class="line"> * lowercase. Case mapping is based on the Unicode Standard version</span><br><span class="line"> * specified by the &#123;@link java.lang.Character Character&#125; class.</span><br><span class="line"> * &lt;p&gt;</span><br><span class="line"> * The Java language provides special support for the string</span><br><span class="line"> * concatenation operator (&amp;nbsp;+&amp;nbsp;), and for conversion of</span><br><span class="line"> * other objects to strings. String concatenation is implemented</span><br><span class="line"> * through the &#123;@code StringBuilder&#125;(or &#123;@code StringBuffer&#125;)</span><br><span class="line"> * class and its &#123;@code append&#125; method.</span><br><span class="line"> * String conversions are implemented through the method</span><br><span class="line"> * &#123;@code toString&#125;, defined by &#123;@code Object&#125; and</span><br><span class="line"> * inherited by all classes in Java. For additional information on</span><br><span class="line"> * string concatenation and conversion, see Gosling, Joy, and Steele,</span><br><span class="line"> * &lt;i&gt;The Java Language Specification&lt;/i&gt;.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>String 类代表字符串。Java 程序中的所有字符串字面值（如 “abc” ）都作为此类的实例实现。 </li>
+<li>字符串是常量；它们的值在创建之后不能更改。字符串缓冲区支持可变的字符串。因为 String 对象是不可变的，所以可以共享。例如： </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String str = &quot;abc&quot;;</span><br></pre></td></tr></table></figure>
+<p> 等效于： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">char data[] = &#123;&apos;a&apos;, &apos;b&apos;, &apos;c&apos;&#125;;</span><br><span class="line">     String str = new String(data);</span><br></pre></td></tr></table></figure>
+<p>下面给出了一些如何使用字符串的更多示例： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&quot;abc&quot;);</span><br><span class="line">     String cde = &quot;cde&quot;;</span><br><span class="line">     System.out.println(&quot;abc&quot; + cde);</span><br><span class="line">     String c = &quot;abc&quot;.substring(2,3);</span><br><span class="line">     String d = cde.substring(1, 2);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>String 类包括的方法可用于检查序列的单个字符、比较字符串、搜索字符串、提取子字符串、创建字符串副本并将所有字符全部转换为大写或小写。</li>
+<li><p>大小写映射基于 Character 类指定的 Unicode 标准版。 </p>
+</li>
+<li><p>Java 语言提供对字符串串联符号（”+”）以及将其他对象转换为字符串的特殊支持。</p>
+</li>
+<li>字符串串联是通过 StringBuilder（或 StringBuffer）类及其 append 方法实现的。</li>
+<li>字符串转换是通过 toString 方法实现的，该方法由 Object 类定义，并可被 Java 中的所有类继承。</li>
+<li>有关字符串串联和转换的更多信息，请参阅 Gosling、Joy 和 Steele 合著的 The Java Language Specification。 </li>
+</ul>
+<h3 id="1-String是个final类"><a href="#1-String是个final类" class="headerlink" title="1 String是个final类"></a>1 String是个final类</h3><h3 id="2-String是不可变的字符序列"><a href="#2-String是不可变的字符序列" class="headerlink" title="2 String是不可变的字符序列"></a>2 String是不可变的字符序列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public final class String</span><br><span class="line">    implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123;</span><br><span class="line">    /** The value is used for character storage. */</span><br><span class="line">    private final char value[];</span><br><span class="line"></span><br><span class="line">    /** Cache the hash code for the string */</span><br><span class="line">    private int hash; // Default to 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>String对象的字符内容是存储在一个字符数组中的。</li>
+<li>private意味着外面无法直接获取字符数组，而且String没有提供value的get和set方法，</li>
+<li>final意味着字符数组的引用不可改变，即通过让value指向新的数组对象来实现修改String对象，</li>
+<li>而且String也没有提供方法来修改value数组某个元素值，因此字符串的字符数组内容也不可变。</li>
+</ul>
+<p>疑问？那么字符串的拼接、字符串的截取、字符串的替换等操作是如何实现的呢？<br>每次修改都创建一个新的char数组表示修改结果。</p>
+<h3 id="3-String对象的创建"><a href="#3-String对象的创建" class="headerlink" title="3 String对象的创建"></a>3 String对象的创建</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String str = “hello”;</span><br><span class="line">String  s1 = new String();   //  本质上  this.value = new char[0];</span><br><span class="line">String  s2 = new String(String original);  //this.value = original.value;</span><br><span class="line">String  s3 = new String(char[] a);  //this.value = Arrays.copyOf(value, value.length);</span><br><span class="line">String  s4 = new String(char[] a,int startIndex,int count)</span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235002.png" alt></p>
+<h3 id="4-字符串对象是如何存储的"><a href="#4-字符串对象是如何存储的" class="headerlink" title="4 字符串对象是如何存储的"></a>4 字符串对象是如何存储的</h3><p>字符串常量存储在字符串常量池，目的是共享<br>字符串非常量对象存储在堆中。</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235346.png" alt></p>
+<h3 id="5-String的拼接"><a href="#5-String的拼接" class="headerlink" title="5 String的拼接"></a>5 String的拼接</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235426.png" alt></p>
+<p>结论：<br>常量与常量的拼接结果在常量池<br>只要其中有一个是变量，结果就在堆中<br>如果拼接的结果调用intern()方法，就在常量池中</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235538.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530235559.png" alt></p>
+<h3 id="6、String对象的比较"><a href="#6、String对象的比较" class="headerlink" title="6、String对象的比较"></a>6、String对象的比较</h3><p><strong>==比较的是地址。</strong><br>equals比较的是字符串的内容，重写了Object的equals方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public boolean equals(Object anObject) &#123;</span><br><span class="line">        if (this == anObject) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        if (anObject instanceof String) &#123;</span><br><span class="line">            String anotherString = (String)anObject;</span><br><span class="line">            int n = value.length;</span><br><span class="line">            if (n == anotherString.value.length) &#123;</span><br><span class="line">                char v1[] = value;</span><br><span class="line">                char v2[] = anotherString.value;</span><br><span class="line">                int i = 0;</span><br><span class="line">                while (n-- != 0) &#123;</span><br><span class="line">                    if (v1[i] != v2[i])</span><br><span class="line">                        return false;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="10-2-2-String类的常用方法"><a href="#10-2-2-String类的常用方法" class="headerlink" title="10.2.2 String类的常用方法"></a>10.2.2 String类的常用方法</h2><h3 id="1、常用方法系列之一"><a href="#1、常用方法系列之一" class="headerlink" title="1、常用方法系列之一"></a>1、常用方法系列之一</h3><ul>
+<li>int length()：返回字符串的长度： return value.length;</li>
+<li>boolean isEmpty()：判断是否是空字符串：return value.length == 0;</li>
+<li>String toLowerCase()：使用默认语言环境的规则将此 String 中的所有字符都转换为小写。</li>
+<li>String toUpperCase()：使用默认语言环境的规则将此 String 中的所有字符都转换为大写。</li>
+<li>String trim()：返回字符串的副本，忽略前导空白和尾部空白。</li>
+<li>boolean equals(Object obj)：比较字符串的内容</li>
+<li>boolean equalsIgnoreCase(String anotherString)：与equals方法类似，忽略大小写</li>
+<li>String concat(String str)：将指定字符串连接到此字符串的结尾。 等价于用“+”</li>
+</ul>
+<h3 id="2-String类和字符相关操作"><a href="#2-String类和字符相关操作" class="headerlink" title="2 String类和字符相关操作"></a>2 String类和字符相关操作</h3><ul>
+<li>char charAt(int index)： 返回某索引处的字符return value[index];</li>
+<li>char[ ] toCharArray()：将此字符串转换为一个新的字符数组</li>
+<li>String(char[ ] value)：分配一个新的 String，使其表示字符数组参数中当前包含的字符序列。 </li>
+<li>String(char[ ] value, int offset, int count)：分配一个新的 String，它包含取自字符数组参数一个子数组的字符。 </li>
+</ul>
+<h3 id="3-String类字节与字符串操作方法"><a href="#3-String类字节与字符串操作方法" class="headerlink" title="3 String类字节与字符串操作方法"></a>3 String类字节与字符串操作方法</h3><p>编码：把字符–&gt;字节</p>
+<ul>
+<li>byte[ ] getBytes()：使用平台的默认字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中。</li>
+<li>byte[ ] getBytes(Charset charset) ：使用给定的 charset 将此 String 编码到 byte 序列，并将结果存储到新的 byte 数组。</li>
+<li>byte[ ] getBytes(String charsetName) ：使用指定的字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中。<br>解码：把字节–&gt;字符</li>
+<li>String(byte[] bytes) ：通过使用平台的默认字符集解码指定的 byte 数组，构造一个新的 String。 </li>
+<li>String(byte[] bytes, Charset charset)：通过使用指定的 charset 解码指定的 byte 数组，构造一个新的 String。 </li>
+<li>String(byte[] bytes, int offset, int length) ：通过使用平台的默认字符集解码指定的 byte 子数组，构造一个新的 String。 </li>
+<li>String(byte[] bytes, int offset, int length, Charset charset)：通过使用指定的 charset 解码指定的 byte 子数组，构造一个新的 String。 </li>
+<li>String(byte[] bytes, int offset, int length, String charsetName)：通过使用指定的字符集解码指定的 byte 子数组，构造一个新的 String。 </li>
+<li>String(byte[] bytes, String charsetName)：通过使用指定的 charset 解码指定的 byte 数组，构造一个新的 String。 </li>
+</ul>
+<h3 id="4-String类判断是否以指定内容开头或结尾"><a href="#4-String类判断是否以指定内容开头或结尾" class="headerlink" title="4 String类判断是否以指定内容开头或结尾"></a>4 String类判断是否以指定内容开头或结尾</h3><ul>
+<li>boolean endsWith(String suffix)：测试此字符串是否以指定的后缀结束。 </li>
+<li>boolean startsWith(String prefix)：测试此字符串是否以指定的前缀开始。 </li>
+<li>boolean startsWith(String prefix, int toffset)：测试此字符串从指定索引开始的子字符串是否以指定前缀开始。</li>
+</ul>
+<h3 id="5-String类字符串查找操作"><a href="#5-String类字符串查找操作" class="headerlink" title="5 String类字符串查找操作"></a>5 String类字符串查找操作</h3><ul>
+<li>boolean contains(CharSequence s)：当且仅当此字符串包含指定的 char 值序列时，返回 true。</li>
+<li>int indexOf(int ch)：返回指定字符在此字符串中第一次出现处的索引。 </li>
+<li>int indexOf(int ch, int fromIndex)：返回在此字符串中第一次出现指定字符处的索引，从指定的索引开始搜索。 </li>
+<li>int indexOf(String str)：返回指定子字符串在此字符串中第一次出现处的索引。 </li>
+<li>int indexOf(String str, int fromIndex)：返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始。 </li>
+<li>int lastIndexOf(int ch)：返回指定字符在此字符串中最后一次出现处的索引。 </li>
+<li>int lastIndexOf(int ch, int fromIndex)：返回指定字符在此字符串中最后一次出现处的索引，从指定的索引处开始进行反向搜索。 </li>
+<li>int lastIndexOf(String str)：返回指定子字符串在此字符串中最右边出现处的索引。 </li>
+<li>int lastIndexOf(String str, int fromIndex)：返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索。<br>indexOf和lastIndexOf方法如果未找到都是返回-1</li>
+</ul>
+<h3 id="6-String类字符串截取操作"><a href="#6-String类字符串截取操作" class="headerlink" title="6 String类字符串截取操作"></a>6 String类字符串截取操作</h3><ul>
+<li>String substring(int beginIndex) <pre><code>返回一个新的字符串，它是此字符串的从beginIndex开始截取到最后的一个子字符串。 
+</code></pre></li>
+<li>String substring(int beginIndex, int endIndex) <pre><code>返回一个新字符串，它是此字符串从beginIndex开始截取到endIndex(不包含)的一个子字符串。 
+</code></pre></li>
+</ul>
+<h3 id="7-String类是否匹配正则"><a href="#7-String类是否匹配正则" class="headerlink" title="7 String类是否匹配正则"></a>7 String类是否匹配正则</h3><ul>
+<li>boolean matches(String regex)：告知此字符串是否匹配给定的正则表达式。 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		String str = &quot;12345&quot;;</span><br><span class="line">		//判断str字符串中是否全部有数字组成，即有1-n个数字组成</span><br><span class="line">		boolean matches = str.matches(&quot;\\d+&quot;);</span><br><span class="line">		System.out.println(matches);</span><br><span class="line">		String tel = &quot;0571-4534289&quot;;</span><br><span class="line">		//判断这是否是一个杭州的固定电话</span><br><span class="line">		boolean result = tel.matches(&quot;0571-\\d&#123;7,8&#125;&quot;);</span><br><span class="line">		System.out.println(result);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="8-String类替换操作"><a href="#8-String类替换操作" class="headerlink" title="8 String类替换操作"></a>8 String类替换操作</h3><ul>
+<li>String replace(char oldChar, char newChar)： <pre><code>返回一个新的字符串，它是通过用 newChar 替换此字符串中出现的所有 oldChar 得到的。 
+</code></pre></li>
+<li>String replace(CharSequence target, CharSequence replacement)： <pre><code>使用指定的字面值替换序列替换此字符串所有匹配字面值目标序列的子字符串。 
+</code></pre></li>
+<li>replaceAll(String regex, String replacement)： <pre><code>使用给定的 replacement 替换此字符串所有匹配给定的正则表达式的子字符串。 
+</code></pre></li>
+<li>String replaceFirst(String regex, String replacement)： <pre><code>使用给定的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。 
+</code></pre></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		String str = &quot;12hello34world5java7891mysql456&quot;;</span><br><span class="line">		//把字符串中的数字替换成,，如果结果中开头和结尾有，的话去掉</span><br><span class="line">		String string = str.replaceAll(&quot;\\d+&quot;, &quot;,&quot;).replaceAll(&quot;^,|,$&quot;, &quot;&quot;);</span><br><span class="line">		System.out.println(string);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="9-String类字符串拆分操作"><a href="#9-String类字符串拆分操作" class="headerlink" title="9 String类字符串拆分操作"></a>9 String类字符串拆分操作</h3><ul>
+<li>String[] split(String regex)：根据给定正则表达式的匹配拆分此字符串。 </li>
+<li>String[] split(String regex, int limit)：根据匹配给定的正则表达式来拆分此字符串，最多不超过limit个，如果超过了，剩下的全部都放到最后一个元素中。 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		String str = &quot;hello|world|java&quot;;</span><br><span class="line">		String[] strings = str.split(&quot;\\|&quot;);</span><br><span class="line">		for (String string : strings) &#123;</span><br><span class="line">			System.out.println(string);</span><br><span class="line">		&#125;</span><br><span class="line">		String str2 = &quot;hello.world.java&quot;;</span><br><span class="line">		String[] strings2 = str2.split(&quot;\\.&quot;);</span><br><span class="line">		for (String string : strings2) &#123;</span><br><span class="line">			System.out.println(string);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="10-3-可变字符序列：字符串缓冲区"><a href="#10-3-可变字符序列：字符串缓冲区" class="headerlink" title="10.3 可变字符序列：字符串缓冲区"></a>10.3 可变字符序列：字符串缓冲区</h1><h2 id="10-3-1-StringBuffer、StringBuilder、String的区别"><a href="#10-3-1-StringBuffer、StringBuilder、String的区别" class="headerlink" title="10.3.1 StringBuffer、StringBuilder、String的区别"></a>10.3.1 StringBuffer、StringBuilder、String的区别</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000436.png" alt></p>
+<h3 id="1-一个类似于-String"><a href="#1-一个类似于-String" class="headerlink" title="1 一个类似于 String"></a>1 一个类似于 String</h3><p>的字符串缓冲区，但能被修改。虽然在任意时间点上它都包含某种特定的字符序列，但通过某些方法调用可以改变该序列的长度和内容，所有对StringBuffer或StringBuilder对象的字符序列的修改不会产生新的StringBuffer或StringBuilder对象，这点和String很大的不同。</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000517.png" alt></p>
+<p>value没有final声明,value可以不断扩容，count记录有效字符的个数。</p>
+<h3 id="2-StringBuilder："><a href="#2-StringBuilder：" class="headerlink" title="2 StringBuilder："></a>2 StringBuilder：</h3><p>线程安全，效率低；StringBuffer：线程不安全，效率高</p>
+<h2 id="10-3-2-StringBuffer和StringBuilder不同的API"><a href="#10-3-2-StringBuffer和StringBuilder不同的API" class="headerlink" title="10.3.2 StringBuffer和StringBuilder不同的API"></a>10.3.2 StringBuffer和StringBuilder不同的API</h2><h3 id="1、构造器"><a href="#1、构造器" class="headerlink" title="1、构造器"></a>1、构造器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer或StringBuilder对象的创建必须用new+构造器。</span><br><span class="line">StringBuffer()   初始容量为16的字符串缓冲区</span><br><span class="line">StringBuffer(int size)   构造指定容量的字符串缓冲区</span><br><span class="line">StringBuffer(String str)  将内容初始化为指定字符串内容</span><br></pre></td></tr></table></figure>
+<h3 id="2、和字符序列改变有关的方法"><a href="#2、和字符序列改变有关的方法" class="headerlink" title="2、和字符序列改变有关的方法"></a>2、和字符序列改变有关的方法</h3><p>而且所有这些方法支持方法链</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer append(xx)：提供了很多的append()方法，用于进行字符串拼接</span><br><span class="line">StringBuffer delete(int start,int end)：删除指定位置的内容</span><br><span class="line">StringBuffer insert(int offset, xx)：在指定位置插入xx</span><br><span class="line">StringBuffer replace(int start, int end, String str)：把[start,end)位置替换为str</span><br><span class="line">StringBuffer reverse() ：把当前字符序列逆转</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		StringBuffer sf = new StringBuffer();</span><br><span class="line">		sf.append(&quot;hello&quot;).append(&quot;world&quot;).append(&quot;java&quot;);</span><br><span class="line">		System.out.println(sf);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>方法链的原理</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000702.png" alt></p>
+<p>当append和insert时，如果原来value数组长度不够，可扩容</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000722.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000744.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531000842.png" alt></p>
+<h2 id="10-3-3-效率测试"><a href="#10-3-3-效率测试" class="headerlink" title="10.3.3 效率测试"></a>10.3.3 效率测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">package com.api.string;</span><br><span class="line"></span><br><span class="line">public class TestStringBuilder &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		testStringBuilder();</span><br><span class="line">		testStringBuffer();</span><br><span class="line">		testString();</span><br><span class="line">	&#125;</span><br><span class="line">	public static void testString()&#123;</span><br><span class="line">		long start = System.currentTimeMillis();</span><br><span class="line">		String s = new String(&quot;0&quot;);</span><br><span class="line">		for(int i=1;i&lt;=10000;i++)&#123;</span><br><span class="line">			s += i;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(s);</span><br><span class="line">		long end = System.currentTimeMillis();</span><br><span class="line">		System.out.println(&quot;String拼接+用时：&quot;+(end-start));</span><br><span class="line">		long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();</span><br><span class="line">        System.out.println(&quot;String拼接+memory: &quot; + memory);</span><br><span class="line">	&#125;</span><br><span class="line">	public static void testStringBuilder()&#123;</span><br><span class="line">		long start = System.currentTimeMillis();</span><br><span class="line">		StringBuilder s = new StringBuilder(&quot;0&quot;);</span><br><span class="line">		for(int i=1;i&lt;=10000;i++)&#123;</span><br><span class="line">			s.append(i);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(s);</span><br><span class="line">		long end = System.currentTimeMillis();</span><br><span class="line">		System.out.println(&quot;StringBuilder拼接+用时：&quot;+(end-start));</span><br><span class="line">		long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();</span><br><span class="line">        System.out.println(&quot;StringBuilder拼接+memory: &quot; + memory);</span><br><span class="line">	&#125;</span><br><span class="line">	public static void testStringBuffer()&#123;</span><br><span class="line">		long start = System.currentTimeMillis();</span><br><span class="line">		StringBuffer s = new StringBuffer(&quot;0&quot;);</span><br><span class="line">		for(int i=1;i&lt;=10000;i++)&#123;</span><br><span class="line">			s.append(i);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(s);</span><br><span class="line">		long end = System.currentTimeMillis();</span><br><span class="line">		System.out.println(&quot;StringBuffer拼接+用时：&quot;+(end-start));</span><br><span class="line">		long memory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();</span><br><span class="line">        System.out.println(&quot;StringBuffer拼接+memory: &quot; + memory);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="10-4-System系统类"><a href="#10-4-System系统类" class="headerlink" title="10.4 System系统类"></a>10.4 System系统类</h1><ul>
+<li>System 类包含一些有用的类字段和方法。它不能被实例化。 </li>
+<li>在 System 类提供的设施中，有标准输入、标准输出和错误输出流；对外部定义的属性和环境变量的访问；加载文件和库的方法；还有快速复制数组的一部分的实用方法。 </li>
+</ul>
+<h2 id="10-4-1-标准输入、标准输出和错误输出流对象"><a href="#10-4-1-标准输入、标准输出和错误输出流对象" class="headerlink" title="10.4.1 标准输入、标准输出和错误输出流对象"></a>10.4.1 标准输入、标准输出和错误输出流对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PrintStream err：“标准”错误输出流。 </span><br><span class="line">InputStream in：“标准”输入流。 </span><br><span class="line">PrintStream out：“标准”输出流。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">class TestSystem&#123;</span><br><span class="line">	public static void main(String[] args)&#123;</span><br><span class="line">		Scanner input = new Scanner(System.in);</span><br><span class="line">		System.out.print(&quot;请输入成绩：&quot;);</span><br><span class="line">		int score = input.nextInt();</span><br><span class="line">		</span><br><span class="line">		if(score&gt;=0 &amp;&amp; score&lt;=100)&#123;</span><br><span class="line">			System.out.println(&quot;成绩是：&quot; + score);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			System.err.println(&quot;输入有误，成绩应该在[0,100]&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="10-4-2-常用方法"><a href="#10-4-2-常用方法" class="headerlink" title="10.4.2 常用方法"></a>10.4.2 常用方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">void arraycopy(Object src, int srcPos, Object dest, int destPos, int length) ：从指定源数组中复制一个数组，复制从指定的位置开始，到目标数组的指定位置结束。</span><br><span class="line">long currentTimeMillis() ：返回以毫秒为单位的当前时间。  </span><br><span class="line">void exit(int status) ：终止当前正在运行的 Java 虚拟机。</span><br><span class="line">void gc()：运行垃圾回收器。  </span><br><span class="line">Properties getProperties()：确定当前的系统属性。 </span><br><span class="line">String getProperty(String key)：获取指定键指示的系统属性。 </span><br><span class="line">void setErr(PrintStream err) ：重新分配“标准”错误输出流。 </span><br><span class="line">void setIn(InputStream in)：重新分配“标准”输入流。 </span><br><span class="line">void setOut(PrintStream out)：重新分配“标准”输出流。 </span><br><span class="line">String setProperty(String key, String value) ：设置指定键指示的系统属性。</span><br></pre></td></tr></table></figure>
+<h1 id="10-5-JDK1-8之前日期时间类"><a href="#10-5-JDK1-8之前日期时间类" class="headerlink" title="10.5 JDK1.8之前日期时间类"></a>10.5 JDK1.8之前日期时间类</h1><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531001054.png" alt></p>
+<h2 id="10-5-1-java-lang-System类"><a href="#10-5-1-java-lang-System类" class="headerlink" title="10.5.1 java.lang.System类"></a>10.5.1 java.lang.System类</h2><p>System类提供的public static long currentTimeMillis()用来返回当前时间与1970年1月1日0时0分0秒GMT之间以毫秒为单位的时间差。此方法适于计算时间差。</p>
+<h2 id="10-5-2-java-util-Date"><a href="#10-5-2-java-util-Date" class="headerlink" title="10.5.2 java.util.Date"></a>10.5.2 java.util.Date</h2><p>它的对象表示一个特定的瞬间，精确到毫秒。<br>Java中时间的表示说白了也是数字，是从标准纪元1970年1月1日0时0分0秒GMT到某个时刻的毫秒数，类型是long<br>理解：一维的时间轴，选择1970年1月1日0时0分0秒时间为0刻度，1毫秒一刻度  </p>
+<h3 id="构造方法："><a href="#构造方法：" class="headerlink" title="构造方法："></a>构造方法：</h3><ul>
+<li>Date()：      源代码：this(System.currentTimeMillis());</li>
+<li>Date(long date)</li>
+</ul>
+<h3 id="常用方法："><a href="#常用方法：" class="headerlink" title="常用方法："></a>常用方法：</h3><ul>
+<li>getTime():返回自 1970 年 1 月 1 日 00:00:00 GMT 以来此 Date 对象表示的毫秒数。</li>
+<li>toString():把此 Date 对象转换为以下形式的 String： dow mon dd hh:mm:ss zzz yyyy 其中：<br> dow 是一周中的某一天 (Sun, Mon, Tue, Wed, Thu, Fri, Sat)， zzz是时间标准。</li>
+</ul>
+<h3 id="已过时的方法："><a href="#已过时的方法：" class="headerlink" title="已过时的方法："></a>已过时的方法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-public Date(int year,int month,int date,int hrs,int min,int sec)</span><br><span class="line">参数：</span><br><span class="line"></span><br><span class="line">year - 减 1900 的年份。</span><br><span class="line">month - 0-11 之间的月份。</span><br><span class="line">date - 一月中 1-31 之间的某一天。</span><br><span class="line">hrs - 0-23 之间的小时数。</span><br><span class="line">min - 0-59 之间的分钟数。</span><br><span class="line">sec - 0-59 之间的秒数。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>getYear() 从 JDK 1.1 开始，由 Calendar.get(Calendar.YEAR) - 1900 取代。</li>
+<li>getMonth()从 JDK 1.1 开始，由 Calendar.get(Calendar.MONTH) 取代。返回的值在 0 和 11 之间，值 0 表示 1 月。 </li>
+<li>getDate() JDK 1.1 开始，由 Calendar.get(Calendar.DAY_OF_MONTH) 取代。返回的值在 1 和 31 之间</li>
+<li>getDay()从 JDK 1.1 开始，由 Calendar.get(Calendar.DAY_OF_WEEK) 取代。 返回值 (0 = Sunday, 1 = Monday, 2 = Tuesday, 3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday) 表示一周中的某一天</li>
+<li>getHours()从 JDK 1.1 开始，由 Calendar.get(Calendar.HOUR_OF_DAY) 取代。返回值是一个数字（0 至 23）</li>
+<li>getMinutes()从 JDK 1.1 开始，由 Calendar.get(Calendar.MINUTE) 取代。 返回值在 0 和 59 之间。 </li>
+<li>getSeconds()从 JDK 1.1 开始，由 Calendar.get(Calendar.SECOND) 取代。回的值在 0 和 61 之间。值 60 和 61 只可能发生在考虑了闰秒的 Java 虚拟机上。 </li>
+</ul>
+<h2 id="10-5-3-java-util-TimeZone和Locale"><a href="#10-5-3-java-util-TimeZone和Locale" class="headerlink" title="10.5.3 java.util.TimeZone和Locale"></a>10.5.3 java.util.TimeZone和Locale</h2><ul>
+<li>Locale 对象表示了特定的地理、政治和文化地区。需要 Locale 来执行其任务的操作称为语言环境敏感的 操作，它使用 Locale 为用户量身定制信息。例如，显示一个数值，日期就是语言环境敏感的操作，应该根据用户的国家、地区或文化的风俗/传统来格式化该数值。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">获取Locale对象：</span><br><span class="line"> Locale(String language)</span><br><span class="line"> Locale(String language, String country)</span><br><span class="line"> Locale.CHINA、Locale.US等</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		Locale loc = Locale.CHINA;</span><br><span class="line">		System.out.println(loc);//zh_CN</span><br><span class="line">		System.out.println(Locale.US);//en_US</span><br><span class="line">		System.out.println(Locale.JAPAN);//ja_JP</span><br><span class="line">		</span><br><span class="line">		Locale c = new Locale(&quot;zh&quot;,&quot;CN&quot;);</span><br><span class="line">		System.out.println(c);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>通常，使用 TimeZone的getDefault 获取 TimeZone，getDefault 基于程序运行所在的时区创建 TimeZone。例如，对于在日本运行的程序，getDefault 基于日本标准时间创建 TimeZone 对象。 </p>
+</li>
+<li><p>也可以用TimeZone的 getTimeZone 及时区 ID 获取 TimeZone 。例如美国太平洋时区的时区 ID 是 “America/Los_Angeles”。因此，可以使用下面语句获得美国太平洋时间 TimeZone 对象： </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TimeZone tz = TimeZone.getTimeZone(&quot;America/Los_Angeles&quot;);</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		TimeZone t = TimeZone.getDefault();</span><br><span class="line">		System.out.println(t);</span><br><span class="line">		</span><br><span class="line">		TimeZone t1 = TimeZone.getTimeZone(&quot;America/New_York&quot;);</span><br><span class="line">		System.out.println(t1);</span><br><span class="line">		</span><br><span class="line">		TimeZone t2 = TimeZone.getTimeZone(&quot;Asia/Shanghai&quot;);</span><br><span class="line">		System.out.println(t2);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] all = TimeZone.getAvailableIDs();</span><br><span class="line">for (String id : all) &#123;</span><br><span class="line">	System.out.println(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="10-5-4-java-util-Calendar"><a href="#10-5-4-java-util-Calendar" class="headerlink" title="10.5.4 java.util.Calendar"></a>10.5.4 java.util.Calendar</h2><ul>
+<li>Calendar 类是一个抽象类，它为特定瞬间与一组诸如 YEAR、MONTH、DAY_OF_MONTH、HOUR 等 日历字段之间的转换提供了一些方法，并为操作日历字段（例如获得下星期的日期）提供了一些方法。瞬间可用毫秒值来表示，它是距历元（即格林威治标准时间 1970 年 1 月 1 日的 00:00:00.000，格里高利历）的偏移量。 </li>
+<li>人们对于时间的认识是：某年某月某日，这样的日期概念。计算机是long类型的数字。通过Calendar在二者之间搭起桥梁。而且Calendar提供了很多关于日期时间计算的方法。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531001631.png" alt></p>
+<ul>
+<li>GregorianCalendar（公历）是Calendar的一个具体子类，提供了世界上大多数国家/地区使用的标准日历系统。</li>
+</ul>
+<p>注意：<br>月份：一月是0，二月是1，以此类推，12月是11<br>星期：周日是1，周二是2,。。。。周六是7</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531001747.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">//默认语言环境的时间（时区）</span><br><span class="line">		Calendar c = new GregorianCalendar();</span><br><span class="line">		/*</span><br><span class="line">		 * java.util.GregorianCalendar[</span><br><span class="line">		 * time=1480667849712,</span><br><span class="line">		 * areFieldsSet=true,</span><br><span class="line">		 * areAllFieldsSet=true,</span><br><span class="line">		 * lenient=true,</span><br><span class="line">		 * zone=sun.util.calendar.ZoneInfo[id=&quot;Asia/Shanghai&quot;,offset=28800000,dstSavings=0,useDaylight=false,transitions=19,lastRule=null],</span><br><span class="line">		 * firstDayOfWeek=1,</span><br><span class="line">		 * minimalDaysInFirstWeek=1,</span><br><span class="line">		 * ERA=1,</span><br><span class="line">		 * YEAR=2016,</span><br><span class="line">		 * MONTH=11,</span><br><span class="line">		 * WEEK_OF_YEAR=49,//本年第49周</span><br><span class="line">		 * WEEK_OF_MONTH=1,//本月第1周</span><br><span class="line">		 * DAY_OF_MONTH=2,</span><br><span class="line">		 * DAY_OF_YEAR=337,//本年第337天</span><br><span class="line">		 * DAY_OF_WEEK=6,</span><br><span class="line">		 * DAY_OF_WEEK_IN_MONTH=1,		</span><br><span class="line">		 * AM_PM=1, //下午</span><br><span class="line">		 * HOUR=4,</span><br><span class="line">		 * HOUR_OF_DAY=16,  //HOUR是12小时制， HOUR_OF_DAY是24小时制</span><br><span class="line">		 * MINUTE=37,</span><br><span class="line">		 * SECOND=29,</span><br><span class="line">		 * MILLISECOND=712,</span><br><span class="line">		 * ZONE_OFFSET=28800000,</span><br><span class="line">		 * DST_OFFSET=0]</span><br><span class="line">		 */</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//默认语言环境的时间（时区）</span><br><span class="line">		Calendar c = new GregorianCalendar();</span><br><span class="line">		</span><br><span class="line">		int year=c.get(Calendar.YEAR);</span><br><span class="line">		int month=c.get(Calendar.MONTH);</span><br><span class="line">		int date=c.get(Calendar.DAY_OF_MONTH);</span><br><span class="line">		</span><br><span class="line">		int hour=c.get(Calendar.HOUR_OF_DAY);</span><br><span class="line">		int minute=c.get(Calendar.MINUTE);</span><br><span class="line">		int second=c.get(Calendar.SECOND);</span><br><span class="line">		int mill=c.get(Calendar.MILLISECOND);</span><br><span class="line">		int week=c.get(Calendar.DAY_OF_WEEK);</span><br><span class="line">		</span><br><span class="line">		StringBuffer dateStr=new StringBuffer();</span><br><span class="line">		dateStr.append(year).append(&quot;年&quot;);</span><br><span class="line">		dateStr.append(month+1).append(&quot;月&quot;);</span><br><span class="line">		dateStr.append(date).append(&quot;日&quot;).append(&quot;  &quot;);</span><br><span class="line">		dateStr.append(hour).append(&quot;时&quot;);</span><br><span class="line">		dateStr.append(minute).append(&quot;分&quot;);</span><br><span class="line">		dateStr.append(second).append(&quot;秒&quot;);</span><br><span class="line">		dateStr.append(mill).append(&quot;毫秒&quot;).append(&quot;  &quot;);</span><br><span class="line">		</span><br><span class="line">		String[] weeks=&#123;&quot;日&quot;,&quot;一&quot;,&quot;二&quot;,&quot;&quot;,&quot;四&quot;,&quot;五&quot;,&quot;六&quot;&#125;;</span><br><span class="line">		dateStr.append(&quot;星期&quot;).append(weeks[week-1]);</span><br><span class="line">		</span><br><span class="line">		System.out.println(dateStr);</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Calendar c = new GregorianCalendar(2015, 6, 13);</span><br><span class="line">//		c.set(2016, Calendar.DECEMBER, 4, 12, 12, 0);</span><br><span class="line">//		c.setTime(new Date());</span><br><span class="line">		//15天之后</span><br><span class="line">		//c.add(Calendar.DATE, 15);</span><br><span class="line">		//2个月之前</span><br><span class="line">		//c.add(Calendar.DAY_OF_MONTH, -2);</span><br><span class="line">		//12小时之后</span><br><span class="line">		c.add(Calendar.HOUR, 12);</span><br><span class="line">		</span><br><span class="line">		Date time = c.getTime();//转成日期</span><br><span class="line">		System.out.println(time);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>public static Calendar getInstance()使用默认时区和语言环境获得一个日历。返回的 Calendar 基于当前时间，使用了默认时区和默认语言环境。 </li>
+<li>public static Calendar getInstance(TimeZone zone, Locale aLocale)使用指定时区和语言环境获得一个日历。返回的 Calendar 基于当前时间，使用了给定的时区和给定的语言环境。 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		Calendar c = Calendar.getInstance();</span><br><span class="line">		System.out.println(c);</span><br><span class="line">		</span><br><span class="line">		Calendar c2 = Calendar.getInstance(TimeZone.getTimeZone(&quot;Asia/Shanghai&quot;), Locale.CHINA);</span><br><span class="line">		System.out.println(c2);</span><br><span class="line">		</span><br><span class="line">		Calendar c3 = Calendar.getInstance(TimeZone.getTimeZone(&quot;America/New_York&quot;), Locale.US);</span><br><span class="line">		System.out.println(c3);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="10-5-5-java-text-DateFormat和SimpleDateFormat"><a href="#10-5-5-java-text-DateFormat和SimpleDateFormat" class="headerlink" title="10.5.5 java.text.DateFormat和SimpleDateFormat"></a>10.5.5 java.text.DateFormat和SimpleDateFormat</h2><p>完成字符串和时间对象的转化：</p>
+<ul>
+<li>format(date)</li>
+<li>Date parse(string)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		Date date = new Date();</span><br><span class="line">		SimpleDateFormat sf = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss 是本年的第几D&quot;);</span><br><span class="line">		System.out.println(sf.format(date));</span><br><span class="line">		</span><br><span class="line">		String s = &quot;2016-12-01 14:12:23&quot;;</span><br><span class="line">		SimpleDateFormat sf2 = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">		try &#123;</span><br><span class="line">			Date d = sf2.parse(s);</span><br><span class="line">			System.out.println(d);</span><br><span class="line">		&#125; catch (ParseException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531002016.png" alt></p>
+<h1 id="10-6-数学相关类Math、BigInteger、BigDecimal"><a href="#10-6-数学相关类Math、BigInteger、BigDecimal" class="headerlink" title="10.6 数学相关类Math、BigInteger、BigDecimal"></a>10.6 数学相关类Math、BigInteger、BigDecimal</h1><h2 id="10-6-1-java-lang-Math类"><a href="#10-6-1-java-lang-Math类" class="headerlink" title="10.6.1 java.lang.Math类"></a>10.6.1 java.lang.Math类</h2><p>java.lang.Math提供了一系列静态方法用于科学计算；<br>其方法的参数和返回值类型一般为double型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">abs     绝对值</span><br><span class="line">acos,asin,atan,cos,sin,tan  三角函数</span><br><span class="line">sqrt     平方根</span><br><span class="line">pow(double a,doble b)     a的b次幂</span><br><span class="line">log    自然对数</span><br><span class="line">exp    e为底指数</span><br><span class="line">max(double a,double b)</span><br><span class="line">min(double a,double b)</span><br><span class="line">random()      返回0.0到1.0的随机数</span><br><span class="line">long round(double a)     double型数据a转换为long型（四舍五入）</span><br><span class="line">toDegrees(double angrad)     弧度—&gt;角度</span><br><span class="line">toRadians(double angdeg)     角度—&gt;弧度</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">	public void test1() &#123;</span><br><span class="line">		System.out.println(Math.random());//随机值</span><br><span class="line">		System.out.println(Math.round(1.8));//四舍五入  保留整数部分</span><br><span class="line">		System.out.println(Math.floor(1.2));//1.0  向下取</span><br><span class="line">		System.out.println(Math.ceil(1.2));//2.0  向上取</span><br><span class="line">		System.out.println(Math.floor(-2.4));//-3.0</span><br><span class="line">		System.out.println(Math.ceil(-2.4));//-2.0</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="10-6-2-java-math包的BigInteger和BigDecimal"><a href="#10-6-2-java-math包的BigInteger和BigDecimal" class="headerlink" title="10.6.2 java.math包的BigInteger和BigDecimal"></a>10.6.2 java.math包的BigInteger和BigDecimal</h2><p>Integer类作为int的包装类，能存储的最大整型值为231-1，Long类也是有限的，最大为263-1如果要表示再大的整数，不管是基本数据类型还是他们的包装类都无能为力，更不用说进行运算了。<br>java.math包的BigInteger可以表示不可变的任意精度的整数。BigInteger 提供所有 Java 的基本整数操作符的对应物，并提供 java.lang.Math 的所有相关方法。另外，BigInteger 还提供以下运算：模算术、GCD 计算、质数测试、素数生成、位操作以及一些其他操作。 </p>
+<ul>
+<li>构造方法<ul>
+<li>BigInteger(String val)：根据字符串构建BigInteger对象</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>常用方法<ul>
+<li>BigInteger add(BigInteger val) ：返回其值为 (this + val) 的 BigInteger。 </li>
+<li>BigInteger subtract(BigInteger val) ：返回其值为 (this - val) 的 BigInteger。</li>
+<li>BigInteger multiply(BigInteger val) ：返回其值为 (this * val) 的 BigInteger。</li>
+<li>BigInteger divide(BigInteger val) ：返回其值为 (this / val) 的 BigInteger。整数相除只保留整数部分。</li>
+<li>BigInteger remainder(BigInteger val) ：返回其值为 (this % val) 的 BigInteger。</li>
+<li>BigInteger[] divideAndRemainder(BigInteger val)：返回包含 (this / val) 后跟 (this % val) 的两个 BigInteger 的数组。</li>
+<li>BigInteger pow(int exponent) ：返回其值为 (thisexponent) 的 BigInteger。 </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">	public void test2()&#123;</span><br><span class="line">//		long num1 = 12345678901234567890L;//out of range 超过long的范围</span><br><span class="line">		BigInteger num1 = new BigInteger(&quot;12345678901234567890&quot;);</span><br><span class="line">		BigInteger num2 = new BigInteger(&quot;92345678901234567890&quot;);</span><br><span class="line">		</span><br><span class="line">//		System.out.println(&quot;和：&quot; + (num1 + num2));//错误的</span><br><span class="line">		System.out.println(&quot;和：&quot; + num1.add(num2));</span><br><span class="line">		System.out.println(&quot;减：&quot; + num1.subtract(num2));</span><br><span class="line">		System.out.println(&quot;乘：&quot; + num1.multiply(num2));</span><br><span class="line">		System.out.println(&quot;除：&quot; + num2.divide(num1));//两个整数相除只保留整数部分</span><br><span class="line">		System.out.println(&quot;幂次方：&quot; + num2.pow(5));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>一般的Float类和Double类可以用来做科学计算或工程计算，但是在商业计算中，要求数字精度比较高，所以用到java.math.BigDecimal类。BigDecimal类支持不可变的、任意精度的有符号十进制定点数。</p>
+<ul>
+<li>构造器<ul>
+<li>BigDecimal(double val)</li>
+<li>BigDecimal(String val)</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>常用方法<ul>
+<li>BigDecimal add(BigDecimal augend) :返回一个 BigDecimal，其值为 (this + augend)，其标度为 max(this.scale(), augend.scale())。</li>
+<li>BigDecimal subtract(BigDecimal subtrahend) ：返回一个 BigDecimal，其值为 (this - subtrahend)，其标度为 max(this.scale(), subtrahend.scale())。 </li>
+<li>BigDecimal multiply(BigDecimal multiplicand)：返回一个 BigDecimal，其值为 (this × multiplicand)，其标度为 (this.scale() + multiplicand.scale())。</li>
+<li>BigDecimal pow(int n) ：返回其值为 (thisn) 的 BigDecimal，准确计算该幂，使其具有无限精度。</li>
+<li>BigDecimal divide(BigDecimal divisor)： 返回一个 BigDecimal，其值为 (this / divisor)，其首选标度为 (this.scale() - divisor.scale())；如果无法表示准确的商值（因为它有无穷的十进制扩展），则抛出 ArithmeticException。</li>
+<li>BigDecimal divide(BigDecimal divisor, int roundingMode) ：返回一个 BigDecimal，其值为 (this / divisor)，其标度为 this.scale()。  </li>
+<li>BigDecimal divide(BigDecimal divisor, int scale, int roundingMode) ：返回一个 BigDecimal，其值为 (this / divisor)，其标度为指定标度。 </li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">	public void test3()&#123;</span><br><span class="line">		BigDecimal num1 = new BigDecimal(&quot;-12.1234567890123456567899554544444332&quot;);</span><br><span class="line">		BigDecimal num2 = new BigDecimal(&quot;89.6734567890123456567899554544444333&quot;);</span><br><span class="line">		System.out.println(&quot;和：&quot; + num1.add(num2));</span><br><span class="line">		System.out.println(&quot;减：&quot; + num1.subtract(num2));</span><br><span class="line">		System.out.println(&quot;乘：&quot; + num1.multiply(num2));</span><br><span class="line">		System.out.println(&quot;除：&quot; + num2.divide(new BigDecimal(&quot;2&quot;)));//可以整除（除尽）就对，不能整除就报异常</span><br><span class="line">		System.out.println(&quot;除：&quot; + num2.divide(num1,BigDecimal.ROUND_HALF_UP));</span><br><span class="line">		System.out.println(&quot;除：&quot; + num2.divide(num1,BigDecimal.ROUND_DOWN));//往零的方向舍去</span><br><span class="line">		System.out.println(&quot;除：&quot; + num2.divide(num1,BigDecimal.ROUND_FLOOR));//往小的方向舍去</span><br><span class="line">		System.out.println(&quot;除：&quot; + num2.divide(num1,BigDecimal.ROUND_CEILING));//往大的方向舍去</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="10-7-比较器：自然排序与定制排序"><a href="#10-7-比较器：自然排序与定制排序" class="headerlink" title="10.7 比较器：自然排序与定制排序"></a>10.7 比较器：自然排序与定制排序</h1><h2 id="10-7-1-自然排序：java-lang-Comparable"><a href="#10-7-1-自然排序：java-lang-Comparable" class="headerlink" title="10.7.1 自然排序：java.lang.Comparable"></a>10.7.1 自然排序：java.lang.Comparable</h2><ul>
+<li><p>Comparable接口强行对实现它的每个类的对象进行整体排序。这种排序被称为类的自然排序，类的 compareTo(T t) 方法被称为它的自然比较方法。当前对象this与指定对象t比较“大小”，如果当前对象this大于指定对象t，则返回正整数，如果当前对象this小于指定对象t，则返回负整数，如果当前对象this等于指定对象t，则返回零。</p>
+</li>
+<li><p>实现Comparable接口的对象列表（和数组）可以通过 Collections.sort（和 Arrays.sort）进行自动排序。实现此接口的对象可以用作有序映射中的键或有序集合中的元素，无需指定比较器。</p>
+</li>
+<li><p>Comparable的典型实现：</p>
+<ul>
+<li>String：按照字符串中字符的Unicode值进行比较</li>
+<li>Character：按照字符的Unicode值来进行比较</li>
+<li>数值类型对应的包装类以及BigInteger、BigDecimal：按照它们对应的数值大小进行比较</li>
+<li>Date、Time等：后面的日期时间比前面的日期时间大</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-7-2-定制排序：java-util-Compartor"><a href="#10-7-2-定制排序：java-util-Compartor" class="headerlink" title="10.7.2 定制排序：java.util.Compartor"></a>10.7.2 定制排序：java.util.Compartor</h2><ul>
+<li><p>强行对某个对象 collection 进行整体排序 的比较函数。可以将 Comparator 传递给 sort 方法（如 Collections.sort 或 Arrays.sort），从而允许在排序顺序上实现精确控制。还可以使用 Comparator 来控制某些数据结构（如有序 set或有序映射）的顺序，或者为那些没有自然顺序的对象 collection 提供排序。</p>
+</li>
+<li><p>当元素的类型没有实现java.lang.Comparable接口而又不方便修改代码，或者实现了java.lang.Comparable接口的排序规则不适合当前的操作，那么可以考虑使用 Comparator 的对象来排序。</p>
+</li>
+</ul>
+<h2 id="10-7-3-示例"><a href="#10-7-3-示例" class="headerlink" title="10.7.3 示例"></a>10.7.3 示例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">com.api.compare;</span><br><span class="line"></span><br><span class="line">import java.text.Collator;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.Comparator;</span><br><span class="line">import java.util.Locale;</span><br><span class="line"></span><br><span class="line">public class TestCompare &#123;</span><br><span class="line"></span><br><span class="line">	@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Goods[] all = new Goods[4];</span><br><span class="line">		all[0] = new Goods(&quot;《红楼梦》&quot;,100);</span><br><span class="line">		all[1] = new Goods(&quot;《西游记》&quot;,80);</span><br><span class="line">		all[2] = new Goods(&quot;《三国演义》&quot;,140);</span><br><span class="line">		all[3] = new Goods(&quot;《水浒传》&quot;,120);</span><br><span class="line">		</span><br><span class="line">		Arrays.sort(all);</span><br><span class="line">		</span><br><span class="line">		System.out.println(Arrays.toString(all));</span><br><span class="line">		</span><br><span class="line">		Arrays.sort(all , new Comparator() &#123;</span><br><span class="line"></span><br><span class="line">			@Override</span><br><span class="line">			public int compare(Object o1, Object o2) &#123;</span><br><span class="line">				Goods g1 = (Goods) o1;</span><br><span class="line">				Goods g2 = (Goods) o2;</span><br><span class="line">				</span><br><span class="line">				return Collator.getInstance(Locale.CHINA).compare(g1.getName(),g2.getName());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">		System.out.println(Arrays.toString(all));</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">class Goods implements Comparable&#123;</span><br><span class="line">	private String name;</span><br><span class="line">	private double price;</span><br><span class="line">	public Goods(String name, double price) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.price = price;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	public double getPrice() &#123;</span><br><span class="line">		return price;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setPrice(double price) &#123;</span><br><span class="line">		this.price = price;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;商品名：&quot; + name + &quot;, 价格：&quot; + price;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public int compareTo(Object o) &#123;</span><br><span class="line">		Goods other = (Goods) o;</span><br><span class="line">		if(this.price &gt; other.price)&#123;</span><br><span class="line">			return 1;</span><br><span class="line">		&#125;else if(this.price &lt; other.price)&#123;</span><br><span class="line">			return -1;</span><br><span class="line">		&#125;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="10-8-JDK1-8新增日期时间类型"><a href="#10-8-JDK1-8新增日期时间类型" class="headerlink" title="10.8 JDK1.8新增日期时间类型"></a>10.8 JDK1.8新增日期时间类型</h1><p>如果我们可以跟别人说：“我们在1502643933071见面，别晚了！”那么就再简单不过了。但是我们希望时间与昼夜和四季有关，于是事情就变复杂了。Java1.0中包含了一个Date类，但是它的大多数方法已经在Java 1.1引入Calendar类之后被弃用了。而Calendar并不比Date好多少。它们面临的问题是：</p>
+<ul>
+<li>可变性：象日期和时间这样的类应该是不可变的。Calendar类中可以使用三种方法更改日历字段：set()、add() 和 roll()。</li>
+<li>偏移性：Date中的年份是从1900开始的，而月份都是从0开始的。</li>
+<li>格式化：格式化只对Date有用，Calendar则不行。</li>
+<li>此外，它们也不是线程安全的，不能处理闰秒等。</li>
+</ul>
+<p>Date的API： </p>
+<blockquote>
+<p>尽管 Date 类打算反映协调世界时 (UTC)，但无法做到如此准确，这取决于 Java 虚拟机的主机环境。当前几乎所有操作系统都假定 1 天 = 24 × 60 × 60 = 86400 秒。但对于 UTC，大约每一两年出现一次额外的一秒，称为“闰秒”。闰秒始终作为当天的最后一秒增加，并且始终在 12 月 31 日或 6 月 30 日增加。例如，1995 年的最后一分钟是 61 秒，因为增加了闰秒。大多数计算机时钟不是特别的准确，因此不能反映闰秒的差别。<br>在类 Date 所有可以接受或返回年、月、日期、小时、分钟和秒值的方法中，将使用下面的表示形式： </p>
+</blockquote>
+<ul>
+<li>年份 y 由整数 y - 1900 表示。 </li>
+<li>月份由从 0 至 11 的整数表示；0 是一月、1 是二月等等；因此 11 是十二月。 </li>
+<li>日期（一月中的某天）按通常方式由整数 1 至 31 表示。 </li>
+<li>小时由从 0 至 23 的整数表示。因此，从午夜到 1 a.m. 的时间是 0 点，从中午到 1 p.m. 的时间是 12 点。 </li>
+<li>分钟按通常方式由 0 至 59 的整数表示。 </li>
+<li>秒由 0 至 61 的整数表示；值 60 和 61 只对闰秒发生，尽管那样，也只用在实际正确跟踪闰秒的 Java 实现中。于按当前引入闰秒的方式，两个闰秒在同一分钟内发生是极不可能的，但此规范遵循 ISO C 的日期和时间约定。 </li>
+</ul>
+<p>在所有情形中，针对这些目的赋予方法的参数不需要在指定的范围内；例如，可以把日期指定为 1 月 32 日，并把它解释为 2 月 1 日的相同含义。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Date date = new Date(2017-1900,8-1,28);</span><br><span class="line">System.out.println(date);//Mon Aug 28 00:00:00 CST 2017</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以说，对日期和时间的操作一直是Java程序员最痛苦的地方之一。第三次引入的API是成功的，并且java 8中引入的java.time API 已经纠正了过去的缺陷，将来很长一段时间内它都会为我们服务。  </li>
+<li>Java 8 吸收了 Joda-Time 的精华，以一个新的开始为 Java 创建优秀的 API。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java.time – 包含值对象的基础包</span><br><span class="line">java.time.chrono – 提供对不同的日历系统的访问。</span><br><span class="line">java.time.format – 格式化和解析时间和日期</span><br><span class="line">java.time.temporal – 包括底层框架和扩展特性</span><br><span class="line">java.time.zone – 包含时区支持的类</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Java 8 吸收了 Joda-Time 的精华，以一个新的开始为 Java 创建优秀的 API。新的 java.time 中包含了所有关于时钟（Clock），本地日期（LocalDate）、本地时间（LocalTime）、本地日期时间（LocalDateTime）、时区（ZonedDateTime）和持续时间（Duration）的类。历史悠久的 Date 类新增了 toInstant() 方法，用于把 Date 转换成新的表示形式。这些新增的本地化时间日期 API 大大简化了了日期时间和本地化的管理。</p>
+</blockquote>
+<ul>
+<li>说明：大多数开发者只会用到基础包和format包，也可能会用到temporal包。因此，尽管有68个新的公开类型，大多数开发者，大概将只会用到其中的三分之一。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531003328.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531003703.png" alt></p>
+<h2 id="10-8-1-java-time"><a href="#10-8-1-java-time" class="headerlink" title="10.8.1 java.time"></a>10.8.1 java.time</h2><h3 id="1、本地日期（LocalDate）、本地时间（LocalTime）、本地日期时间（LocalDateTime）"><a href="#1、本地日期（LocalDate）、本地时间（LocalTime）、本地日期时间（LocalDateTime）" class="headerlink" title="1、本地日期（LocalDate）、本地时间（LocalTime）、本地日期时间（LocalDateTime）"></a>1、本地日期（LocalDate）、本地时间（LocalTime）、本地日期时间（LocalDateTime）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LocalDate代表IOS格式（yyyy-MM-dd）的日期,可以存储 生日、纪念日等日期。</span><br><span class="line">LocalTime表示一个时间，而不是日期</span><br><span class="line">LocalDateTime是用来表示日期和时间的，这是一个最常用的类之一。</span><br></pre></td></tr></table></figure>
+<p>描述<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">now() / now(ZoneId zone)</span><br><span class="line">静态方法，根据当前时间创建对象/指定时区的对象</span><br><span class="line">of()</span><br><span class="line">静态方法，根据指定日期/时间创建对象</span><br><span class="line">getDayOfMonth()/getDayOfYear()</span><br><span class="line">获得月份天数(1-31) /获得年份天数(1-366)</span><br><span class="line">getDayOfWeek()</span><br><span class="line">获得星期几(返回一个 DayOfWeek 枚举值)</span><br><span class="line">getMonth()</span><br><span class="line">获得月份, 返回一个 Month 枚举值</span><br><span class="line">getMonthValue() / getYear()</span><br><span class="line">获得月份(1-12) /获得年份</span><br><span class="line">getHours()/getMinute()/getSecond()</span><br><span class="line">获得当前对象对应的小时、分钟、秒</span><br><span class="line">withDayOfMonth()/withDayOfYear()/withMonth()/withYear()</span><br><span class="line">将月份天数、年份天数、月份、年份修改为指定的值并返回新的对象</span><br><span class="line"> with(TemporalAdjuster  t)</span><br><span class="line">将当前日期时间设置为校对器指定的日期时间</span><br><span class="line">plusDays(), plusWeeks(), plusMonths(), plusYears(),plusHours()</span><br><span class="line">向当前对象添加几天、几周、几个月、几年、几小时</span><br><span class="line">minusMonths() / minusWeeks()/minusDays()/minusYears()/minusHours()</span><br><span class="line">从当前对象减去几月、几周、几天、几年、几小时</span><br><span class="line">plus(TemporalAmount t)/minus(TemporalAmount t)</span><br><span class="line">添加或减少一个 Duration 或 Period</span><br><span class="line">isBefore()/isAfter()</span><br><span class="line">比较两个 LocalDate</span><br><span class="line">isLeapYear()</span><br><span class="line">判断是否是闰年（在LocalDate类中声明）</span><br><span class="line"> format(DateTimeFormatter  t)</span><br><span class="line">格式化本地日期、时间，返回一个字符串</span><br><span class="line"> parse(Charsequence text)</span><br><span class="line">将指定格式的字符串解析为日期、时间</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//now()</span><br><span class="line">    @Test</span><br><span class="line">	public void testLocalDateTime()&#123;</span><br><span class="line">		LocalDate date = LocalDate.now();</span><br><span class="line">		LocalTime time = LocalTime.now();</span><br><span class="line">		LocalDateTime datetime = LocalDateTime.now();</span><br><span class="line">    &#125;</span><br><span class="line">    //of()或parse</span><br><span class="line">	@Test</span><br><span class="line">	public void testLocalDate() &#123;</span><br><span class="line">		// LocalDate date = LocalDate.now();</span><br><span class="line">		// LocalDate date = LocalDate.of(2017, 3, 20);</span><br><span class="line">		LocalDate date = LocalDate.parse(&quot;2017-03-12&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		LocalDateTime t = LocalDateTime.now();</span><br><span class="line">		System.out.println(&quot;这一天是这一年的第几天：&quot;+t.getDayOfYear());</span><br><span class="line">		System.out.println(&quot;年：&quot;+t.getYear());</span><br><span class="line">		System.out.println(&quot;月：&quot;+t.getMonth());</span><br><span class="line">		System.out.println(&quot;月份值：&quot;+t.getMonthValue());</span><br><span class="line">		System.out.println(&quot;日：&quot;+t.getDayOfMonth());</span><br><span class="line">		System.out.println(&quot;星期：&quot;+t.getDayOfWeek());</span><br><span class="line">		System.out.println(&quot;时：&quot;+t.getHour());</span><br><span class="line">		System.out.println(&quot;分：&quot;+t.getMinute());</span><br><span class="line">		System.out.println(&quot;秒：&quot;+t.getSecond());</span><br><span class="line">		System.out.println(t.getMonthValue());</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testLocalDate2() &#123;</span><br><span class="line">	LocalDate date = LocalDate.now();</span><br><span class="line"></span><br><span class="line">       //withXxx()方法，不改变原来的date对象，返回一个新的对象，不可变性</span><br><span class="line">	// LocalDate date2 = date.withDayOfMonth(1);//获取这个月的第一天</span><br><span class="line">	LocalDate date2 = date.with(TemporalAdjusters.firstDayOfMonth());// 获取这个月的第一天</span><br><span class="line">	System.out.println(date2);</span><br><span class="line"></span><br><span class="line">	// 获取这个月的最后一天</span><br><span class="line">	LocalDate date3 = date.with(TemporalAdjusters.lastDayOfMonth());</span><br><span class="line">	System.out.println(date3);</span><br><span class="line"></span><br><span class="line">	//45天后的日期</span><br><span class="line">	LocalDate date4 = date.plusDays(45);</span><br><span class="line">	System.out.println(date4);</span><br><span class="line"></span><br><span class="line">	//20天前的日期</span><br><span class="line">	LocalDate date5 = date.minusDays(20);</span><br><span class="line">	System.out.println(date5);</span><br><span class="line">	</span><br><span class="line">	boolean before = date.isBefore(date5);</span><br><span class="line">	System.out.println(date+&quot;是否比&quot;+date5+&quot;早&quot; + before);</span><br><span class="line">	</span><br><span class="line">	System.out.println(date+&quot;是否是闰年：&quot;+date.isLeapYear());</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MonthDay month = MonthDay.of(8, 14);</span><br><span class="line">MonthDay today = MonthDay.from(date);</span><br><span class="line">System.out.println(&quot;今天是否是生日：&quot; + month.equals(today));</span><br></pre></td></tr></table></figure>
+<h3 id="2、瞬时：Instant"><a href="#2、瞬时：Instant" class="headerlink" title="2、瞬时：Instant"></a>2、瞬时：Instant</h3><ul>
+<li>Instant：时间线上的一个瞬时点。 这可能被用来记录应用程序中的事件时间戳。</li>
+<li>在处理时间和日期的时候，我们通常会想到年,月,日,时,分,秒。然而，这只是时间的一个模型，是面向人类的。第二种通用模型是面向机器的，或者说是连续的。在此模型中，时间线中的一个点表示为一个很大的数，这有利于计算机处理。在UNIX中，这个数从1970年开始，以秒为的单位；同样的，在Java中，也是从1970年开始，但以毫秒为单位。</li>
+<li>java.time包通过值类型Instant提供机器视图。Instant表示时间线上的一点，而不需要任何上下文信息，例如，时区。概念上讲，它只是简单的表示自1970年1月1日0时0分0秒（UTC）开始的秒数。因为java.time包是基于纳秒计算的，所以Instant的精度可以达到纳秒级。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531004049.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531004148.png" alt></p>
+<p>时间戳：指格林威治时间1970年01月01日00时00分00秒（北京时间1970年01月01日08时00分00秒）起至现在的总秒数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		Instant t = Instant.now();</span><br><span class="line">		System.out.println(t);</span><br><span class="line">		</span><br><span class="line">		//偏移8个小时</span><br><span class="line">		OffsetDateTime atOffset = t.atOffset(ZoneOffset.ofHours(8));</span><br><span class="line">		System.out.println(atOffset);</span><br><span class="line">		</span><br><span class="line">		long milli = t.toEpochMilli();</span><br><span class="line">		System.out.println(milli);</span><br><span class="line">		</span><br><span class="line">		Instant in2 = Instant.ofEpochSecond(10000000);</span><br><span class="line">		System.out.println(in2);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3、带时区的日期、时间的处理"><a href="#3、带时区的日期、时间的处理" class="headerlink" title="3、带时区的日期、时间的处理"></a>3、带时区的日期、时间的处理</h3><p>作为一个开发者，如果不用去处理时区和它带来的复杂性，那是幸运的。java.time包下的LocalDate、LocalTime、LocalDateTime和Instant基本能满足需求。当你不可避免时区时，ZonedDateTime等类可以满足我们的需求。  </p>
+<p>ZonedDateTime：一个在ISO-8601日历系统时区的日期时间，如 2007-12-03T10:15:30+01:00 Europe/Paris。</p>
+<ul>
+<li>其中每个时区都对应着ID，地区ID都为“{区域}/{城市}”的格式，例如：Asia/Shanghai等</li>
+<li>now()：使用系统时间获取当前的ZonedDateTime</li>
+<li>now(ZoneId)：返回指定时区的ZonedDateTime</li>
+</ul>
+<p>ZoneId：该类中包含了所有的时区信息，一个时区的ID，如 Europe/Paris</p>
+<ul>
+<li>getAvailableZoneIds()：静态方法，可以获取所有时区信息</li>
+<li>of(String id)：静态方法，用指定的时区信息获取ZoneId对象</li>
+</ul>
+<p>Clock：使用时区提供对当前即时、日期和时间的访问的时钟。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		Set&lt;String&gt; availableZoneIds = ZoneId.getAvailableZoneIds();</span><br><span class="line">		for (String string : availableZoneIds) &#123;</span><br><span class="line">			System.out.println(string);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		ZonedDateTime t = ZonedDateTime.now();</span><br><span class="line">		System.out.println(t);</span><br><span class="line">		</span><br><span class="line">		ZonedDateTime t1 = ZonedDateTime.now(ZoneId.of(&quot;America/New_York&quot;));</span><br><span class="line">		System.out.println(t1);</span><br><span class="line"></span><br><span class="line">//		Clock clock = Clock.systemDefaultZone();</span><br><span class="line">		Clock c = Clock.system(ZoneId.of(&quot;America/New_York&quot;));</span><br><span class="line">		System.out.println(c.getZone());</span><br><span class="line">		System.out.println(c.instant());</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4、持续时间：Duration"><a href="#4、持续时间：Duration" class="headerlink" title="4、持续时间：Duration"></a>4、持续时间：Duration</h3><p>Duration:用于计算两个“时间”间隔</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		LocalDateTime t1 = LocalDateTime.now();</span><br><span class="line">		LocalDateTime t2 = LocalDateTime.of(2017, 8, 29, 0, 0, 0, 0);</span><br><span class="line">		Duration between = Duration.between(t1, t2);</span><br><span class="line">		System.out.println(between);</span><br><span class="line">		</span><br><span class="line">		System.out.println(&quot;相差的总天数：&quot;+between.toDays());</span><br><span class="line">		System.out.println(&quot;相差的总小时数：&quot;+between.toHours());</span><br><span class="line">		System.out.println(&quot;相差的总分钟数：&quot;+between.toMinutes());</span><br><span class="line">		System.out.println(&quot;相差的总秒数：&quot;+between.getSeconds());</span><br><span class="line">		System.out.println(&quot;相差的总毫秒数：&quot;+between.toMillis());</span><br><span class="line">		System.out.println(&quot;相差的总纳秒数：&quot;+between.toNanos());</span><br><span class="line">		System.out.println(&quot;不够一秒的纳秒数：&quot;+between.getNano());</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5、日期间隔：Period"><a href="#5、日期间隔：Period" class="headerlink" title="5、日期间隔：Period"></a>5、日期间隔：Period</h3><p>Period:用于计算两个“日期”间隔</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		LocalDate t1 = LocalDate.now();</span><br><span class="line">		LocalDate t2 = LocalDate.of(2018, 12, 31);</span><br><span class="line">		Period between = Period.between(t1, t2);</span><br><span class="line">		System.out.println(between);</span><br><span class="line">		</span><br><span class="line">		System.out.println(&quot;相差的年数：&quot;+between.getYears());//1年</span><br><span class="line">		System.out.println(&quot;相差的月数：&quot;+between.getMonths());//又7个月</span><br><span class="line">		System.out.println(&quot;相差的天数：&quot;+between.getDays());//零25天</span><br><span class="line">		System.out.println(&quot;相差的总数：&quot;+between.toTotalMonths());//总共19个月</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="10-8-2-java-time-temporal-TemporalAdjuster-时间校正器"><a href="#10-8-2-java-time-temporal-TemporalAdjuster-时间校正器" class="headerlink" title="10.8.2 java.time.temporal.TemporalAdjuster : 时间校正器"></a>10.8.2 java.time.temporal.TemporalAdjuster : 时间校正器</h2><ul>
+<li>TemporalAdjuster : 时间校正器。有时我们可能需要获取例如：将日期调整到“下一个工作日”等操作。</li>
+<li>TemporalAdjusters : 该类通过静态方法(firstDayOfXxx()/lastDayOfXxx()/nextXxx())提供了大量的常用 TemporalAdjuster 的实现。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		LocalDate now = LocalDate.now();</span><br><span class="line">		System.out.println(&quot;下一个周日:&quot;+now.with(TemporalAdjusters.next(DayOfWeek.SUNDAY)));</span><br><span class="line">		System.out.println(&quot;下周五&quot; + now.with(TemporalAdjusters.next(DayOfWeek.FRIDAY)));</span><br><span class="line">        System.out.println(&quot;本月最后一天:&quot;+now.with(TemporalAdjusters.lastDayOfMonth()));//2017-08-31</span><br><span class="line">		LocalDate week = LocalDate.now().with(new TemporalAdjuster()&#123;</span><br><span class="line">			@Override</span><br><span class="line">			public Temporal adjustInto(Temporal temporal) &#123;</span><br><span class="line">				LocalDate date = (LocalDate) temporal;</span><br><span class="line">				if(date.getDayOfWeek().equals(DayOfWeek.MONDAY))&#123;</span><br><span class="line">					return date.plusDays(7);</span><br><span class="line">				&#125;else if(date.getDayOfWeek().equals(DayOfWeek.TUESDAY))&#123;</span><br><span class="line">					return date.plusDays(6);</span><br><span class="line">				&#125;else if(date.getDayOfWeek().equals(DayOfWeek.WEDNESDAY))&#123;</span><br><span class="line">					return date.plusDays(5);</span><br><span class="line">				&#125;else if(date.getDayOfWeek().equals(DayOfWeek.THURSDAY))&#123;</span><br><span class="line">					return date.plusDays(4);</span><br><span class="line">				&#125;else if(date.getDayOfWeek().equals(DayOfWeek.FRIDAY))&#123;</span><br><span class="line">					return date.plusDays(3);</span><br><span class="line">				&#125;else if(date.getDayOfWeek().equals(DayOfWeek.SATURDAY))&#123;</span><br><span class="line">					return date.plusDays(2);</span><br><span class="line">				&#125;else&#123;</span><br><span class="line">					return date.plusDays(1);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		System.out.println(&quot;下一个工作日：&quot; + week);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="10-8-3-java-time-format-DateTimeFormatter-类"><a href="#10-8-3-java-time-format-DateTimeFormatter-类" class="headerlink" title="10.8.3 java.time.format.DateTimeFormatter 类"></a>10.8.3 java.time.format.DateTimeFormatter 类</h2><ul>
+<li>该类提供了三种格式化方法：</li>
+<li>预定义的标准格式。如：ISO_DATE_TIME;ISO_DATE</li>
+<li>本地化相关的格式。如：ofLocalizedDate(FormatStyle.MEDIUM)</li>
+<li>自定义的格式。如：ofPattern(“yyyy-MM-dd hh:mm:ss”)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(DateTimeFormatter.ISO_DATE.format(LocalDate.now()));</span><br><span class="line">		System.out.println(DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now()));</span><br><span class="line">		</span><br><span class="line">		//FULL和SHORT适用于LocalDate和LocalTime</span><br><span class="line">		System.out.println(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(LocalDate.now()));</span><br><span class="line">		System.out.println(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).format(LocalTime.now()));</span><br><span class="line">		</span><br><span class="line">		//LONG和MEDIUM适用于LocalDateTime</span><br><span class="line">		System.out.println(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).format(LocalDateTime.now()));</span><br><span class="line">	</span><br><span class="line">		DateTimeFormatter op = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">		System.out.println(op.format(LocalDateTime.now()));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="10-8-4-与传统日期处理的转换"><a href="#10-8-4-与传统日期处理的转换" class="headerlink" title="10.8.4 与传统日期处理的转换"></a>10.8.4 与传统日期处理的转换</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531004958.png" alt></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/12/24/9. JavaSE-Java异常处理/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/01/10/11. JavaSE-集合/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '277317290454635afa73',
+  clientSecret: '78223c859304da5e8d71bfce136d436c6ff95c37',
+  repo: 'blog-comment',
+  owner: 'forsigner',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['forsigner'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

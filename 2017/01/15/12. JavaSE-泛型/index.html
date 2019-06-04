@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>12. JavaSE-泛型 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java SE,">
+  
+
+  <meta name="description" content="12.1 泛型的概念泛型：标签举例：     超市购物架上很多瓶子，每个瓶子装的是什么，有标签 中药店，每个抽屉外面贴着标签    集合容器类在设计阶段/声明阶段不能确定这个容器到底实际存的是什么类型的对象，所以在JDK1.5之前只能把元素类型设计为Object，JDK1.5之后使用泛型来解决。因为这个时候除了元素的类型不确定，其他的部分是确定的，例如关于这个元素如何保存，如何管理等是确定的，因此">
+<meta name="keywords" content="Java SE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12. JavaSE-泛型">
+<meta property="og:url" content="http://yoursite.com/2017/01/15/12. JavaSE-泛型/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="12.1 泛型的概念泛型：标签举例：     超市购物架上很多瓶子，每个瓶子装的是什么，有标签 中药店，每个抽屉外面贴着标签    集合容器类在设计阶段/声明阶段不能确定这个容器到底实际存的是什么类型的对象，所以在JDK1.5之前只能把元素类型设计为Object，JDK1.5之后使用泛型来解决。因为这个时候除了元素的类型不确定，其他的部分是确定的，例如关于这个元素如何保存，如何管理等是确定的，因此">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603111458.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603111516.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603113046.png">
+<meta property="og:updated_time" content="2019-06-04T01:25:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12. JavaSE-泛型">
+<meta name="twitter:description" content="12.1 泛型的概念泛型：标签举例：     超市购物架上很多瓶子，每个瓶子装的是什么，有标签 中药店，每个抽屉外面贴着标签    集合容器类在设计阶段/声明阶段不能确定这个容器到底实际存的是什么类型的对象，所以在JDK1.5之前只能把元素类型设计为Object，JDK1.5之后使用泛型来解决。因为这个时候除了元素的类型不确定，其他的部分是确定的，例如关于这个元素如何保存，如何管理等是确定的，因此">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603111458.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#12-1-泛型的概念"><span class="toc-text">12.1 泛型的概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#12-1-1-为什么要使用泛型"><span class="toc-text">12.1.1 为什么要使用泛型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-1-2-掌握集合中的泛型使用"><span class="toc-text">12.1.2 掌握集合中的泛型使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-2-自定义泛型"><span class="toc-text">12.2 自定义泛型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#泛型字母"><span class="toc-text">泛型字母</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-2-1-泛型声明形式之一：泛型类、接口"><span class="toc-text">12.2.1  泛型声明形式之一：泛型类、接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#声明时的要点"><span class="toc-text">声明时的要点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指定时的要点"><span class="toc-text">指定时的要点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于泛型类-接口的继承-实现说明"><span class="toc-text">关于泛型类/接口的继承/实现说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于泛型的擦除说明"><span class="toc-text">关于泛型的擦除说明</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-2-2-泛型形式之二：泛型方法"><span class="toc-text">12.2.2 泛型形式之二：泛型方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型方法的格式："><span class="toc-text">泛型方法的格式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例：java-util-Arrays类"><span class="toc-text">示例：java.util.Arrays类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-3-泛型通配符"><span class="toc-text">12.3 泛型通配符</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、匹配任意类型的通配符"><span class="toc-text">1、匹配任意类型的通配符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、受限泛型：上限、下限"><span class="toc-text">2、受限泛型：上限、下限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#（1）通配符指定上限"><span class="toc-text">（1）通配符指定上限</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#满足以下规则"><span class="toc-text">满足以下规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#（2）通配符指定下限"><span class="toc-text">（2）通配符指定下限</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-4-泛型嵌套：由外到内分析"><span class="toc-text">12.4 泛型嵌套：由外到内分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-5-泛型的特殊点"><span class="toc-text">12.5 泛型的特殊点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、泛型没有多态"><span class="toc-text">1、泛型没有多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、没有泛型数组"><span class="toc-text">2、没有泛型数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、jdk1-7简化泛型"><span class="toc-text">3、jdk1.7简化泛型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、不能在try-catch中使用泛型定义"><span class="toc-text">4、不能在try-catch中使用泛型定义</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#12-6-Collections工具类"><span class="toc-text">12.6 Collections工具类</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-12. JavaSE-泛型" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">12. JavaSE-泛型</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.01.15</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaSE基础笔记/">JavaSE基础笔记</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="12-1-泛型的概念"><a href="#12-1-泛型的概念" class="headerlink" title="12.1 泛型的概念"></a>12.1 泛型的概念</h1><p>泛型：标签<br>举例：  </p>
+<blockquote>
+<ul>
+<li>超市购物架上很多瓶子，每个瓶子装的是什么，有标签</li>
+<li>中药店，每个抽屉外面贴着标签</li>
+</ul>
+</blockquote>
+<ul>
+<li>集合容器类在设计阶段/声明阶段不能确定这个容器到底实际存的是什么类型的对象，所以在JDK1.5之前只能把元素类型设计为Object，JDK1.5之后使用泛型来解决。因为这个时候除了元素的类型不确定，其他的部分是确定的，例如关于这个元素如何保存，如何管理等是确定的，因此此时把元素的类型设计成一个参数，这个类型参数叫做泛型。Collection<e>，List<e>，ArrayList<e>   这个<e>就是类型参数，即泛型</e></e></e></e></li>
+<li>从JDK1.5以后，Java引入了“参数化类型（Parameterized type）”的概念，允许我们在创建集合时再指定集合元素的类型，正如：List<string>，这表明该List只能保存字符串类型的对象。</string></li>
+<li>所谓泛型，就是允许在定义类、接口时指定类型参数（我们称为类型形参），这个类型形参将在使用时（例如，继承或实现这个接口，用这个类型声明变量、创建对象时）确定（即传入实际的类型参数，也称为类型实参）。JDK1.5改写了集合框架中的全部接口和类，为这些接口、类增加了泛型支持，从而可以在声明集合变量、创建集合对象时传入类型实参。</li>
+</ul>
+<h2 id="12-1-1-为什么要使用泛型"><a href="#12-1-1-为什么要使用泛型" class="headerlink" title="12.1.1 为什么要使用泛型"></a>12.1.1 为什么要使用泛型</h2><p>那么为什么要有泛型呢，直接Object不是也可以存储数据吗？<br>1 解决元素存储的安全性问题，好比商品、药品标签，不会弄错<br>2 解决获取数据元素时，需要类型强制转换的问题，好比不用每回拿商品、药品都要辨别</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603111458.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603111516.png" alt></p>
+<p>泛型就是为了解决哪种在声明时不能确定类型，但在使用时才能确定类型的情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		/*ArrayList list = new ArrayList();</span><br><span class="line">		list.add(1);</span><br><span class="line">		list.add(&quot;java&quot;);</span><br><span class="line">		list.add(2);</span><br><span class="line">		</span><br><span class="line">		//麻烦</span><br><span class="line">		int i = (int) list.get(0);</span><br><span class="line">		//不安全</span><br><span class="line">		int j = (int) list.get(1);*/</span><br><span class="line"></span><br><span class="line">		ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">		list.add(1);</span><br><span class="line">//		list.add(&quot;java&quot;);//类型检查，安全   在编译期间就确保类型安全</span><br><span class="line">		list.add(2);</span><br><span class="line">		</span><br><span class="line">		//省事</span><br><span class="line">		int i = list.get(0);</span><br><span class="line">		int j = list.get(1);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="12-1-2-掌握集合中的泛型使用"><a href="#12-1-2-掌握集合中的泛型使用" class="headerlink" title="12.1.2 掌握集合中的泛型使用"></a>12.1.2 掌握集合中的泛型使用</h2><h1 id="12-2-自定义泛型"><a href="#12-2-自定义泛型" class="headerlink" title="12.2 自定义泛型"></a>12.2 自定义泛型</h1><h2 id="泛型字母"><a href="#泛型字母" class="headerlink" title="泛型字母"></a>泛型字母</h2><ul>
+<li>形式类型参数（formal type parameters）即泛型字母</li>
+<li>命名：泛型字母可以随意指定，尽量使用单个的大写字母（有时候多个泛型类型时会加上数字，比如T1，T2）</li>
+<li>常见字母（见名知意）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">T：Type</span><br><span class="line">K V：Key Value</span><br><span class="line">E：Element</span><br></pre></td></tr></table></figure>
+<h2 id="12-2-1-泛型声明形式之一：泛型类、接口"><a href="#12-2-1-泛型声明形式之一：泛型类、接口" class="headerlink" title="12.2.1  泛型声明形式之一：泛型类、接口"></a>12.2.1  泛型声明形式之一：泛型类、接口</h2><p>需求：定义学生类，其中有学生成绩</p>
+<ul>
+<li>整数</li>
+<li>小数</li>
+<li>字符串“优秀、良好、合格、不及格”</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">class Student&lt;T&gt;&#123;</span><br><span class="line">	private String name;</span><br><span class="line">	private T score;</span><br><span class="line">	</span><br><span class="line">	public Student() &#123;</span><br><span class="line">		super();</span><br><span class="line">	&#125;</span><br><span class="line">	public Student(String name, T score) &#123;</span><br><span class="line">		super();</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.score = score;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	public T getScore() &#123;</span><br><span class="line">		return score;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setScore(T score) &#123;</span><br><span class="line">		this.score = score;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;姓名：&quot; + name + &quot;, 成绩：&quot; + score;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class TestStudentScore &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Student&lt;Integer&gt; s1 = new Student&lt;Integer&gt;(&quot;张三&quot;,89);</span><br><span class="line">		Integer score = s1.getScore();</span><br><span class="line">		</span><br><span class="line">		Student&lt;Integer&gt; s2 = new Student&lt;Integer&gt;();</span><br><span class="line">//		s2.setScore(&quot;优秀&quot;);</span><br><span class="line">		s2.setScore(99);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="声明时的要点"><a href="#声明时的要点" class="headerlink" title="声明时的要点"></a>声明时的要点</h3><ul>
+<li>在类/接口上声明的泛型，在本类或本接口中即代表某种类型，可以作为非静态属性的类型、非静态方法的参数类型、非静态方法的返回值类型</li>
+<li>在类/接口上声明的泛型不能使用在静态成员上</li>
+<li>泛型类的构造器如下：public GenericClass(){}。</li>
+<li>而如下是错误的：public GenericClass<e>(){}</e></li>
+<li>泛型类在声明时还可以指定泛型的上限</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package com.generic.classtype;</span><br><span class="line"></span><br><span class="line">public class TestPerson &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">//		Person&lt;Dog&gt; p = new Person&lt;Dog&gt;();</span><br><span class="line">//		Person&lt;Object&gt; = new Person&lt;Object&gt;();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">/*class Human&lt;T super Person&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;*/</span><br><span class="line">class Person&lt;T extends Person&gt;&#123;</span><br><span class="line">	private T parnter;//伴侣</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Man extends Person&lt;Woman&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">class Woman extends Person&lt;Man&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">class Dog&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="指定时的要点"><a href="#指定时的要点" class="headerlink" title="指定时的要点"></a>指定时的要点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">当类或接口被使用时，会使用具体的实际类型参数（actual type argument）代替</span><br><span class="line">泛型的指定中不能使用基本数据类型，可以使用包装类替换</span><br><span class="line">泛型如果不指定，将被擦除，泛型对应的类型均按照Object处理，但不等价于Object</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">（1）ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();  </span><br><span class="line">声明集合变量或创建集合对象，指定泛型</span><br><span class="line">（2）class Dog implements Comparable&lt;Dog&gt;&#123;...&#125;  </span><br><span class="line">实现接口时，指定泛型</span><br><span class="line">（3）public void test(ArrayList&lt;Student&gt; list)&#123;&#125;  </span><br><span class="line">使用泛型类或接口作为形参时，此处指定为学生类型</span><br><span class="line">（4）public void test(ArrayList&lt;?&gt; list)&#123;&#125;     </span><br><span class="line">使用泛型类或接口作为形参时，此处指定为任意类型</span><br><span class="line">（5）public void test(ArrayList&lt;? extends Person&gt; </span><br><span class="line">使用泛型类或接口作为形参时，此处指定为Person或其子类</span><br><span class="line">（6）public void test(ArrayList&lt;? super Son&gt;    </span><br><span class="line">使用泛型类或接口作为形参时，此处指定为Son或其父类</span><br></pre></td></tr></table></figure>
+<h3 id="关于泛型类-接口的继承-实现说明"><a href="#关于泛型类-接口的继承-实现说明" class="headerlink" title="关于泛型类/接口的继承/实现说明"></a>关于泛型类/接口的继承/实现说明</h3><p>父类有泛型，子类可以选择保留泛型也可以选择指定泛型类型：</p>
+<ul>
+<li>子类不保留父类的泛型：按需实现</li>
+</ul>
+<blockquote>
+<ul>
+<li>没有类型  擦除</li>
+<li>具体类型</li>
+</ul>
+</blockquote>
+<ul>
+<li>子类保留父类的泛型：泛型子类<blockquote>
+<ul>
+<li>全部保留</li>
+<li>部分保留        </li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>结论：子类必须是“富二代”，子类除了指定或保留父类的泛型，还可以增加自己的泛型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Father&lt;T1,T2&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">//子类不保留父类的泛型</span><br><span class="line">//1)没有类型  擦除</span><br><span class="line">class Son extends Father&#123;//等价于class Son extends Father&lt;Object,Object&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//2)具体类型</span><br><span class="line">class Son2 extends Father&lt;Integer,String&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">//子类保留父类的泛型</span><br><span class="line">//1)全部保留</span><br><span class="line">class Son3&lt;T1,T2&gt; extends Father&lt;T1,T2&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">//2)部分保留</span><br><span class="line">class Son4&lt;T2&gt; extends Father&lt;Integer,T2&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">class Father&lt;T1,T2&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">//子类不保留父类的泛型</span><br><span class="line">//1)没有类型  擦除</span><br><span class="line">class Son&lt;A,B&gt; extends Father&#123;//等价于class Son extends Father&lt;Object,Object&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">//2)具体类型</span><br><span class="line">class Son2&lt;A,B&gt; extends Father&lt;Integer,String&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">//子类保留父类的泛型</span><br><span class="line">//1)全部保留</span><br><span class="line">class Son3&lt;T1,T2,A,B&gt; extends Father&lt;T1,T2&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">//2)部分保留</span><br><span class="line">class Son4&lt;T2,A,B&gt; extends Father&lt;Integer,T2&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体示例代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Dog implements Comparable&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int compareTo(Object o) &#123;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">class Cat implements Comparable&lt;Cat&gt;&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int compareTo(Cat o) &#123;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class MySet&lt;E&gt; implements Collection&lt;E&gt;&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public boolean add(E e) &#123;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">......	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="关于泛型的擦除说明"><a href="#关于泛型的擦除说明" class="headerlink" title="关于泛型的擦除说明"></a>关于泛型的擦除说明</h3><p>使用泛型类时未指定泛型的具体类型：类似于Object，不等同于Object</p>
+<ul>
+<li>泛型擦除，默认按照Object处理但编译不会类型检查</li>
+<li>明确指定Object，编译会按Object类型检查</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class TestGenericErasure &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//1、使用时：类似于Object，不等同于Object</span><br><span class="line">		ArrayList list = new ArrayList();</span><br><span class="line">//		list.add(new Date());//有风险</span><br><span class="line">		list.add(&quot;hello&quot;);</span><br><span class="line">		</span><br><span class="line">		test(list);//泛型擦除，编译不会类型检查</span><br><span class="line">		</span><br><span class="line">//		ArrayList&lt;Object&gt; list2 = new ArrayList&lt;Object&gt;();</span><br><span class="line">//		test(list2);//一旦指定Object，编译会类型检查，必须按照Object处理</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void test(ArrayList&lt;String&gt; list)&#123;</span><br><span class="line">		String str = &quot;&quot;;</span><br><span class="line">		for(String s:list)&#123;</span><br><span class="line">			str += s + &quot;,&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;元素:&quot;+str);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="12-2-2-泛型形式之二：泛型方法"><a href="#12-2-2-泛型形式之二：泛型方法" class="headerlink" title="12.2.2 泛型形式之二：泛型方法"></a>12.2.2 泛型形式之二：泛型方法</h2><ul>
+<li>如果某个类不是泛型类，而某个方法需要使用泛型</li>
+<li>如果某个类是泛型类，但是需要在静态方法上使用泛型</li>
+</ul>
+<h3 id="泛型方法的格式："><a href="#泛型方法的格式：" class="headerlink" title="泛型方法的格式："></a>泛型方法的格式：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[访问权限]  &lt;泛型字母&gt;  返回类型  方法名([泛型字母 参数名称])  抛出的异常</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package com.generic.method;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class TestMyArrays &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Integer[] arr = &#123;1,2,3,4&#125;;</span><br><span class="line">		String str = MyArrays.toString(arr);</span><br><span class="line">		System.out.println(str);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class MyArrays&#123;</span><br><span class="line">	public static &lt;T&gt; String toString(T[] arr)&#123;</span><br><span class="line">		String str = &quot;[&quot;;</span><br><span class="line">		int i = 0;</span><br><span class="line">		for (T t : arr) &#123;</span><br><span class="line">			str += t;</span><br><span class="line">			if(i!=arr.length-1)&#123;</span><br><span class="line">				str += &quot;,&quot;;</span><br><span class="line">			&#125;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		str += &quot;]&quot;;</span><br><span class="line">		return str;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="示例：java-util-Arrays类"><a href="#示例：java-util-Arrays类" class="headerlink" title="示例：java.util.Arrays类"></a>示例：java.util.Arrays类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt; List&lt;T&gt; asList(T... a)</span><br><span class="line">注意：Arrays.asList(…) 方法返回的 List 集合既不是 ArrayList 实例，也不是 Vector 实例。 Arrays.asList(…)  返回值是一个固定长度的 List 集合</span><br><span class="line">public static &lt;T&gt; T[] copyOf(T[] original, int newLength)</span><br><span class="line">public static &lt;T&gt; T[] copyOfRange(T[] original, int from,int to)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		//public static &lt;T&gt; List&lt;T&gt; asList(T... a)</span><br><span class="line">		List&lt;String&gt; list = Arrays.asList(&quot;hello&quot;,&quot;world&quot;,&quot;java&quot;);</span><br><span class="line">		List&lt;Integer&gt; list2 = Arrays.asList(1,2,3);</span><br><span class="line">		</span><br><span class="line">		//public static &lt;T&gt; T[] copyOf(T[] original, int newLength)</span><br><span class="line">		String[] str = &#123;&quot;hello&quot;,&quot;world&quot;,&quot;java&quot;&#125;;</span><br><span class="line">		String[] array = Arrays.copyOf(str, 10);</span><br><span class="line">		</span><br><span class="line">		//public static &lt;T&gt; T[] copyOfRange(T[] original, int from,int to)</span><br><span class="line">		String[] as = Arrays.copyOfRange(array, 0, 3);</span><br><span class="line">		System.out.println(Arrays.toString(str));</span><br><span class="line">		System.out.println(Arrays.toString(array));</span><br><span class="line">		System.out.println(Arrays.toString(as));</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>泛型方法可以是静态方法也可以是非静态方法</li>
+<li>泛型方法声明泛型时也可以指定上限</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">package com.generic.method;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class TestMyArrays &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		List&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">		list.add(2);</span><br><span class="line">		list.add(3);</span><br><span class="line">		list.add(4);</span><br><span class="line">		list.add(5);</span><br><span class="line">		list.add(1);</span><br><span class="line">		MyArrays.sort(list);</span><br><span class="line">		</span><br><span class="line">		for (Integer integer : list) &#123;</span><br><span class="line">			System.out.println(integer);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">class MyArrays&#123;</span><br><span class="line">	public static &lt;T extends Comparable&lt;T&gt;&gt; void sort(List&lt;T&gt; list)&#123;</span><br><span class="line">		for(int i=0; i&lt;list.size()-1; i++)&#123;</span><br><span class="line">			for(int j=0; j&lt;list.size()-i-1; j++)&#123;</span><br><span class="line">				Comparable&lt;T&gt; c1 = (Comparable&lt;T&gt;)list.get(j);</span><br><span class="line">				if(c1.compareTo(list.get(j+1))&lt;0)&#123;</span><br><span class="line">					T temp = list.get(j);</span><br><span class="line">					list.set(j, list.get(j+1));</span><br><span class="line">					list.set(j+1, temp);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">/*		test(new String());</span><br><span class="line">		test(new Object());*/</span><br><span class="line">		test(new Person());</span><br><span class="line">		test(new Man());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static &lt;T extends Person&gt; void test(T t)&#123;</span><br><span class="line">		System.out.println(t);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/*public static &lt;T super Person&gt; void test(T t)&#123;</span><br><span class="line">		//错误</span><br><span class="line">	&#125;*/</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">class Person&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">class Man extends Person&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T extends Closeable&gt; void free(T... t)&#123;</span><br><span class="line">	for(T c : t)&#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			if(c!=null)&#123;</span><br><span class="line">				c.close();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; catch (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="12-3-泛型通配符"><a href="#12-3-泛型通配符" class="headerlink" title="12.3 泛型通配符"></a>12.3 泛型通配符</h1><ul>
+<li>只能用于声明变量|形参上，一般是形参类型上，表示可以接收任意</li>
+<li>不能用在<ul>
+<li>1、创建对象，即new 后面</li>
+<li>2、声明泛型类、泛型接口，即class和interface</li>
+<li>3、声明泛型方法，即返回值类型前面&lt;&gt;中</li>
+</ul>
+</li>
+</ul>
+<h2 id="1、匹配任意类型的通配符"><a href="#1、匹配任意类型的通配符" class="headerlink" title="1、匹配任意类型的通配符"></a>1、匹配任意类型的通配符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * ?  通配符，类型不确定</span><br><span class="line"> * 1、用于声明变量|形参上</span><br><span class="line"> * 不能用在</span><br><span class="line"> * 1、创建对象</span><br><span class="line"> * 2、声明泛型类、泛型接口、泛型方法</span><br><span class="line"> */</span><br><span class="line">public class TestGenericWildcard &#123;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		ArrayList&lt;?&gt; list = new ArrayList();</span><br><span class="line">		list = new ArrayList&lt;String&gt;();</span><br><span class="line">		list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">		list = new ArrayList&lt;Object&gt;();</span><br><span class="line"></span><br><span class="line">		list = Collections.list(new StringTokenizer(&quot;this is a test&quot;));</span><br><span class="line">		//但是此list不能添加任意类型的对象，除了null</span><br><span class="line">		list.add(null);</span><br><span class="line">//		list.add(&quot;&quot;);//因为?类似于Object,但不等价与Object，所以还是类型不确定，所以除了null可以给任意引用类型之外，其他类型对象都不能随便赋</span><br><span class="line">		Object obj = list.get(0);//可以调用get()方法并使用其返回值。返回值是一个未知的类型，但是我们知道，它总是一个Object</span><br><span class="line">		System.out.println(obj);</span><br><span class="line">		</span><br><span class="line">		test(new ArrayList&lt;Object&gt;());</span><br><span class="line">		test(new ArrayList&lt;String&gt;());</span><br><span class="line">		test(new ArrayList&lt;Integer&gt;());</span><br><span class="line">		</span><br><span class="line">		//编译错误：不能用在创建对象上，右边属于创建集合对象</span><br><span class="line">//		ArrayList&lt;?&gt; list2 = new ArrayList&lt;?&gt;();</span><br><span class="line">	&#125;</span><br><span class="line">	public static void test(ArrayList&lt;?&gt; list)&#123;</span><br><span class="line">		list.add(null);</span><br><span class="line">//		list.add(&quot;&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//编译错误：不能用在泛型方法声明上，返回值类型前面&lt;&gt;不能使用?</span><br><span class="line">//	public static &lt;?&gt; void test(ArrayList&lt;?&gt; list)&#123;</span><br><span class="line">//		</span><br><span class="line">//	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//编译错误：不能用在泛型类的声明上</span><br><span class="line">/*class GenericTypeClass&lt;?&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;*/</span><br></pre></td></tr></table></figure>
+<h2 id="2、受限泛型：上限、下限"><a href="#2、受限泛型：上限、下限" class="headerlink" title="2、受限泛型：上限、下限"></a>2、受限泛型：上限、下限</h2><h3 id="（1）通配符指定上限"><a href="#（1）通配符指定上限" class="headerlink" title="（1）通配符指定上限"></a>（1）通配符指定上限</h3><p>上限extends：使用时指定的类型必须是继承某个类，或者实现某个接口，即&lt;= ，如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">? extends Person</span><br><span class="line">? extends Comparable</span><br></pre></td></tr></table></figure>
+<h4 id="满足以下规则"><a href="#满足以下规则" class="headerlink" title="满足以下规则"></a>满足以下规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Fruit&gt; 满足 List&lt;? extends Fruit&gt;</span><br><span class="line">List&lt;Apple&gt; 满足 List&lt;? extends Fruit&gt;</span><br><span class="line">List&lt;FujiApple&gt; 满足 List&lt;? extends Fruit&gt;</span><br><span class="line">List&lt;? extends Apple&gt; 满足 List&lt;? extends Fruit&gt;</span><br><span class="line">List&lt;?&gt; 不满足 List&lt;? extends Fruit&gt; 因为List&lt;?&gt; 等价于List&lt;? extends Object&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		ArrayList&lt;Fruit&gt; list1= new ArrayList&lt;Fruit&gt;();</span><br><span class="line">		test(list1);</span><br><span class="line">		ArrayList&lt;Apple&gt; list2= new ArrayList&lt;Apple&gt;();</span><br><span class="line">		test(list2);</span><br><span class="line">		ArrayList&lt;FujiApple&gt; list3= new ArrayList&lt;FujiApple&gt;();</span><br><span class="line">		test(list3);</span><br><span class="line">		</span><br><span class="line">		ArrayList&lt;? extends Fruit&gt; list= new ArrayList&lt;Fruit&gt;();</span><br><span class="line">		test(list);</span><br><span class="line">		</span><br><span class="line">		ArrayList&lt;? extends Apple&gt; list4= new ArrayList&lt;FujiApple&gt;();</span><br><span class="line">		test(list4);</span><br><span class="line">		ArrayList&lt;? extends Apple&gt; list5= new ArrayList&lt;Apple&gt;();</span><br><span class="line">		test(list5);</span><br><span class="line">		</span><br><span class="line">		//编译错误，因为ArrayList&lt;?&gt;类似于ArrayList&lt;? extends Object&gt;</span><br><span class="line">		//而且list6有可能赋值new ArrayList&lt;String&gt;();</span><br><span class="line">		//而且list6有可能赋值new ArrayList&lt;Object&gt;();</span><br><span class="line">		ArrayList&lt;?&gt; list6 = new ArrayList();</span><br><span class="line">//		test(list6);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void test(ArrayList&lt;? extends Fruit&gt; list)&#123;</span><br></pre></td></tr></table></figure>
+<p>如果使用“？ extends  类型”接收泛型对象的时候，则不能设置被泛型指定的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public static void test(ArrayList&lt;? extends Fruit&gt; list)&#123;</span><br><span class="line">		/*</span><br><span class="line">		 * 通通编译错误</span><br><span class="line">		 * 只能接收使用，不能修改</span><br><span class="line">		 * 因为不知道list最终传入的到底是什么样的集合</span><br><span class="line">		list.add(new Fruit());</span><br><span class="line">		list.add(new Apple());</span><br><span class="line">		list.add(new Peach());*/</span><br><span class="line">		</span><br><span class="line">		//此处只能是Fruit或以上，不能是Apple等子类，因为可能传入的是ArrayList&lt;Fruit&gt;或ArrayList&lt;Peach&gt;</span><br><span class="line">		for(Fruit f:list)&#123;</span><br><span class="line">			System.out.println(f);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		//Iterator只能使用Iterator&lt;?&gt;或Iterator&lt;? extends Fruit&gt;</span><br><span class="line">		Iterator&lt;? extends Fruit&gt; iter = list.iterator();</span><br><span class="line">          // Iterator&lt;Fruit&gt; iter = list.iterator();//编译错误，因为泛型不支持多态</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="（2）通配符指定下限"><a href="#（2）通配符指定下限" class="headerlink" title="（2）通配符指定下限"></a>（2）通配符指定下限</h3><p>下限super：使用时指定的类型不能小于操作的类，即&gt;=，如<br>? super Apple<br>存在以下规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;Apple&gt;  满足 ArrayList&lt;? super Apple&gt;</span><br><span class="line">ArrayList&lt;Fruit&gt;  满足 ArrayList&lt;? super Apple&gt;</span><br><span class="line">ArrayList&lt;Object&gt;  满足 ArrayList&lt;? super Apple&gt;</span><br><span class="line">ArrayList&lt;? super Apple&gt; 满足 ArrayList&lt;? super Apple&gt;</span><br><span class="line">ArrayList&lt;? super Fruit&gt; 满足 ArrayList&lt;? super Apple&gt;</span><br><span class="line">ArrayList&lt;?&gt; 不满足 ArrayList&lt;? super Apple&gt;因为List&lt;?&gt; 等价于List&lt;? extends Object&gt;，那么可能ArrayList&lt;String&gt;</span><br><span class="line">ArrayList&lt;? super FujiApple&gt; 不满足 ArrayList&lt;? super Apple&gt; 因为可能ArrayList&lt; FujiApple&gt;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		ArrayList&lt;Apple&gt; list1= new ArrayList&lt;Apple&gt;();</span><br><span class="line">		test(list1);</span><br><span class="line">		ArrayList&lt;Fruit&gt; list2= new ArrayList&lt;Fruit&gt;();</span><br><span class="line">		test(list2);</span><br><span class="line">		ArrayList&lt;Object&gt; list3= new ArrayList&lt;Object&gt;();</span><br><span class="line">		test(list3);</span><br><span class="line">		</span><br><span class="line">		ArrayList&lt;? super Apple&gt; list4= new ArrayList&lt;Apple&gt;();</span><br><span class="line">		test(list4);</span><br><span class="line">		ArrayList&lt;? super Fruit&gt; list5= new ArrayList&lt;Fruit&gt;();</span><br><span class="line">		test(list5);</span><br><span class="line">		ArrayList&lt;? super Fruit&gt; list6= new ArrayList&lt;Object&gt;();</span><br><span class="line">		test(list6);</span><br><span class="line">	//编译错误</span><br><span class="line">	/*	ArrayList&lt;? super FujiApple&gt; list= new ArrayList&lt;FujiApple&gt;();</span><br><span class="line">		test(list);*/</span><br><span class="line">		</span><br><span class="line">//		//编译错误，因为FujiApple是Apple的子类</span><br><span class="line">//		ArrayList&lt;? super Apple&gt; list7= new ArrayList&lt;FujiApple&gt;();</span><br><span class="line">//		test(list7);</span><br><span class="line">		</span><br><span class="line">		//编译错误，因为ArrayList&lt;?&gt;类似于ArrayList&lt;? extends Object&gt;</span><br><span class="line">		//而且list8有可能赋值new ArrayList&lt;String&gt;();</span><br><span class="line">		ArrayList&lt;?&gt; list8 = new ArrayList();</span><br><span class="line">//		test(list8);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	public static void test(ArrayList&lt;? super Apple&gt; list)&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果使用“？ super类型”接收泛型对象的时候，则能够添加数据，但是不能添加父对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public static void test(ArrayList&lt;? super Apple&gt; list)&#123;</span><br><span class="line">		/*</span><br><span class="line">		 * 通通编译错误</span><br><span class="line">		 * 只能接收本类或子类对象</span><br><span class="line">		 * 因为不知道list最终传入的到底是什么样的集合，如果传入的是ArrayList&lt;Apple&gt;，那添加Fruit对象就有问题了*/</span><br><span class="line">		list.add(new FujiApple());</span><br><span class="line">		list.add(new Apple());</span><br><span class="line">//		list.add(new Fruit());</span><br><span class="line">		</span><br><span class="line">		//此处只能是Object,不能是Apple,Fruit，因为可能传入的是ArrayList&lt;Object&gt;</span><br><span class="line">		for(Object a:list)&#123;</span><br><span class="line">			System.out.println(a);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="12-4-泛型嵌套：由外到内分析"><a href="#12-4-泛型嵌套：由外到内分析" class="headerlink" title="12.4 泛型嵌套：由外到内分析"></a>12.4 泛型嵌套：由外到内分析</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		HashMap&lt;String,ArrayList&lt;Citizen&gt;&gt; map = new HashMap&lt;String,ArrayList&lt;Citizen&gt;&gt;();</span><br><span class="line">		ArrayList&lt;Citizen&gt; list = new ArrayList&lt;Citizen&gt;();</span><br><span class="line">		list.add(new Citizen(&quot;刘恺威&quot;));</span><br><span class="line">		list.add(new Citizen(&quot;杨幂&quot;));</span><br><span class="line">		list.add(new Citizen(&quot;小糯米&quot;));</span><br><span class="line">		map.put(&quot;刘恺威&quot;, list);</span><br><span class="line">		</span><br><span class="line">		Set&lt;Entry&lt;String, ArrayList&lt;Citizen&gt;&gt;&gt; entrySet = map.entrySet();</span><br><span class="line">		Iterator&lt;Entry&lt;String, ArrayList&lt;Citizen&gt;&gt;&gt; iterator = entrySet.iterator();</span><br><span class="line">		while(iterator.hasNext())&#123;</span><br><span class="line">			Entry&lt;String, ArrayList&lt;Citizen&gt;&gt; next = iterator.next();</span><br><span class="line">			String key = next.getKey();</span><br><span class="line">			ArrayList&lt;Citizen&gt; value = next.getValue();</span><br><span class="line">			System.out.println(&quot;户主：&quot;+key);</span><br><span class="line">			System.out.println(&quot;家庭成员：&quot;+value);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="12-5-泛型的特殊点"><a href="#12-5-泛型的特殊点" class="headerlink" title="12.5 泛型的特殊点"></a>12.5 泛型的特殊点</h1><h2 id="1、泛型没有多态"><a href="#1、泛型没有多态" class="headerlink" title="1、泛型没有多态"></a>1、泛型没有多态</h2><p>如果B是A的一个子类型（子类或者子接口），而G是具有泛型声明的类或接口，G<b>并不是G<a>的子类型！<br>比如：</a></b></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String是Object的子类，但是List&lt;String &gt;并不是List&lt;Object&gt;的子类。</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603113046.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">		Fruit f = new Apple();//多态</span><br><span class="line">		//泛型没有多态</span><br><span class="line">//		ArrayList&lt;Fruit&gt; list = new ArrayList&lt;Apple&gt;();//泛型没有多态</span><br><span class="line">		ArrayList&lt;? extends Fruit&gt; list = new ArrayList&lt;Apple&gt;();//使用通配符可以</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2、没有泛型数组"><a href="#2、没有泛型数组" class="headerlink" title="2、没有泛型数组"></a>2、没有泛型数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class TestGenericPolymophism &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//泛型没有数组</span><br><span class="line">//		Tiger&lt;String&gt;[] as = new Tiger&lt;String&gt;[];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">class Tiger&lt;T&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">ArrayList源代码</span><br><span class="line">public class ArrayList&lt;E&gt;  。。。&#123;</span><br><span class="line">    transient Object[] elementData;</span><br><span class="line">    public boolean add(E e) &#123;</span><br><span class="line">        ensureCapacityInternal(size + 1);  // Increments modCount!!</span><br><span class="line">        elementData[size++] = e;</span><br><span class="line">        return true;</span><br><span class="line">&#125;</span><br><span class="line">    public E get(int index) &#123;</span><br><span class="line">        rangeCheck(index);</span><br><span class="line">        return elementData(index);</span><br><span class="line">&#125;</span><br><span class="line">    E elementData(int index) &#123;</span><br><span class="line">        return (E) elementData[index];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3、jdk1-7简化泛型"><a href="#3、jdk1-7简化泛型" class="headerlink" title="3、jdk1.7简化泛型"></a>3、jdk1.7简化泛型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//jdk1.7，泛型的简化操作</span><br><span class="line">	ArrayList&lt;Fruit&gt; flist = new ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<h2 id="4、不能在try-catch中使用泛型定义"><a href="#4、不能在try-catch中使用泛型定义" class="headerlink" title="4、不能在try-catch中使用泛型定义"></a>4、不能在try-catch中使用泛型定义</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">&#125;catch(T t)&#123;&#125;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="12-6-Collections工具类"><a href="#12-6-Collections工具类" class="headerlink" title="12.6 Collections工具类"></a>12.6 Collections工具类</h1><ul>
+<li>参考操作数组的工具类：Arrays</li>
+<li>Collections 是一个操作 Set、List 和 Map 等集合的工具类</li>
+<li>Collections 中提供了一系列静态的方法对集合元素进行排序、查询和修改等操作，还提供了对集合对象设置不可变、对集合对象实现同步控制等方法</li>
+</ul>
+<ul>
+<li>排序操作：（均为static方法）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;T&gt; boolean addAll(Collection&lt;? super T&gt; c,T... elements)</span><br><span class="line">将所有指定元素添加到指定 collection 中。</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; int binarySearch(List&lt;? extends Comparable&lt;? super T&gt;&gt; list,T key)</span><br><span class="line">在List集合中查找某个元素的下标，但是List的元素必须是T或T的子类对象</span><br><span class="line">，而且必须是可比较大小的，即支持自然排序的。而且集合也事先必须是有序的，否则结果不确定。</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; int binarySearch(List&lt;? extends T&gt; list,T key,Comparator&lt;? super T&gt; c)</span><br><span class="line">在List集合中查找某个元素的下标，但是List的元素必须是T或T的子类对象，</span><br><span class="line">而且集合也事先必须是按照c比较器规则进行排序过的，否则结果不确定。</span><br><span class="line"></span><br><span class="line">public static &lt;T extends Object &amp; Comparable&lt;? super T&gt;&gt; T max(Collection&lt;? extends T&gt; coll)</span><br><span class="line">在coll集合中找出最大的元素，集合中的对象必须是T或T的子类对象，而且支持自然排序</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; T max(Collection&lt;? extends T&gt; coll,Comparator&lt;? super T&gt; comp)</span><br><span class="line">在coll集合中找出最大的元素，集合中的对象必须是T或T的子类对象，</span><br><span class="line"></span><br><span class="line">public static void reverse</span><br><span class="line">反转指定列表List中元素的顺序。</span><br><span class="line"></span><br><span class="line">public static void shuffle(List&lt;?&gt; list) List</span><br><span class="line">集合元素进行随机排序，类似洗牌</span><br><span class="line"></span><br><span class="line">public static &lt;T extends Comparable&lt;? super T&gt;&gt; void sort(List&lt;T&gt; list)</span><br><span class="line">根据元素的自然顺序对指定 List 集合元素按升序排序</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; void sort(List&lt;T&gt; list,Comparator&lt;? super T&gt; c)</span><br><span class="line">根据指定的 Comparator 产生的顺序对 List 集合元素进行排序</span><br><span class="line"></span><br><span class="line">public static void swap(List&lt;?&gt; list,int i,int j)</span><br><span class="line">将指定 list 集合中的 i 处元素和 j 处元素进行交换</span><br><span class="line"></span><br><span class="line">public static int frequency(Collection&lt;?&gt; c,Object o)</span><br><span class="line">返回指定集合中指定元素的出现次数</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; void copy(List&lt;? super T&gt; dest,List&lt;? extends T&gt; src)</span><br><span class="line">将src中的内容复制到dest中</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; boolean replaceAll(List&lt;T&gt; list，T oldVal，T newVal)</span><br><span class="line">使用新值替换 List 对象的所有旧值</span><br><span class="line"></span><br><span class="line">Collections 类中提供了多个 synchronizedXxx() 方法，</span><br><span class="line">该方法可使将指定集合包装成线程同步的集合</span><br><span class="line">，从而可以解决多线程并发访问集合时的线程安全问题</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/01/10/11. JavaSE-集合/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/01/29/13. JavaSE-IO流/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+
+<!-- Gitalk评论插件通用代码 -->
+<div id="gitalk-container"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+const gitalk = new Gitalk({
+  clientID: '277317290454635afa73',
+  clientSecret: '78223c859304da5e8d71bfce136d436c6ff95c37',
+  repo: 'blog-comment',
+  owner: 'forsigner',
+  // 在这里设置一下截取前50个字符串, 这是因为 github 对 label 的长度有了要求, 如果超过
+  // 50个字符串则会报错.
+  // id: location.pathname.split('/').pop().substring(0, 49),
+  id: location.pathname,
+  admin: ['forsigner'],
+  // facebook-like distraction free mode
+  distractionFreeMode: false
+})
+gitalk.render('gitalk-container')
+</script>
+<!-- Gitalk代码结束 -->
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
