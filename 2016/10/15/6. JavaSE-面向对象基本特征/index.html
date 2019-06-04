@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>6. JavaSE-面向对象基本特征 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java SE,">
+  
+
+  <meta name="description" content="6.1 基本特征一 封装6.1.1访问控制修饰符作用访问控制修饰符的作用是控制类中的成员可以在哪些范围内被访问到 6.1.2访问控制修饰符用的最多的有2个  1    public 公共的意思, 访问范围最大, 可以任意范围内访问2    private 私有的意思, 访问范围最小, 只能在本类中被访问  6.1.3 如何封装6.1.3.1 成员类中的要素,属性, 方法, 构造器, 代码块, 成员">
+<meta name="keywords" content="Java SE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6. JavaSE-面向对象基本特征">
+<meta property="og:url" content="http://yoursite.com/2016/10/15/6. JavaSE-面向对象基本特征/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="6.1 基本特征一 封装6.1.1访问控制修饰符作用访问控制修饰符的作用是控制类中的成员可以在哪些范围内被访问到 6.1.2访问控制修饰符用的最多的有2个  1    public 公共的意思, 访问范围最大, 可以任意范围内访问2    private 私有的意思, 访问范围最小, 只能在本类中被访问  6.1.3 如何封装6.1.3.1 成员类中的要素,属性, 方法, 构造器, 代码块, 成员">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee0fffb507366942.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee0fffd085f68947.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee1007096ab39316.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee100733a5d78165.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee100730e5654509.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee0ffff1bdc69394.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee100736b6425011.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee10000077c17027.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee100729b1214440.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee0fffe555236372.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee10070616510190.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee100005fa972786.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee0fffec1e076794.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee0fffef15372674.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee10072df5363871.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee10073975322106.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee10000331989402.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/29/5cee0fffe959515357.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529125920.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529125953.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529130433.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529130828.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529130846.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529130939.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529131237.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529141052.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529141154.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530094040.png">
+<meta property="og:updated_time" content="2019-06-04T01:22:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6. JavaSE-面向对象基本特征">
+<meta name="twitter:description" content="6.1 基本特征一 封装6.1.1访问控制修饰符作用访问控制修饰符的作用是控制类中的成员可以在哪些范围内被访问到 6.1.2访问控制修饰符用的最多的有2个  1    public 公共的意思, 访问范围最大, 可以任意范围内访问2    private 私有的意思, 访问范围最小, 只能在本类中被访问  6.1.3 如何封装6.1.3.1 成员类中的要素,属性, 方法, 构造器, 代码块, 成员">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/29/5cee0fffb507366942.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-基本特征一-封装"><span class="toc-text">6.1 基本特征一 封装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-1访问控制修饰符作用"><span class="toc-text">6.1.1访问控制修饰符作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-2访问控制修饰符"><span class="toc-text">6.1.2访问控制修饰符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-3-如何封装"><span class="toc-text">6.1.3 如何封装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-3-1-成员"><span class="toc-text">6.1.3.1 成员</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-3-2-成员私有化"><span class="toc-text">6.1.3.2 成员私有化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-3-3-封装的问题"><span class="toc-text">6.1.3.3 封装的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-get-set方法"><span class="toc-text">1  get/set方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-间接访问属性"><span class="toc-text">2.间接访问属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-为什么要封装"><span class="toc-text">3. 为什么要封装</span></a></li></ol></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-构造器"><span class="toc-text">6.2 构造器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-1-什么是构造器"><span class="toc-text">6.2.1 什么是构造器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是初始化"><span class="toc-text">1. 什么是初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-构造器概念"><span class="toc-text">2.构造器概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-如何定义构造器"><span class="toc-text">3. 如何定义构造器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-2-构造器的特点"><span class="toc-text">6.2.2 构造器的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-3-构造器调用"><span class="toc-text">6.2.3 构造器调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-如何调用构造器"><span class="toc-text">1.如何调用构造器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-4-构造器重载"><span class="toc-text">6.2.4 构造器重载</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是构造器重载"><span class="toc-text">1.什么是构造器重载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-this-调用"><span class="toc-text">2. this()调用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-this关键字和对象关系"><span class="toc-text">6.3 this关键字和对象关系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-1-this关键字含义"><span class="toc-text">6.3.1 this关键字含义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-this代表什么"><span class="toc-text">1. this代表什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-为什么使用this"><span class="toc-text">2.为什么使用this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-使用this的优点"><span class="toc-text">3.使用this的优点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-2-对象的传递"><span class="toc-text">6.3.2 对象的传递</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么要传递对象"><span class="toc-text">1. 为什么要传递对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-传递的是什么"><span class="toc-text">3.传递的是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-对象传递的优点"><span class="toc-text">4.对象传递的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-对象传递的危险性"><span class="toc-text">5.对象传递的危险性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-3-对象关联"><span class="toc-text">6.3.3 对象关联</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是对象关联"><span class="toc-text">1. 什么是对象关联</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-为什么要关联对象"><span class="toc-text">2. 为什么要关联对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-如何关联对象"><span class="toc-text">3. 如何关联对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-对象关联的作用"><span class="toc-text">4. 对象关联的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-4-javabean"><span class="toc-text">6.3.4 javabean</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-4-包"><span class="toc-text">6.4 包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-1-package语句"><span class="toc-text">6.4.1 package语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么要使用包"><span class="toc-text">1  为什么要使用包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-使用包带来的问题"><span class="toc-text">3  使用包带来的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-2-import语句"><span class="toc-text">6.4.2 import语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-import作用是什么"><span class="toc-text">1. import作用是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-import注意事项"><span class="toc-text">2. import注意事项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-5-eclipse的使用"><span class="toc-text">6.5 eclipse的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-1-安装"><span class="toc-text">6.5.1 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-版本选择"><span class="toc-text">1  版本选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-工作空间"><span class="toc-text">2  工作空间</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-2-运行"><span class="toc-text">6.5.2 运行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-启动eclipse"><span class="toc-text">1 启动eclipse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-透视图和窗口布局"><span class="toc-text">2 透视图和窗口布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-一些常用设置"><span class="toc-text">3. 一些常用设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-3-使用常用功能"><span class="toc-text">6.5.3 使用常用功能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-6-基本特征二-继承"><span class="toc-text">6.6 基本特征二 继承</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-6-1-继承"><span class="toc-text">6.6.1 继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-继承的概念"><span class="toc-text">1 继承的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-为什么要继承"><span class="toc-text">2 为什么要继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-继承语法"><span class="toc-text">3 继承语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-继承的特点"><span class="toc-text">4 继承的特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-6-2方法覆盖-override"><span class="toc-text">6.6.2方法覆盖(override)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是方法覆盖"><span class="toc-text">1. 什么是方法覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-为什么要方法覆盖"><span class="toc-text">2.为什么要方法覆盖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-方法覆盖的特殊性"><span class="toc-text">3. 方法覆盖的特殊性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Override注解的使用"><span class="toc-text">4. @Override注解的使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-6-3-四种访问权限"><span class="toc-text">6.6.3 四种访问权限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-为什么需要访问权限"><span class="toc-text">1  为什么需要访问权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-访问权限"><span class="toc-text">2  访问权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-访问权限的使用注意"><span class="toc-text">3. 访问权限的使用注意</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-7-super关键字"><span class="toc-text">6.7 super关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-7-1-super关键字含义"><span class="toc-text">6.7.1 super关键字含义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-super关键字"><span class="toc-text">1. super关键字</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-7-2-super使用场景"><span class="toc-text">6.7.2 super使用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-方法中使用"><span class="toc-text">1. 方法中使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-构造器中使用"><span class="toc-text">2. 构造器中使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-7-3子类对象实例化过程"><span class="toc-text">6.7.3子类对象实例化过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-7-4-super和this的区别"><span class="toc-text">6.7.4 super和this的区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-8-基本特征三-多态"><span class="toc-text">6.8 基本特征三 多态</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-8-1-什么是多态"><span class="toc-text">6.8.1 什么是多态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-本态"><span class="toc-text">1. 本态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-多态"><span class="toc-text">2. 多态</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-8-2多态的使用"><span class="toc-text">6.8.2多态的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-多态引用"><span class="toc-text">1. 多态引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-多态带来的问题"><span class="toc-text">2 多态带来的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-8-3虚拟方法调用-Virtual-Method-Invocation"><span class="toc-text">6.8.3虚拟方法调用(Virtual Method Invocation)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是虚拟方法"><span class="toc-text">1. 什么是虚拟方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-多态小结"><span class="toc-text">2. 多态小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-8-4多态的应用场景"><span class="toc-text">6.8.4多态的应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-多态数组"><span class="toc-text">1. 多态数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-多态参数"><span class="toc-text">2. 多态参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-对象类型转换-Casting"><span class="toc-text">3 对象类型转换(Casting)</span></a></li></ol></li></ol></li>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-6. JavaSE-面向对象基本特征" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">6. JavaSE-面向对象基本特征</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.10.15</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaSE基础笔记/">JavaSE基础笔记</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="6-1-基本特征一-封装"><a href="#6-1-基本特征一-封装" class="headerlink" title="6.1 基本特征一 封装"></a>6.1 基本特征一 封装</h1><h2 id="6-1-1访问控制修饰符作用"><a href="#6-1-1访问控制修饰符作用" class="headerlink" title="6.1.1访问控制修饰符作用"></a>6.1.1访问控制修饰符作用</h2><p>访问控制修饰符的作用是控制类中的成员可以在哪些范围内被访问到</p>
+<h2 id="6-1-2访问控制修饰符"><a href="#6-1-2访问控制修饰符" class="headerlink" title="6.1.2访问控制修饰符"></a>6.1.2访问控制修饰符</h2><p>用的最多的有2个</p>
+<blockquote>
+<p>1    public 公共的意思, 访问范围最大, 可以任意范围内访问<br>2    private 私有的意思, 访问范围最小, 只能在本类中被访问</p>
+</blockquote>
+<h2 id="6-1-3-如何封装"><a href="#6-1-3-如何封装" class="headerlink" title="6.1.3 如何封装"></a>6.1.3 如何封装</h2><h3 id="6-1-3-1-成员"><a href="#6-1-3-1-成员" class="headerlink" title="6.1.3.1 成员"></a>6.1.3.1 成员</h3><p>类中的要素,<strong>属性, 方法, 构造器, 代码块, 成员内部类</strong>, 这些要素都隶属于类, 对于本类而言, 这些要素就是互为成员, 既然是互为成员, 那么它们之间的互相访问是没有任何障碍.</p>
+<h3 id="6-1-3-2-成员私有化"><a href="#6-1-3-2-成员私有化" class="headerlink" title="6.1.3.2 成员私有化"></a>6.1.3.2 成员私有化</h3><p>只需要把类中的成员使用private修饰就是私有化了, 而一旦成员被私有化, 这个成员也称为被封装了<br><strong>注意 : 代码块不能封装</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class Teacher &#123;</span><br><span class="line">	</span><br><span class="line">	private String name; // 对象属性</span><br><span class="line">	private int age;</span><br><span class="line">	private String gender;</span><br><span class="line"></span><br><span class="line">    // 对象方法</span><br><span class="line">public void lesson() &#123;</span><br><span class="line">    System.out.println(name + “老师在上课”);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void eat(String something) &#123;</span><br><span class="line">System.out.println(&quot;老师在吃&quot; + something);</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">// 描述对象的详细信息, 把所有的属性值串接成一个字符串</span><br><span class="line">public String say() &#123;</span><br><span class="line">	String str = &quot;姓名:&quot; + name + &quot;,年龄:&quot; + age + &quot;,性别:&quot; + gender;</span><br><span class="line">	return str;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-1-3-3-封装的问题"><a href="#6-1-3-3-封装的问题" class="headerlink" title="6.1.3.3 封装的问题"></a>6.1.3.3 封装的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class TeacherTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123; </span><br><span class="line">		Teacher t = new Teacher(); </span><br><span class="line">        // 下面的语句都不能执行了, 因为在测试类中,不能直接跨类访问别的类中的私有成员</span><br><span class="line">        //t.name = “张三”;</span><br><span class="line">        //t.age = 30;</span><br><span class="line">        //t.gender = “男”;</span><br><span class="line">        //System.out.println(t.name); </span><br><span class="line">//System.out.println(t.age); </span><br><span class="line">//System.out.println(t.age); </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-get-set方法"><a href="#1-get-set方法" class="headerlink" title="1  get/set方法"></a>1  get/set方法</h4><blockquote>
+<p>   因为成员一旦私有化, 就不可以在其他类中直接访问了, 但是在其他类中仍然有访问的需求, 成员之间是可以互相访问的, 所以解决这个问题的方法就是在本类中添加一些公共方法, 通过方法间接访问类中的私有成员.</p>
+</blockquote>
+<p>public class Teacher {</p>
+<pre><code>private String name = &quot;某老师&quot;; // 实例变量, 私有化属性, 封装
+private int age = 30; // 当属性被私有化时, 只能在本类中使用
+private String gender = &quot;男&quot;;
+
+// 用于间接设置name属性, 所以方法必须公共的
+public void setName(String n) {
+    name = n; 
+}
+
+// 用于间接获取name属性, 所以方法必须公共的
+public String getName() {
+    return name; 
+}
+
+public void setGender(String g) {
+    gender = g;
+}
+
+public String getGender() {
+    return gender;
+}
+
+public void setAge(int age) { 
+    this.age = age;
+}
+
+// get方法有返回值, 没有参数
+public int getAge() {
+    return age;
+}
+
+// 实例方法
+public void lesson() {
+    System.out.println(name + &quot;老师在上课&quot;); // 成员可以互访
+}
+
+public void eat(String something) {
+    System.out.println(&quot;老师在吃&quot; + something);
+}
+
+// 描述对象的详细信息, 把所有的属性值串接成一个字符串
+public String say() {
+    String str = &quot;姓名:&quot; + name + &quot;,年龄:&quot; + age + &quot;,性别:&quot; + gender;
+    return str;
+}
+</code></pre><p>}</p>
+<h4 id="2-间接访问属性"><a href="#2-间接访问属性" class="headerlink" title="2.间接访问属性"></a>2.间接访问属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class TeacherTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Teacher t = new Teacher();</span><br><span class="line">		t.setName(&quot;张老师&quot;);// 通过方法设置属性</span><br><span class="line">		t.setAge(30); </span><br><span class="line">		t.setGender(&quot;男&quot;);</span><br><span class="line">		</span><br><span class="line">		System.out.println(t.getName());</span><br><span class="line">		System.out.println(t.getAge());// 通过方法获取属性</span><br><span class="line">		System.out.println(t.getGender());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-为什么要封装"><a href="#3-为什么要封装" class="headerlink" title="3. 为什么要封装"></a>3. 为什么要封装</h4><p>如果不使用封装而直接访问对象的属性, 就可以给属性赋上一些不合理的数据值, 比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.age = 50000; // 显然这个操作是应该失败的, 因为年龄不合理</span><br></pre></td></tr></table></figure>
+<p>但是如果通过方法来赋值, 就可以把这种错误拦截住<br>相同的道理, 如果要获取某个属性, 但是需要在内部再处理一下, 也可以通过方法来实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 保护数据</span><br><span class="line">	public void setAge(int a) &#123; </span><br><span class="line">		if (a &gt; 120 || a &lt; 0) &#123; // 当参数中传入的数据不合理时, 方法直接返回, 不给对象的属性赋值</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		age = a;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="6-2-构造器"><a href="#6-2-构造器" class="headerlink" title="6.2 构造器"></a>6.2 构造器</h1><h2 id="6-2-1-什么是构造器"><a href="#6-2-1-什么是构造器" class="headerlink" title="6.2.1 什么是构造器"></a>6.2.1 什么是构造器</h2><h3 id="1-什么是初始化"><a href="#1-什么是初始化" class="headerlink" title="1. 什么是初始化"></a>1. 什么是初始化</h3><pre><code>对象在刚创建时进行的工作就称为初始化, 初始化的主要工作是针对对象的属性的.
+</code></pre><h3 id="2-构造器概念"><a href="#2-构造器概念" class="headerlink" title="2.构造器概念"></a>2.构造器概念</h3><p>   当对象创建时, 希望对象的属性值被正确赋值, 此时就需要用到了构造器, 构造器也称为构造方法, 本质上构造器就是一个方法, 是一个特殊的方法.</p>
+<h3 id="3-如何定义构造器"><a href="#3-如何定义构造器" class="headerlink" title="3. 如何定义构造器"></a>3. 如何定义构造器</h3><p>  构造器(构造方法)的定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">修饰符 类名(参数类型1 形参1, 参数类型2 形参2….) &#123;</span><br><span class="line">代码块;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">public class Teacher &#123;</span><br><span class="line">	</span><br><span class="line">	private String name;</span><br><span class="line">	private int age = 30;</span><br><span class="line">	private String gender = &quot;女&quot;;</span><br><span class="line">	</span><br><span class="line">	public Teacher() &#123; // 无参构造器</span><br><span class="line">		name = &quot;张三&quot;;</span><br><span class="line">		age = 35;</span><br><span class="line">		gender = &quot;男&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setGender(String gender) &#123;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getGender() &#123;</span><br><span class="line">		return gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;姓名:&quot; + this.name + &quot;,年龄:&quot; + this.age + &quot;,性别:&quot; + this.gender;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意 : 类中如果没有提供任何的构造器, 编译器也会自动添加一个缺省的构造器<br>缺省的构造器就是 修饰符和类一致, 无参, 并且方法体中没有代码.</p>
+<h2 id="6-2-2-构造器的特点"><a href="#6-2-2-构造器的特点" class="headerlink" title="6.2.2 构造器的特点"></a>6.2.2 构造器的特点</h2><ul>
+<li>特点1：<br>构造器没有返回值, 也不可以声明void</li>
+<li>特点2：构造器名称必须和类名一致</li>
+<li>特点3：构造器不可以被final, static, abstract等修饰</li>
+<li>特点4：<br>构造器不像普通方法可以随意调用, 只能在创建对象时调用一次<h2 id="6-2-3-构造器调用"><a href="#6-2-3-构造器调用" class="headerlink" title="6.2.3 构造器调用"></a>6.2.3 构造器调用</h2><h3 id="1-如何调用构造器"><a href="#1-如何调用构造器" class="headerlink" title="1.如何调用构造器"></a>1.如何调用构造器</h3>使用new关键字在创建对象时就会自动调用了构造器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class TeacherTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Teacher t = new Teacher(); // 调用无参构造方法</span><br><span class="line">		System.out.println(t.say()); // 输出”姓名:张三,年龄:35,性别:男”</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-2-4-构造器重载"><a href="#6-2-4-构造器重载" class="headerlink" title="6.2.4 构造器重载"></a>6.2.4 构造器重载</h2><h3 id="1-什么是构造器重载"><a href="#1-什么是构造器重载" class="headerlink" title="1.什么是构造器重载"></a>1.什么是构造器重载</h3><p>当一个类中有多个构造器, 并且参数不同就形成构造器重载<br>构造器重载的目的是可以使用多种方式创建不同的对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class Teacher &#123;</span><br><span class="line">	</span><br><span class="line">	private String name;</span><br><span class="line">	private int age = 30;</span><br><span class="line">	private String gender = &quot;女&quot;;</span><br><span class="line">	</span><br><span class="line">	public Teacher() &#123; // 无参构造器</span><br><span class="line">		name = &quot;佟刚&quot;;</span><br><span class="line">		age = 35;</span><br><span class="line">		gender = &quot;女&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	// 有参构造器</span><br><span class="line">	public Teacher(String n, int a) &#123;</span><br><span class="line">		name = n;</span><br><span class="line">		age = a;</span><br><span class="line">		gender = &quot;女&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	// 有参构造器</span><br><span class="line">	public Teacher(String n, int a, String g) &#123; </span><br><span class="line">		name = n;</span><br><span class="line">		age = a;</span><br><span class="line">		gender = g;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;姓名:&quot; + name + &quot;,年龄:&quot; + age + &quot;,性别:&quot; + gender;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class TeacherTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Teacher t1 = new Teacher(); // 调用无参构造方法</span><br><span class="line">		System.out.println(t1.say());</span><br><span class="line"></span><br><span class="line">Teacher t2 = new Teacher(“李四”, 40); // 调用有参构造方法</span><br><span class="line">		System.out.println(t2.say());</span><br><span class="line"></span><br><span class="line">Teacher t3 = new Teacher(“王五”, 50, “男”); // 调用有参构造方法</span><br><span class="line">		System.out.println(t3.say());</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-this-调用"><a href="#2-this-调用" class="headerlink" title="2. this()调用"></a>2. this()调用</h3><p>  在无参构造器中, 给对象的3个属性分别完成赋值, 而这个操作可以通过调用另外一个构造器来完成,调用的语法this(实参列表);<br>  注意 : </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">this(…) 调用必须放在构造器的第一行!</span><br><span class="line">	this(…) 调用时,必须保证有一个构造器是没有this(…)的, 否则会形成构造器递归调用.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class Teacher &#123;</span><br><span class="line">	</span><br><span class="line">	private String name;</span><br><span class="line">	private int age = 30;</span><br><span class="line">	private String gender = &quot;女&quot;;</span><br><span class="line">	</span><br><span class="line">	public Teacher() &#123; // 无参构造器</span><br><span class="line">		// 注释不算行</span><br><span class="line">		this(&quot;张三&quot;, 35, &quot;男&quot;); // 通过调用第3个构造器完成属性赋值</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// 有参构造器</span><br><span class="line">	public Teacher(String n, int a) &#123;</span><br><span class="line">		name = n;</span><br><span class="line">		age = a;</span><br><span class="line">		gender = &quot;女&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Teacher(String n, int a, String g) &#123; </span><br><span class="line">		name = n;</span><br><span class="line">		age = a;</span><br><span class="line">		gender = g;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;姓名:&quot; + name + &quot;,年龄:&quot; + age + &quot;,性别:&quot; + gender;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="6-3-this关键字和对象关系"><a href="#6-3-this关键字和对象关系" class="headerlink" title="6.3 this关键字和对象关系"></a>6.3 this关键字和对象关系</h1><h2 id="6-3-1-this关键字含义"><a href="#6-3-1-this关键字含义" class="headerlink" title="6.3.1 this关键字含义"></a>6.3.1 this关键字含义</h2><h3 id="1-this代表什么"><a href="#1-this代表什么" class="headerlink" title="1. this代表什么"></a>1. this代表什么</h3><pre><code>this代表对象, 代表的是当前对象, this里保存的是对象的地址.
+</code></pre><p>谁是当前对象? 比如方法调用<br><code>t1.say()</code>在这个方法执行时<br>执行以下代码 :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public String say() &#123;</span><br><span class="line">	return &quot;姓名:&quot; + name + &quot;,年龄:&quot; + age + &quot;,性别:&quot; + gender;</span><br><span class="line">&#125;</span><br><span class="line">这段代码可以写成</span><br><span class="line">public String say() &#123;</span><br><span class="line">	return &quot;姓名:&quot; + this.name + &quot;,年龄:&quot; + this.age + &quot;,性别:&quot; + this.gender;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果是一样的, 当前对象是哪个对象呢? 就是调用这个方法的对象, <code>t1.say()</code>中的t1就是当前对象,显然这个当前对象在变化, 因为<code>t2.say()</code>调用时,this就是指的是t2了.</p>
+<h3 id="2-为什么使用this"><a href="#2-为什么使用this" class="headerlink" title="2.为什么使用this"></a>2.为什么使用this</h3><p>this强调了使用当前对象, 有的时候属性如果和方法中的局部变量重名时, 为了区别必须使用this,在构造器重载时, 调用别的构造器也需要使用this. 两者的语法不一样.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public class Teacher &#123;</span><br><span class="line">	</span><br><span class="line">	private String name;</span><br><span class="line">	private int age = 30;</span><br><span class="line">	private String gender = &quot;女&quot;;</span><br><span class="line">	</span><br><span class="line">	public Teacher() &#123; // 无参构造器</span><br><span class="line">		this(&quot;佟刚&quot;, 35, &quot;女&quot;); // 调用其他构造器 </span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Teacher(String name, int age, String gender) &#123; </span><br><span class="line">		this.name = name; // this表示对象, 右侧的name是形参, 是局部变量</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return this.name; // 加上this也可以, 但是没有必须, 它暗含了this</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setGender(String gender) &#123;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getGender() &#123;</span><br><span class="line">		return gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;姓名:&quot; + this.name + &quot;,年龄:&quot; + this.age + &quot;,性别:&quot; + this.gender;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-使用this的优点"><a href="#3-使用this的优点" class="headerlink" title="3.使用this的优点"></a>3.使用this的优点</h3><blockquote>
+<ol>
+<li>使用this可以提高代码的可读性, 强调要使用的是当前对象.</li>
+<li>在方法中, 如果局部变量和属性重名, 必须使用this, 用以区分属性和局部变量, 并且这样局部变量的含义也更清晰.</li>
+<li>this(…)调用可以简化构造器调用, 并有利于维护. 如果有修改的需要, 只要修改被调用的构造器就可以了.</li>
+</ol>
+</blockquote>
+<h2 id="6-3-2-对象的传递"><a href="#6-3-2-对象的传递" class="headerlink" title="6.3.2 对象的传递"></a>6.3.2 对象的传递</h2><h3 id="1-为什么要传递对象"><a href="#1-为什么要传递对象" class="headerlink" title="1. 为什么要传递对象"></a>1. 为什么要传递对象</h3><p>在有些方法中, 功能的完成除了需要一些基本数据外, 还需要复杂类型, 比如在Teacher类中方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void lesson() &#123;</span><br><span class="line">    // 老师上课的代码, 老师上课时, 需要一台电脑, 这时就可以通过参数传递一个电脑对象</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void lesson(Computer computer) &#123;</span><br><span class="line">// 老师上课的代码, 老师上课时, 需要一台电脑, 这时就可以通过参数传递一个电脑对象</span><br><span class="line">// 这样在老师上课的代码中, 就可以直接使用传入的Computer对象.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.对象如何传递<br>在方法调用时, 由调用者传实参时,负责把对象传给方法.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class Computer &#123;</span><br><span class="line">	</span><br><span class="line">	private double cpu;</span><br><span class="line">	private int memory;</span><br><span class="line">	</span><br><span class="line">	public Computer() &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	public Computer(double cpu, int memory) &#123;</span><br><span class="line">		this.cpu = cpu;</span><br><span class="line">		this.memory = memory;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setCpu(double cpu) &#123;</span><br><span class="line">		this.cpu = cpu;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public double getCpu() &#123;</span><br><span class="line">		return cpu;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setMemory(int memory) &#123;</span><br><span class="line">		this.memory = memory;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public int getMemory() &#123;</span><br><span class="line">		return memory;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;CPU:&quot; + cpu + &quot;GHz, 内存:&quot; + memory + &quot;G&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">public class Teacher &#123;</span><br><span class="line">	</span><br><span class="line">	private String name;</span><br><span class="line">	private int age = 30;</span><br><span class="line">	private String gender = &quot;女&quot;;</span><br><span class="line">	</span><br><span class="line">	public Teacher() &#123; // 无参构造器</span><br><span class="line">		this(&quot;佟刚&quot;, 35, &quot;女&quot;);	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Teacher(String name, int age, String gender) &#123; </span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setGender(String gender) &#123;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getGender() &#123;</span><br><span class="line">		return gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void lesson(Computer com) &#123; // 这个方法应该需要一台电脑才能上课</span><br><span class="line">		System.out.println(&quot;[&quot; + this.name + &quot;] 老师使用电脑[&quot; + com.say() + &quot;]在上课&quot;); </span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;姓名:&quot; + this.name + &quot;,年龄:&quot; + this.age + &quot;,性别:&quot; + this.gender;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class TeacherTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Teacher t = new Teacher(&quot;李四&quot;, 25, &quot;女&quot;);</span><br><span class="line">		Computer com = new Computer(3.5, 4); // 要传递的对象先创建好</span><br><span class="line">		t.lesson(com); // 通过实参传递对象</span><br><span class="line">        // 以上代码打印输出为”[李四] 老师使用电脑[CPU:3.5GHz,内存:4G]在上课&quot;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-传递的是什么"><a href="#3-传递的是什么" class="headerlink" title="3.传递的是什么"></a>3.传递的是什么</h3><blockquote>
+<p>在方法调用中的实参com是在main方法中声明的引用变量, 但是这个引用指向了在main中创建的新的Computer对象, 所以在lesson方法执行时, 接收到的是对象的引用, 通过引用使用了对象.</p>
+</blockquote>
+<h3 id="4-对象传递的优点"><a href="#4-对象传递的优点" class="headerlink" title="4.对象传递的优点"></a>4.对象传递的优点</h3><p>即使对象很大, 属性很多, 在对象传递时, 并不是把对象本身复制了一份, 而是只把对象的引用传递了, 优点就是速度快.</p>
+<h3 id="5-对象传递的危险性"><a href="#5-对象传递的危险性" class="headerlink" title="5.对象传递的危险性"></a>5.对象传递的危险性</h3><p>危险性就在于因为传递了对象的引用, 这样通过引用一方面可以读取对象的属性或调用对象的方法, 同时如果通过引用直接修改对象的属性, 也会导致对象属性的变化, 所以当把对象传递给方法时, 如果在方法内部有对于对象的修改操作, 对于调用者来说, 这个修改也是同步的.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class Teacher &#123;</span><br><span class="line"></span><br><span class="line">private String name;</span><br><span class="line"></span><br><span class="line">public void lesson(Computer com) &#123; // 这个方法应该需要一台电脑才能上课</span><br><span class="line">		System.out.println(&quot;[&quot; + this.name + &quot;] 老师使用电脑[&quot; + com.say() + &quot;]在上课&quot;); </span><br><span class="line">        com.setMemory(8);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class TeacherTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Teacher t = new Teacher();</span><br><span class="line">		Computer com = new Computer(3.5, 4); // 要传递的对象先创建好</span><br><span class="line">		t.lesson(com); // 通过实参传递对象</span><br><span class="line">        </span><br><span class="line">        System.out.println(com.getMemory()); // 输出的不是原来的4而是在方法中被修改后的8</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-3-3-对象关联"><a href="#6-3-3-对象关联" class="headerlink" title="6.3.3 对象关联"></a>6.3.3 对象关联</h2><h3 id="1-什么是对象关联"><a href="#1-什么是对象关联" class="headerlink" title="1. 什么是对象关联"></a>1. 什么是对象关联</h3><p>   对象关联就是一个对象关联了另外一个对象, 前者拥有了后者, 是一种包含关系.</p>
+<h3 id="2-为什么要关联对象"><a href="#2-为什么要关联对象" class="headerlink" title="2. 为什么要关联对象"></a>2. 为什么要关联对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void lesson(Computer com) &#123; // 这个方法应该需要一台电脑才能上课</span><br><span class="line">		System.out.println(&quot;[&quot; + this.name + &quot;] 老师使用电脑[&quot; + com.say() + &quot;]在上课&quot;); </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法中老师对象要想上课, 需要通过参数传入一个对象. 方法结束后, 这个对象对于老师对象来说就会消失, 显然老师对象最好是应该完全拥有一个电脑对象, 这样再执行上课方法时,就不需要再传入对象, 而是使用自己拥有的对象, 甚至还可以再添加一些别的方法使用此对象.</p>
+<h3 id="3-如何关联对象"><a href="#3-如何关联对象" class="headerlink" title="3. 如何关联对象"></a>3. 如何关联对象</h3><p>  在当前类中把要关联的对象作为属性即可.<br>  也可以在构造器中添加参数为关联的对象赋值, 也可以添加对应的get/set方法,用以处理这个关联的对象</p>
+<p>先写被关联的类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class Computer &#123;</span><br><span class="line">	</span><br><span class="line">	private double cpu;</span><br><span class="line">	private int memory;</span><br><span class="line">	</span><br><span class="line">	public Computer() &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	public Computer(double cpu, int memory) &#123;</span><br><span class="line">		this.cpu = cpu;</span><br><span class="line">		this.memory = memory;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setCpu(double cpu) &#123;</span><br><span class="line">		this.cpu = cpu;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public double getCpu() &#123;</span><br><span class="line">		return cpu;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setMemory(int memory) &#123;</span><br><span class="line">		this.memory = memory;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public int getMemory() &#123;</span><br><span class="line">		return memory;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;CPU:&quot; + cpu + &quot;GHz, 内存:&quot; + memory + &quot;G&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在Teacher类中关联Computer类的对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">public class Teacher &#123;</span><br><span class="line">	</span><br><span class="line">	private String name;</span><br><span class="line">	private int age = 30;</span><br><span class="line">	private String gender = &quot;女&quot;;</span><br><span class="line">    // 对象关联, 把被关联的对象声明成属性</span><br><span class="line">    private Computer computer;</span><br><span class="line">	</span><br><span class="line">    // 可以通过构造器完成对关联对象的初始化</span><br><span class="line">	public Teacher(String name, int age, String gender, Computer computer) &#123; </span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">        this.computer = computer;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">// 同时应该再提供相应的get/set方法</span><br><span class="line">public void setComputer(Computer computer) &#123;</span><br><span class="line">    this.computer = computer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public Computer getComputer() &#123;</span><br><span class="line">    return computer;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setGender(String gender) &#123;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getGender() &#123;</span><br><span class="line">		return gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">    // 在上课方法中, 不必再在每次调用时传参了.</span><br><span class="line">	public void lesson() &#123; </span><br><span class="line">		System.out.println(&quot;[&quot; + this.name + &quot;] 老师使用电脑[&quot; + computer.say() + &quot;]在上课&quot;); </span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;姓名:&quot; + this.name + &quot;,年龄:&quot; + this.age + &quot;,性别:&quot; + this.gender;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class TeacherTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">Computer com = new Computer(3.5, 4); // 要关联的对象先创建好</span><br><span class="line">		Teacher t = new Teacher(&quot;李四&quot;, 25, &quot;女&quot;, com); // 通过构造器完成对象关联</span><br><span class="line">		t.lesson(); // 通过实参传递对象</span><br><span class="line">        // 以上代码打印输出为”[李四] 老师使用电脑[CPU:3.5GHz,内存:4G]在上课&quot;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-对象关联的作用"><a href="#4-对象关联的作用" class="headerlink" title="4. 对象关联的作用"></a>4. 对象关联的作用</h3><p>   对象关联的作用非常广泛, 当一个类完成某种功能时, 有的时候如果有现成的其他对象可以直接使用, 并且在本类中要多次多方法中使用同一个功能时, 对象关联更显得必要. 这样使得对象之间的关系更加紧密.</p>
+<h2 id="6-3-4-javabean"><a href="#6-3-4-javabean" class="headerlink" title="6.3.4 javabean"></a>6.3.4 javabean</h2><ul>
+<li>JavaBean是一种Java语言写成的可重用组件。</li>
+<li>所谓javaBean，是指符合如下标准的Java类：</li>
+</ul>
+<blockquote>
+<ul>
+<li>类是公共的</li>
+<li>有一个无参的公共的构造器</li>
+<li>有属性，且有对应的get、set方法</li>
+<li>用户可以使用JavaBean将功能、处理、值、数据库访问和其他任何可以用java代码创造的对象进行打包，并且其他的开发者可以通过内部的JSP页面、Servlet、其他JavaBean、applet程序或者应用来使用这些对象。用户可以认为JavaBean提供了一种随时随地的复制和粘贴的功能，而不用关心任何改变。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class TestJavaBean&#123;</span><br><span class="line">	private String name;  //属性一般定义为private</span><br><span class="line">	private int age;</span><br><span class="line">	public  TestJavaBean()&#123;&#125;</span><br><span class="line">	public int getAge()&#123;</span><br><span class="line">	     return age;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setAge(int age)&#123;</span><br><span class="line">	     this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getName()&#123;</span><br><span class="line">	    return name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name)&#123;</span><br><span class="line">	    this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="6-4-包"><a href="#6-4-包" class="headerlink" title="6.4 包"></a>6.4 包</h1><h2 id="6-4-1-package语句"><a href="#6-4-1-package语句" class="headerlink" title="6.4.1 package语句"></a>6.4.1 package语句</h2><h3 id="1-为什么要使用包"><a href="#1-为什么要使用包" class="headerlink" title="1  为什么要使用包"></a>1  为什么要使用包</h3><ul>
+<li>当程序中涉及的类越来越多时, 类的功能含义以及如果有同名类该如何处理的问题就出现了. </li>
+<li>我们希望把功能类似的一组类放在一起, 有利于管理和维护, 在java中使用了”包”的概念来分类管理</li>
+<li>包和目录非常接近, 但是虽然文件系统中是以目录的形式出现的, 但是在程序中包不是目录,目录也不是包.</li>
+</ul>
+<p>###2  如何使用包<br>   在程序的第一行添加语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">package 包名.子包名.子子包名……;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>包目录深度没有限制, 但也不宜太深</li>
+<li><p>package的作用就是让编译器编译代码时, 把生成的class文件放置到指定的包目录中, 并在类中记录包信息.</p>
+</li>
+<li><p>包名及子包结构通常符合下列规范,由四个部分组成：</p>
+</li>
+<li>机构类型名称.机构名称.项目名称.模块名称</li>
+</ul>
+<h3 id="3-使用包带来的问题"><a href="#3-使用包带来的问题" class="headerlink" title="3  使用包带来的问题"></a>3  使用包带来的问题</h3><p>一旦源文件中使用了package语句, 那么这个源文件中的所有类都会被放置到指定的包中,<br>带来2个问题</p>
+<blockquote>
+<p>1)    包中的所有的类如果被别的包中的类访问时, 不能再使用简单类名(simple name), 必须使用全限定名称(qualified name), 全限定类名 就是所有的包名.类名.<br>2)    如果类是主类, 那么在执行主类时, 必须使用全限定类名.<br>3)    编译源文件时必须加上选项-d 生成的包目录及其中的类文件的目标目录, 通过这个目录是当前目录, 在eclipse中这个目录是bin</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">package com.javase.javabean; </span><br><span class="line"></span><br><span class="line">public class Teacher &#123; // Teacher类在其他包的类中使用时,必须使用全限定名称</span><br><span class="line">	</span><br><span class="line">	private String name;</span><br><span class="line">	private int age = 30;</span><br><span class="line">	private String gender = &quot;女&quot;;</span><br><span class="line">	</span><br><span class="line">    // 可以通过构造器完成对关联对象的初始化</span><br><span class="line">	public Teacher(String name, int age, String gender) &#123; </span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setGender(String gender) &#123;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getGender() &#123;</span><br><span class="line">		return gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;姓名:&quot; + this.name + &quot;,年龄:&quot; + this.age + &quot;,性别:&quot; + this.gender;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">package com.javase.test;</span><br><span class="line"></span><br><span class="line">public class TeacherTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//Teacher t = new Teacher(&quot;李四&quot;, 25, &quot;女&quot;); // 编译时这行语句就会报错!!!</span><br><span class="line">        com.atguigu.javase.javabean.Teacher t = new com.atguigu.javase.javabean.Teacher(“李四”,25,”女”);</span><br><span class="line">        System.out.println(t.say());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并且在命令行中执行此主类时必须使用全限定类名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java com.javase.test.TeacherTest</span><br></pre></td></tr></table></figure>
+<h2 id="6-4-2-import语句"><a href="#6-4-2-import语句" class="headerlink" title="6.4.2 import语句"></a>6.4.2 import语句</h2><h3 id="1-import作用是什么"><a href="#1-import作用是什么" class="headerlink" title="1. import作用是什么"></a>1. import作用是什么</h3><blockquote>
+<p>跨包使用类时, 必须使用全限定类名, 所以当一个类中使用别的包的类太多时, 或者一个类的包名特别冗长时, 使用全限定名称代价就会非常高, 即使是一个类已经使用过了全限定, 下次再使用时,仍然还得使用全限定类名. 为了解决这个问题, 使用import导入语句, 把本类中要使用的其他包中的类导入进来, 这样, 在本类中再使用别的包的类就不必再使用全限定类名了, 可以直接使用简单类名, 这样就可以简化开发.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package com.javase.test;</span><br><span class="line"></span><br><span class="line">import com.atguigu.javase.javabean.Teacher;</span><br><span class="line"></span><br><span class="line">public class TeacherTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Teacher t = new Teacher(&quot;李四&quot;, 25, &quot;女&quot;); // 虽然Teacher类不在本包, 因为已经导入可以使用</span><br><span class="line">        System.out.println(t.say());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-import注意事项"><a href="#2-import注意事项" class="headerlink" title="2. import注意事项"></a>2. import注意事项</h3><blockquote>
+<p>①    import 也可以一次性导入某个包的所有类, 使用.*通配符即可<br>②    import导入时,必须要保证要导入的类确实存在</p>
+</blockquote>
+<h1 id="6-5-eclipse的使用"><a href="#6-5-eclipse的使用" class="headerlink" title="6.5 eclipse的使用"></a>6.5 eclipse的使用</h1><h2 id="6-5-1-安装"><a href="#6-5-1-安装" class="headerlink" title="6.5.1 安装"></a>6.5.1 安装</h2><h3 id="1-版本选择"><a href="#1-版本选择" class="headerlink" title="1  版本选择"></a>1  版本选择</h3><p>  在命令行执行语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java –version</span><br></pre></td></tr></table></figure>
+<p>   最后一行如果显示以下内容, 表明JDK版本是64位的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.162-b12, mixed mode)</span><br></pre></td></tr></table></figure>
+<p>  最后一行如果显示以下内容,表明JDK版本是32位的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Java HotSpot(TM) Client VM (build 24.80-b11, mixed mode)</span><br></pre></td></tr></table></figure>
+<p>  Eclipse的位数必须和JDK位数一致, 否则无法运行.</p>
+<h3 id="2-工作空间"><a href="#2-工作空间" class="headerlink" title="2  工作空间"></a>2  工作空间</h3><p>  在硬盘上创建一个目录, 记下它的位置, 作用就是eclipse使用这个目录保存一些常用的设置和项目配置信   息, 称之为工作空间.</p>
+<h2 id="6-5-2-运行"><a href="#6-5-2-运行" class="headerlink" title="6.5.2 运行"></a>6.5.2 运行</h2><h3 id="1-启动eclipse"><a href="#1-启动eclipse" class="headerlink" title="1 启动eclipse"></a>1 启动eclipse</h3><p>  解压好eclipse以后, 进入目录, 双击eclipse.exe运行</p>
+<h3 id="2-透视图和窗口布局"><a href="#2-透视图和窗口布局" class="headerlink" title="2 透视图和窗口布局"></a>2 透视图和窗口布局</h3><p><img src="https://i.loli.net/2019/05/29/5cee0fffb507366942.jpg" alt></p>
+<h3 id="3-一些常用设置"><a href="#3-一些常用设置" class="headerlink" title="3. 一些常用设置"></a>3. 一些常用设置</h3><p>1） 设置字体</p>
+<p> <img src="https://i.loli.net/2019/05/29/5cee0fffd085f68947.jpg" alt></p>
+<p><img src="https://i.loli.net/2019/05/29/5cee1007096ab39316.jpg" alt></p>
+<p>2）设置快捷操作</p>
+<p><img src="https://i.loli.net/2019/05/29/5cee100733a5d78165.jpg" alt></p>
+<h2 id="6-5-3-使用常用功能"><a href="#6-5-3-使用常用功能" class="headerlink" title="6.5.3 使用常用功能"></a>6.5.3 使用常用功能</h2><ol>
+<li>创建项目</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/29/5cee100730e5654509.jpg" alt></p>
+<ol start="2">
+<li>创建包</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/29/5cee0ffff1bdc69394.jpg" alt></p>
+<ol start="3">
+<li>创建类</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/29/5cee100736b6425011.jpg" alt></p>
+<ol start="4">
+<li>编辑代码<br>自动生成构造器</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/29/5cee10000077c17027.jpg" alt></p>
+<p>自动生成get/set方法</p>
+<p><img src="https://i.loli.net/2019/05/29/5cee100729b1214440.jpg" alt></p>
+<p>添加say()方法</p>
+<p>创建测试类并运行结果</p>
+<p><img src="https://i.loli.net/2019/05/29/5cee0fffe555236372.jpg" alt></p>
+<p></p>
+<ol start="5">
+<li>一些常用快捷键</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">Ctrl + 1 快速修正错误</span><br><span class="line">Ctrl + d 快速删除当前行</span><br><span class="line">Ctrl + Alt + 下方向 快速在下方复制当前行</span><br><span class="line">Alt + / 自动完成提醒功能</span><br><span class="line">Ctrl + shift + f 格式化代码</span><br><span class="line">Ctrl + shift + o 整理导入</span><br><span class="line">按住ctrl移动鼠标, 可以查看指定位置的元素的声明.</span><br><span class="line"></span><br><span class="line">Alt+↓ 当前行和下面一行交互位置(特别实用,可以省去先剪切,再粘贴了) </span><br><span class="line">Alt+↑ 当前行和上面一行交互位置(同上) </span><br><span class="line">Alt+← 前一个编辑的页面 </span><br><span class="line">Alt+→ 下一个编辑的页面(当然是针对上面那条来说了) </span><br><span class="line"></span><br><span class="line">Alt+Enter 显示当前选择资源(工程,or 文件 or文件)的属性 </span><br><span class="line"></span><br><span class="line">Shift+Enter 在当前行的下一行插入空行(这时鼠标可以在当前行的任一位置,不一定是最后) </span><br><span class="line">Shift+Ctrl+Enter 在当前行插入空行(原理同上条) </span><br><span class="line"></span><br><span class="line">Ctrl+Q 定位到最后编辑的地方 </span><br><span class="line">Ctrl+L 定位在某行 (对于程序超过100的人就有福音了) </span><br><span class="line">Ctrl+M 最大化当前的Edit或View (再按则反之) </span><br><span class="line">Ctrl+/ 注释当前行,再按则取消注释 </span><br><span class="line">Ctrl+O 快速显示 OutLine </span><br><span class="line">Ctrl+T 快速显示当前类的继承结构 </span><br><span class="line">Ctrl+W 关闭当前Editer </span><br><span class="line">Ctrl+K 参照选中的Word快速定位到下一个 </span><br><span class="line">Ctrl+E 快速显示当前Editer的下拉列表(如果当前页面没有显示的用黑体表示) </span><br><span class="line"></span><br><span class="line">Ctrl+/(小键盘) 折叠当前类中的所有代码 </span><br><span class="line"></span><br><span class="line">Ctrl+×(小键盘) 展开当前类中的所有代码 </span><br><span class="line"></span><br><span class="line">Ctrl+Space 代码助手完成一些代码的插入(但一般和输入法有冲突,可以修改输入法的热键,也可以暂用Alt+/来代替) </span><br><span class="line"></span><br><span class="line">Ctrl+Shift+E 显示管理当前打开的所有的View的管理器(可以选择关闭,激活等操作) </span><br><span class="line"></span><br><span class="line">Ctrl+J 正向增量查找(按下Ctrl+J后,你所输入的每个字母编辑器都提供快速匹配定位到某个单词,如果没有,则在stutes line中显示没有找到了,查一个单词时,特别实用,这个功能Idea两年前就有了) </span><br><span class="line"></span><br><span class="line">Ctrl+Shift+J 反向增量查找(和上条相同,只不过是从后往前查) </span><br><span class="line"></span><br><span class="line">Ctrl+Shift+F4 关闭所有打开的Editer </span><br><span class="line"></span><br><span class="line">Ctrl+Shift+X 把当前选中的文本全部变为小写 </span><br><span class="line"></span><br><span class="line">Ctrl+Shift+Y 把当前选中的文本全部变为小写 </span><br><span class="line"></span><br><span class="line">Ctrl+Shift+F 格式化当前代码 </span><br><span class="line"></span><br><span class="line">Ctrl+Shift+P 定位到对于的匹配符(譬如&#123;&#125;) (从前面定位后面时,光标要在匹配符里面,后面到前面,则反之) </span><br><span class="line"></span><br><span class="line">下面的快捷键是重构里面常用的,本人就自己喜欢且常用的整理一下(注:一般重构的快捷键都是Alt+Shift开头的了) </span><br><span class="line"></span><br><span class="line">Alt+Shift+R 重命名 (是我自己最爱用的一个了,尤其是变量和类的Rename,比手工方法能节省很多劳动力) </span><br><span class="line"></span><br><span class="line">Alt+Shift+M 抽取方法 (这是重构里面最常用的方法之一了,尤其是对一大堆泥团代码有用) </span><br><span class="line"></span><br><span class="line">Alt+Shift+C 修改函数结构(比较实用,有N个函数调用了这个方法,修改一次搞定) </span><br><span class="line"></span><br><span class="line">Alt+Shift+L 抽取本地变量( 可以直接把一些魔法数字和字符串抽取成一个变量,尤其是多处调用的时候) </span><br><span class="line"></span><br><span class="line">Alt+Shift+F 把Class中的local变量变为field变量 (比较实用的功能) </span><br><span class="line"></span><br><span class="line">Alt+Shift+I 合并变量(可能这样说有点不妥Inline) </span><br><span class="line">Alt+Shift+V 移动函数和变量(不怎么常用) </span><br><span class="line">Alt+Shift+Z 重构的后悔药(Undo)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">序号           功能                                      快捷键</span><br><span class="line">1       为用户提供内容的辅助                      〔Alt＋/〕</span><br><span class="line">2       显示类中方法和属性的大纲，快速定位        〔Ctrl＋O〕</span><br><span class="line">3       光标所在行或选定行快速添加注释或取消注释  〔Ctrl＋/〕</span><br><span class="line">4       窗口的最大化和还原                        〔Ctrl＋M〕</span><br><span class="line">5       快速修正                                  〔Ctrl＋1〕</span><br><span class="line">-----------------------------------------------------------------------------------------------------------</span><br><span class="line">6            快速向下和向上查找                        〔Ctrl＋K〕、〔Ctrl＋Shift＋K〕</span><br><span class="line">7            查找构建路径中的可找到类                  〔Ctrl+Shift＋T〕</span><br><span class="line">8            查找构建路径重点的所有文件                〔Ctrl＋Shift＋R〕</span><br><span class="line">9            查找类、方法和属性的引用                  〔Ctrl＋Shift＋G〕</span><br><span class="line">10          快速生成import                            〔Ctrl＋Shift＋O〕</span><br><span class="line">11          格式化代码                                〔Ctrl＋Shift＋F〕</span><br><span class="line">12        查找当前文件所在项目中的路径              〔Alt＋Shift＋W〕</span><br><span class="line">13        定位到当前编辑器的某一行                  〔Ctrl＋L〕</span><br><span class="line">14        后退历史记录和前进历史记录                〔Alt＋&lt;-〕、〔Alt＋-&gt;〕</span><br><span class="line">15        快速定位光标位置的某个类、方法和属性        〔F3〕</span><br><span class="line">16        显示类的继承关系                            〔F4〕</span><br></pre></td></tr></table></figure>
+<p></p>
+<ol start="6">
+<li>导入项目</li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/29/5cee10070616510190.jpg" alt></p>
+<p><img src="https://i.loli.net/2019/05/29/5cee100005fa972786.jpg" alt></p>
+<h1 id="6-6-基本特征二-继承"><a href="#6-6-基本特征二-继承" class="headerlink" title="6.6 基本特征二 继承"></a>6.6 基本特征二 继承</h1><h2 id="6-6-1-继承"><a href="#6-6-1-继承" class="headerlink" title="6.6.1 继承"></a>6.6.1 继承</h2><h3 id="1-继承的概念"><a href="#1-继承的概念" class="headerlink" title="1 继承的概念"></a>1 继承的概念</h3><p>一个类从另外一个类继承所有成员, 包括属性和方法, 但是不包括构造器和语句块<br>从现有类创建子类, 现有类就称为<code>父类, 基类, 超类.</code></p>
+<p><img src="https://i.loli.net/2019/05/29/5cee0fffec1e076794.jpg" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">      public String name;</span><br><span class="line">      public int age;</span><br><span class="line">      public Date birthDate;</span><br><span class="line">      public String getInfo()   </span><br><span class="line">     &#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/05/29/5cee0fffef15372674.jpg" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Student &#123;</span><br><span class="line">      public String name;</span><br><span class="line">      public int age;</span><br><span class="line">      public Date birthDate;</span><br><span class="line">      public String school;</span><br><span class="line">      public String getInfo()  </span><br><span class="line">     &#123;...&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/05/29/5cee10072df5363871.jpg" alt></p>
+<p><img src="https://i.loli.net/2019/05/29/5cee10073975322106.jpg" alt></p>
+<h3 id="2-为什么要继承"><a href="#2-为什么要继承" class="headerlink" title="2 为什么要继承"></a>2 为什么要继承</h3><ul>
+<li>多个类中存在相同属性和行为时，将这些内容抽取到单独一个类中，那么多个类无需再定义这些属性和行为，只要继承那个类即可。</li>
+<li>此处的多个类称为子类，单独的这个类称为父类（基类或超类）。可以理解为:“子类 is a 父类”</li>
+</ul>
+<blockquote>
+<p>当一个类和另外一个类的属性和方法完全相同, 并且同时又比另一个类多一些特有的属性和方法时, 前者就可以作成后者的子类, 子类继承父类的所有成员, 这样, 在子类中就可以省略从父类继承的成员, 便于代码的复用, 以及更统一的类型管理.</p>
+</blockquote>
+<h3 id="3-继承语法"><a href="#3-继承语法" class="headerlink" title="3 继承语法"></a>3 继承语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class 子类 extends 父类 &#123;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>从语法意思来看, 子类是扩展自父类, 也可以理解为子类是在以父类为基础的前提下, 进一步扩展一些属性和方法, 所以子类大于父类, 或者也可以说, 子类包含父类.</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/05/29/5cee10000331989402.jpg" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">      public String name;</span><br><span class="line">      public int age;</span><br><span class="line">      public Date birthDate;</span><br><span class="line">      public String getInfo() &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Student extends Person&#123;</span><br><span class="line">      public String school;</span><br><span class="line">&#125;</span><br><span class="line">//Student类继承了父类Person的所有属性和方法，并增加了一个属性school。</span><br><span class="line">//Person中的属性和方法,Student都可以使用。</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/05/29/5cee0fffe959515357.jpg" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529125920.png" alt></p>
+<h3 id="4-继承的特点"><a href="#4-继承的特点" class="headerlink" title="4 继承的特点"></a>4 继承的特点</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529125953.png" alt></p>
+<p>①子类继承父类的所有成员(构造器除外), 就意味着父类的私有成员也会被子类继承, 但是因为私有成员只能被本类访问, 所以即使是在子类中也不能直接访问从父类继承的私有成员, 可以通过从父类继承的公共的get/set方法间接访问.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">      private String name;</span><br><span class="line">      private int age;</span><br><span class="line">      private Date birthDate;</span><br><span class="line">      </span><br><span class="line">      public void setName(String name) &#123;</span><br><span class="line">          this.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">      public String getInfo() &#123;...&#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Student extends Person&#123;</span><br><span class="line">      public String school;</span><br><span class="line">      public void test() &#123;</span><br><span class="line">          //name = “小明”; // 不可以, 因为是私有的</span><br><span class="line">          setName(“小明”);// 可以, 通过公共方法间接访问</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>②单继承</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529130433.png" alt></p>
+<blockquote>
+<p>在继承关系中, 一个类Person可以被另外的类Soldier和Student和Officer继承, 然后Student又被Graduate类继承, 这是允许的, 在这样的体系中, Graduate类也称为Person类的子类, Person类也称为Graduate类的父类, 这样的继承我们称之为多层继承. 在这样的体系中, Student类称为Graduate类的直接父类, 显然地, Person类称为Graduate类的间接父类, 在java中, 多层继承是被允许的.<br>Java中不允许的多继承是指多重继承, 也就是说一个类不允许有多个直接父类, 间接父类并没有个数限制. 称之为单继承.</p>
+</blockquote>
+<h2 id="6-6-2方法覆盖-override"><a href="#6-6-2方法覆盖-override" class="headerlink" title="6.6.2方法覆盖(override)"></a>6.6.2方法覆盖(override)</h2><h3 id="1-什么是方法覆盖"><a href="#1-什么是方法覆盖" class="headerlink" title="1. 什么是方法覆盖"></a>1. 什么是方法覆盖</h3><p>定义：</p>
+<ul>
+<li>在子类中可以根据需要对从父类中继承来的方法进行改造，</li>
+<li><p>也称方法的重写、重置。在程序执行时，子类的方法将覆盖父类的方法。<br>要求：</p>
+</li>
+<li><p>覆盖方法必须和被重写方法具有相同的方法名称、参数列表和返回值类型。</p>
+</li>
+<li>覆盖方法不能使用比被重写方法更严格的访问权限。</li>
+<li>覆盖和被覆盖的方法必须同时为非static的。</li>
+<li>子类方法抛出的异常不能大于父类被重写方法的异常</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line"></span><br><span class="line">	public String name;</span><br><span class="line">	public int age;</span><br><span class="line">	public String getInfo() &#123;</span><br><span class="line">		return &quot;Name: &quot;+ name + &quot;\n&quot; +&quot;age: &quot;+ age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Student extends Person &#123;</span><br><span class="line"></span><br><span class="line">	public String school;</span><br><span class="line">	int age;</span><br><span class="line">	</span><br><span class="line">	public String getInfo() &#123;       //重写方法</span><br><span class="line">		return  &quot;Name: &quot;+ name + &quot;\nage: &quot;+ age + &quot;\nschool: &quot;+ school;</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	public static void main(String args[])&#123;</span><br><span class="line">		Student s1=new Student();</span><br><span class="line">		s1.name=&quot;Bob&quot;;</span><br><span class="line">		s1.age=20;</span><br><span class="line">		s1.school=&quot;school2&quot;;</span><br><span class="line">		System.out.println(s1.getInfo());   //Name:Bob  age:20  school:school2 执行的是子类重写过的方法</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-为什么要方法覆盖"><a href="#2-为什么要方法覆盖" class="headerlink" title="2.为什么要方法覆盖"></a>2.为什么要方法覆盖</h3><blockquote>
+<p>有的时候子类继承的父类方法并不能满足子类的需要, 而方法名称又要保持一致, 此时用到方法覆盖.</p>
+</blockquote>
+<h3 id="3-方法覆盖的特殊性"><a href="#3-方法覆盖的特殊性" class="headerlink" title="3. 方法覆盖的特殊性"></a>3. 方法覆盖的特殊性</h3><blockquote>
+<p>子类一旦把父类的方法覆盖, 那么在测试类中再无法通过子类对象调用父类的被覆盖方法了, 因为子类已经把父类的方法重写了, 如果有调用父类方法的需求, 只能通过再创建一个父类对象来调用.</p>
+</blockquote>
+<h3 id="4-Override注解的使用"><a href="#4-Override注解的使用" class="headerlink" title="4. @Override注解的使用"></a>4. @Override注解的使用</h3><blockquote>
+<p>有的时候, 在子类中写重写方法时, 容易出现一些低级的拼写错误, 或其他错误, 导致方法不能正确覆盖时, 程序的运行就会出乎意外, 所以为了防止这种现象, 在子类的覆盖方法上添加修饰符@Override注解.</p>
+<ul>
+<li>注解 : 本质上一种类, 也是一种特殊的注释, 所以一般情况下,  程序不执行注解, 但是会被编译器, 运行时所识别和处理(通过反射的方式).注解也有很多.</li>
+<li>@Override注解的作用是告诉编译器, 在编译程序时, 必须先检查此方法是否满足方法覆盖的条件, 如果不满足, 则编译出错, 这样强制程序员通过排查, 提前检查方法覆盖的问题.</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class Student extends Person &#123;</span><br><span class="line"></span><br><span class="line">	public String school;</span><br><span class="line">	int age;</span><br><span class="line">	</span><br><span class="line">    @Override // 加上注解, 也能提高代码可读性</span><br><span class="line">	public String getInfo() &#123;       //重写方法</span><br><span class="line">		return  &quot;Name: &quot;+ name + &quot;\nage: &quot;+ age + &quot;\nschool: &quot;+ school;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-6-3-四种访问权限"><a href="#6-6-3-四种访问权限" class="headerlink" title="6.6.3 四种访问权限"></a>6.6.3 四种访问权限</h2><h3 id="1-为什么需要访问权限"><a href="#1-为什么需要访问权限" class="headerlink" title="1  为什么需要访问权限"></a>1  为什么需要访问权限</h3><p>有的时候, 类中的一些成员需要控制可以被哪些范围的其他类所访问, 就可以使用访问控制修饰符来控制.</p>
+<h3 id="2-访问权限"><a href="#2-访问权限" class="headerlink" title="2  访问权限"></a>2  访问权限</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529130828.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529130846.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529130939.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Parent&#123;</span><br><span class="line">        private int f1 = 1;</span><br><span class="line">        int f2 = 2;</span><br><span class="line">        protected  int f3 = 3;</span><br><span class="line">        public  int f4 = 4;</span><br><span class="line">        private  void  fm1() &#123;System.out.println(&quot;in fm1() f1=&quot; + f1);&#125;</span><br><span class="line">        void fm2() &#123;System.out.println(&quot;in fm2() f2=&quot; + f2);&#125;</span><br><span class="line">        protected  void  fm3() &#123;System.out.println(&quot;in fm3() f3=&quot; + f3);&#125;</span><br><span class="line">        public void fm4() &#123;System.out.println(&quot;in fm4() f4=&quot; + f4);&#125;	</span><br><span class="line">&#125;</span><br><span class="line">class Child extends Parent&#123;               //设父类和子类在同一个包内</span><br><span class="line">	private int c1 = 21;</span><br><span class="line">	public  int c2 = 22;	 </span><br><span class="line">	private void cm1()&#123;System.out.println(&quot;in cm1() c1=&quot; + c1);&#125;</span><br><span class="line">	public  void cm2()&#123;System.out.println(&quot;in cm2() c2=&quot; + c2);&#125;</span><br><span class="line">	public static void main(String args[])&#123;</span><br><span class="line">		int i; </span><br><span class="line">		Parent  p = new Parent();</span><br><span class="line">		// i = p1.f1; // 不可以访问其他类的私有成员</span><br><span class="line">		i = p.f2;//	i = p.f3;	i = p.f4;	p.fm2();//	p.fm3();	p.fm4();		</span><br><span class="line">		Child  c = new Child();</span><br><span class="line">		i = c.f2;	        //	i = c.f3;		i = c.f4;		</span><br><span class="line">		i = c.c1;	        //	i = c.c2;</span><br><span class="line">		//c.fm1(); // 不能访问</span><br><span class="line">		c.cm1();        // c.cm2(); c.fm2(); c.fm3(); c.fm4() 都能访问</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-访问权限的使用注意"><a href="#3-访问权限的使用注意" class="headerlink" title="3. 访问权限的使用注意"></a>3. 访问权限的使用注意</h3><p>protected是被保护的, 容易从字面意思理解成它的范围会比较小, 但是其实被protected修饰的成员的访问范围是仅次于public的, 所以要小心.</p>
+<h1 id="6-7-super关键字"><a href="#6-7-super关键字" class="headerlink" title="6.7 super关键字"></a>6.7 super关键字</h1><h2 id="6-7-1-super关键字含义"><a href="#6-7-1-super关键字含义" class="headerlink" title="6.7.1 super关键字含义"></a>6.7.1 super关键字含义</h2><h3 id="1-super关键字"><a href="#1-super关键字" class="headerlink" title="1. super关键字"></a>1. super关键字</h3><p>作用：</p>
+<ul>
+<li>在Java类中使用super来调用父类中的指定操作：</li>
+<li>super可用于访问父类中定义的属性</li>
+<li>super可用于调用父类中定义的成员方法</li>
+<li><p>super可用于在子类构造方法中调用父类的构造器<br>注意：</p>
+</li>
+<li><p>尤其当子父类出现同名成员时，可以用super进行区分</p>
+</li>
+<li>super的追溯不仅限于直接父类</li>
+<li>super和this的用法相像，this代表本类对象的引用，super代表父类的内存空间的标识</li>
+<li>super关键字表示在当前类中特别指定要使用父类的成员时使用super限定.</li>
+<li>这里的父类不仅包括直接父类, 也包括间接父类.</li>
+</ul>
+<h2 id="6-7-2-super使用场景"><a href="#6-7-2-super使用场景" class="headerlink" title="6.7.2 super使用场景"></a>6.7.2 super使用场景</h2><h3 id="1-方法中使用"><a href="#1-方法中使用" class="headerlink" title="1. 方法中使用"></a>1. 方法中使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line"></span><br><span class="line">	protected String name=&quot;张三&quot;;</span><br><span class="line">protected int age;</span><br><span class="line"></span><br><span class="line">	public String getInfo() &#123;</span><br><span class="line">         return “Name: ” + name + “\nage: ” + age; </span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Student extends Person &#123;</span><br><span class="line"></span><br><span class="line">    protected String name = &quot;李四&quot;;</span><br><span class="line">	private String school = &quot;New Oriental&quot;;</span><br><span class="line"></span><br><span class="line">	public String getSchool()&#123; </span><br><span class="line">return school; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">public String getInfo() &#123;</span><br><span class="line">        return super.getInfo() +&quot;\nschool: &quot; +school; </span><br><span class="line">// 在方法中使用super可以调用父类中的被覆盖方法</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line">public class TestStudent&#123;</span><br><span class="line">	public static void main(String[] args)&#123;</span><br><span class="line">		Student st = new Student();</span><br><span class="line">		System.out.println(st.getInfo());</span><br><span class="line">	&#125; &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-构造器中使用"><a href="#2-构造器中使用" class="headerlink" title="2. 构造器中使用"></a>2. 构造器中使用</h3><p>①    子类中所有的构造器默认都会访问父类中空参数的构造器<br>②    当父类中没有空参数的构造器时，子类的构造器必须通过this(参数列表)或者super(参数列表)语句指定调用本类或者父类中相应的构造器，且必须放在构造器的第一行<br>③    如果子类构造器中既未显式调用父类或本类的构造器，且父类中又没有无参的构造器，则编译出错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line"></span><br><span class="line">	private String name;</span><br><span class="line">	private int age;</span><br><span class="line">	private Date birthDate;	</span><br><span class="line">	</span><br><span class="line">	public Person(String name, int age, Date d) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.birthDate = d;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Person(String name, int age) &#123;</span><br><span class="line">		this(name, age, null);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Person(String name, Date d) &#123;</span><br><span class="line">		this(name, 30, d);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Person(String name) &#123;</span><br><span class="line">		this(name, 30);</span><br><span class="line">	&#125;</span><br><span class="line">	// ……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Student extends Person &#123;</span><br><span class="line">	private String school;</span><br><span class="line"></span><br><span class="line">	public Student(String name, int age, String s) &#123;</span><br><span class="line">		super(name, age); // 直接显式调用父类有参构造器</span><br><span class="line">		school = s;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Student(String name, String s) &#123;</span><br><span class="line">		super(name); // 直接显式调用父类有参构造器</span><br><span class="line">		school = s;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public Student(String s) &#123; // 直接隐式调用父类无参构造器</span><br><span class="line">		school = s;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-7-3子类对象实例化过程"><a href="#6-7-3子类对象实例化过程" class="headerlink" title="6.7.3子类对象实例化过程"></a>6.7.3子类对象实例化过程</h2><ol>
+<li>执行顺序</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529131237.png" alt></p>
+<h2 id="6-7-4-super和this的区别"><a href="#6-7-4-super和this的区别" class="headerlink" title="6.7.4 super和this的区别"></a>6.7.4 super和this的区别</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529141052.png" alt></p>
+<h1 id="6-8-基本特征三-多态"><a href="#6-8-基本特征三-多态" class="headerlink" title="6.8 基本特征三 多态"></a>6.8 基本特征三 多态</h1><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190529141154.png" alt></p>
+<h2 id="6-8-1-什么是多态"><a href="#6-8-1-什么是多态" class="headerlink" title="6.8.1 什么是多态"></a>6.8.1 什么是多态</h2><h3 id="1-本态"><a href="#1-本态" class="headerlink" title="1. 本态"></a>1. 本态</h3><p>一个对象的本类形态就是本态.</p>
+<h3 id="2-多态"><a href="#2-多态" class="headerlink" title="2. 多态"></a>2. 多态</h3><p>一个对象的多种父类形态就是多态</p>
+<h2 id="6-8-2多态的使用"><a href="#6-8-2多态的使用" class="headerlink" title="6.8.2多态的使用"></a>6.8.2多态的使用</h2><h3 id="1-多态引用"><a href="#1-多态引用" class="headerlink" title="1. 多态引用"></a>1. 多态引用</h3><p>  将子类对象赋值于父类类型的引用变量就是多态引用, 在这里对象其实还是子类对象, 只不过是被看作是一个父类类型的对象.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person person = new Student();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>多态性，是面向对象中最重要的概念，在java中有两种体现：<ol>
+<li>方法的重载(overload)和重写(overwrite)。</li>
+<li>对象的多态性   ——可以直接应用在抽象类和接口上。</li>
+</ol>
+</li>
+<li><p>Java引用变量有两个类型：编译时类型和运行时类型。编译时类型由声明该变量时使用的类型决定，运行时类型由实际赋给该变量的对象决定。</p>
+</li>
+<li><p>注意：若编译时类型和运行时类型不一致，就出现多态（Polymorphism）</p>
+</li>
+</ul>
+<h3 id="2-多态带来的问题"><a href="#2-多态带来的问题" class="headerlink" title="2 多态带来的问题"></a>2 多态带来的问题</h3><ul>
+<li>一个引用类型变量如果声明为父类的类型，但实际引用的是子类对象，那么该变量就不能再访问子类中添加的属性和方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Student m = new Student();</span><br><span class="line">m.school = “pku”; 	//合法,Student类有school成员变量</span><br><span class="line">Person e = new Student(); </span><br><span class="line">e.school = “pku”;	//非法,Person类没有school成员变量</span><br></pre></td></tr></table></figure>
+<pre><code>属性是在编译时确定的，编译时e为Person类型，没有school成员变量，
+</code></pre><p>因而编译错误。</p>
+<h2 id="6-8-3虚拟方法调用-Virtual-Method-Invocation"><a href="#6-8-3虚拟方法调用-Virtual-Method-Invocation" class="headerlink" title="6.8.3虚拟方法调用(Virtual Method Invocation)"></a>6.8.3虚拟方法调用(Virtual Method Invocation)</h2><h3 id="1-什么是虚拟方法"><a href="#1-什么是虚拟方法" class="headerlink" title="1. 什么是虚拟方法"></a>1. 什么是虚拟方法</h3><p>  正常的方法调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> 		Person e = new Person();</span><br><span class="line">		e.getInfo();</span><br><span class="line">		Student e = new Student();</span><br><span class="line"> 		e.getInfo();</span><br><span class="line">虚拟方法调用(多态情况下)：</span><br><span class="line">			Person e = new Student();</span><br><span class="line">  		e.getInfo();	//调用Student类的getInfo()方法</span><br></pre></td></tr></table></figure>
+<p>  编译时类型和运行时类型：</p>
+<p>  编译时e为Person类型，而方法的调用是在运行时确定的，所以调用的是Student类的getInfo()方法。<br>  ——动态绑定</p>
+<h3 id="2-多态小结"><a href="#2-多态小结" class="headerlink" title="2. 多态小结"></a>2. 多态小结</h3><pre><code>前提：
+
+  需要存在继承或者实现关系
+要有覆盖操作
+
+  成员方法：
+
+编译时：要查看引用变量所属的类中是否有所调用的方法。
+(编译时检查父类类型)
+运行时：调用实际对象所属的类中的重写方法。
+
+(运行时执行子类类型)
+
+成员变量：
+
+不具备多态性，只看引用变量所属的类。
+</code></pre><h2 id="6-8-4多态的应用场景"><a href="#6-8-4多态的应用场景" class="headerlink" title="6.8.4多态的应用场景"></a>6.8.4多态的应用场景</h2><h3 id="1-多态数组"><a href="#1-多态数组" class="headerlink" title="1. 多态数组"></a>1. 多态数组</h3><p>   当创建多个不同的子类对象, 而又想统一处理这批对象时, 就可以使用多态数组.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person[] arr = &#123;new Student(), new Teacher()&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;  </span><br><span class="line">	</span><br><span class="line">	private String name;</span><br><span class="line">	private int age;</span><br><span class="line">	private String gender;</span><br><span class="line">		</span><br><span class="line">	public Person(String name, int age, String gender) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">		this.age = age;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setAge(int age) &#123;</span><br><span class="line">		this.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public int getAge() &#123;</span><br><span class="line">		return age;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setGender(String gender) &#123;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getGender() &#123;</span><br><span class="line">		return gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return &quot;姓名:&quot; + name + &quot;,年龄:&quot; + age + &quot;,性别:&quot; + gender;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void sayHello() &#123;</span><br><span class="line">		System.out.println(&quot;打个招呼&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class Chinese extends Person &#123;</span><br><span class="line">	</span><br><span class="line">	private String shuxiang;</span><br><span class="line">	</span><br><span class="line">	public Chinese(String name, int age, String gender, String shuxiang) &#123;</span><br><span class="line">		super(name, age, gender); </span><br><span class="line">		this.shuxiang = shuxiang;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setShuxiang(String shuxiang) &#123;</span><br><span class="line">		this.shuxiang = shuxiang;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public String getShuxiang() &#123;</span><br><span class="line">		return shuxiang;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void spring() &#123;</span><br><span class="line">		System.out.println(&quot;过大年&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public String say() &#123;</span><br><span class="line">		return super.say() + &quot;,属相:&quot; + shuxiang;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public void sayHello() &#123;</span><br><span class="line">		System.out.println(&quot;吃了吗?&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public class American extends Person &#123;</span><br><span class="line">	</span><br><span class="line">	private boolean hasGun;</span><br><span class="line">	</span><br><span class="line">	public American() &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	public American(String name, int age, String gender, boolean hasGun) &#123;</span><br><span class="line">		super(name, age, gender);</span><br><span class="line">		this.hasGun = hasGun;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void setHasGun(boolean hasGun) &#123;</span><br><span class="line">		this.hasGun = hasGun;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public boolean isHasGun() &#123;</span><br><span class="line">		return hasGun;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void christmas() &#123;</span><br><span class="line">		System.out.println(&quot;Merry Christmas!!&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	@Override</span><br><span class="line">	public void sayHello() &#123;</span><br><span class="line">		System.out.println(&quot;How are you?&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class PersonTest &#123;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Person[] ps = new Person[5]; // 多态数组, 可以保存任意类型的子类对象</span><br><span class="line">		ps[0] = new Chinese(&quot;张三&quot;, 30, &quot;男&quot;, &quot;牛&quot;);</span><br><span class="line">		ps[1] = new American(&quot;Jack&quot;, 25, &quot;male&quot;, true);</span><br><span class="line">		ps[2] = new Person(&quot;某人&quot;, 15, &quot;未知&quot;);</span><br><span class="line">		ps[3] = new American(&quot;Rose&quot;, 32, &quot;female&quot;, false);</span><br><span class="line">		ps[4] = new Chinese(&quot;李四&quot;, 40, &quot;女&quot;, &quot;羊&quot;);</span><br><span class="line">		</span><br><span class="line">		for (Person p : ps) &#123;</span><br><span class="line">			System.out.println(p.say());</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;-------------------------&quot;);</span><br><span class="line">        // 因为在同一个数组中, 并且所有对象都有age属性, 所以就可以对所有元素进行冒泡排序</span><br><span class="line">		for (int i = 0; i &lt; ps.length - 1; i++) &#123;</span><br><span class="line">			for (int j = 0; j &lt; ps.length - 1 - i; j++) &#123;</span><br><span class="line">				if (ps[j].getAge() &gt; ps[j + 1].getAge()) &#123;</span><br><span class="line">					Person tmp = ps[j];</span><br><span class="line">					ps[j] = ps[j + 1];</span><br><span class="line">					ps[j + 1] = tmp;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		for (Person p : ps) &#123;</span><br><span class="line">			System.out.println(p.say());</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-多态参数"><a href="#2-多态参数" class="headerlink" title="2. 多态参数"></a>2. 多态参数</h3><blockquote>
+<p>在设计方法时, 有的方法内部需要用到另外的类的对象, 但是在设计方法时, 又不需要关心究竟是哪个对象, 只关心这些实参对象都是某个类型的, 此时, 方法的参数的类型就可以写成父类类型的参数,这样的方法的参数就是多态参数.</p>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>p) &#123;</span><a href="//">这个方法的参数p的具体类型未知</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">    System.out.println(p.say());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main() &#123;</span><br><span class="line">test(new Chinese()); // 在实际调用多态参数方法时, 可以传入任意本类或子类类型的对象</span><br><span class="line">test(new American());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>x instanceof A：检验x是否为类A的对象，返回值为boolean型。</strong></p>
+<ul>
+<li>要求x所属的类与类A必须是子类和父类的关系，否则编译错误。</li>
+<li>如果x属于类A的子类B，x instanceof  A值也为true。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class Person extends Object &#123;…&#125;</span><br><span class="line">public class Student extends Person &#123;…&#125;</span><br><span class="line">public class Graduate extends Person &#123;…&#125;</span><br><span class="line">-------------------------------------------------------------------</span><br><span class="line">public void method1(Person e) &#123;</span><br><span class="line">	if (e instanceof Person) </span><br><span class="line">		// 处理Person类及其子类对象</span><br><span class="line">	if (e instanceof Student) </span><br><span class="line">		//处理Student类及其子类对象</span><br><span class="line">	if (e instanceof Graduate)</span><br><span class="line">		//处理Graduate类及其子类对象</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-对象类型转换-Casting"><a href="#3-对象类型转换-Casting" class="headerlink" title="3 对象类型转换(Casting)"></a>3 对象类型转换(Casting)</h3><ul>
+<li><p>基本数据类型的Casting：</p>
+<ul>
+<li>自动类型转换：小的数据类型可以自动转换成大的数据类型<br><code>如long g=20;   double d=12.0f</code></li>
+<li>强制类型转换：可以把大的数据类型强制转换(casting)成小的数据类型<pre><code>` 如 float f=(float)12.0;   int a=(int)1200L
+</code></pre></li>
+</ul>
+</li>
+<li><p>对Java对象的强制类型转换称为造型</p>
+</li>
+</ul>
+<ul>
+<li>从子类到父类的类型可以自动进行</li>
+<li>从父类到子类的类型转换必须通过造型(强制类型转换)实现</li>
+<li>无继承关系的引用类型间的转换是非法的</li>
+<li>在造型前可以使用instanceof操作符测试一个对象的类型</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190530094040.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class PersonTest5 &#123;</span><br><span class="line">	</span><br><span class="line">	public static void test(Person p) &#123; // 多态参数, 提高了兼容性!!</span><br><span class="line">		p.sayHello(); //方法中父类中定义,所以直接调用,		</span><br><span class="line">		//p.spring(); // 多态副作用, 子类特有成员不能访问</span><br><span class="line">		// 必须对对象的真实身份进行检测 </span><br><span class="line">		if (p instanceof Chinese) &#123; // 造型有风险, 使用须谨慎!!!</span><br><span class="line">			Chinese ch = (Chinese)p; // 造型: 对象是什么类型还原成什么类型</span><br><span class="line">			ch.spring(); // 子类特有的成员的访问,必须要经过造型.</span><br><span class="line">		&#125; else if (p instanceof American) &#123;</span><br><span class="line">			((American)p).christmas();</span><br><span class="line">		&#125; else if (p instanceof Person)&#123;</span><br><span class="line">			System.out.println(&quot;普通人一枚&quot;);	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Person[] ps = new Person[5]; // 多态数组, 可以保存任意类型的子类对象</span><br><span class="line">		Chinese c1 = new Chinese(&quot;张三&quot;, 30, &quot;男&quot;, &quot;牛&quot;);</span><br><span class="line">		American a1  = new American(&quot;Jack&quot;, 25, &quot;male&quot;, true);</span><br><span class="line">		Person p1 = new Person(&quot;某人&quot;, 15, &quot;未知&quot;);</span><br><span class="line">		American a2 = new American(&quot;Rose&quot;, 32, &quot;female&quot;, false);</span><br><span class="line">		Chinese c2 = new Chinese(&quot;李四&quot;, 40, &quot;女&quot;, &quot;羊&quot;);</span><br><span class="line">		ps[0] = c1;</span><br><span class="line">		ps[1] = a1;</span><br><span class="line">		ps[2] = p1;</span><br><span class="line">		ps[3] = a2;</span><br><span class="line">		ps[4] = c2;</span><br><span class="line">		</span><br><span class="line">		System.out.println(&quot;-------------------------&quot;);</span><br><span class="line">		for (Person p : ps) &#123;</span><br><span class="line">			test(p); // 不同的子类对象作为实参调用方法, 方法的执行也不一样.</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/09/06/5. JavaSE-面向对象基础/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/10/28/7. JavaSE-面向对象高级特性/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

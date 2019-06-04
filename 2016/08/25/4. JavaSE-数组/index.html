@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>4. JavaSE-数组 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java SE,">
+  
+
+  <meta name="description" content="4.1 数组的特点和好处4.1.1 数组的特点1、数组存储的是相同类型的一组元素 1double[] arr = &amp;#123;1.6,2.3,1,2,&amp;apos;a&amp;apos;&amp;#125;; 2、数组的定义类型可以是任意类型，包含基本类型或引用类型1234String[] arr = &amp;#123;&amp;quot;john&amp;quot;,&amp;quot;lucy&amp;quot;&amp;#125;;Person[] ar">
+<meta name="keywords" content="Java SE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4. JavaSE-数组">
+<meta property="og:url" content="http://yoursite.com/2016/08/25/4. JavaSE-数组/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="4.1 数组的特点和好处4.1.1 数组的特点1、数组存储的是相同类型的一组元素 1double[] arr = &amp;#123;1.6,2.3,1,2,&amp;apos;a&amp;apos;&amp;#125;; 2、数组的定义类型可以是任意类型，包含基本类型或引用类型1234String[] arr = &amp;#123;&amp;quot;john&amp;quot;,&amp;quot;lucy&amp;quot;&amp;#125;;Person[] ar">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://i.loli.net/2019/05/27/5ceba4934773730896.jpg">
+<meta property="og:updated_time" content="2019-06-04T01:22:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4. JavaSE-数组">
+<meta name="twitter:description" content="4.1 数组的特点和好处4.1.1 数组的特点1、数组存储的是相同类型的一组元素 1double[] arr = &amp;#123;1.6,2.3,1,2,&amp;apos;a&amp;apos;&amp;#125;; 2、数组的定义类型可以是任意类型，包含基本类型或引用类型1234String[] arr = &amp;#123;&amp;quot;john&amp;quot;,&amp;quot;lucy&amp;quot;&amp;#125;;Person[] ar">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/27/5ceba4934773730896.jpg">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#4-1-数组的特点和好处"><span class="toc-text">4.1 数组的特点和好处</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-1-数组的特点"><span class="toc-text">4.1.1 数组的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-2-数组的好处"><span class="toc-text">4.1.2 数组的好处</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-2-数组的语法和使用步骤"><span class="toc-text">4.2 数组的语法和使用步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-1-动态初始化"><span class="toc-text">4.2.1 动态初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-2-静态初始化"><span class="toc-text">4.2.2 静态初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-3-使用注意事项"><span class="toc-text">4.2.3 使用注意事项</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-3-数组的使用"><span class="toc-text">4.3 数组的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-1-正序打印"><span class="toc-text">4.3.1 正序打印</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-2-逆序打印"><span class="toc-text">4.3.2 逆序打印</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-3-求和、平均值"><span class="toc-text">4.3.3 求和、平均值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-4-求最值"><span class="toc-text">4.3.4 求最值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-5-查找"><span class="toc-text">4.3.5 查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-6-排序"><span class="toc-text">4.3.6 排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-7赋值"><span class="toc-text">4.3.7赋值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-4二维数组"><span class="toc-text">4.4二维数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-1-特点"><span class="toc-text">4.4.1 特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-2-使用步骤"><span class="toc-text">4.4.2 使用步骤</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-4. JavaSE-数组" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">4. JavaSE-数组</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.08.25</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaSE基础笔记/">JavaSE基础笔记</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="4-1-数组的特点和好处"><a href="#4-1-数组的特点和好处" class="headerlink" title="4.1 数组的特点和好处"></a>4.1 数组的特点和好处</h1><h2 id="4-1-1-数组的特点"><a href="#4-1-1-数组的特点" class="headerlink" title="4.1.1 数组的特点"></a>4.1.1 数组的特点</h2><p>1、数组存储的是相同类型的一组元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double[] arr = &#123;1.6,2.3,1,2,&apos;a&apos;&#125;;</span><br></pre></td></tr></table></figure>
+<p>2、数组的定义类型可以是任意类型，包含基本类型或引用类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] arr = &#123;&quot;john&quot;,&quot;lucy&quot;&#125;;</span><br><span class="line">Person[] arr;</span><br><span class="line">int[][] arr;</span><br><span class="line">Person[][] arr;</span><br></pre></td></tr></table></figure></p>
+<p>3、数组属于引用类型，引用存储在栈中，值存储在堆中，又称为对象。</p>
+<p><img src="https://i.loli.net/2019/05/27/5ceba4934773730896.jpg" alt></p>
+<p>4、数组的成员如果不赋值，有默认值。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">byte/short/int/long——&gt;0</span><br><span class="line">    float/double——&gt;0.0</span><br><span class="line">    char——&gt;\u0000</span><br><span class="line">    boolean——&gt;false</span><br><span class="line">    String——&gt;null</span><br></pre></td></tr></table></figure>
+<p>5、数组的四要素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据类型、标识符、元素、下标（0——数组名.length-1）</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-1-2-数组的好处"><a href="#4-1-2-数组的好处" class="headerlink" title="4.1.2 数组的好处"></a>4.1.2 数组的好处</h2><p>说明：相当于用于保存一组元素的容器<br>好处：<br>1、提高代码的简洁性和扩展性，且同时开辟多个空间，提高了效率<br>2、分类存储，且空间是连续的，容易查找</p>
+<h1 id="4-2-数组的语法和使用步骤"><a href="#4-2-数组的语法和使用步骤" class="headerlink" title="4.2 数组的语法和使用步骤"></a>4.2 数组的语法和使用步骤</h1><h2 id="4-2-1-动态初始化"><a href="#4-2-1-动态初始化" class="headerlink" title="4.2.1 动态初始化"></a>4.2.1 动态初始化</h2><p>针对题型：声明时不确定值是什么<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">步骤1、声明</span><br><span class="line">数据类型[] 数组名;或</span><br><span class="line">数据类型 数组名[];</span><br><span class="line"></span><br><span class="line">步骤2、开辟空间</span><br><span class="line">数组名 = new 数据类型[长度];//长度不能省略</span><br><span class="line"></span><br><span class="line">步骤3、赋值</span><br><span class="line">方式一：一个个赋值</span><br><span class="line">数组名[下标] = 值;</span><br><span class="line">方式二：循环赋值</span><br><span class="line">for(int i=0;i&lt;数组名.length;i++)&#123;</span><br><span class="line">	数组名[i] = 值;</span><br><span class="line">&#125;</span><br><span class="line">步骤4、使用</span><br><span class="line">System.out.println(数组名[下标]);</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-2-2-静态初始化"><a href="#4-2-2-静态初始化" class="headerlink" title="4.2.2 静态初始化"></a>4.2.2 静态初始化</h2><p>针对题型：声明时就知道值是什么<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">步骤1、声明并初始化</span><br><span class="line">数据类型 数组名[] = new 数据类型[]&#123;值，值，值&#125;;或</span><br><span class="line">数据类型[] 数组名 = &#123;值，值，值&#125;;</span><br><span class="line">步骤2、使用</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-2-3-使用注意事项"><a href="#4-2-3-使用注意事项" class="headerlink" title="4.2.3 使用注意事项"></a>4.2.3 使用注意事项</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">①数组的下标：0——arr.length-1,如果超出范围，</span><br><span class="line">则报ArrayIndexOutOfBoundsException</span><br><span class="line">②数组的成员如果不手动赋值，也有默认值</span><br><span class="line">int——0</span><br><span class="line">double——0.0</span><br><span class="line">char——\u0000</span><br><span class="line">boolean——false</span><br><span class="line">引用类型——null</span><br></pre></td></tr></table></figure>
+<h1 id="4-3-数组的使用"><a href="#4-3-数组的使用" class="headerlink" title="4.3 数组的使用"></a>4.3 数组的使用</h1><h2 id="4-3-1-正序打印"><a href="#4-3-1-正序打印" class="headerlink" title="4.3.1 正序打印"></a>4.3.1 正序打印</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;arr.length;i++)&#123;</span><br><span class="line">   System.out.println(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-2-逆序打印"><a href="#4-3-2-逆序打印" class="headerlink" title="4.3.2 逆序打印"></a>4.3.2 逆序打印</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for(int i=arr.length-1;i&gt;=0;i--)&#123;</span><br><span class="line"></span><br><span class="line">   System.out.println(arr[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-3-求和、平均值"><a href="#4-3-3-求和、平均值" class="headerlink" title="4.3.3 求和、平均值"></a>4.3.3 求和、平均值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int sum = 0;</span><br><span class="line">for(int i=0;i&lt;arr.length;i++)&#123;</span><br><span class="line">  sum+=arr[i];</span><br><span class="line">&#125;</span><br><span class="line">sum:和  aum/arr.length平均值</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-4-求最值"><a href="#4-3-4-求最值" class="headerlink" title="4.3.4 求最值"></a>4.3.4 求最值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int max = arr[0];</span><br><span class="line">int indexMax = 0;</span><br><span class="line">int min = arr[0];</span><br><span class="line">int indexMin = 0;</span><br><span class="line"></span><br><span class="line">for(int i=1;i&lt;arr.length;i++)&#123;</span><br><span class="line">   if(arr[i]&gt;max)&#123;</span><br><span class="line">     max = arr[i];</span><br><span class="line">     indexMax = i;</span><br><span class="line">   &#125;</span><br><span class="line">   if(arr[i]&lt;min)&#123;</span><br><span class="line">     min = arr[i];</span><br><span class="line">     indexMin = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>max:最大值<br>min：最小值</p>
+<h2 id="4-3-5-查找"><a href="#4-3-5-查找" class="headerlink" title="4.3.5 查找"></a>4.3.5 查找</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int index=-1;</span><br><span class="line">for(int i=0;i&lt;arr.length;i++)&#123;</span><br><span class="line"></span><br><span class="line">  if(arr[i]==带查找的元素)&#123;</span><br><span class="line">       index = i;</span><br><span class="line">       break;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">if(index==-1)&#123;//没找到&#125;else&#123;找到了&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-6-排序"><a href="#4-3-6-排序" class="headerlink" title="4.3.6 排序"></a>4.3.6 排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;arr.length-1;i++)&#123;</span><br><span class="line">  for(int j=0;j&lt;arr.length-1-i;j++)&#123;</span><br><span class="line"></span><br><span class="line">     if(arr[j]&gt;arr[j+1])&#123;</span><br><span class="line">       int t = arr[j];</span><br><span class="line">       arr[j] = arr[j+1];</span><br><span class="line">       arr[j+1]=t;</span><br><span class="line">  &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3-7赋值"><a href="#4-3-7赋值" class="headerlink" title="4.3.7赋值"></a>4.3.7赋值</h2><p>特点：</p>
+<ul>
+<li>基本类型变量的赋值：赋的是值，其中一个更改不影响另外一个</li>
+<li>引用类型变量的赋值：赋的是地址，二者共同引用一个空间，其中一个更改影响另外一个</li>
+</ul>
+<blockquote>
+<p>如果希望赋的是值（内容），则可以采用循环赋值</p>
+<ul>
+<li>方式一：传统的使用 = 赋值<br><code>newArr = arr;</code></li>
+<li>方式二：循环赋值<br>`①创建新数组，长度=旧数组.length<br>int[] newArr = new int[arr.length];<br>②循环将旧数组的元素依次赋值给新数组的每个成员<br>for(int i=0;i&lt;newArr.length;i++){<br>  newArr[i] = arr[i];<br>}</li>
+</ul>
+</blockquote>
+<p> `</p>
+<h1 id="4-4二维数组"><a href="#4-4二维数组" class="headerlink" title="4.4二维数组"></a>4.4二维数组</h1><h2 id="4-4-1-特点"><a href="#4-4-1-特点" class="headerlink" title="4.4.1 特点"></a>4.4.1 特点</h2><ul>
+<li>二维数组本身属于也能用类型，保存的也是地址号</li>
+<li>二维数组相当于多个一维数组的组合，也就是二维数组中的每个元素又是一个一维数组</li>
+</ul>
+<h2 id="4-4-2-使用步骤"><a href="#4-4-2-使用步骤" class="headerlink" title="4.4.2 使用步骤"></a>4.4.2 使用步骤</h2><ul>
+<li>1、动态初始化</li>
+</ul>
+<p>步骤1 :声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">格式1：数据类型[][] 数组名;</span><br><span class="line">	格式2：数据类型[] 数组名[];</span><br><span class="line">格式3:数据类型 数组名[][];</span><br></pre></td></tr></table></figure></p>
+<p>步骤2:开辟空间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">格式1：固定列数</span><br><span class="line">数组名 = new 数据类型[行数][列数];</span><br><span class="line">//行数相当于二维数组的长度或一维数组的个数，列数相当于每个一维数组中的成员个数</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">格式2：不固定列数</span><br><span class="line">数组名 = new 数据类型[行数][];</span><br><span class="line">前两步可以合二为一</span><br><span class="line">语法示例：</span><br><span class="line">int[][] arr = new int[5][];</span><br></pre></td></tr></table></figure></p>
+<p>步骤3:赋值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">格式1：固定列数</span><br><span class="line">for(int i=0;i&lt;数组名.length;i++)&#123;</span><br><span class="line">   for(int j=0;j&lt;数组名[i].length;j++)&#123;</span><br><span class="line">     数组名[i][j] = 值;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">格式2：不固定列数</span><br><span class="line">for(int i=0;i&lt;数组名.length;i++)&#123;</span><br><span class="line">   数组名[i]=new 数据类型[长度];//长度不能省略！</span><br><span class="line">   for(int j=0;j&lt;数组名[i].length;j++)&#123;</span><br><span class="line">     数组名[i][j] = 值;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>步骤4、使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;数组名.length;i++)&#123;</span><br><span class="line">   for(int j=0;j&lt;数组名[i].length;j++)&#123;</span><br><span class="line">     System.out.println(数组名[i][j]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>2、静态初始化</li>
+</ul>
+<p>步骤1、声明并初始化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">数据类型[][] 数组名 =&#123;&#123;值，值&#125;,&#123;值，值，值&#125;&#125;;或</span><br><span class="line">数据类型[][] 数组名 =new 数据类型[][]&#123;&#123;值，值&#125;,&#123;值，值，值&#125;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>步骤2、使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(int i=0;i&lt;数组名.length;i++)&#123;</span><br><span class="line">   for(int j=0;j&lt;数组名[i].length;j++)&#123;</span><br><span class="line">     System.out.println(数组名[i][j]);</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/08/12/3. JavaSE-流程控制结构/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/09/06/5. JavaSE-面向对象基础/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

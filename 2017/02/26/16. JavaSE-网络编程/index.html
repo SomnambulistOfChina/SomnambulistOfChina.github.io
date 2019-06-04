@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>16. JavaSE-网络编程 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java SE,">
+  
+
+  <meta name="description" content="16.1 网络编程概述16.1.1 网络编程概述•    Java是 Internet   上的语言，它从语言级上提供了对网络应用程序的支持，程序员能够很容易开发常见的网络应用程序。•    Java提供的网络类库，可以实现无痛的网络连接，联网的底层细节被隐藏在 Java 的本机安装系统里，由 JVM 进行控制。并且 Java   实现了一个跨平台的网络库，程序员面对的是一个统一的网络编程环境。">
+<meta name="keywords" content="Java SE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="16. JavaSE-网络编程">
+<meta property="og:url" content="http://yoursite.com/2017/02/26/16. JavaSE-网络编程/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="16.1 网络编程概述16.1.1 网络编程概述•    Java是 Internet   上的语言，它从语言级上提供了对网络应用程序的支持，程序员能够很容易开发常见的网络应用程序。•    Java提供的网络类库，可以实现无痛的网络连接，联网的底层细节被隐藏在 Java 的本机安装系统里，由 JVM 进行控制。并且 Java   实现了一个跨平台的网络库，程序员面对的是一个统一的网络编程环境。">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162248.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162351.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162435.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162542.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162706.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162827.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162859.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603163320.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603163339.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603163401.png">
+<meta property="og:updated_time" content="2019-06-04T03:39:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="16. JavaSE-网络编程">
+<meta name="twitter:description" content="16.1 网络编程概述16.1.1 网络编程概述•    Java是 Internet   上的语言，它从语言级上提供了对网络应用程序的支持，程序员能够很容易开发常见的网络应用程序。•    Java提供的网络类库，可以实现无痛的网络连接，联网的底层细节被隐藏在 Java 的本机安装系统里，由 JVM 进行控制。并且 Java   实现了一个跨平台的网络库，程序员面对的是一个统一的网络编程环境。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162248.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#16-1-网络编程概述"><span class="toc-text">16.1 网络编程概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#16-1-1-网络编程概述"><span class="toc-text">16.1.1 网络编程概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-1-2-网络基础"><span class="toc-text">16.1.2 网络基础</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-2-网络通信要素"><span class="toc-text">16.2 网络通信要素</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-3-InetAddress类"><span class="toc-text">16.3 InetAddress类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#16-3-1通讯要素1：IP-和-端口号"><span class="toc-text">16.3.1通讯要素1：IP 和 端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-3-2-InetAddress类"><span class="toc-text">16.3.2 InetAddress类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-3-2-InetAddress类代码实例"><span class="toc-text">16.3.2 InetAddress类代码实例</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-4-TCP网络通信"><span class="toc-text">16.4 TCP网络通信</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#16-4-1-通讯要素2：网络通信协议"><span class="toc-text">16.4.1 通讯要素2：网络通信协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-4-2-TCP-IP协议簇"><span class="toc-text">16.4.2 TCP/IP协议簇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-4-3-TCP-和-UDP"><span class="toc-text">16.4.3 TCP 和 UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-4-4-Socket"><span class="toc-text">16.4.4 Socket</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-4-5-基于Socket的TCP编程"><span class="toc-text">16.4.5 基于Socket的TCP编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-4-6-Socket类的常用方法"><span class="toc-text">16.4.6 Socket类的常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-4-7-ServerSocket类的常用方法"><span class="toc-text">16.4.7 ServerSocket类的常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-4-8-基于Socket的TCP编程"><span class="toc-text">16.4.8 基于Socket的TCP编程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-8-1-客户端创建Socket对象"><span class="toc-text">4.8.1 客户端创建Socket对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-8-2服务器程序的工作过程包含以下四个基本的步骤："><span class="toc-text">4.8.2服务器程序的工作过程包含以下四个基本的步骤：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-8-3服务器建立-ServerSocket-对象"><span class="toc-text">4.8.3服务器建立 ServerSocket 对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-5-UDP网络通信"><span class="toc-text">16.5 UDP网络通信</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#16-5-1-UDP网络通信"><span class="toc-text">16.5.1 UDP网络通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-5-2-流程"><span class="toc-text">16.5.2 流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-5-3-发送端"><span class="toc-text">16.5.3 发送端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-5-4-接收端"><span class="toc-text">16.5.4 接收端</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#16-6-URL编程"><span class="toc-text">16.6 URL编程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#16-6-1-简介"><span class="toc-text">16.6.1 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-6-2-代码"><span class="toc-text">16.6.2 代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-6-3-针对HTTP协议的URLConnection类"><span class="toc-text">16.6.3 针对HTTP协议的URLConnection类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#16-6-4-小结"><span class="toc-text">16.6.4 小结</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-16. JavaSE-网络编程" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">16. JavaSE-网络编程</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.02.26</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaSE基础笔记/">JavaSE基础笔记</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="16-1-网络编程概述"><a href="#16-1-网络编程概述" class="headerlink" title="16.1 网络编程概述"></a>16.1 网络编程概述</h1><h2 id="16-1-1-网络编程概述"><a href="#16-1-1-网络编程概述" class="headerlink" title="16.1.1 网络编程概述"></a>16.1.1 网络编程概述</h2><p>•    Java是 Internet   上的语言，它从语言级上提供了对网络应用程序的支持，程序员能够很容易开发常见的网络应用程序。<br>•    Java提供的网络类库，可以实现无痛的网络连接，联网的底层细节被隐藏在 Java 的本机安装系统里，由 JVM 进行控制。并且 Java   实现了一个跨平台的网络库，程序员面对的是一个统一的网络编程环境。  </p>
+<h2 id="16-1-2-网络基础"><a href="#16-1-2-网络基础" class="headerlink" title="16.1.2 网络基础"></a>16.1.2 网络基础</h2><ul>
+<li>计算机网络：  <ul>
+<li>把分布在不同地理区域的计算机与专门的外部设备用通信线路互连成一个规模大、功能强的网络系统，从而使众多的计算机可以方便地互相传递信息、共享硬件、软件、数据信息等资源。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>网络编程的目的：  <ul>
+<li>直接或间接地通过网络协议与其它计算机进行通讯。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>网络编程中有两个主要的问题：<ul>
+<li>如何准确地定位网络上一台或多台主机</li>
+<li>找到主机后如何可靠高效地进行数据传输</li>
+</ul>
+</li>
+</ul>
+<p>地球村</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162248.png" alt></p>
+<h1 id="16-2-网络通信要素"><a href="#16-2-网络通信要素" class="headerlink" title="16.2 网络通信要素"></a>16.2 网络通信要素</h1><p>如何实现网络中的主机互相通信：</p>
+<ul>
+<li>通信双方地址 </li>
+<li>一定的规则（有两套参考模型）<ul>
+<li>OSI参考模型：模型过于理想化，未能在因特网上进行广泛推广</li>
+<li>TCP/IP参考模型(或TCP/IP协议)：事实上的国际标准。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162351.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162435.png" alt></p>
+<h1 id="16-3-InetAddress类"><a href="#16-3-InetAddress类" class="headerlink" title="16.3 InetAddress类"></a>16.3 InetAddress类</h1><h2 id="16-3-1通讯要素1：IP-和-端口号"><a href="#16-3-1通讯要素1：IP-和-端口号" class="headerlink" title="16.3.1通讯要素1：IP 和 端口号"></a>16.3.1通讯要素1：IP 和 端口号</h2><p>IP 地址：InetAddress</p>
+<ul>
+<li>唯一的标识 Internet 上的计算机</li>
+<li>本地回环地址(hostAddress)：127.0.0.1      主机名(hostName)：localhost</li>
+<li>不易记忆</li>
+<li>端口号标识正在计算机上运行的进程（程序）<ul>
+<li>不同的进程有不同的端口号</li>
+<li>被规定为一个 16 位的整数 0~65535。其中，0~1023被预先定义的服务通信占用（如http占用端口80，Tomcat占用端口8080，MySql占用端口3306,Oracle占用端口1521等）。除非我们需要访问这些特定服务，否则，就应该使用 1024~65535 这些端口中的某一个进行通信，以免发生端口冲突。 </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>端口号与IP地址的组合得出一个网络套接字：Socket。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162542.png" alt></p>
+<h2 id="16-3-2-InetAddress类"><a href="#16-3-2-InetAddress类" class="headerlink" title="16.3.2 InetAddress类"></a>16.3.2 InetAddress类</h2><ul>
+<li>Internet上的主机有两种方式表示地址：<ul>
+<li>域名(hostName)：<a href="http://www.soc.pub" target="_blank" rel="noopener">www.soc.pub</a></li>
+<li>IP 地址(hostAddress)：202.108.35.210</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>InetAddress类主要表示IP地址，两个子类：Inet4Address、Inet6Address。</p>
+</li>
+<li><p>InetAddress 类对象含有一个 Internet 主机地址的域名和IP地址：<a href="http://www.atguigu.com" target="_blank" rel="noopener">www.atguigu.com</a> 和 202.108.35.210。</p>
+</li>
+<li><p>域名容易记忆，当在连接网络时输入一个主机的域名后，域名服务器（DNS）负责将域名转化成IP地址，这样才能和主机建立连接。 ——-域名解析</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162706.png" alt></p>
+<ul>
+<li>InetAddress类没有提供公共的构造器，而是提供了如下两个静态方法来获取InetAddress实例</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162827.png" alt></p>
+<ul>
+<li>InetAddress提供了如下几个常用的方法</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603162859.png" alt></p>
+<h2 id="16-3-2-InetAddress类代码实例"><a href="#16-3-2-InetAddress类代码实例" class="headerlink" title="16.3.2 InetAddress类代码实例"></a>16.3.2 InetAddress类代码实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">InetAddress address = InetAddress.getByName(&quot;www.atguigu.com&quot;);</span><br><span class="line">		</span><br><span class="line">		System.out.println(address);</span><br><span class="line">		//获取InetAddress 对象所含的域名</span><br><span class="line">		System.out.println(address.getHostName());</span><br><span class="line">		//获取InetAddress 对象所含的IP地址</span><br><span class="line">		System.out.println(address.getHostAddress());</span><br><span class="line">		</span><br><span class="line">		//获取本机的域名和IP地址</span><br><span class="line">		InetAddress address2 = InetAddress.getLocalHost();</span><br><span class="line">		System.out.println(address2);</span><br></pre></td></tr></table></figure>
+<h1 id="16-4-TCP网络通信"><a href="#16-4-TCP网络通信" class="headerlink" title="16.4 TCP网络通信"></a>16.4 TCP网络通信</h1><h2 id="16-4-1-通讯要素2：网络通信协议"><a href="#16-4-1-通讯要素2：网络通信协议" class="headerlink" title="16.4.1 通讯要素2：网络通信协议"></a>16.4.1 通讯要素2：网络通信协议</h2><p>网络通信协议  </p>
+<ul>
+<li>计算机网络中实现通信必须有一些约定，即通信协议，对速率、传输代码、代码结构、传输控制步骤、出错控制等制定标准。</li>
+</ul>
+<p>通信协议分层的思想</p>
+<ul>
+<li>由于结点之间联系很复杂，在制定协议时，把复杂成份分解成一些简单的成份，再将它们复合起来。最常用的复合方式是层次方式，即同层间可以通信、上一层可以调用下一层，而与再下一层不发生关系。各层互不影响，利于系统的开发和扩展。</li>
+</ul>
+<h2 id="16-4-2-TCP-IP协议簇"><a href="#16-4-2-TCP-IP协议簇" class="headerlink" title="16.4.2 TCP/IP协议簇"></a>16.4.2 TCP/IP协议簇</h2><ul>
+<li>传输层协议中有两个非常重要的协议：<ul>
+<li>传输控制协议TCP(Transmission Control Protocol)</li>
+<li>用户数据报协议UDP(User Datagram Protocol)。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>TCP/IP 以其两个主要协议：传输控制协议(TCP)和网络互联协议(IP)而得名，实际上是一组协议，包括多个具有不同功能且互为关联的协议。</li>
+<li>IP(Internet Protocol)协议是网络层的主要协议，支持网间互连的数据通信。</li>
+<li>TCP/IP协议模型从更实用的角度出发，形成了高效的四层体系结构，即物理链路层、IP层、传输层和应用层。</li>
+</ul>
+<h2 id="16-4-3-TCP-和-UDP"><a href="#16-4-3-TCP-和-UDP" class="headerlink" title="16.4.3 TCP 和 UDP"></a>16.4.3 TCP 和 UDP</h2><p>TCP协议：</p>
+<ul>
+<li>使用TCP协议前，须先建立TCP连接，形成传输数据通道</li>
+<li>传输前，采用“三次握手”方式，是可靠的</li>
+<li>TCP协议进行通信的两个应用进程：客户端、服务端</li>
+<li>在连接中可进行大数据量的传输</li>
+<li>传输完毕，需释放已建立的连接，效率低</li>
+</ul>
+<p>UDP协议：</p>
+<ul>
+<li>将数据、源、目的封装成数据包，不需要建立连接</li>
+<li>每个数据报的大小限制在64K内</li>
+<li>因无需连接，故是不可靠的</li>
+<li>发送数据结束时无需释放资源，速度快</li>
+</ul>
+<h2 id="16-4-4-Socket"><a href="#16-4-4-Socket" class="headerlink" title="16.4.4 Socket"></a>16.4.4 Socket</h2><ul>
+<li>利用套接字(Socket)开发网络应用程序早已被广泛的采用，以至于成为事实上的标准。</li>
+<li>通信的两端都要有Socket，是两台机器间通信的端点</li>
+<li>网络通信其实就是Socket间的通信。</li>
+<li>Socket允许程序把网络连接当成一个流，数据在两个Socket间通过IO传输。</li>
+<li>一般主动发起通信的应用程序属客户端，等待通信请求的为服务端</li>
+</ul>
+<h2 id="16-4-5-基于Socket的TCP编程"><a href="#16-4-5-基于Socket的TCP编程" class="headerlink" title="16.4.5 基于Socket的TCP编程"></a>16.4.5 基于Socket的TCP编程</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603163320.png" alt></p>
+<h2 id="16-4-6-Socket类的常用方法"><a href="#16-4-6-Socket类的常用方法" class="headerlink" title="16.4.6 Socket类的常用方法"></a>16.4.6 Socket类的常用方法</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603163339.png" alt></p>
+<h2 id="16-4-7-ServerSocket类的常用方法"><a href="#16-4-7-ServerSocket类的常用方法" class="headerlink" title="16.4.7 ServerSocket类的常用方法"></a>16.4.7 ServerSocket类的常用方法</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603163401.png" alt></p>
+<h2 id="16-4-8-基于Socket的TCP编程"><a href="#16-4-8-基于Socket的TCP编程" class="headerlink" title="16.4.8 基于Socket的TCP编程"></a>16.4.8 基于Socket的TCP编程</h2><p>客户端Socket的工作过程包含以下四个基本的步骤：</p>
+<ul>
+<li>创建 Socket：根据指定服务端的 IP 地址或端口号构造 Socket 类对象。若服务器端响应，则建立客户端到服务器的通信线路。若连接失败，会出现异常。</li>
+<li>打开连接到 Socket 的输入/出流： 使用 getInputStream()方法获得输入流，使用 getOutputStream()方法获得输出流，进行数据传输</li>
+<li>按照一定的协议对 Socket  进行读/写操作：通过输入流读取服务器放入线路的信息（但不能读取自己放入线路的信息），通过输出流将信息写入线程。</li>
+<li>关闭 Socket：断开客户端到服务器的连接，释放线路 </li>
+</ul>
+<h2 id="4-8-1-客户端创建Socket对象"><a href="#4-8-1-客户端创建Socket对象" class="headerlink" title="4.8.1 客户端创建Socket对象"></a>4.8.1 客户端创建Socket对象</h2><p>客户端程序可以使用Socket类创建对象，创建的同时会自动向服务器方发起连接。Socket的构造方法是：</p>
+<ul>
+<li>Socket(String host,int port)throws UnknownHostException,IOException：向服务器(域名是host。端口号为port)发起TCP连接，若成功，则创建Socket对象，否则抛出异常。</li>
+<li>Socket(InetAddress address,int port)throws IOException：根据InetAddress对象所表示的IP地址以及端口号port发起连接。</li>
+</ul>
+<p>客户端建立socketAtClient对象的过程就是向服务器发出套接字连接请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Socket s = new Socket(“192.168.40.165”,9999);</span><br><span class="line">OutputStream out = s.getOutputStream();</span><br><span class="line">out.write(“hello”.getBytes());</span><br><span class="line">s.close();</span><br></pre></td></tr></table></figure>
+<h2 id="4-8-2服务器程序的工作过程包含以下四个基本的步骤："><a href="#4-8-2服务器程序的工作过程包含以下四个基本的步骤：" class="headerlink" title="4.8.2服务器程序的工作过程包含以下四个基本的步骤："></a>4.8.2服务器程序的工作过程包含以下四个基本的步骤：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">调用 ServerSocket(int port) ：</span><br><span class="line">    创建一个服务器端套接字，并绑定到指定端口上。用于监听客户端的请求。</span><br><span class="line"></span><br><span class="line">调用 accept()：</span><br><span class="line">    监听连接请求，如果客户端请求连接，则接受连接，返回通信套接字对象。</span><br><span class="line"></span><br><span class="line">调用 该Socket类对象的 getOutputStream() 和 getInputStream ()：</span><br><span class="line">    获取输出流和输入流，开始网络数据的发送和接收。</span><br><span class="line"></span><br><span class="line">关闭ServerSocket和Socket对象：</span><br><span class="line">    客户端访问结束，关闭通信套接字。</span><br></pre></td></tr></table></figure>
+<h2 id="4-8-3服务器建立-ServerSocket-对象"><a href="#4-8-3服务器建立-ServerSocket-对象" class="headerlink" title="4.8.3服务器建立 ServerSocket 对象"></a>4.8.3服务器建立 ServerSocket 对象</h2><ul>
+<li>ServerSocket 对象负责等待客户端请求建立套接字连接，类似邮局某个窗口中的业务员。也就是说，服务器必须事先建立一个等待客户请求建立套接字连接的ServerSocket对象。</li>
+<li>所谓“接收”客户的套接字请求，就是accept()方法会返回一个 Socket 对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket ss = new ServerSocket(9999);</span><br><span class="line">Socket s = ss.accept ();</span><br><span class="line">InputStream in = s.getInputStream();</span><br><span class="line">byte[] buf = new byte[1024];</span><br><span class="line">int num = in.read(buf);</span><br><span class="line">String str = new String(buf,0,num);</span><br><span class="line">System.out.println(s.getInetAddress().toString()+”:”+str);</span><br><span class="line">s.close();</span><br><span class="line">ss.close();</span><br></pre></td></tr></table></figure>
+<h1 id="16-5-UDP网络通信"><a href="#16-5-UDP网络通信" class="headerlink" title="16.5 UDP网络通信"></a>16.5 UDP网络通信</h1><h2 id="16-5-1-UDP网络通信"><a href="#16-5-1-UDP网络通信" class="headerlink" title="16.5.1 UDP网络通信"></a>16.5.1 UDP网络通信</h2><ul>
+<li>类 DatagramSocket 和 DatagramPacket 实现了基于 UDP 协议网络程序。</li>
+<li>UDP数据报通过数据报套接字 DatagramSocket 发送和接收，系统不保证UDP数据报一定能够安全送到目的地，也不能确定什么时候可以抵达。</li>
+<li>DatagramPacket 对象封装了UDP数据报，在数据报中包含了发送端的IP地址和端口号以及接收端的IP地址和端口号。</li>
+<li>UDP协议中每个数据报都给出了完整的地址信息，因此无须建立发送方和接收方的连接</li>
+</ul>
+<h2 id="16-5-2-流程"><a href="#16-5-2-流程" class="headerlink" title="16.5.2 流程"></a>16.5.2 流程</h2><p>流  程：</p>
+<ol>
+<li>DatagramSocket与DatagramPacket  </li>
+<li>建立发送端，接收端  </li>
+<li>建立数据包  </li>
+<li>调用Socket的发送、接收方法  </li>
+<li>关闭Socket  </li>
+</ol>
+<ul>
+<li>发送端与接收端是两个独立的运行程序</li>
+</ul>
+<h2 id="16-5-3-发送端"><a href="#16-5-3-发送端" class="headerlink" title="16.5.3 发送端"></a>16.5.3 发送端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DatagramSocket ds = new DatagramSocket();</span><br><span class="line">byte[] by = “hello,atguigu.com”.getBytes();</span><br><span class="line">DatagramPacket dp = new DatagramPacket(by,0,by.length,</span><br><span class="line">InetAddress.getByName(“127.0.0.1”),10000);</span><br><span class="line">ds.send(dp);</span><br><span class="line">ds.close();</span><br></pre></td></tr></table></figure>
+<h2 id="16-5-4-接收端"><a href="#16-5-4-接收端" class="headerlink" title="16.5.4 接收端"></a>16.5.4 接收端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//在接收端，要指定监听的端口。</span><br><span class="line">DatagramSocket ds = new DatagramSocket(10000);</span><br><span class="line">byte[] by = new byte[1024];</span><br><span class="line">DatagramPacket dp = new DatagramPacket(by,by.length);</span><br><span class="line">ds.receive(dp);</span><br><span class="line">String str = new String(dp.getData(),0,dp.getLength());</span><br><span class="line">System.out.println(str+&quot;--&quot;+dp.getAddress());</span><br><span class="line">ds.close();</span><br></pre></td></tr></table></figure>
+<h1 id="16-6-URL编程"><a href="#16-6-URL编程" class="headerlink" title="16.6 URL编程"></a>16.6 URL编程</h1><h2 id="16-6-1-简介"><a href="#16-6-1-简介" class="headerlink" title="16.6.1 简介"></a>16.6.1 简介</h2><ul>
+<li>URL(Uniform Resource Locator)：统一资源定位符，它表示 Internet 上某一资源的地址。通过 URL 我们可以访问 Internet 上的各种网络资源，比如最常见的 www，ftp 站点。浏览器通过解析给定的 URL 可以在网络上查找相应的文件或其他资源。 </li>
+<li>URL的基本结构由5部分组成：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;传输协议&gt;://&lt;主机名&gt;:&lt;端口号&gt;/&lt;文件名&gt;</span><br><span class="line">例如: http://192.168.1.100:8080/helloworld/index.jsp</span><br></pre></td></tr></table></figure>
+<ul>
+<li>为了表示URL，java.net 中实现了类 URL。我们可以通过下面的构造器来初始化一个 URL 对象：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public URL (String spec)：</span><br><span class="line">通过一个表示URL地址的字符串可以构造一个URL对象。</span><br><span class="line">例如：URL url = new URL (&quot;http://www. atguigu.com/&quot;); </span><br><span class="line"></span><br><span class="line">public URL(URL context, String spec)：</span><br><span class="line">通过基 URL 和相对 URL 构造一个 URL 对象。</span><br><span class="line">例如：URL downloadUrl = new URL(url, “download.html&quot;)</span><br><span class="line"></span><br><span class="line">public URL(String protocol, String host, String file); </span><br><span class="line">例如：new URL(&quot;http&quot;, &quot;www.atguigu.com&quot;, “download. html&quot;);</span><br><span class="line"></span><br><span class="line">public URL(String protocol, String host, int port, String file); </span><br><span class="line">例如: URL gamelan = new URL(&quot;http&quot;, &quot;www.atguigu.com&quot;, 80, “download.html&quot;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>类URL的构造方法都声明抛出非运行时异常，必须要对这一异常进行处理，通常是用 try-catch 语句进行捕获。</li>
+<li>一个URL对象生成后，其属性是不能被改变的，但可以通过它给定的方法来获取这些属性：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public String getProtocol(  )        获取该URL的协议名</span><br><span class="line">public String getHost(  )            获取该URL的主机名</span><br><span class="line">public String getPort(  )            获取该URL的端口号</span><br><span class="line">public String getPath(  )            获取该URL的文件路径</span><br><span class="line">public String getFile(  )             获取该URL的文件名</span><br><span class="line">public String getQuery(   )          获取该URL的查询名</span><br></pre></td></tr></table></figure>
+<h2 id="16-6-2-代码"><a href="#16-6-2-代码" class="headerlink" title="16.6.2 代码"></a>16.6.2 代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">URL url = new URL(&quot;http://localhost:8080/examples/myTest.txt&quot;);</span><br><span class="line">System.out.println(&quot;getProtocol() :&quot;+url.getProtocol());</span><br><span class="line">System.out.println(&quot;getHost() :&quot;+url.getHost());</span><br><span class="line">System.out.println(&quot;getPort() :&quot;+url.getPort());</span><br><span class="line">System.out.println(&quot;getPath() :&quot;+url.getPath());</span><br><span class="line">System.out.println(&quot;getFile() :&quot;+url.getFile());</span><br><span class="line">System.out.println(&quot;getQuery() :&quot;+url.getQuery());</span><br></pre></td></tr></table></figure>
+<h2 id="16-6-3-针对HTTP协议的URLConnection类"><a href="#16-6-3-针对HTTP协议的URLConnection类" class="headerlink" title="16.6.3 针对HTTP协议的URLConnection类"></a>16.6.3 针对HTTP协议的URLConnection类</h2><ul>
+<li>URL的方法 openStream()：能从网络上读取数据</li>
+<li>若希望输出数据，例如向服务器端的 CGI （公共网关接口-Common Gateway Interface-的简称，是用户浏览器和服务器端的应用程序进行连接的接口）程序发送一些数据，则必须先与URL建立连接，然后才能对其进行读写，此时需要使用 URLConnection 。</li>
+<li>URLConnection：表示到URL所引用的远程对象的连接。当与一个URL建立连接时，首先要在一个 URL 对象上通过方法 openConnection() 生成对应的 URLConnection 对象。如果连接过程失败，将产生IOException. </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">URL netchinaren = new URL (&quot;http://www.atguigu.com/index.shtml&quot;); </span><br><span class="line">URLConnectonn u = netchinaren.openConnection( );</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过URLConnection对象获取的输入流和输出流，即可以与现有的CGI程序进行交互。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public Object getContent( ) throws IOException</span><br><span class="line">public int getContentLength( )</span><br><span class="line">public String getContentType( )</span><br><span class="line">public long getDate( )</span><br><span class="line">public long getLastModified( )</span><br><span class="line">public InputStream getInputStream( )throws IOException</span><br><span class="line">public OutputSteram getOutputStream( )throws IOException</span><br></pre></td></tr></table></figure>
+<h2 id="16-6-4-小结"><a href="#16-6-4-小结" class="headerlink" title="16.6.4 小结"></a>16.6.4 小结</h2><ul>
+<li>位于网络中的计算机具有唯一的IP地址，这样不同的主机可以互相区分。</li>
+<li>客户端－服务器是一种最常见的网络应用程序模型。服务器是一个为其客户端提供某种特定服务的硬件或软件。客户机是一个用户应用程序，用于访问某台服务器提供的服务。端口号是对一个服务的访问场所，它用于区分同一物理计算机上的多个服务。套接字用于连接客户端和服务器，客户端和服务器之间的每个通信会话使用一个不同的套接字。TCP协议用于实现面向连接的会话。</li>
+<li>Java 中有关网络方面的功能都定义在 java.net 程序包中。Java 用 InetAddress 对象表示 IP 地址，该对象里有两个字段：主机名(String) 和 IP 地址(int)。</li>
+<li>类 Socket 和 ServerSocket 实现了基于TCP协议的客户端－服务器程序。Socket是客户端和服务器之间的一个连接，连接创建的细节被隐藏了。这个连接提供了一个安全的数据传输通道，这是因为 TCP 协议可以解决数据在传送过程中的丢失、损坏、重复、乱序以及网络拥挤等问题，它保证数据可靠的传送。</li>
+<li>类 URL 和 URLConnection 提供了最高级网络应用。URL 的网络资源的位置来同一表示 Internet 上各种网络资源。通过URL对象可以创建当前应用程序和 URL 表示的网络资源之间的连接，这样当前程序就可以读取网络资源数据，或者把自己的数据传送到网络上去。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * T代表JavaBean类型</span><br><span class="line"> * P代表主键类型</span><br><span class="line"> */</span><br><span class="line">interface DAO&lt;T,P&gt;&#123;</span><br><span class="line">	boolean add(T t);</span><br><span class="line">	boolean deleteById(P id);</span><br><span class="line">	boolean update(T t);</span><br><span class="line">	T findById(P id);</span><br><span class="line">	List&lt;T&gt; getAll();</span><br><span class="line">	int getCount();</span><br><span class="line">&#125;</span><br><span class="line">class UserDAOImpl implements DAO&lt;User,String&gt;&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public boolean add(User t) &#123;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public boolean deleteById(String id) &#123;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public boolean update(User t) &#123;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public User findById(String id) &#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public List&lt;User&gt; getAll() &#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int getCount() &#123;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class GoodsDAOImpl implements DAO&lt;Goods,Integer&gt;&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public boolean add(Goods t) &#123;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public boolean deleteById(Integer id) &#123;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public boolean update(Goods t) &#123;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public Goods findById(Integer id) &#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public List&lt;Goods&gt; getAll() &#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int getCount() &#123;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line">class User&#123;</span><br><span class="line">	private String username;</span><br><span class="line">	private String password;</span><br><span class="line">	public String getUsername() &#123;</span><br><span class="line">		return username;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setUsername(String username) &#123;</span><br><span class="line">		this.username = username;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getPassword() &#123;</span><br><span class="line">		return password;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setPassword(String password) &#123;</span><br><span class="line">		this.password = password;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">class Goods&#123;</span><br><span class="line">	private int gid;</span><br><span class="line">	private String name;</span><br><span class="line">	public int getGid() &#123;</span><br><span class="line">		return gid;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setGid(int gid) &#123;</span><br><span class="line">		this.gid = gid;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5、编写程序，在main方法中接收5个参数整数字符串；  </p>
+<ul>
+<li>创建TreeSet类型的集合（使用泛型），将5个字符串以整数形式添加到集合中；<br>增强型for循环遍历该集合，打印所有元素，并将所有元素之和打印出来。</li>
+</ul>
+<p>6、编写代码，存储丈夫与妻子，Map&lt;丈夫,妻子&gt;，并遍历输出</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/02/19/15. JavaSE-多线程/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
