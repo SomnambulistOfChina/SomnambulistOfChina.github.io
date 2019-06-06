@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>11 web-会话控制-Cookie | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaWeb概述,">
+  
+
+  <meta name="description" content="CookieCookie简介     HTTP是无状态协议，服务器不能记录浏览器的访问状态，也就是说服务器不能区分中两次请求是否由一个客户端发出。这样的设计严重阻碍的Web程序的设计。如：在我们进行网购时，买了一条裤子，又买了一个手机。由于http协议是无状态的，如果不通过其他手段，服务器是不能知道用户到底买了什么。而Cookie就是解决方案之一。     Cookie实际上就是服务器保存在浏">
+<meta name="keywords" content="JavaWeb概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="11 web-会话控制-Cookie">
+<meta property="og:url" content="http://yoursite.com/2017/11/21/30 web-会话控制-Cookie/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="CookieCookie简介     HTTP是无状态协议，服务器不能记录浏览器的访问状态，也就是说服务器不能区分中两次请求是否由一个客户端发出。这样的设计严重阻碍的Web程序的设计。如：在我们进行网购时，买了一条裤子，又买了一个手机。由于http协议是无状态的，如果不通过其他手段，服务器是不能知道用户到底买了什么。而Cookie就是解决方案之一。     Cookie实际上就是服务器保存在浏">
+<meta property="og:locale" content="Java EE">
+<meta property="og:updated_time" content="2019-06-06T15:08:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="11 web-会话控制-Cookie">
+<meta name="twitter:description" content="CookieCookie简介     HTTP是无状态协议，服务器不能记录浏览器的访问状态，也就是说服务器不能区分中两次请求是否由一个客户端发出。这样的设计严重阻碍的Web程序的设计。如：在我们进行网购时，买了一条裤子，又买了一个手机。由于http协议是无状态的，如果不通过其他手段，服务器是不能知道用户到底买了什么。而Cookie就是解决方案之一。     Cookie实际上就是服务器保存在浏">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cookie"><span class="toc-text">Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie简介"><span class="toc-text">Cookie简介</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用Cookie"><span class="toc-text">使用Cookie</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#设置Cookie"><span class="toc-text">设置Cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#读取Cookie"><span class="toc-text">读取Cookie</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie有效时间"><span class="toc-text">Cookie有效时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cookie的路径"><span class="toc-text">Cookie的路径</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HttpSession"><span class="toc-text">HttpSession</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Session的工作原理"><span class="toc-text">Session的工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session时效"><span class="toc-text">Session时效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL重写"><span class="toc-text">URL重写</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现方式："><span class="toc-text">实现方式：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session的活化和钝化"><span class="toc-text">Session的活化和钝化</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-30 web-会话控制-Cookie" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">11 web-会话控制-Cookie</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.11.21</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h1><h2 id="Cookie简介"><a href="#Cookie简介" class="headerlink" title="Cookie简介"></a>Cookie简介</h2><ul>
+<li>    HTTP是无状态协议，服务器不能记录浏览器的访问状态，也就是说服务器不能区分中两次请求是否由一个客户端发出。这样的设计严重阻碍的Web程序的设计。如：在我们进行网购时，买了一条裤子，又买了一个手机。由于http协议是无状态的，如果不通过其他手段，服务器是不能知道用户到底买了什么。而Cookie就是解决方案之一。</li>
+<li>    Cookie实际上就是服务器保存在浏览器上的一段信息。浏览器有了Cookie之后，每次向服务器发送请求时都会同时将该信息发送给服务器，服务器收到请求后，就可以根据该信息处理请求。</li>
+<li>    例如：我们上文说的网上商城，当用户向购物车中添加一个商品时，服务器会将这个条信息封装成一个Cookie发送给浏览器，浏览器收到Cookie，会将它保存在内存中(注意这里的内存是本机内存，而不是服务器内存)，那之后每次向服务器发送请求，浏览器都会携带该Cookie，而服务器就可以通过读取Cookie来判断用户到底买了哪些商品。当用户进行结账操作时，服务器就可以根据Cookie的信息来做结算。</li>
+<li>Cookie的用途：<ul>
+<li style="list-style: none"><input type="checkbox" checked>     网上商城的购物车</li>
+<li style="list-style: none"><input type="checkbox" checked>     保持用户登录状态</li>
+<li style="list-style: none"><input type="checkbox" checked>     163邮箱的7天免登陆</li>
+</ul>
+</li>
+<li><p>    Cookie的原理：  </p>
+<blockquote>
+<p>总的来看Cookie像是服务器发给浏览器的一张“会员卡”，浏览器每次向服务器发送请求时都会带着这张“会员卡”，当服务器看到这张“会员卡”时就可以识别浏览器的身份。</p>
+</blockquote>
+<blockquote>
+<p>   实际上这个所谓的“会员卡”就是服务器发送的一个响应头：</p>
+<blockquote>
+<ul>
+<li>Set-Cookie这个响应头就是服务器在向服务器发“会员卡”，这个响应头的名字是Set-Cookie，后边JSESSIONID=95A92EC1D7CCB4ADFC24584CB316382E和Path=/Test_cookie，是两组键值对的结构就是服务器为这个“会员卡”设置的信息。浏览器收到该信息后就会将它保存到内存或硬盘中。    </li>
+<li>当浏览器再次向服务器发送请求时就会携带这个Cookie信息：  </li>
+<li>这是浏览器发送的请求报文，中间画红框的就是Cookie信息，这里可以理解为浏览器这次带着“会员卡”再次访问服务器。<br>-于是服务器就可以根据Cookie信息来判断浏览器的状态。  </li>
+</ul>
+</blockquote>
+</blockquote>
+</li>
+<li>Cookie的缺点<blockquote>
+<ul>
+<li>Cookie最为请求或响应报文发送，无形中增加了网络流量。</li>
+<li>Cookie是明文传送的安全性差。  </li>
+<li>各个浏览器对Cookie有限制，使用上有局限  </li>
+</ul>
+</blockquote>
+<h1 id="使用Cookie"><a href="#使用Cookie" class="headerlink" title="使用Cookie"></a>使用Cookie</h1></li>
+<li>使用Cookie主要是先创建Cookie对象，然后将Cookie信息发送给浏览器，浏览器收到Cookie后会自动保存，然后我们可以在下次浏览器发送请求时读取Cookie信息。  <h2 id="设置Cookie"><a href="#设置Cookie" class="headerlink" title="设置Cookie"></a>设置Cookie</h2></li>
+</ul>
+<ol>
+<li>创建一个CookieServlet  </li>
+<li>在Servlet的doPost()方法中编写如下代码：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//创建一个Cookie对象Cookie cookie = new Cookie(&quot;username&quot;, &quot;zhangsan&quot;);//将Cookie对象放入response对象中response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在浏览器中访问该Servlet，会发现响应头中出现如下内容：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Set-Cookie: username=zhangsan</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>如此就成功的向浏览器设置了一个Cookie，当我们在刷新页面时会发现浏览器的请求头中出现如下代码：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cookie: username=zhangsan</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>同样我们还可以同时设置多个Cookie：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//创建一个Cookie对象Cookie cookie1 = new</span><br><span class="line">Cookie(&quot;username&quot;, &quot;zhangsan&quot;);Cookie cookie2 = newCookie(&quot;password&quot;, &quot;123456&quot;);</span><br><span class="line">Cookie cookie3 = new Cookie(&quot;age&quot;, &quot;20&quot;);</span><br><span class="line">//将Cookie对象放入response对象中</span><br><span class="line">response.addCookie(cookie1);</span><br><span class="line">response.addCookie(cookie2);</span><br><span class="line">response.addCookie(cookie3);</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>浏览器会以一下形式发送Cookie：  </li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cookie: username=zhangsan;</span><br><span class="line">password=123456;</span><br><span class="line">age=20</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>总之，设置Cookie就是两个步骤：</li>
+</ol>
+<ul>
+<li>创建Cookie对象</li>
+<li>将Cookie对象加入到response中</li>
+</ul>
+<h2 id="读取Cookie"><a href="#读取Cookie" class="headerlink" title="读取Cookie"></a>读取Cookie</h2><ul>
+<li>读取Cookie主要指从读取浏览器中携带的Cookie</li>
+<li>只需要通过一个方法就可以得到浏览器中的Cookie，在Servlet或JSP中通过request对象调用getCookies()方法可以获得浏览器传送过来的所有Cookie对象，返回的是一个Cookie数组，通过遍历Cookie数组可以获得所有的Cookie信息。</li>
+<li>如：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//通过request的getCookies()方法获的Cookie数组</span><br><span class="line">Cookie[] cookies = request.getCookies();</span><br><span class="line">//判断数组是否为空</span><br><span class="line">if(cookies != null)&#123;</span><br><span class="line">//如果不为空遍历数组</span><br><span class="line">for(Cookie cookie : cookies)&#123;</span><br><span class="line">//获取cookie的名字</span><br><span class="line">String name = cookie.getName();</span><br><span class="line">//获取cookie的键</span><br><span class="line">String value = cookie.getValue();</span><br><span class="line">System.out.println(name+&quot;---&quot;+value);    &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Cookie有效时间"><a href="#Cookie有效时间" class="headerlink" title="Cookie有效时间"></a>Cookie有效时间</h2><ul>
+<li>经过上边的介绍我们已经知道Cookie是存储在浏览器中的，但是可想而知一般情况下浏览器不可能永远保存一个Cookie，一来是占用硬盘空间，再来一个Cookie可能只在某一时刻有用没必要长久保存。</li>
+<li>所以我们还需要为Cookie设置一个有效时间。</li>
+<li>通过Cookie对象的setMaxAge()可以设置Cookie的有效时间。</li>
+<li>其中setMaxAge()接收一个int型的参数，来设置有效时间。参数主要有一下四种情况：<ul>
+<li>设置为0，setMaxAge(0)<ul>
+<li>Cookie立即失效，下次浏览器发送请求将不会在携带该Cookie</li>
+</ul>
+</li>
+<li>设置大于0，setMaxAge(60)<ul>
+<li>表示有效的秒数60就代表60秒即1分钟，也就是Cookie在1分钟后失效。</li>
+</ul>
+</li>
+<li>设置小于0，setMaxAge(-1)<ul>
+<li>设置为负数表示当前会话有效。也就是关闭浏览器后Cookie失效</li>
+</ul>
+</li>
+<li>不设置<ul>
+<li>如果不设置失效时间，则默认当前会话有效。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Cookie的路径"><a href="#Cookie的路径" class="headerlink" title="Cookie的路径"></a>Cookie的路径</h2><ul>
+<li>Cookie的路径指告诉浏览器访问那些地址时该携带该Cookie，我们知道浏览器会保存很多不同网站的Cookie，比如百度的Cookie，新浪的Cookie，腾讯的Cookie等等。那我们不可能访问百度的时候携带新浪的Cookie，也不可能访问每个网站时都带上所有的Cookie这是不现实的，所以往往我们还需要为Cookie设置一个Path属性，来告诉浏览器何时携带该Cookie。</li>
+<li>我们同过Cookie的setPath()来设置路径，这个路径是由浏览器来解析的所以/代表服务器的根目录。</li>
+<li>如：<ul>
+<li>设置为 /项目名/路径 à cookie.setPath(“/项目名/路径”)<ul>
+<li>这样设置只有访问“/项目名/路径”下的的资源才会携带Cookie</li>
+<li>如：/项目名/路径/1.jsp 、/项目名/路径/hello/2.jsp 等</li>
+</ul>
+</li>
+<li>如果不设置，默认会在访问“/项目名”下的资源时携带<ul>
+<li>如：“/项目名/index.jsp” 、 “/项目名/hello/index.jsp”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="HttpSession"><a href="#HttpSession" class="headerlink" title="HttpSession"></a>HttpSession</h1><ul>
+<li>使用Cookie有一个非常大的局限，就是如果Cookie很多，则无形的增加了客户端与服务端的数据传输量。而且由于浏览器对Cookie数量的限制，注定我们不能再Cookie中保存过多的信息，于是Session出现。</li>
+<li>Session的作用就是在服务器端保存一些用户的数据，然后传递给用户一个名字为JSESSIONID的Cookie，这个JESSIONID对应这个服务器中的一个Session对象，通过它就可以获取到保存用户信息的Session。</li>
+</ul>
+<h2 id="Session的工作原理"><a href="#Session的工作原理" class="headerlink" title="Session的工作原理"></a>Session的工作原理</h2><ul>
+<li>Session的创建<ul>
+<li>Session的创建时机是在request.getSession()方法第一次被调用时。</li>
+<li>Session被创建后，同时还会有一个名为JSESSIONID的Cookie被创建。</li>
+<li>这个Cookie的默认时效就是当前会话。</li>
+</ul>
+</li>
+<li>Session的使用<ul>
+<li>Session被创建后，对应的Cookie被保存到浏览器中，之后浏览器每次访问项目时都会携带该Cookie。</li>
+<li>当我们再次调用时会根据该JSESSIONID获取已经存在的Cookie，而不是在创建一个新的Cookie。</li>
+<li>如果Cookie中有JSESSIONID，但是JSESSIONID没有对应的Session存在，则会重新创建一个HttpSession对象，并重新设置JSESSIONID。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Session时效"><a href="#Session时效" class="headerlink" title="Session时效"></a>Session时效</h2><p><strong>基本原则</strong>  </p>
+<blockquote>
+<p>Session对象在服务器端不能长期保存，它是有时间限制的，超过一定时间没有被访问过的Session对象就应该释放掉，以节约内存。所以Session的有效时间并不是从创建对象开始计时，到指定时间后释放——而是从最后一次被访问开始计时，统计其“空闲”的时间。<br><strong>默认设置</strong><br>在全局web.xml中能够找到如下配置：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- ==================== Default Session Configuration ================= --&gt; </span><br><span class="line">&lt;!-- You can set the default session timeout (in minutes) for all newly   --&gt;  </span><br><span class="line">&lt;!-- created sessions by modifying the value below.                       --&gt;    </span><br><span class="line">&lt;session-config&gt;       </span><br><span class="line">&lt;session-timeout&gt;30&lt;/session-timeout&gt;   </span><br><span class="line">&lt;/session-config&gt;</span><br></pre></td></tr></table></figure>
+<p>说明Session对象默认的最长有效时间为30分钟。</p>
+<ul>
+<li>手工设置<ul>
+<li>session.setMaxInactiveInterval(int seconds)</li>
+<li>session.getMaxInactiveInterval()</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>强制失效<ul>
+<li>session.invalidate()</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>可以使Session对象释放的情况<ul>
+<li>Session对象空闲时间达到了目标设置的最大值，自动释放</li>
+<li>Session对象被强制失效</li>
+<li>Web应用卸载</li>
+<li>服务器进程停止</li>
+</ul>
+</li>
+</ul>
+<h2 id="URL重写"><a href="#URL重写" class="headerlink" title="URL重写"></a>URL重写</h2><ul>
+<li>在整个会话控制技术体系中，保持JSESSIONID的值主要通过Cookie实现。但Cookie在浏览器端可能会被禁用，所以我们还需要一些备用的技术手段，例如：URL重写。</li>
+<li>URL重写其实就是将JSESSIONID的值以固定格式附着在URL地址后面，以实现保持JSESSIONID，进而保持会话状态。这个固定格式是：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">URL;jsessionid=xxxxxxxxx</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例如：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">targetServlet;jsessionid=F9C893D3E77E3E8329FF6BD9B7A09957</span><br></pre></td></tr></table></figure>
+<h3 id="实现方式："><a href="#实现方式：" class="headerlink" title="实现方式："></a>实现方式：</h3><ul>
+<li>response.encodeURL(String)</li>
+<li>response.encodeRedirectURL(String)</li>
+<li>例如：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//1.获取Session对象</span><br><span class="line">HttpSession session = request.getSession();</span><br><span class="line">//2.创建目标URL地址字符串</span><br><span class="line">String url = &quot;targetServlet&quot;;</span><br><span class="line">//3.在目标URL地址字符串后面附加JSESSIONID的值</span><br><span class="line">url = response.encodeURL(url);</span><br><span class="line">//4.重定向到目标资源</span><br><span class="line">response.sendRedirect(url);</span><br></pre></td></tr></table></figure>
+<h2 id="Session的活化和钝化"><a href="#Session的活化和钝化" class="headerlink" title="Session的活化和钝化"></a>Session的活化和钝化</h2><ul>
+<li>Session机制很好的解决了Cookie的不足，但是当访问应用的用户很多时，服务器上就会创建非常多的Session对象，如果不对这些Session对象进行处理，那么在Session失效之前，这些Session一直都会在服务器的内存中存在。那么就，就出现了Session活化和钝化的机制。</li>
+<li>Session钝化：Session在一段时间内没有被使用时，会将当前存在的Session对象序列化到磁盘上，而不再占用内存空间。</li>
+<li>Session活化：Session被钝化后，服务器再次调用Session对象时，将Session对象由磁盘中加载到内存中使用。</li>
+<li>如果希望Session域中的对象也能够随Session钝化过程一起序列化到磁盘上，则对象的实现类也必须实现java.io.Serializable接口。不仅如此，如果对象中还包含其他对象的引用，则被关联的对象也必须支持序列化，否则会抛出异常：java.io.NotSerializableException</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/11/15/29 web-JSTL概述/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/11/28/31 web-Filter(过滤器)/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

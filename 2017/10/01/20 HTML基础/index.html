@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>01 web-HTML基础 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaWeb概述,">
+  
+
+  <meta name="description" content="网页的组成•结构(HTML)HTML是网页内容的载体。内容就是网页制作者放在页面上想要让用户浏览的信息，可以包含文字、图片、视频等。•表现(CSS)SS)•CSS样式是表现。就像网页的外衣。比如，标题字体、颜色变化，或为标题加入背景图片、边框等。所有这些用来改变内容外观的东西称之为表现。•行为, JavaScript, JQueryJavaScript是用来实现网页上的特效效果。如：鼠标滑过弹出下">
+<meta name="keywords" content="JavaWeb概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01 web-HTML基础">
+<meta property="og:url" content="http://yoursite.com/2017/10/01/20 HTML基础/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="网页的组成•结构(HTML)HTML是网页内容的载体。内容就是网页制作者放在页面上想要让用户浏览的信息，可以包含文字、图片、视频等。•表现(CSS)SS)•CSS样式是表现。就像网页的外衣。比如，标题字体、颜色变化，或为标题加入背景图片、边框等。所有这些用来改变内容外观的东西称之为表现。•行为, JavaScript, JQueryJavaScript是用来实现网页上的特效效果。如：鼠标滑过弹出下">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605151610.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605152114.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605152805.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605152913.png">
+<meta property="og:updated_time" content="2019-06-06T15:03:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="01 web-HTML基础">
+<meta name="twitter:description" content="网页的组成•结构(HTML)HTML是网页内容的载体。内容就是网页制作者放在页面上想要让用户浏览的信息，可以包含文字、图片、视频等。•表现(CSS)SS)•CSS样式是表现。就像网页的外衣。比如，标题字体、颜色变化，或为标题加入背景图片、边框等。所有这些用来改变内容外观的东西称之为表现。•行为, JavaScript, JQueryJavaScript是用来实现网页上的特效效果。如：鼠标滑过弹出下">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605151610.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网页的组成"><span class="toc-text">网页的组成</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML简介"><span class="toc-text">HTML简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HelloWorld"><span class="toc-text">HelloWorld</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#html文件的结构"><span class="toc-text">html文件的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签的语法"><span class="toc-text">标签的语法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTML的常用标签"><span class="toc-text">HTML的常用标签</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-标题标签"><span class="toc-text">1.标题标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-div标签"><span class="toc-text">2.div标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-段落标签"><span class="toc-text">3.段落标签</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-转义字符"><span class="toc-text">4.转义字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-无序列表-amp-有序列表"><span class="toc-text">5.无序列表&amp;有序列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#无序列表语法：unorder-list-ul"><span class="toc-text">无序列表语法：unorder list:ul</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有序列表语法：order-list-ul"><span class="toc-text">有序列表语法：order list:ul</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用img标签插入图片"><span class="toc-text">使用img标签插入图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路径问题："><span class="toc-text">路径问题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超链接"><span class="toc-text">超链接:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#了解-一些强调标签："><span class="toc-text">(了解)一些强调标签：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTML中表格的创建"><span class="toc-text">HTML中表格的创建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表单"><span class="toc-text">表单</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#属性"><span class="toc-text">属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标签"><span class="toc-text">标签</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#css"><span class="toc-text">_css</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS简介"><span class="toc-text">CSS简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS代码语法"><span class="toc-text">CSS代码语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择器的分类"><span class="toc-text">选择器的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS中注释语句"><span class="toc-text">CSS中注释语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS中的颜色"><span class="toc-text">CSS中的颜色</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-20 HTML基础" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">01 web-HTML基础</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.10.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="网页的组成"><a href="#网页的组成" class="headerlink" title="网页的组成"></a>网页的组成</h1><p>•结构(HTML)<br>HTML是网页内容的载体。内容就是网页制作者放在页面上想要让用户浏览的信息，可以包含文字、图片、视频等。<br>•表现(CSS)SS)<br>•CSS样式是表现。就像网页的外衣。比如，标题字体、颜色变化，或为标题加入背景图片、边框等。所有这些用来改变内容外观的东西称之为表现。<br>•行为, JavaScript, JQuery<br>JavaScript是用来实现网页上的特效效果。如：鼠标滑过弹出下拉菜单。或鼠标滑过表格的背景颜色改变。还有购物网站中图片的轮换。可以这么理解，有动画的，有交互的一般都是用JavaScript来实现的.  </p>
+<h2 id="HTML简介"><a href="#HTML简介" class="headerlink" title="HTML简介"></a>HTML简介</h2><ul>
+<li>HTML 是用来描述网页的一种语言。</li>
+<li>HTML 指的是超文本标记语言 (Hyper Text Markup Language)</li>
+<li>【超文本】就是指页面内可以包含图片、链接，甚至音乐、程序等非文字元素</li>
+<li>HTML 不是一种编程语言，而是一种标记语言 (markup language)</li>
+<li>标记语言是一套标记标签 (markup tag)</li>
+<li>HTML 使用标记标签来描述网页</li>
+</ul>
+<h2 id="HelloWorld"><a href="#HelloWorld" class="headerlink" title="HelloWorld"></a>HelloWorld</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605151610.png" alt></p>
+<h2 id="html文件的结构"><a href="#html文件的结构" class="headerlink" title="html文件的结构"></a>html文件的结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.&lt;html&gt;&lt;/html&gt;为HTML页面中的根标签，</span><br><span class="line">    所有的HTML网页中的标签都在&lt;html&gt;&lt;/html&gt;中。  </span><br><span class="line">2.&lt;head&gt;标签用于定义文档的头部，它是所有头部元素的容器。</span><br><span class="line">    头部元素有&lt;title&gt;、&lt;script&gt;、 &lt;style&gt;、&lt;link&gt;、 &lt;meta&gt;等标签。  </span><br><span class="line">3.在&lt;body&gt;和&lt;/body&gt;标签之间的内容是网页的主要内容，</span><br><span class="line">    如&lt;h1&gt;、&lt;p&gt;、&lt;a&gt;、&lt;img&gt;等网页内容标签，在这里的标签中的内容会在浏览器中显示出来。</span><br></pre></td></tr></table></figure>
+<h2 id="标签的语法"><a href="#标签的语法" class="headerlink" title="标签的语法"></a>标签的语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1.标签由英文尖括号 &lt; 和 &gt; 括起来,如：&lt;html&gt;</span><br><span class="line">2.html中的标签一般都是成对出现的,分开始标签和结束标签。结束标签比开始标签多一个 / ,</span><br><span class="line">    &lt;title&gt;..&lt;/title&gt;;还有一些是自结束标签，如：&lt;br/&gt;</span><br><span class="line">	&lt;div&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">3.标签不区分大小写</span><br><span class="line">	&lt;div&gt;i am div&lt;/div&gt;</span><br><span class="line">	&lt;DIV&gt;I AM DIV&lt;/DIV&gt;</span><br><span class="line"></span><br><span class="line">4.标签与标签之间是可以嵌套的，但先后顺序必须保持一致，</span><br><span class="line">    如：&lt;div&gt;里嵌套&lt;p&gt;，那么&lt;/p&gt;必须放在&lt;/div&gt;的前面。</span><br><span class="line">    注意：HTML有一定的容错能力。</span><br><span class="line">	&lt;div&gt;div&lt;h2&gt;h2&lt;/div&gt;&lt;/h2&gt;</span><br><span class="line"></span><br><span class="line">5.标签必须正确关闭		</span><br><span class="line">	&lt;div&gt;i am div&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">6.属性必须有值，且属性值必须加引号 --&gt;</span><br><span class="line">	&lt;div id=&quot;divId&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">7.注释是不可以嵌套的,如：&lt;!-- &lt;!-- 注释部分 --&gt; --&gt;</span><br><span class="line">	&lt;!-- 注释1&lt;!-- 注释2 --&gt; --&gt;</span><br><span class="line"></span><br><span class="line">8..HTML标签不区分大小写,&lt;h1&gt;和&lt;H1&gt;是一样的,但建议小写。</span><br></pre></td></tr></table></figure>
+<h1 id="HTML的常用标签"><a href="#HTML的常用标签" class="headerlink" title="HTML的常用标签"></a>HTML的常用标签</h1><h2 id="1-标题标签"><a href="#1-标题标签" class="headerlink" title="1.标题标签"></a>1.标题标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">语法:h1-h6</span><br><span class="line">            &lt;h1&gt;h1&lt;/h1&gt;</span><br><span class="line">		&lt;h2&gt;h2&lt;/h2&gt;</span><br><span class="line">		&lt;h3&gt;h3&lt;/h3&gt;</span><br><span class="line">		&lt;h4&gt;h4&lt;/h4&gt;</span><br><span class="line">		&lt;h5&gt;h5&lt;/h5&gt;</span><br><span class="line">		&lt;h6&gt;h6&lt;/h6&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-div标签"><a href="#2-div标签" class="headerlink" title="2.div标签"></a>2.div标签</h2><pre><code>语法：div  
+作用：无实际意义，布局。  
+</code></pre><p>相当于一个容器,可以把一些独立的逻辑部分(如网页中独立的栏目版块)划分出来,如下图：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605152114.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">		&lt;div&gt;上&lt;/div&gt;</span><br><span class="line">		&lt;div&gt;中&lt;/div&gt;</span><br><span class="line">		&lt;div&gt;下&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-段落标签"><a href="#3-段落标签" class="headerlink" title="3.段落标签"></a>3.段落标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    语法：p</span><br><span class="line">	特点：换两行</span><br><span class="line">	br:换行标签</span><br><span class="line">	</span><br><span class="line">&lt;p&gt;&amp;emsp;&amp;emsp;段落标签&lt;/p&gt;</span><br><span class="line">	aaa&lt;br&gt;</span><br><span class="line">	bbb</span><br><span class="line">	ccc</span><br><span class="line">	&lt;br&gt;&lt;br&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-转义字符"><a href="#4-转义字符" class="headerlink" title="4.转义字符"></a>4.转义字符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">语法：&amp;;</span><br><span class="line">	常用转义字符</span><br><span class="line">		空格：&amp;nbsp;  &amp;emsp;</span><br><span class="line">		大于号:&amp;gt;</span><br><span class="line">		小于号:&amp;lt;</span><br><span class="line">		版权号码:&amp;copy;</span><br></pre></td></tr></table></figure>
+<h2 id="5-无序列表-amp-有序列表"><a href="#5-无序列表-amp-有序列表" class="headerlink" title="5.无序列表&amp;有序列表"></a>5.无序列表&amp;有序列表</h2><h3 id="无序列表语法：unorder-list-ul"><a href="#无序列表语法：unorder-list-ul" class="headerlink" title="无序列表语法：unorder list:ul"></a>无序列表语法：unorder list:ul</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">        &lt;ul&gt;</span><br><span class="line">			&lt;li&gt;列表项&lt;/li&gt;</span><br><span class="line">		&lt;/ul&gt;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">&lt;ul type=&quot;square&quot;&gt;</span><br><span class="line">		&lt;li&gt;aaa&lt;/li&gt;</span><br><span class="line">		&lt;li&gt;bbb&lt;/li&gt;</span><br><span class="line">		&lt;li&gt;ccc&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="有序列表语法：order-list-ul"><a href="#有序列表语法：order-list-ul" class="headerlink" title="有序列表语法：order list:ul"></a>有序列表语法：order list:ul</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">        &lt;ol&gt;</span><br><span class="line">			&lt;li&gt;列表项&lt;/li&gt;</span><br><span class="line">		&lt;/ol&gt;</span><br><span class="line">		</span><br><span class="line">&lt;ol type=&quot;i&quot;&gt;</span><br><span class="line">		&lt;li&gt;aaa&lt;/li&gt;</span><br><span class="line">		&lt;li&gt;bbb&lt;/li&gt;</span><br><span class="line">		&lt;li&gt;ccc&lt;/li&gt;</span><br><span class="line">&lt;/ol&gt;</span><br></pre></td></tr></table></figure>
+<p>#3 图片标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img alt=&quot;&quot; src=&quot;&quot; title=&quot;&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="使用img标签插入图片"><a href="#使用img标签插入图片" class="headerlink" title="使用img标签插入图片"></a>使用img标签插入图片</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">src:图片路径</span><br><span class="line">alt:图片路径有误时的提示文本</span><br><span class="line">title:鼠标悬停时的提示文本</span><br></pre></td></tr></table></figure>
+<h2 id="路径问题："><a href="#路径问题：" class="headerlink" title="路径问题："></a>路径问题：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 目标b文件与当前a文件是否在同一包下</span><br><span class="line">	 同包下:直接获取目标b文件</span><br><span class="line">     不在同包:先查询目标文件的父包，再找目标文件。</span><br><span class="line">2. 使用../返回上一级	</span><br><span class="line">&lt;img alt=&quot;picture&quot; src=&quot;img/wm.jpg&quot; title=&quot;a&quot; &gt;</span><br></pre></td></tr></table></figure>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接:"></a>超链接:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;&quot; target=&quot;&quot;&gt;&lt;/a&gt;</span><br><span class="line">	使用a标签实现超链接功能</span><br><span class="line">		href:链接的目标路径</span><br><span class="line">		target:以何种方式打开</span><br><span class="line">			值为”_self”时在向当前窗口(默认)打开新的网页</span><br><span class="line">      			值为”_blank”时在新的窗口打开</span><br><span class="line">&lt;a href=&quot;pages/target.html&quot; target=&quot;_self&quot;&gt;跳转到目标页面！&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="了解-一些强调标签："><a href="#了解-一些强调标签：" class="headerlink" title="(了解)一些强调标签："></a>(了解)一些强调标签：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ü &lt;strong&gt;和&lt;em&gt;标签</span><br><span class="line">         两者在强调的语气上有区别: &lt;em&gt; 表示强调，&lt;strong&gt; 表示更强烈的强调。并且在浏览器中&lt;em&gt; 默认用 斜体 表示，&lt;strong&gt; 用 粗体 表示。</span><br><span class="line">ü&lt;span&gt;标签</span><br><span class="line">         &lt;span&gt;标签是没有语义的，它的作用就是为了设置单独的样式用的。有了它就可以对某段文字里的几个字单独设置样式了。</span><br></pre></td></tr></table></figure>
+<h1 id="HTML中表格的创建"><a href="#HTML中表格的创建" class="headerlink" title="HTML中表格的创建"></a>HTML中表格的创建</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">使用table制作表格</span><br><span class="line">	* 使用tr制作表格中的行</span><br><span class="line">		* 使用td|th制作表格中的单元格</span><br><span class="line">	* border=&quot;边框&quot;</span><br><span class="line">	* 跨行跨列</span><br><span class="line">		* 跨行：rowspan</span><br><span class="line">		* 跨列：colspan</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605152805.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;tr&gt;</span><br><span class="line">	&lt;th&gt;姓名&lt;/th&gt;</span><br><span class="line">	&lt;th&gt;阵营&lt;/th&gt;</span><br><span class="line">	&lt;th&gt;职业&lt;/th&gt;</span><br><span class="line">	&lt;th&gt;武器&lt;/th&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">	&lt;td&gt;刘备&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;蜀&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;蜀汉集团董事长&lt;/td&gt;</span><br><span class="line">	&lt;td&gt;双股剑&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h1><p>生活中的表单</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605152913.png" alt></p>
+<p>使用form标签制作表单</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">* action=&quot;表单提交的目标地址&quot;</span><br><span class="line">* method:get|post</span><br><span class="line">* input属性</span><br><span class="line">	type:表单项的类型</span><br><span class="line">	name:表单项的名称（必选，提交数据使用name属性）</span><br><span class="line">	value:表单项的值</span><br><span class="line">	checked:表单项的默认选中状态</span><br></pre></td></tr></table></figure>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><ul>
+<li>input</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">•表单标签：&lt;form action=&quot;&quot;&gt;..&lt;/form&gt;</span><br><span class="line">•文本输入框：&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;</span><br><span class="line">•密码输入框：&lt;input type=&quot;password&quot; name=&quot;pwd&quot;/&gt;</span><br><span class="line">•单选框： &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;提交的值&quot;/&gt;</span><br><span class="line">•多选框：</span><br><span class="line"> &lt;input type=&quot;checkbox&quot; name=&quot;&quot; value=&quot;提交的值&quot; checked=&quot;checked&quot;/&gt;</span><br><span class="line">•下拉列表：</span><br><span class="line">         &lt;select name=&quot;&quot;&gt;</span><br><span class="line">            &lt;option value=&quot;&quot;&gt;没有value属性时提交的值&lt;/option&gt;</span><br><span class="line">         &lt;/select&gt;</span><br><span class="line">•重置按钮：&lt;input type=&quot;reset&quot;&gt;</span><br><span class="line">•提交按钮：&lt;input type=&quot;submit&quot; value=&quot;修改的按钮的值&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;success.html&quot;&gt;</span><br><span class="line">		用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br/&gt;&lt;br/&gt;</span><br><span class="line">		密码：&lt;input type=&quot;password&quot; name=&quot;pwd&quot;/&gt;&lt;br/&gt;&lt;br/&gt;</span><br><span class="line">		</span><br><span class="line">		性别：&lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;man&quot; checked=&quot;checked&quot;/&gt;男</span><br><span class="line">		  	&lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;woman&quot;/&gt;女&lt;br/&gt;&lt;br/&gt;</span><br><span class="line">		  	</span><br><span class="line">		 爱好：&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;basketball&quot; checked=&quot;checked&quot;/&gt;篮球</span><br><span class="line">		  	&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;football&quot;/&gt;足球</span><br><span class="line">		  	&lt;input type=&quot;checkbox&quot; name=&quot;hobby&quot; value=&quot;volleyball&quot;/&gt;排球</span><br><span class="line">		  	&lt;br/&gt;&lt;br/&gt;</span><br><span class="line">		  	</span><br><span class="line">	喜欢的明星：&lt;select name=&quot;star&quot;&gt;</span><br><span class="line">	            &lt;option value=&quot;fbb&quot;&gt;范冰冰&lt;/option&gt;</span><br><span class="line">	            &lt;option value=&quot;zy&quot;&gt;杨颖&lt;/option&gt;</span><br><span class="line">	            &lt;option value=&quot;zzy&quot;&gt;章子怡&lt;/option&gt;</span><br><span class="line">	         &lt;/select&gt;</span><br><span class="line">	         </span><br><span class="line">	         &lt;br/&gt;</span><br><span class="line">	         &lt;br/&gt;</span><br><span class="line">		&lt;input type=&quot;reset&quot;&gt;</span><br><span class="line">		&lt;input type=&quot;submit&quot;&gt;</span><br><span class="line">	&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="css"><a href="#css" class="headerlink" title="_css"></a>_css</h1><h2 id="CSS简介"><a href="#CSS简介" class="headerlink" title="CSS简介"></a>CSS简介</h2><pre><code>CSS全称为“层叠样式表 (Cascading Style Sheets)”，它主要是用于定义HTML内容在浏览器内的显示样式，如文字大小、颜色、字体等。
+</code></pre><h2 id="CSS代码语法"><a href="#CSS代码语法" class="headerlink" title="CSS代码语法"></a>CSS代码语法</h2><p>1.CSS样式由选择符(选择器)和声明组成，而声明又由属性和值组成，如下所示：  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">* 语法：选择器&#123;属性:属性值;属性2:属性值2;&#125;</span><br><span class="line">  	   当有多条声明时, 中间用英文分号&quot;;&quot;分隔</span><br></pre></td></tr></table></figure>
+<p>2.CSS的样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">①写在标签的style属性中：&lt;p style=“font-size: 30px”&gt;字体大小用px表示&lt;/p&gt;</span><br><span class="line">②写在style标签中(style标签一般写在head标签与title标签之间)：</span><br><span class="line">          </span><br><span class="line">    &lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;CSS基本语法&lt;/title&gt;</span><br><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    p&#123;</span><br><span class="line">        color:red;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;!-- </span><br><span class="line">    css:cascading style sheets</span><br><span class="line">        * 语法：选择器&#123;属性:属性值;属性2:属性值2;&#125;</span><br><span class="line">        * 选择器</span><br><span class="line">            标签选择器:h2  p</span><br><span class="line">            类选择器</span><br><span class="line">                定义: .类名&#123;&#125;</span><br><span class="line">                调用: class=&quot;类名&quot;</span><br><span class="line">            ID选择器</span><br><span class="line">                定义: #ID名&#123;&#125;</span><br><span class="line">                调用: id=&quot;ID名&quot;</span><br><span class="line"> --&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p&gt;师傅领进门，修行在个人&lt;/p&gt;</span><br><span class="line">    </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br><span class="line">  ③引入外部CSS文件：</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;style.css&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="选择器的分类"><a href="#选择器的分类" class="headerlink" title="选择器的分类"></a>选择器的分类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">①标签选择器：</span><br><span class="line">②类选择器：.class属性值&#123;..&#125;</span><br><span class="line">定义: .类名&#123;&#125;</span><br><span class="line">调用: class=&quot;类名&quot;</span><br><span class="line">  ③ID选择器：#id属性值&#123;..&#125;</span><br><span class="line">定义: #ID名&#123;&#125;</span><br><span class="line">调用: id=&quot;ID名&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;CSS选择器&lt;/title&gt;</span><br><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">    h2&#123;</span><br><span class="line">        color:#ff0000;</span><br><span class="line">    &#125;</span><br><span class="line">    .cb&#123;</span><br><span class="line">        color:rgb(0,255,255);</span><br><span class="line">    &#125;</span><br><span class="line">    #cy&#123;</span><br><span class="line">        color:yellow;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h2&gt;冬夜读书示子聿&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;cb&quot;&gt;宋代•陆游&lt;/p&gt;</span><br><span class="line">    &lt;p class=&quot;cb&quot;&gt;古人学问无遗力&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;少壮工夫老始成&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;纸上得来终觉浅&lt;/p&gt;</span><br><span class="line">    &lt;p id=&quot;cy&quot;&gt;绝知此事要躬行&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="CSS中注释语句"><a href="#CSS中注释语句" class="headerlink" title="CSS中注释语句"></a>CSS中注释语句</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用/*注释语句*/标明。</span><br></pre></td></tr></table></figure>
+<h2 id="CSS中的颜色"><a href="#CSS中的颜色" class="headerlink" title="CSS中的颜色"></a>CSS中的颜色</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CSS中的颜色用RGB颜色：</span><br><span class="line">红色(red)、绿色(green)、蓝色(blue)——光学三原色表示。</span><br><span class="line"></span><br><span class="line">RGB中每种颜色都用两位十六进制数表示，0表示没有光，</span><br><span class="line">F表示最强的光，并按红、绿、蓝的顺序排列，前面再加上#号。</span><br><span class="line"></span><br><span class="line">例如：#000000黑色；#FFFFFF 白色；#FF0000红色；</span><br><span class="line">   #00FF00绿色；#0000FF蓝色等等。</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/09/25/34 web-文件的上传和下载/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/10/06/21 JavaScript /">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

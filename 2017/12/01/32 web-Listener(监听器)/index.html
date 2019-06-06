@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>13 web-Listener(监听器) | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaWeb概述,">
+  
+
+  <meta name="description" content="简介 Listener用于监听JavaWeb程序中的事件。 例如：ServletContext、HttpSession、ServletRequest的创建、修改和删除。 Listener和我们之前学习的JS中的事件处理机制类似。在JS中，当我们触发某个事件后（例如：点击一个按钮）程序会调用一个响应函数来处理事件。同样的，在JavaWeb中，我们可以为某些事件来设置监听器，当事件被触发时，监听器中的">
+<meta name="keywords" content="JavaWeb概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13 web-Listener(监听器)">
+<meta property="og:url" content="http://yoursite.com/2017/12/01/32 web-Listener(监听器)/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="简介 Listener用于监听JavaWeb程序中的事件。 例如：ServletContext、HttpSession、ServletRequest的创建、修改和删除。 Listener和我们之前学习的JS中的事件处理机制类似。在JS中，当我们触发某个事件后（例如：点击一个按钮）程序会调用一个响应函数来处理事件。同样的，在JavaWeb中，我们可以为某些事件来设置监听器，当事件被触发时，监听器中的">
+<meta property="og:locale" content="Java EE">
+<meta property="og:updated_time" content="2019-06-06T15:09:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="13 web-Listener(监听器)">
+<meta name="twitter:description" content="简介 Listener用于监听JavaWeb程序中的事件。 例如：ServletContext、HttpSession、ServletRequest的创建、修改和删除。 Listener和我们之前学习的JS中的事件处理机制类似。在JS中，当我们触发某个事件后（例如：点击一个按钮）程序会调用一个响应函数来处理事件。同样的，在JavaWeb中，我们可以为某些事件来设置监听器，当事件被触发时，监听器中的">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#观察者模式"><span class="toc-text">观察者模式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#监听器的分类"><span class="toc-text">监听器的分类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-监听对象的创建与销毁"><span class="toc-text">1.    监听对象的创建与销毁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ServletContextListener"><span class="toc-text">ServletContextListener</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpSessionListener"><span class="toc-text">HttpSessionListener</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ServletRequestListener"><span class="toc-text">ServletRequestListener</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建与销毁监听器的使用："><span class="toc-text">创建与销毁监听器的使用：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-监听对象的属性变化"><span class="toc-text">2. 监听对象的属性变化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ServletContextAttributeListener"><span class="toc-text">ServletContextAttributeListener</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#HttpSessionAttributeListener"><span class="toc-text">HttpSessionAttributeListener</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ServletRequestAttributeListener"><span class="toc-text">ServletRequestAttributeListener</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象属性变化监听器的使用："><span class="toc-text">对象属性变化监听器的使用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-监听Session内的对象"><span class="toc-text">3. 监听Session内的对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpSessionBindingListener"><span class="toc-text">HttpSessionBindingListener</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HttpSessionActivationListener"><span class="toc-text">HttpSessionActivationListener</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-32 web-Listener(监听器)" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">13 web-Listener(监听器)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.12.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>Listener用于监听JavaWeb程序中的事件。</li>
+<li>例如：ServletContext、HttpSession、ServletRequest的创建、修改和删除。</li>
+<li>Listener和我们之前学习的JS中的事件处理机制类似。在JS中，当我们触发某个事件后（例如：点击一个按钮）程序会调用一个响应函数来处理事件。同样的，在JavaWeb中，我们可以为某些事件来设置监听器，当事件被触发时，监听器中的指定方法将会被调用。</li>
+</ul>
+<h1 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h1><ul>
+<li>Listener的原理是基于观察者模式的，所谓观察者模式简单来说，就是当被观察者的特定事件被触发（一般这某些方法被调用）后，会通知观察者（调用观察者的方法），观察者可以在自己的方法中来对事件做一些处理。</li>
+<li>在我们的JavaWeb中，观察者就是Listener，而被观察者可能有三个ServletContext、HttpSession、ServletRequest。而事件指的就是这些对象的创建、修改和删除等。</li>
+</ul>
+<h1 id="监听器的分类"><a href="#监听器的分类" class="headerlink" title="监听器的分类"></a>监听器的分类</h1><h2 id="1-监听对象的创建与销毁"><a href="#1-监听对象的创建与销毁" class="headerlink" title="1.    监听对象的创建与销毁"></a>1.    监听对象的创建与销毁</h2><h3 id="ServletContextListener"><a href="#ServletContextListener" class="headerlink" title="ServletContextListener"></a>ServletContextListener</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">作用：监听ServletContext对象的创建与销毁</span><br><span class="line">方法：</span><br><span class="line">	public void contextInitialized ( ServletContextEvent sce );</span><br><span class="line">    	ServletContext创建时调用</span><br><span class="line">	public void contextDestroyed ( ServletContextEvent sce );</span><br><span class="line">    	ServletContext销毁时调用</span><br><span class="line">ServletContextEvent对象</span><br><span class="line">    作用：public ServletContext getServletContext ()</span><br><span class="line">    	获取ServletContext对象</span><br></pre></td></tr></table></figure>
+<h3 id="HttpSessionListener"><a href="#HttpSessionListener" class="headerlink" title="HttpSessionListener"></a>HttpSessionListener</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">作用：监听HttpSession对象的创建与销毁</span><br><span class="line">方法：</span><br><span class="line">	public void sessionCreated ( HttpSessionEvent se );</span><br><span class="line">    	HttpSession对象创建时调用</span><br><span class="line">	public void sessionDestroyed ( HttpSessionEvent se );</span><br><span class="line">    	HttpSession对象销毁时调用</span><br><span class="line">HttpSessionEvent对象</span><br><span class="line">	作用：public HttpSession getSession ()</span><br><span class="line">	获取当前HttpSession对象</span><br></pre></td></tr></table></figure>
+<h3 id="ServletRequestListener"><a href="#ServletRequestListener" class="headerlink" title="ServletRequestListener"></a>ServletRequestListener</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">作用：监听ServletRequest对象的创建与销毁</span><br><span class="line">方法：</span><br><span class="line">	public void requestInitialized ( ServletRequestEvent sre );</span><br><span class="line">    	ServletRequest对象创建时调用</span><br><span class="line">	public void requestDestroyed ( ServletRequestEvent sre );</span><br><span class="line">    	ServletRequest对象销毁时调用</span><br><span class="line">	ServletRequestEvent对象</span><br><span class="line">	作用：</span><br><span class="line">    	public ServletRequest getServletRequest ();</span><br><span class="line">        	获取当前的ServletRequest对象。</span><br><span class="line">    	public ServletContext getServletContext ();</span><br><span class="line">        	获取当前项目的ServletContext对象。</span><br></pre></td></tr></table></figure>
+<h4 id="创建与销毁监听器的使用："><a href="#创建与销毁监听器的使用：" class="headerlink" title="创建与销毁监听器的使用："></a>创建与销毁监听器的使用：</h4><ul>
+<li>三种创建与销毁的监听器使用起来基本一致。</li>
+<li>下边来编写一个ServletContext的监听器：<blockquote>
+<ul>
+<li>步骤：</li>
+<li>创建一个类实现ServletContextListener</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class MyServletContextListener implements ServletContextListener &#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void contextInitialized(ServletContextEvent sce) &#123;</span><br><span class="line">		System.out.println(&quot;哈哈，我是ServletContext，我出生了&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void contextDestroyed(ServletContextEvent sce) &#123;</span><br><span class="line">		System.out.println(&quot;~~~~(&gt;_&lt;)~~~~，我是ServletContext，我要死了&quot;);	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>在web.xml文件中注册监听器</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;listener&gt;</span><br><span class="line">&lt;listener-class&gt;com.atguigu.web.listener.MyServletContextListener&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>由于ServletContext对象在服务器启动时创建，停止时销毁。所以启动服务器时我们会发现contextInitialized()方法被调用，服务器停止时contextDestroyed()方法被调用。<br>ν    其他两个监听器和该监听器使用方法一样，不再多说。</li>
+</ul>
+<h2 id="2-监听对象的属性变化"><a href="#2-监听对象的属性变化" class="headerlink" title="2. 监听对象的属性变化"></a>2. 监听对象的属性变化</h2><h4 id="ServletContextAttributeListener"><a href="#ServletContextAttributeListener" class="headerlink" title="ServletContextAttributeListener"></a>ServletContextAttributeListener</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">作用：监听ServletContext中属性的创建、修改和销毁</span><br><span class="line">方法：</span><br><span class="line">	public void attributeAdded(ServletContextAttributeEvent scab);</span><br><span class="line">    	向ServletContext中添加属性时调用</span><br><span class="line">	public void attributeRemoved(ServletContextAttributeEvent scab);</span><br><span class="line">    	从ServletContext中移除属性时调用</span><br><span class="line">	public void attributeReplaced(ServletContextAttributeEvent scab);</span><br><span class="line">    	当ServletContext中的属性被修改时调用</span><br><span class="line"></span><br><span class="line">ServletContextAttributeEvent对象</span><br><span class="line">    作用：</span><br><span class="line">    	public String getName() </span><br><span class="line">         	获取修改或添加的属性名</span><br><span class="line">    	public Object getValue()</span><br><span class="line">        	获取被修改或添加的属性值</span><br><span class="line">    	public ServletContext getServletContext ()</span><br><span class="line">        	获取当前WEB应用的ServletContext对象</span><br></pre></td></tr></table></figure>
+<h4 id="HttpSessionAttributeListener"><a href="#HttpSessionAttributeListener" class="headerlink" title="HttpSessionAttributeListener"></a>HttpSessionAttributeListener</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">作用：监听HttpSession中属性的创建、修改和销毁</span><br><span class="line">方法：</span><br><span class="line">	public void attributeAdded ( HttpSessionBindingEvent se );</span><br><span class="line">    	向HttpSession中添加属性时调用</span><br><span class="line">	public void attributeRemoved(HttpSessionBindingEvent se);</span><br><span class="line">    	从HttpSession中移除属性时调用</span><br><span class="line">	public void attributeReplaced(HttpSessionBindingEvent se);</span><br><span class="line">    	当HttpSession中的属性被修改时调用</span><br><span class="line">    </span><br><span class="line">    HttpSessionBindingEvent对象</span><br><span class="line">        作用：</span><br><span class="line">        	public String getName() </span><br><span class="line">            	获取修改或添加的属性名</span><br><span class="line">        	public Object getValue()</span><br><span class="line">            	获取被修改或添加的属性值</span><br><span class="line">        	public HttpSession getSession ()</span><br><span class="line">            	获取当前的HttpSession对象</span><br></pre></td></tr></table></figure>
+<h4 id="ServletRequestAttributeListener"><a href="#ServletRequestAttributeListener" class="headerlink" title="ServletRequestAttributeListener"></a>ServletRequestAttributeListener</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">作用：监听ServletRequest中属性的创建、修改和销毁</span><br><span class="line">方法：</span><br><span class="line">	public void attributeAdded (ServletRequestAttributeEvent srae );</span><br><span class="line">    	向ServletRequest中添加属性时调用</span><br><span class="line">	public void attributeRemoved(ServletRequestAttributeEvent srae);</span><br><span class="line">    	从ServletRequest中移除属性时调用</span><br><span class="line">	public void attributeReplaced(ServletRequestAttributeEvent srae);</span><br><span class="line">    	当ServletRequest中的属性被修改时调用</span><br><span class="line"></span><br><span class="line">	ServletRequestAttributeEvent对象</span><br><span class="line">	作用：</span><br><span class="line">    	public String getName() </span><br><span class="line">        	获取修改或添加的属性名</span><br><span class="line">    	public Object getValue()</span><br><span class="line">        	获取被修改或添加的属性值</span><br><span class="line">    	public ServletRequest getServletRequest () </span><br><span class="line">        	获取当前的ServletRequest对象</span><br></pre></td></tr></table></figure>
+<h3 id="对象属性变化监听器的使用："><a href="#对象属性变化监听器的使用：" class="headerlink" title="对象属性变化监听器的使用："></a>对象属性变化监听器的使用：</h3><ul>
+<li>同样三种对象属性变化监听器使用方式类似，下边以request属性监听器为例。<ul>
+<li>创建一个类实现ServletRequestAttributeListener接口</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class ReqAttrListener implements ServletRequestAttributeListener &#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void attributeAdded(ServletRequestAttributeEvent srae) &#123;</span><br><span class="line">		System.out.println(&quot;request域中添加一个属性&quot;+srae.getName()+&quot;=&quot;+srae.getValue());</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void attributeRemoved(ServletRequestAttributeEvent srae) &#123;</span><br><span class="line">		System.out.println(&quot;request域中移除一个属性&quot;+srae.getName()+&quot;=&quot;+srae.getValue());</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void attributeReplaced(ServletRequestAttributeEvent srae) &#123;</span><br><span class="line">		System.out.println(&quot;request域中一个属性被修改了&quot;+srae.getName()+&quot;=&quot;+srae.getValue());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在web.xml文件中注册监听器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;listener&gt;</span><br><span class="line">		&lt;listener-class&gt;com.atguigu.web.listener.ReqAttrListener&lt;/listener-class&gt;</span><br><span class="line">	&lt;/listener&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如此当我们操作request域中的属性时，对应方法将会被调用。</li>
+</ul>
+<h2 id="3-监听Session内的对象"><a href="#3-监听Session内的对象" class="headerlink" title="3. 监听Session内的对象"></a>3. 监听Session内的对象</h2><h3 id="HttpSessionBindingListener"><a href="#HttpSessionBindingListener" class="headerlink" title="HttpSessionBindingListener"></a>HttpSessionBindingListener</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">作用：监听某个对象在session域中的创建与移除。</span><br><span class="line">方法：</span><br><span class="line">	public void valueBound(HttpSessionBindingEvent event)</span><br><span class="line">    	该类的实例被放到Session域中时调用</span><br><span class="line">	public void valueUnbound(HttpSessionBindingEvent event)</span><br><span class="line">    	该类的实例从Session中移除时调用</span><br><span class="line">HttpSessionBindingEvent对象</span><br><span class="line">作用：</span><br><span class="line">	public HttpSession getSession ()</span><br><span class="line">    	获取HttpSession对象</span><br><span class="line">	public String getName()</span><br><span class="line">    	获取操作的属性名</span><br><span class="line">	public Object getValue()</span><br><span class="line">    	获取操作的属性值</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用：要监听哪一个类，直接使该类实现HttpSessionB</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">indingListener接口即可。</span><br><span class="line">public class Student implements HttpSessionBindingListener &#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void valueBound(HttpSessionBindingEvent event) &#123;</span><br><span class="line">		//doSomeThing</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void valueUnbound(HttpSessionBindingEvent event) &#123;</span><br><span class="line">		//doSomeThing</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="HttpSessionActivationListener"><a href="#HttpSessionActivationListener" class="headerlink" title="HttpSessionActivationListener"></a>HttpSessionActivationListener</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">作用：监听某个对象在session中的序列化与反序列化。</span><br><span class="line">方法：</span><br><span class="line">	public void sessionWillPassivate(HttpSessionEvent se)</span><br><span class="line">    	该类实例和Session一起钝化到硬盘时调用</span><br><span class="line">	public void sessionDidActivate(HttpSessionEvent se)</span><br><span class="line">    	该类实例和Session一起活化到内存时调用</span><br><span class="line">HttpSessionEvent对象</span><br><span class="line">作用：</span><br><span class="line">	public HttpSession getSession ()</span><br><span class="line">    	获取HttpSession对象</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用：要监听哪一个类，直接使该类实现HttpSessionActivationListener接口即可。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class Student implements HttpSessionActivationListener , Serializable &#123;</span><br><span class="line">	private static final long serialVersionUID = 1L;</span><br><span class="line">	@Override</span><br><span class="line">	public void sessionWillPassivate(HttpSessionEvent se) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public void sessionDidActivate(HttpSessionEvent se) &#123;</span><br><span class="line">		// TODO Auto-generated method stub</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：这里为了是Student对象可以正常序列化到硬盘上，还需要让类实现java.io.Serializable接口</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/11/28/31 web-Filter(过滤器)/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>06 web-HTTP协议 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaWeb概述,">
+  
+
+  <meta name="description" content="1.    HTTP协议简介 HTTP 超文本传输协议 (HTTP-Hypertext transfer protocol)，是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。它是一种详细规定了浏览器和万维网服务器之间互相通信的规则，通过因特网传送万维网文档的数据传送协议。 客户端与服务端通信时传输">
+<meta name="keywords" content="JavaWeb概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06 web-HTTP协议">
+<meta property="og:url" content="http://yoursite.com/2017/10/27/25 web-HTTP协议/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="1.    HTTP协议简介 HTTP 超文本传输协议 (HTTP-Hypertext transfer protocol)，是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。它是一种详细规定了浏览器和万维网服务器之间互相通信的规则，通过因特网传送万维网文档的数据传送协议。 客户端与服务端通信时传输">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103412.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103540.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103649.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103715.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103741.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606104102.png">
+<meta property="og:updated_time" content="2019-06-06T15:07:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="06 web-HTTP协议">
+<meta name="twitter:description" content="1.    HTTP协议简介 HTTP 超文本传输协议 (HTTP-Hypertext transfer protocol)，是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。它是一种详细规定了浏览器和万维网服务器之间互相通信的规则，通过因特网传送万维网文档的数据传送协议。 客户端与服务端通信时传输">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103412.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-HTTP协议简介"><span class="toc-text">1.    HTTP协议简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-HTTP协议的发展历程"><span class="toc-text">2.    HTTP协议的发展历程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-HTTP协议的会话方式"><span class="toc-text">3.    HTTP协议的会话方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-HTTP1-0和HTTP1-1的区别"><span class="toc-text">4.    HTTP1.0和HTTP1.1的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-HttpWatch"><span class="toc-text">5.    HttpWatch</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-安装"><span class="toc-text">5.1 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-使用"><span class="toc-text">5.2 使用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-报文"><span class="toc-text">6.    报文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-报文格式"><span class="toc-text">6.1 报文格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-请求报文"><span class="toc-text">6.2 请求报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-1-报文格式"><span class="toc-text">6.2.1 报文格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-2-GET请求"><span class="toc-text">6.2.2 GET请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-3-POST请求"><span class="toc-text">6.2.3 POST请求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-响应报文"><span class="toc-text">6.3 响应报文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-1-报文格式"><span class="toc-text">6.3.1 报文格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-2-响应码"><span class="toc-text">6.3.2 响应码</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-25 web-HTTP协议" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">06 web-HTTP协议</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.10.27</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="1-HTTP协议简介"><a href="#1-HTTP协议简介" class="headerlink" title="1.    HTTP协议简介"></a>1.    HTTP协议简介</h1><ul>
+<li>HTTP 超文本传输协议 (HTTP-Hypertext transfer protocol)，是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。它是一种详细规定了浏览器和万维网服务器之间互相通信的规则，通过因特网传送万维网文档的数据传送协议。</li>
+<li>客户端与服务端通信时传输的内容我们称之为报文。</li>
+<li>HTTP就是一个通信规则，这个规则规定了客户端发送给服务器的报文格式，也规定了服务器发送给客户端的报文格式。实际我们要学习的就是这两种报文。客户端发送给服务器的称为”请求报文“，服务器发送给客户端的称为”响应报文“。</li>
+</ul>
+<h1 id="2-HTTP协议的发展历程"><a href="#2-HTTP协议的发展历程" class="headerlink" title="2.    HTTP协议的发展历程"></a>2.    HTTP协议的发展历程</h1><ul>
+<li>超文本传输协议的前身是世外桃源(Xanadu)项目，超文本的概念是泰德˙纳尔森(Ted Nelson)在1960年代提出的。进入哈佛大学后，纳尔森一直致力于超文本协议和该项目的研究，但他从未公开发表过资料。1989年，蒂姆˙伯纳斯˙李(Tim Berners Lee)在CERN(欧洲原子核研究委员会 = European Organization for Nuclear Research)担任软件咨询师的时候，开发了一套程序，奠定了万维网(WWW = World Wide Web)的基础。1990年12月，超文本在CERN首次上线。1991年夏天，继Telnet等协议之后，超文本转移协议成为互联网诸多协议的一分子。</li>
+<li>当时，Telnet协议解决了一台计算机和另外一台计算机之间一对一的控制型通信的要求。邮件协议解决了一个发件人向少量人员发送信息的通信要求。文件传输协议解决一台计算机从另外一台计算机批量获取文件的通信要求，但是它不具备一边获取文件一边显示文件或对文件进行某种处理的功能。新闻传输协议解决了一对多新闻广播的通信要求。而超文本要解决的通信要求是：在一台计算机上获取并显示存放在多台计算机里的文本、数据、图片和其他类型的文件；它包含两大部分：超文本转移协议和超文本标记语言(HTML)。HTTP、HTML以及浏览器的诞生给互联网的普及带来了飞跃。</li>
+</ul>
+<h1 id="3-HTTP协议的会话方式"><a href="#3-HTTP协议的会话方式" class="headerlink" title="3.    HTTP协议的会话方式"></a>3.    HTTP协议的会话方式</h1><ul>
+<li>浏览器与服务器之间的通信过程要经历四个步骤</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103412.png" alt></p>
+<ul>
+<li>浏览器与WEB服务器的连接过程是短暂的，每次连接只处理一个请求和响应。对每一个页面的访问，浏览器与WEB服务器都要建立一次单独的连接。</li>
+<li>浏览器到WEB服务器之间的所有通讯都是完全独立分开的请求和响应对。<h1 id="4-HTTP1-0和HTTP1-1的区别"><a href="#4-HTTP1-0和HTTP1-1的区别" class="headerlink" title="4.    HTTP1.0和HTTP1.1的区别"></a>4.    HTTP1.0和HTTP1.1的区别</h1></li>
+<li>在HTTP1.0版本中，浏览器请求一个带有图片的网页，会由于下载图片而与服务器之间开启一个新的连接；但在HTTP1.1版本中，允许浏览器在拿到当前请求对应的全部资源后再断开连接，提高了效率。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103540.png" alt></p>
+<h1 id="5-HttpWatch"><a href="#5-HttpWatch" class="headerlink" title="5.    HttpWatch"></a>5.    HttpWatch</h1><h2 id="5-1-安装"><a href="#5-1-安装" class="headerlink" title="5.1 安装"></a>5.1 安装</h2><ul>
+<li>由于IE8以下的IE浏览器没有提供监听HTTP的功能，所以如果要使用IE8以下的浏览器查看HTTP请求的内容需要安装一个工具HttpWatch。</li>
+<li>Firefox和chrome都有内置的开发者工具，可以直接查看Http请求。</li>
+<li>HttpWatch的使用非常简单，直接安装，然后一直下一步，直到安装完成。</li>
+</ul>
+<h2 id="5-2-使用"><a href="#5-2-使用" class="headerlink" title="5.2 使用"></a>5.2 使用</h2><ul>
+<li>安装完成后，打开IE浏览器，工具下拉列表可以看到HttpWatch Professional选项</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103649.png" alt></p>
+<ul>
+<li>打开后点击Record按钮开始监听Http请求。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103715.png" alt></p>
+<h1 id="6-报文"><a href="#6-报文" class="headerlink" title="6.    报文"></a>6.    报文</h1><h2 id="6-1-报文格式"><a href="#6-1-报文格式" class="headerlink" title="6.1 报文格式"></a>6.1 报文格式</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606103741.png" alt></p>
+<h2 id="6-2-请求报文"><a href="#6-2-请求报文" class="headerlink" title="6.2 请求报文"></a>6.2 请求报文</h2><h3 id="6-2-1-报文格式"><a href="#6-2-1-报文格式" class="headerlink" title="6.2.1 报文格式"></a>6.2.1 报文格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">请求首行（请求行）；</span><br><span class="line">请求头信息（请求头）；</span><br><span class="line">空行；</span><br><span class="line">请求体；</span><br></pre></td></tr></table></figure>
+<h3 id="6-2-2-GET请求"><a href="#6-2-2-GET请求" class="headerlink" title="6.2.2 GET请求"></a>6.2.2 GET请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /Hello/index.jsp HTTP/1.1</span><br><span class="line">Accept: */*</span><br><span class="line">Accept-Language: zh-CN</span><br><span class="line">User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Host: localhost:8080</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Cookie: JSESSIONID=C55836CDA892D9124C03CF8FE8311B15</span><br></pre></td></tr></table></figure>
+<ul>
+<li>GET /Hello/index.jsp HTTP/1.1：GET请求，请求服务器路径为Hello/index.jsp，协议为1.1；</li>
+<li>Host:localhost：请求的主机名为localhost；</li>
+<li>User-Agent: Mozilla/4.0 (compatible; MSIE 8.0…：与浏览器和OS相关的信息。有些网站会显示用户的系统版本和浏览器版本信息，这都是通过获取User-Agent头信息而来的；</li>
+<li>Accept: <em>/</em>：告诉服务器，当前客户端可以接收的文档类型， <em>/</em>，就表示什么都可以接收；</li>
+<li>Accept-Language: zh-CN：当前客户端支持的语言，可以在浏览器的工具选项中找到语言相关信息；</li>
+<li>Accept-Encoding: gzip, deflate：支持的压缩格式。数据在网络上传递时，可能服务器会把数据压缩后再发送；</li>
+<li>Connection: keep-alive：客户端支持的链接方式，保持一段时间链接，默认为3000ms；</li>
+<li>Cookie: JSESSIONID=369766FDF6220F7803433C0B2DE36D98：因为不是第一次访问这个地址，所以会在请求中把上一次服务器响应中发送过来的Cookie在请求中一并发送过去。</li>
+</ul>
+<h3 id="6-2-3-POST请求"><a href="#6-2-3-POST请求" class="headerlink" title="6.2.3 POST请求"></a>6.2.3 POST请求</h3><ul>
+<li>POST请求要求将form标签的method的属性设置为post</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606104102.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">POST /Hello/target.html HTTP/1.1</span><br><span class="line">Accept: application/x-ms-application, image/jpeg, application/xaml+xml, image/gif, image/pjpeg, application/x-ms-xbap, */*</span><br><span class="line">Referer: http://localhost:8080/Hello/</span><br><span class="line">Accept-Language: zh-CN</span><br><span class="line">User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E)</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Host: localhost:8080</span><br><span class="line">Content-Length: 14</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Cache-Control: no-cache</span><br><span class="line">Cookie: JSESSIONID=774DA38C1B78AE288610D77621590345</span><br><span class="line"></span><br><span class="line">username=admin</span><br></pre></td></tr></table></figure>
+<ul>
+<li>POST请求有请求体，而GET请求没有请求体。</li>
+<li>Referer: <a href="http://localhost:8080/hello/index.jsp：请求来自哪个页面，例如你在百度上点击链接到了这里，那么Referer:http://www.baidu.com；如果你是在浏览器的地址栏中直接输入的地址，那么就没有Referer这个请求头了；" target="_blank" rel="noopener">http://localhost:8080/hello/index.jsp：请求来自哪个页面，例如你在百度上点击链接到了这里，那么Referer:http://www.baidu.com；如果你是在浏览器的地址栏中直接输入的地址，那么就没有Referer这个请求头了；</a></li>
+<li>Content-Type: application/x-www-form-urlencoded：表单的数据类型，说明会使用url格式编码数据；url编码的数据都是以“%”为前缀，后面跟随两位的16进制，例如“传智”这两个字使用UTF-8的url编码用为“%E4%BC%A0%E6%99%BA”；</li>
+<li>Content-Length:13：请求体的长度，这里表示13个字节。</li>
+<li>keyword=hello：请求体内容！hello是在表单中输入的数据，keyword是表单字段的名字。</li>
+</ul>
+<h2 id="6-3-响应报文"><a href="#6-3-响应报文" class="headerlink" title="6.3 响应报文"></a>6.3 响应报文</h2><h3 id="6-3-1-报文格式"><a href="#6-3-1-报文格式" class="headerlink" title="6.3.1 报文格式"></a>6.3.1 报文格式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">响应首行（响应行）；</span><br><span class="line">响应头信息（响应头）；</span><br><span class="line">空行；</span><br><span class="line">响应体；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Server: Apache-Coyote/1.1</span><br><span class="line">Content-Type: text/html;charset=UTF-8</span><br><span class="line">Content-Length: 274</span><br><span class="line">Date: Tue, 07 Apr 2015 10:08:26 GMT</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;Hello&lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>HTTP/1.1 200 OK：响应协议为HTTP1.1，状态码为200，表示请求成功；</li>
+<li>Server: Apache-Coyote/1.1：服务器的版本信息；</li>
+<li>Content-Type: text/html;charset=UTF-8：响应体使用的编码为UTF-8；</li>
+<li>Content-Length: 274：响应体为274字节；</li>
+<li>Date: Tue, 07 Apr 2015 10:08:26 GMT：响应的时间，这可能会有8小时的时区差；</li>
+</ul>
+<h3 id="6-3-2-响应码"><a href="#6-3-2-响应码" class="headerlink" title="6.3.2 响应码"></a>6.3.2 响应码</h3><p>响应码对浏览器来说很重要，它告诉浏览器响应的结果；</p>
+<ul>
+<li>200：请求成功，浏览器会把响应体内容（通常是html）显示在浏览器中；</li>
+<li>404：请求的资源没有找到，说明客户端错误的请求了不存在的资源；</li>
+<li>500：请求资源找到了，但服务器内部出现了错误；</li>
+<li>302：重定向，当响应码为302时，表示服务器要求浏览器重新再发一个请求，服务器会发送一个响应头Location，它指定了新请求的URL地址；</li>
+</ul>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/10/20/24 web-环境搭建及Tomcat安装、配置、启动.md/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/10/30/26 web-Servlet概述/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

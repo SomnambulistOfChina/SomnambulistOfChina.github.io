@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>04 web-XML概述 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaWeb概述,">
+  
+
+  <meta name="description" content="XML简介•XML–可扩展标记语言    eXtensible Markup Language•由W3C组织发布，目前推荐遵守的是W3C组织于2000年发布的XML1.0规范•XML的使命，就是以一个统一的格式，组织有关系的数据，为不同平台下的应用程序服务•XML用来传输和存储数据，HTML用来显示数据•XML没有预定义标签，均为自定义标签•XML用途•XML–可扩展标记语言    eXtensi">
+<meta name="keywords" content="JavaWeb概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="04 web-XML概述">
+<meta property="og:url" content="http://yoursite.com/2017/10/14/23 web-XML概述/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="XML简介•XML–可扩展标记语言    eXtensible Markup Language•由W3C组织发布，目前推荐遵守的是W3C组织于2000年发布的XML1.0规范•XML的使命，就是以一个统一的格式，组织有关系的数据，为不同平台下的应用程序服务•XML用来传输和存储数据，HTML用来显示数据•XML没有预定义标签，均为自定义标签•XML用途•XML–可扩展标记语言    eXtensi">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605165437.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605165528.png">
+<meta property="og:updated_time" content="2019-06-06T15:07:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="04 web-XML概述">
+<meta name="twitter:description" content="XML简介•XML–可扩展标记语言    eXtensible Markup Language•由W3C组织发布，目前推荐遵守的是W3C组织于2000年发布的XML1.0规范•XML的使命，就是以一个统一的格式，组织有关系的数据，为不同平台下的应用程序服务•XML用来传输和存储数据，HTML用来显示数据•XML没有预定义标签，均为自定义标签•XML用途•XML–可扩展标记语言    eXtensi">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605165437.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#XML简介"><span class="toc-text">XML简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XML基本语法"><span class="toc-text">XML基本语法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XML文档组成"><span class="toc-text">XML文档组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XML解析"><span class="toc-text">XML解析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#XML解析技术体系"><span class="toc-text">XML解析技术体系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DOM和SAX对比"><span class="toc-text">DOM和SAX对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dom4j"><span class="toc-text">dom4j</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dom4j解析关键步骤"><span class="toc-text">Dom4j解析关键步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eg"><span class="toc-text">eg</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Xpath查询"><span class="toc-text">Xpath查询</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-23 web-XML概述" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">04 web-XML概述</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.10.14</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="XML简介"><a href="#XML简介" class="headerlink" title="XML简介"></a>XML简介</h1><p>•XML–可扩展标记语言<br>    eXtensible Markup Language<br>•由W3C组织发布，目前推荐遵守的是W3C组织于2000年发布的XML1.0规范<br>•XML的使命，就是以一个统一的格式，组织有关系的数据，为不同平台下的应用程序服务<br>•XML用来传输和存储数据，HTML用来显示数据<br>•XML没有预定义标签，均为自定义标签<br>•XML用途<br>•XML–可扩展标记语言<br>    eXtensible Markup Language<br>•由W3C组织发布，目前推荐遵守的是W3C组织于2000年发布的XML1.0规范<br>•XML的使命，就是以一个统一的格式，组织有关系的数据，为不同平台下的应用程序服务<br>•XML用来传输和存储数据，HTML用来显示数据<br>•XML没有预定义标签，均为自定义标签 </p>
+<h1 id="XML基本语法"><a href="#XML基本语法" class="headerlink" title="XML基本语法"></a>XML基本语法</h1><p>①XML声明要么不写，要写就写在第一行，并且前面没有任何其他字符<br>②只能有一个根标签<br>③标签必须正确结束<br>④标签不能交叉嵌套<br>⑤严格区分大小写<br>⑥属性必须有值，且必须加引号<br>⑦标签不能以数字开头<br>⑧注释不能嵌套  </p>
+<h1 id="XML文档组成"><a href="#XML文档组成" class="headerlink" title="XML文档组成"></a>XML文档组成</h1><ul>
+<li>XML声明</li>
+</ul>
+<p>•version属性指定XML版本，固定值是1.0<br>•encoding指定的字符集，是告诉解析器使用什么字符集进行解码，而编码是由文本编辑器决定的</p>
+<ul>
+<li>CDATA区<br>•当XML文档中需要写一些程序代码、SQL语句或其他不希望XML解析器进行解析的内容时，就可以写在CDATA区中<br>•XML解析器会将CDATA区中的内容原封不动的输出<br>•CDATA区的定义格式：&lt;![CDATA[…]]&gt;</li>
+</ul>
+<h1 id="XML解析"><a href="#XML解析" class="headerlink" title="XML解析"></a>XML解析</h1><p>•XML解析是指通过解析器读取XML文档，解释语法，并将文档转化成对象<br>•对XML的一切操作都是由解析开始的，所以解析非常重要。<br>•Java 平台同时提供了 DOM（Document Object Model）和 SAX（Simple API for XML）。  </p>
+<h2 id="XML解析技术体系"><a href="#XML解析技术体系" class="headerlink" title="XML解析技术体系"></a>XML解析技术体系</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605165437.png" alt></p>
+<h1 id="DOM和SAX对比"><a href="#DOM和SAX对比" class="headerlink" title="DOM和SAX对比"></a>DOM和SAX对比</h1><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190605165528.png" alt><br> DOM SAX</p>
+<h1 id="dom4j"><a href="#dom4j" class="headerlink" title="dom4j"></a>dom4j</h1><p>•dom4j是一个开源XML解析包<br>•dom4j是一个非常优秀的Java XML API，具有性能优异、功能强大和极易使用的特点。现在很多软件都采用dom4j，例如Hibernate。<br>•使用dom4j开发，需导入dom4j相应的jar包dom4j-1.6.1.jar</p>
+<h2 id="Dom4j解析关键步骤"><a href="#Dom4j解析关键步骤" class="headerlink" title="Dom4j解析关键步骤"></a>Dom4j解析关键步骤</h2><p>•解析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//1.创建解析器对象</span><br><span class="line">SAXReader saxReader = new SAXReader();</span><br><span class="line">//2.解析xml文件获取document对象</span><br><span class="line">Document document = saxReader.read(&quot;students.xml&quot;);</span><br><span class="line">//3.得到根元素</span><br><span class="line">Element root = document.getRootElement();</span><br><span class="line">•修改</span><br><span class="line">//添加一个新的student节点</span><br><span class="line">Element newEle = rootElement.addElement(&quot;student&quot;);</span><br><span class="line"></span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<h2 id="eg"><a href="#eg" class="headerlink" title="eg"></a>eg</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        //创建解析器</span><br><span class="line">    	SAXReader reader = new SAXReader();</span><br><span class="line">    	//将.xml文件解析为document对象</span><br><span class="line">		Document document = reader.read(&quot;students.xml&quot;);</span><br><span class="line">		//通过Document对象获取跟元素</span><br><span class="line">		Element rootElement = document.getRootElement();</span><br><span class="line">		//通过跟元素，遍历子元素</span><br><span class="line">		List&lt;Element&gt; elements = rootElement.elements();</span><br><span class="line">		for (Element element : elements) &#123;</span><br><span class="line">			//获取元素的属性值</span><br><span class="line">			String id = element.attributeValue(&quot;id&quot;);</span><br><span class="line">			//获取子元素的文本值</span><br><span class="line">			String name = element.elementText(&quot;name&quot;);</span><br><span class="line">			String age = element.elementText(&quot;age&quot;);</span><br><span class="line">			Student stu = new Student(id, name, age);</span><br><span class="line">			System.out.println(stu);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125; catch (DocumentException e) &#123;</span><br><span class="line">			// TODO Auto-generated catch block</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Xpath查询"><a href="#Xpath查询" class="headerlink" title="Xpath查询"></a>Xpath查询</h1><p>•XPath 是在 XML 文档中查找信息的语言<br>•XPath通过元素和属性进行查找，简化了Dom4j查找节点的过程，是W3C组织发布的标准。<br>•使用XPath必须导入jaxen-1.1-beta-6.jar包<br>•具体语法见 XPathTutorial(菜鸟必备)<br>•两个重要方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.selectSingleNode(&quot;/students/student[@id=&apos;1&apos;]&quot;)</span><br><span class="line">document.selectNodes(&quot;/students/student&quot;)</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/10/10/22 jQuery基础/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/10/20/24 web-环境搭建及Tomcat安装、配置、启动.md/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

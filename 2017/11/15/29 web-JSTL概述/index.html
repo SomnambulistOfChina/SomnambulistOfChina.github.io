@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>10 web-JSTL概述 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="JavaWeb概述,">
+  
+
+  <meta name="description" content="JSTL简介 JSP虽然为我们提供了EL表达式用来替代JSP表达式，但是由于EL表达式仅仅具有输出功能，而不替代页面中的JSP脚本片段。 为了解决这个问题，JSP为我们提供了可以自定义标签库(Tag Library)的功能。 所谓自定义标签库就是指可以在JSP页面中以类似于HTML标签的形式调用Java中的方法。使用方法和我们JSP动作标签类似。 而为了方便开发使用Sun公司又定义了一套通用的标签">
+<meta name="keywords" content="JavaWeb概述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10 web-JSTL概述">
+<meta property="og:url" content="http://yoursite.com/2017/11/15/29 web-JSTL概述/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="JSTL简介 JSP虽然为我们提供了EL表达式用来替代JSP表达式，但是由于EL表达式仅仅具有输出功能，而不替代页面中的JSP脚本片段。 为了解决这个问题，JSP为我们提供了可以自定义标签库(Tag Library)的功能。 所谓自定义标签库就是指可以在JSP页面中以类似于HTML标签的形式调用Java中的方法。使用方法和我们JSP动作标签类似。 而为了方便开发使用Sun公司又定义了一套通用的标签">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606115859.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606144819.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606144520.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606144625.png">
+<meta property="og:image" content="http://note.youdao.com/yws/res/8882/A47D18C6C90D47C19778B9EA50D9B13A">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606145515.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606145633.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606150021.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606150205.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606150313.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606150356.png">
+<meta property="og:updated_time" content="2019-06-06T15:08:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10 web-JSTL概述">
+<meta name="twitter:description" content="JSTL简介 JSP虽然为我们提供了EL表达式用来替代JSP表达式，但是由于EL表达式仅仅具有输出功能，而不替代页面中的JSP脚本片段。 为了解决这个问题，JSP为我们提供了可以自定义标签库(Tag Library)的功能。 所谓自定义标签库就是指可以在JSP页面中以类似于HTML标签的形式调用Java中的方法。使用方法和我们JSP动作标签类似。 而为了方便开发使用Sun公司又定义了一套通用的标签">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606115859.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JSTL简介"><span class="toc-text">JSTL简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用JSTL"><span class="toc-text">使用JSTL</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#标签库"><span class="toc-text">标签库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心标签-Core-Tags"><span class="toc-text">核心标签(Core Tags)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-c-out-gt"><span class="toc-text">&lt;c:out&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-c-set-gt"><span class="toc-text">&lt;c:set&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-c-remove-gt"><span class="toc-text">&lt;c:remove&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-c-if-gt"><span class="toc-text">&lt;c:if&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-c-choose-gt-、-lt-c-when-gt-、-lt-c-otherwise-gt"><span class="toc-text">&lt;c:choose&gt;、&lt;c:when&gt;、&lt;c:otherwise&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-c-forEach-gt"><span class="toc-text">&lt;c:forEach&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-c-url-gt"><span class="toc-text">&lt;c:url&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-c-redirect-gt"><span class="toc-text">&lt;c:redirect&gt;</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSTL函数（JSTL-Functions）"><span class="toc-text">JSTL函数（JSTL Functions）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#fn-contains和fn-containsIgnoreCase"><span class="toc-text">fn:contains和fn:containsIgnoreCase</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fn-startsWith和fn-endsWith"><span class="toc-text">fn:startsWith和fn:endsWith</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fn-indexOf"><span class="toc-text">fn:indexOf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fn-replace"><span class="toc-text">fn:replace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fn-substringBefore和fn-substringAfter"><span class="toc-text">fn:substringBefore和fn:substringAfter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fn-split"><span class="toc-text">fn:split</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fn-join"><span class="toc-text">fn:join</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fn-toLowerCase和fn-toUpperCase"><span class="toc-text">fn:toLowerCase和fn:toUpperCase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fn-trim"><span class="toc-text">fn:trim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fn-length"><span class="toc-text">fn:length</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-29 web-JSTL概述" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">10 web-JSTL概述</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.11.15</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaWeb/">JavaWeb</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="JSTL简介"><a href="#JSTL简介" class="headerlink" title="JSTL简介"></a>JSTL简介</h1><ul>
+<li>JSP虽然为我们提供了EL表达式用来替代JSP表达式，但是由于EL表达式仅仅具有输出功能，而不替代页面中的JSP脚本片段。</li>
+<li>为了解决这个问题，JSP为我们提供了可以自定义标签库(Tag Library)的功能。</li>
+<li>所谓自定义标签库就是指可以在JSP页面中以类似于HTML标签的形式调用Java中的方法。使用方法和我们JSP动作标签类似。</li>
+<li>而为了方便开发使用Sun公司又定义了一套通用的标签库名为JSTL(JSP Standard Tag Library)，里面定义很多我们开发中常用的方法，方便我们使用。</li>
+<li>JSTL的标准由Sun公司定制，Apache的Jakarta小组负责实现。</li>
+<li>JSTL由5个不同功能的标签库组成。</li>
+</ul>
+<h2 id="使用JSTL"><a href="#使用JSTL" class="headerlink" title="使用JSTL"></a>使用JSTL</h2><ul>
+<li>使用JSTL必须在项目中导入两个jar包<ul>
+<li>taglibs-standard-impl-1.2.1.jar</li>
+<li>taglibs-standard-spec-1.2.5.jar</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>然后还需要在JSP页面中通过taglib指令引入标签库。<ul>
+<li>&lt;%@ taglib prefix=”c” uri=”<a href="http://java.sun.com/jsp/jstl/core&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/core&quot;</a> %&gt;</li>
+<li>prefix用来指定前缀名，我们通过该名来使用JSTL</li>
+<li>uri相当于库的唯一标识，因为JSTL由多个不同的库组成，使用该属性指定要导入哪个库。</li>
+</ul>
+</li>
+<li>使用JSTL<ul>
+<li>&lt;c:out value=”hello”&gt;&lt;/c:out&gt;</li>
+<li>这个例子标识，调用前缀为c的标签的out方法，向页面中输出value属性中的字符串。</li>
+<li>JSTL的使用非常像html标签。</li>
+</ul>
+</li>
+</ul>
+<h1 id="标签库"><a href="#标签库" class="headerlink" title="标签库"></a>标签库</h1><p>JSTL由五个不同功能的标签库组成。</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606115859.png" alt></p>
+<h2 id="核心标签-Core-Tags"><a href="#核心标签-Core-Tags" class="headerlink" title="核心标签(Core Tags)"></a>核心标签(Core Tags)</h2><ul>
+<li>Core标签库，包括了我们最常用的标签。</li>
+<li>要使用Core标签库需要在JSP页面中加入：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="lt-c-out-gt"><a href="#lt-c-out-gt" class="headerlink" title="&lt;c:out&gt;"></a>&lt;c:out&gt;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:out&gt;用于计算一个表达式并将结果输出到当前页面。</span><br><span class="line"></span><br><span class="line">功能类似于JSP表达式&lt;%= &gt;和EL表达式$&#123;&#125;</span><br><span class="line"></span><br><span class="line">可以设置的属性</span><br><span class="line">    value</span><br><span class="line">        作用：要输出的值</span><br><span class="line">        参数类型：Object</span><br><span class="line">    default</span><br><span class="line">        作用：当value为null时显示的默认值。</span><br><span class="line">        参数类型：Object</span><br><span class="line">    escaXml</span><br><span class="line">        作用：是否对特殊字符进行转义。</span><br><span class="line">        参数类型：boolean</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:out value=&quot;$&#123;user.name&#125;&quot; default=&quot;&quot; escapeXml=&quot;true&quot;&gt;&lt;/c:out&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="lt-c-set-gt"><a href="#lt-c-set-gt" class="headerlink" title="&lt;c:set&gt;"></a>&lt;c:set&gt;</h3><ul>
+<li>&lt;c:set&gt;用于添加或修改域中的属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">可以设置的属性：</span><br><span class="line">    value</span><br><span class="line">        作用：要设置的值</span><br><span class="line">        参数类型：Object</span><br><span class="line">    var</span><br><span class="line">        作用：表示域中存放的属性名。</span><br><span class="line">        参数类型：String</span><br><span class="line">    scope</span><br><span class="line">        作用：指定域（page、request、session、application），若不指定则为page域对象</span><br><span class="line">        参数类型：String</span><br><span class="line">    target</span><br><span class="line">    	作用：要修改的域对象的属性名（必须是JavaBean或者Map）</span><br><span class="line">    	参数类型：Object</span><br><span class="line">    property</span><br><span class="line">    	作用：指定要修改的对象的属性名</span><br><span class="line">    	参数类型：String</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设置属性：</span><br><span class="line">&lt;c:set var=&quot;key&quot; value=&quot;value&quot; scope=&quot;request&quot;&gt;&lt;/c:set&gt;</span><br><span class="line">修改属性：</span><br><span class="line">&lt;c:set property=&quot;name&quot; target=&quot;$&#123;user&#125;&quot; value=&quot;孙悟空&quot;&gt;&lt;/c:set&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="lt-c-remove-gt"><a href="#lt-c-remove-gt" class="headerlink" title="&lt;c:remove&gt;"></a>&lt;c:remove&gt;</h3><ul>
+<li>&lt;c:remove&gt;用于移除域中的属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">可以设置的属性：</span><br><span class="line">var</span><br><span class="line">	作用：设置要移除的属性的名字</span><br><span class="line">	作用：String</span><br><span class="line">scope</span><br><span class="line">	作用：设置要移除属性所在的域，若不指定则删除所有域中的对应属性</span><br><span class="line">	参数类型：String</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">移除所有域中key属性：&lt;c:remove var=&quot;key&quot;/&gt;</span><br><span class="line">移除request中的key属性: &lt;c:remove var=&quot;key&quot; scope=&quot;request&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="lt-c-if-gt"><a href="#lt-c-if-gt" class="headerlink" title="&lt;c:if&gt;"></a>&lt;c:if&gt;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:if&gt;用于实现if语句的判断功能</span><br><span class="line">可设置的属性</span><br><span class="line">	test</span><br><span class="line">    	作用：设置if判断的条件，用于判断标签体是否被执行</span><br><span class="line">    	参数类型：boolean</span><br><span class="line">	var</span><br><span class="line">    	作用：用于指定接收判断结果的变量名</span><br><span class="line">    	参数类型：boolean</span><br><span class="line">	scope</span><br><span class="line">    	作用：指定判断结果保存到哪个域</span><br><span class="line">    	参数类型：String</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">c:if test=&quot;$&#123;empty user &#125;&quot; var=&quot;isUserEmpty&quot; scope=&quot;request&quot;&gt;</span><br><span class="line">		用户为空</span><br><span class="line">&lt;/c:if&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="lt-c-choose-gt-、-lt-c-when-gt-、-lt-c-otherwise-gt"><a href="#lt-c-choose-gt-、-lt-c-when-gt-、-lt-c-otherwise-gt" class="headerlink" title="&lt;c:choose&gt;、&lt;c:when&gt;、&lt;c:otherwise&gt;"></a>&lt;c:choose&gt;、&lt;c:when&gt;、&lt;c:otherwise&gt;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:choose&gt;、&lt;c:when&gt;、&lt;c:otherwise&gt;三个标签配合使用，功能类似于Java中的if/else</span><br><span class="line">&lt;c:choose&gt;是&lt;c:when&gt;和&lt;c:otherwise&gt;的父标签</span><br><span class="line">&lt;c:when&gt;的属性</span><br><span class="line">	test</span><br><span class="line">    	作用：用于设置判断条件，若正确则c:when中的代码执行，否则不执行</span><br><span class="line">    	参数类型：boolean</span><br><span class="line">	&lt;c:otherwise&gt;</span><br><span class="line">    	作用：如果所有的&lt;c:when&gt;都没有执行则执行&lt;c:otherwise&gt;的标签体</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:choose&gt;</span><br><span class="line">	&lt;c:when test=&quot;$&#123;param.age&gt;=18 &#125;&quot;&gt;</span><br><span class="line">		您已经成年</span><br><span class="line">	&lt;/c:when&gt;</span><br><span class="line">	&lt;c:otherwise&gt;</span><br><span class="line">		您未成年</span><br><span class="line">	&lt;/c:otherwise&gt;</span><br><span class="line">&lt;/c:choose&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="lt-c-forEach-gt"><a href="#lt-c-forEach-gt" class="headerlink" title="&lt;c:forEach&gt;"></a>&lt;c:forEach&gt;</h3><ul>
+<li>&lt;c:forEach&gt;用于对多个对象的集合进行迭代，重复执行标签体，或者重复迭代固定的次数。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">可设置属性：</span><br><span class="line">	var</span><br><span class="line">    	作用：设置遍历出对象的名称</span><br><span class="line">    	参数类型：String</span><br><span class="line">	items</span><br><span class="line">    	作用：指定要遍历的集合对象</span><br><span class="line">    	参数类型：数组、字符串和各种集合</span><br><span class="line">	varStatus</span><br><span class="line">    	作用：指定保存迭代状态的对象的名字，该变量引用的是一个LoopTagStatus类型的对象，通过该对象可以获得一些遍历的状态：</span><br><span class="line">        	count</span><br><span class="line">        	index</span><br><span class="line">        	first</span><br><span class="line">        	last</span><br><span class="line">        	name</span><br><span class="line">	    参数类型：String</span><br><span class="line">	begin</span><br><span class="line">    	作用：指定遍历的开始位置</span><br><span class="line">    	参数类型：int</span><br><span class="line">	end</span><br><span class="line">    	作用：指定遍历的结束位置</span><br><span class="line">    	参数类型：int</span><br><span class="line">	step</span><br><span class="line">	    作用：迭代的步长</span><br><span class="line">        参数类型：int</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:forEach items=&quot;$&#123;list&#125;&quot; var=&quot;user&quot; begin=&quot;0&quot; end=&quot;4&quot; step=&quot;2&quot; varStatus=&quot;vs&quot;&gt;</span><br><span class="line">		$&#123;vs.index&#125; -- $&#123;user.name &#125; -- $&#123;user.age &#125;&lt;br /&gt;</span><br><span class="line">&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="lt-c-url-gt"><a href="#lt-c-url-gt" class="headerlink" title="&lt;c:url&gt;"></a>&lt;c:url&gt;</h3><ul>
+<li>&lt;c:url&gt;主要用来重写URL地址</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">可设置的属性：</span><br><span class="line">	value</span><br><span class="line">	    作用：设置要处理的URI地址，注意这里要以/开头</span><br><span class="line">可接受参数：String</span><br><span class="line">	var</span><br><span class="line">	    作用：修改后存储到域对象中的uri属性名。</span><br><span class="line">	    可接受参数：String</span><br><span class="line">	scope</span><br><span class="line">	    作用：设置修改后uri存放的域</span><br><span class="line">	    可接受参数：String</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">	使用相对路径：</span><br><span class="line">&lt;c:url value=&quot;index.jsp&quot; var=&quot;uri&quot; scope=&quot;request&quot;&gt;</span><br><span class="line">	&lt;c:param name=&quot;name&quot; value=&quot;张三&quot;&gt;&lt;/c:param&gt;</span><br><span class="line">&lt;/c:url&gt;</span><br><span class="line">会生成如下地址：index.jsp?name=%E5%BC%A0%E4%B8%89</span><br><span class="line">使用绝对路径会自动在路径前加上项目名：</span><br><span class="line">&lt;c:url value=&quot;/index.jsp&quot; var=&quot;uri&quot; scope=&quot;request&quot;&gt;</span><br><span class="line">	&lt;c:param name=&quot;name&quot; value=&quot;张三&quot;&gt;&lt;/c:param&gt;</span><br><span class="line">&lt;/c:url&gt;</span><br><span class="line">会生成如下地址：/Test_JSTL/index.jsp?name=%E5%BC%A0%E4%B8%89</span><br></pre></td></tr></table></figure>
+<h3 id="lt-c-redirect-gt"><a href="#lt-c-redirect-gt" class="headerlink" title="&lt;c:redirect&gt;"></a>&lt;c:redirect&gt;</h3><ul>
+<li>&lt;c:redirect&gt;主要用于将请求重定向到另一个资源地址</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">可设置的属性：</span><br><span class="line">	uri</span><br><span class="line">    	作用：指定要重定向到的目标地址，注意这里指定绝对路径会自动加上项目名</span><br><span class="line">    	参数类型：String</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:redirect url=&quot;/target.jsp&quot;&gt;&lt;/c:redirect&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="JSTL函数（JSTL-Functions）"><a href="#JSTL函数（JSTL-Functions）" class="headerlink" title="JSTL函数（JSTL Functions）"></a>JSTL函数（JSTL Functions）</h2><ul>
+<li>函数标签库是在JSTL中定义的标准的EL函数集。</li>
+<li>函数标签库中定义的函数基本上都是对字符串的操作。</li>
+<li>引入：&lt;%@ taglib prefix=”fn” uri=”<a href="http://java.sun.com/jsp/jstl/functions&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/functions&quot;</a> %&gt;</li>
+</ul>
+<h3 id="fn-contains和fn-containsIgnoreCase"><a href="#fn-contains和fn-containsIgnoreCase" class="headerlink" title="fn:contains和fn:containsIgnoreCase"></a>fn:contains和fn:containsIgnoreCase</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">作用：用于判断字符串中是否包含指定字符串，containsIgnoreCase忽略大小写。</span><br><span class="line">语法：fn:contains(string,subString)  --&gt;boolean</span><br></pre></td></tr></table></figure>
+<p>参数和返回值：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606144819.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:contains(&quot;hello&quot;,&quot;HE&quot;)&#125;   --&gt;false</span><br><span class="line">$&#123;fn:containsIgnoreCase(&quot;hello&quot;,&quot;HE&quot;)&#125;  --&gt;true</span><br></pre></td></tr></table></figure>
+<h2 id="fn-startsWith和fn-endsWith"><a href="#fn-startsWith和fn-endsWith" class="headerlink" title="fn:startsWith和fn:endsWith"></a>fn:startsWith和fn:endsWith</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">作用：判断一个字符串是否以指定字符开头（startsWith）或结尾（endsWith）</span><br><span class="line">语法：</span><br><span class="line">    fn:startsWith(string , prefix)  --&gt;boolean</span><br><span class="line">	fn:endsWith(string,suffix)  --&gt;boolean</span><br></pre></td></tr></table></figure>
+<p>参数和返回值：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606144520.png" alt></p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:startsWith(&quot;hello&quot;,&quot;he&quot;) &#125;  --&gt;true</span><br><span class="line">$&#123;fn:endsWith(&quot;hello&quot;,&quot;he&quot;) &#125;  --&gt;false</span><br></pre></td></tr></table></figure>
+<h2 id="fn-indexOf"><a href="#fn-indexOf" class="headerlink" title="fn:indexOf"></a>fn:indexOf</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">作用：在一个字符串中查找指定字符串，并返回第一个符合的字符串的第一个字符的索引。</span><br><span class="line">语法：fn:indexOf(string,subString)  --&gt;int</span><br></pre></td></tr></table></figure>
+<p>参数和返回值：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606144625.png" alt></p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:indexOf(&quot;hello&quot;,&apos;e&apos;) &#125;  --&gt;1</span><br></pre></td></tr></table></figure>
+<h2 id="fn-replace"><a href="#fn-replace" class="headerlink" title="fn:replace"></a>fn:replace</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">作用：将一个字符串替换为另外一个字符串，并返回替换结果</span><br><span class="line">语法：fn:replace(str , beforeSubString , afterSubString) --&gt;String</span><br></pre></td></tr></table></figure>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:replace(&quot;hello&quot;,&quot;llo&quot;,&apos;e&apos;) &#125;  hee</span><br><span class="line">fn:substring</span><br><span class="line">作用：截取字符串</span><br><span class="line">语法：fn: substring (str , beginIndex , endIndex)  String</span><br></pre></td></tr></table></figure>
+<p>参数和返回值：</p>
+<p><img src="http://note.youdao.com/yws/res/8882/A47D18C6C90D47C19778B9EA50D9B13A" alt="image"></p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:substring(&quot;hello&quot;,1,3) &#125; --&gt; el</span><br></pre></td></tr></table></figure>
+<h2 id="fn-substringBefore和fn-substringAfter"><a href="#fn-substringBefore和fn-substringAfter" class="headerlink" title="fn:substringBefore和fn:substringAfter"></a>fn:substringBefore和fn:substringAfter</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">作用：返回一个字符串指定子串之前（substringBefore）之后（substringAfter）的字符串</span><br><span class="line">语法：fn: substringBefore(string,subString)  --&gt;String</span><br><span class="line">fn: substringAfter (string,subString)  --&gt;String</span><br></pre></td></tr></table></figure>
+<p>参数和返回值：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606145515.png" alt></p>
+<p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:substringBefore(&quot;hello&quot;,&quot;l&quot;) &#125;  --&gt;he</span><br><span class="line">$&#123;fn:substringAfter(&quot;hello&quot;,&quot;l&quot;) &#125;  --&gt;lo</span><br></pre></td></tr></table></figure></p>
+<h2 id="fn-split"><a href="#fn-split" class="headerlink" title="fn:split"></a>fn:split</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">作用：将一个字符串拆分成字符串数组。</span><br><span class="line">语法：fn:split(string,delimiters)  --&gt;String</span><br></pre></td></tr></table></figure>
+<p>参数和返回值：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606145633.png" alt></p>
+<p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:split(&quot;a-b-c-d-e-f-g&quot;,&quot;-&quot;)&#125;</span><br><span class="line">返回一个数组对象[a,b,c,d,e,f,g]</span><br></pre></td></tr></table></figure></p>
+<h2 id="fn-join"><a href="#fn-join" class="headerlink" title="fn:join"></a>fn:join</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">作用：将数组中所有元素连接成一个字符串</span><br><span class="line">语法：fn:join(array,sparator)  --&gt;String</span><br></pre></td></tr></table></figure>
+<p>参数和返回值：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606150021.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">例：</span><br><span class="line">&lt;%</span><br><span class="line">String[] strs = new String[]&#123;&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,&quot;e&quot;,&quot;f&quot;&#125;;</span><br><span class="line">pageContext.setAttribute(&quot;strs&quot;, strs);</span><br><span class="line">%&gt;</span><br><span class="line">$&#123;fn:join(strs,&apos;-&apos;) &#125;</span><br><span class="line">	返回：a-b-c-d-e-f</span><br></pre></td></tr></table></figure>
+<h2 id="fn-toLowerCase和fn-toUpperCase"><a href="#fn-toLowerCase和fn-toUpperCase" class="headerlink" title="fn:toLowerCase和fn:toUpperCase"></a>fn:toLowerCase和fn:toUpperCase</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">作用：将字符串都转换成大写（toUpperCase）或小写（toLowerCase）字符</span><br><span class="line">语法：</span><br><span class="line">	fn: toLowerCase (str)  --&gt;String</span><br><span class="line">    fn: toUpperCase(str)  --&gt;String</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606150205.png" alt></p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   $&#123;fn:toLowerCase(&quot;ABCDEFG&quot;) &#125;  --&gt;abcdefg</span><br><span class="line">$&#123;fn:toUpperCase(&quot;abcdefg&quot;) &#125;  --&gt;ABCDEFG</span><br></pre></td></tr></table></figure>
+<h2 id="fn-trim"><a href="#fn-trim" class="headerlink" title="fn:trim"></a>fn:trim</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">作用：去掉字符串的前后空格</span><br><span class="line">用法：fn:trim(str)  --&gt;String</span><br></pre></td></tr></table></figure>
+<p>参数和返回值：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606150313.png" alt></p>
+<p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:trim(&quot;     hello  &quot;) &#125;  --&gt;hello</span><br></pre></td></tr></table></figure></p>
+<h2 id="fn-length"><a href="#fn-length" class="headerlink" title="fn:length"></a>fn:length</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">作用：返回集合或者字符串的长度</span><br><span class="line">用法：fn:trim(input)  --&gt;int</span><br></pre></td></tr></table></figure>
+<p>参数和返回值：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190606150356.png" alt></p>
+<p>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:length(&quot;hello&quot;) &#125; --&gt;5</span><br></pre></td></tr></table></figure></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/11/09/28 web-EL表达式（Expression Language）概述/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/11/21/30 web-会话控制-Cookie/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
