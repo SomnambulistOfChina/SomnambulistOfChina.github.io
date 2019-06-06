@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2. SQL笔记语法(增删改查) | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java SQL&amp;JDBC,">
+  
+
+  <meta name="description" content="阶段1：常用指令 sql(structure query language)：结构化查询语言    作用：和关系型数据库(dbms)交互的一种方式     分类：123456789101112131415ddl(data definition language)：数据定义语言；操作数据库对象(库、表、列..)dml(data manipulation language)：数据操作语言；操作数据表中">
+<meta name="keywords" content="Java SQL&amp;JDBC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2. SQL笔记语法(增删改查)">
+<meta property="og:url" content="http://yoursite.com/2017/09/19/18. SQL概述(增删改查)/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="阶段1：常用指令 sql(structure query language)：结构化查询语言    作用：和关系型数据库(dbms)交互的一种方式     分类：123456789101112131415ddl(data definition language)：数据定义语言；操作数据库对象(库、表、列..)dml(data manipulation language)：数据操作语言；操作数据表中">
+<meta property="og:locale" content="Java EE">
+<meta property="og:updated_time" content="2019-06-06T09:46:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2. SQL笔记语法(增删改查)">
+<meta name="twitter:description" content="阶段1：常用指令 sql(structure query language)：结构化查询语言    作用：和关系型数据库(dbms)交互的一种方式     分类：123456789101112131415ddl(data definition language)：数据定义语言；操作数据库对象(库、表、列..)dml(data manipulation language)：数据操作语言；操作数据表中">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#阶段1：常用指令"><span class="toc-text">阶段1：常用指令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#分类："><span class="toc-text">分类：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql好处："><span class="toc-text">sql好处：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#进阶2：条件查询"><span class="toc-text">进阶2：条件查询</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#进阶3："><span class="toc-text">进阶3：</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-18. SQL概述(增删改查)" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">2. SQL笔记语法(增删改查)</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.09.19</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/JavaWeb基础笔记/">JavaWeb基础笔记</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="阶段1：常用指令"><a href="#阶段1：常用指令" class="headerlink" title="阶段1：常用指令"></a>阶段1：常用指令</h1><ul>
+<li><p>sql(structure query language)：结构化查询语言  </p>
+</li>
+<li><p>作用：和关系型数据库(dbms)交互的一种方式  </p>
+</li>
+</ul>
+<h2 id="分类："><a href="#分类：" class="headerlink" title="分类："></a>分类：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ddl(data definition language)：数据定义语言；操作数据库对象(库、表、列..)</span><br><span class="line"></span><br><span class="line">dml(data manipulation language)：数据操作语言；操作数据表中的内容</span><br><span class="line">				 使用的crud操作</span><br><span class="line">				 create：创建</span><br><span class="line">				 read：查阅</span><br><span class="line">				 update：修改</span><br><span class="line">				 delete：删除</span><br><span class="line"></span><br><span class="line">dcl(data control language)：数据控制语言；定义访问权限以及安全级别</span><br><span class="line">			    使用其中的两个指令配合事务处理：</span><br><span class="line">				commit：提交</span><br><span class="line">				rollback：回滚</span><br><span class="line"></span><br><span class="line">dql(data query language)：数据查询语言；使用select操作的一些语句</span><br></pre></td></tr></table></figure>
+<h2 id="sql好处："><a href="#sql好处：" class="headerlink" title="sql好处："></a>sql好处：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.易学，语法简单</span><br><span class="line">2.将类似java实现的一些操作简化</span><br></pre></td></tr></table></figure>
+<p>sql的注释：</p>
+<p>分类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">单行注释：</span><br><span class="line"></span><br><span class="line">方式一：-- 注释内容</span><br><span class="line">方式二：#注释内容</span><br><span class="line"></span><br><span class="line">多行注释：/* ... */</span><br><span class="line"></span><br><span class="line">#切换数据库(db)</span><br><span class="line">USE test;</span><br><span class="line"></span><br><span class="line">#显示当前服务器下所有的数据库</span><br><span class="line">SHOW DATABASES;</span><br><span class="line"></span><br><span class="line">#显示当前库下的所有数据表(tables)</span><br><span class="line">SHOW TABLES FROM test;</span><br><span class="line"></span><br><span class="line">#简化写法</span><br><span class="line">SHOW TABLES;</span><br><span class="line"></span><br><span class="line">-- 显示当前服务器的版本信息，用户信息</span><br><span class="line">/*</span><br><span class="line">sql语句中函数的使用：</span><br><span class="line">调用方式：</span><br><span class="line">	函数名(参数列表)</span><br><span class="line">注意事项：</span><br><span class="line">sql中的函数一定有返回值，和java有区别的</span><br><span class="line">*/</span><br><span class="line">SELECT VERSION(),USER();</span><br></pre></td></tr></table></figure>
+<p>#进阶1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">基础查询</span><br><span class="line"></span><br><span class="line">语法：</span><br><span class="line">select 查询列表 【from 表名】;</span><br><span class="line"></span><br><span class="line">查询列表涉及的内容如下：</span><br><span class="line">	常量、表达式、函数、字段(单个、多个)以及上述的组合形式</span><br><span class="line">	</span><br><span class="line">涉及到的函数：</span><br><span class="line">database()、user()、version()、ifnull()、concat()、	</span><br><span class="line">*/</span><br><span class="line">#切库 --&gt; myemployees</span><br><span class="line">USE myemployees;</span><br><span class="line"></span><br><span class="line">#常量：</span><br><span class="line">SELECT 100;</span><br><span class="line">SELECT &apos;jerry&apos;;</span><br><span class="line"> ，</span><br><span class="line">#表达式：</span><br><span class="line">/*</span><br></pre></td></tr></table></figure>
+<p>sql中的+号运算：只做加法运算</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如果+号两遍表达式的数据都为数值型，那么直接做加法运算；  </span><br><span class="line">如果+号两遍表达式的数据存在字符型，先尝试将字符型数据隐式转换为数值型数据，  </span><br><span class="line">	如果转换成功，直接加法运算；  </span><br><span class="line">	如果转换失败，使用0参与加法运算；</span><br></pre></td></tr></table></figure>
+<p>结论：如果运算过程中有null值参与，结果一定为null                   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">*/</span><br><span class="line">SELECT 500+299;</span><br><span class="line">SELECT &apos;300&apos;+200;</span><br><span class="line">SELECT &apos;abc&apos;+&apos;def&apos;;</span><br><span class="line">SELECT &apos;abc&apos;+10;</span><br><span class="line">SELECT NULL + 100;</span><br><span class="line"></span><br><span class="line">#取余操作的符号和被余数有关</span><br><span class="line">SELECT 10%(-3);</span><br><span class="line"></span><br><span class="line">#需求：查询员工的年薪</span><br><span class="line">SELECT salary*12 FROM employees;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#单个字段</span><br><span class="line">SELECT last_name FROM employees;</span><br><span class="line"></span><br><span class="line">#多个字段</span><br><span class="line">-- 部分字段</span><br><span class="line">-- 需求：查询员工的编号、名字、薪资和部门编号</span><br><span class="line">SELECT employee_id,last_name,salary,department_id</span><br><span class="line">FROM employees;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- 全部字段</span><br><span class="line">-- 需求：查询员工信息</span><br><span class="line">-- 方式一：</span><br><span class="line">-- 着重号</span><br><span class="line">SELECT </span><br><span class="line">  `employee_id`,</span><br><span class="line">  `first_name`,</span><br><span class="line">  `last_name`,</span><br><span class="line">  `email`,</span><br><span class="line">  `phone_number`,</span><br><span class="line">  `job_id`,</span><br><span class="line">  `salary`,</span><br><span class="line">  `commission_pct`,</span><br><span class="line">  `manager_id`,</span><br><span class="line">  `department_id`,</span><br><span class="line">  `hiredate` </span><br><span class="line">FROM</span><br><span class="line">  employees ;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">-- 方式二：*</span><br><span class="line">SELECT * FROM employees;</span><br><span class="line"></span><br><span class="line">#函数</span><br><span class="line">SELECT USER(),VERSION(),DATABASE();</span><br><span class="line"></span><br><span class="line">#【综合案例】：涉及存在函数、单个字段、表达式...</span><br><span class="line">SELECT USER(),last_name,12*salary</span><br><span class="line">FROM employees;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">别名：起一个新的名字</span><br><span class="line">位置：列、表</span><br><span class="line"></span><br><span class="line">语法：</span><br><span class="line">1、AS 别名</span><br><span class="line">2、&apos;&apos;或者&quot;&quot;	如果存在特殊符号需要使用引号</span><br><span class="line">*/</span><br><span class="line">#【优化综合案例】：使用别名</span><br><span class="line">SELECT USER(),last_name,12*salary AS year_sal</span><br><span class="line">FROM employees;</span><br><span class="line"></span><br><span class="line">SELECT USER(),last_name,12*salary &quot;Year_Sal&quot;</span><br><span class="line">FROM employees;</span><br><span class="line"></span><br><span class="line">SELECT USER(),last_name,12*salary 年薪</span><br><span class="line">FROM employees;</span><br><span class="line"></span><br><span class="line">SELECT USER(),last_name,12*salary &quot;Year Sal&quot;</span><br><span class="line">FROM employees;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">模拟场景：</span><br><span class="line">错误现象：如何解决？</span><br><span class="line"></span><br><span class="line">ifnull(expr1,expr2)：</span><br><span class="line">	如果expr1不为null，就拿其本身参与运算</span><br><span class="line">	如果expr1为null，就使用expr2参与运算</span><br><span class="line">*/</span><br><span class="line">SELECT USER(),last_name,commission_pct,12*salary*(1+IFNULL(commission_pct,0)) &quot;Year Sal&quot;</span><br><span class="line">FROM employees;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">模拟场景：</span><br><span class="line">	XXX的年薪是XXX</span><br><span class="line">	...</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">concat(...)：拼接	类似于java中的+号	</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">SELECT CONCAT(last_name,&apos;的年薪是&apos;,12*salary*(1+IFNULL(commission_pct,0))) details</span><br><span class="line">FROM employees;</span><br></pre></td></tr></table></figure>
+<h1 id="进阶2：条件查询"><a href="#进阶2：条件查询" class="headerlink" title="进阶2：条件查询"></a>进阶2：条件查询</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">语法：</span><br><span class="line">select 查询列表</span><br><span class="line">from 表名</span><br><span class="line">where 条件</span><br><span class="line"></span><br><span class="line">条件：</span><br><span class="line"></span><br><span class="line">关系表达式：</span><br><span class="line">运算符：&gt; &gt;= &lt; &lt;= = != &lt;&gt;</span><br><span class="line"></span><br><span class="line">逻辑表达式：</span><br><span class="line">运算符：and(与，并且) or(或，或者) not(非，取反)</span><br><span class="line"></span><br><span class="line">其它运算符：</span><br><span class="line">1、模糊查询：like</span><br><span class="line">2、between A and B：在[A,B]之间</span><br><span class="line">3、in(...)：只要满足条件都返回</span><br><span class="line">4、is null：</span><br><span class="line"></span><br><span class="line">总结：</span><br><span class="line">where紧随from</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">#演示关系运算符的使用</span><br><span class="line">-- 案例1：查询工资&gt;10000的员工信息</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE salary &gt; 10000;</span><br><span class="line"></span><br><span class="line">-- 案例2：查询 job_id不是&apos;IT_PROG&apos;的员工姓名、job_id、salary </span><br><span class="line">SELECT last_name,job_id,salary</span><br><span class="line">FROM employees</span><br><span class="line">WHERE job_id &lt;&gt; &apos;IT_PROG&apos;;</span><br><span class="line"></span><br><span class="line">SELECT last_name,job_id,salary</span><br><span class="line">FROM employees</span><br><span class="line">WHERE job_id != &apos;IT_PROG&apos;;</span><br><span class="line"></span><br><span class="line">SELECT last_name,job_id,salary</span><br><span class="line">FROM employees</span><br><span class="line">WHERE NOT(job_id = &apos;IT_PROG&apos;);</span><br><span class="line"></span><br><span class="line">#演示逻辑运算符的使用</span><br><span class="line">-- 案例3：查询工资&gt;10000并且小于20000的员工姓名、工资、年薪</span><br><span class="line">SELECT last_name,salary,salary*12*(1+IFNULL(commission_pct,0)) 年薪</span><br><span class="line">FROM employees</span><br><span class="line">WHERE salary &gt; 10000 AND salary &lt; 20000;</span><br><span class="line">-- 案例4：查询部门编号不在90到120之间的并且 工资&gt;11000的员工信息</span><br><span class="line">SELECT last_name,department_id,salary FROM employees</span><br><span class="line">WHERE NOT(department_id &gt;= 90 AND department_id &lt;= 120) AND salary &gt; 11000;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">模糊查询的使用：</span><br><span class="line">配合通配符使用：</span><br><span class="line">_：匹配任意单个字符</span><br><span class="line">%：匹配0或者任意多个字符</span><br><span class="line">*/</span><br><span class="line">#案例1：查询员工信息表中姓名第一个字符为e的员工信息</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE last_name LIKE &apos;e%&apos;;</span><br><span class="line"></span><br><span class="line">#案例2：查询员工信息表中姓名第二个字符为e，第五个字符为a的员工信息</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE last_name LIKE &apos;_e__a%&apos;;</span><br><span class="line">#案例3：查询姓名中最后第二个字符为s的员工信息</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE last_name LIKE &apos;%s_&apos;;</span><br><span class="line">#案例4：查询姓名中第二个字符为_的员工信息</span><br><span class="line">#方式一：使用\实现转义</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE last_name LIKE &apos;_\_%&apos;;</span><br><span class="line">#方式二：使用escape关键字实现</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE last_name LIKE &apos;_#_%&apos; ESCAPE &apos;#&apos;;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">between...and...的使用：</span><br><span class="line">作用：判断是否在某一个区间范围内(含头含尾闭区间)	返回布尔值</span><br><span class="line">将 and操作简化</span><br><span class="line">*/</span><br><span class="line">#查询年薪在100000到200000的员工年薪和姓名</span><br><span class="line">SELECT last_name,salary*12*(1+IFNULL(commission_pct,0)) 年薪</span><br><span class="line">FROM employees</span><br><span class="line">WHERE salary*12*(1+IFNULL(commission_pct,0)) BETWEEN 100000 AND 200000;</span><br><span class="line">#案例2：查询年薪在100740到187200的员工年薪和姓名</span><br><span class="line">SELECT last_name,salary*12*(1+IFNULL(commission_pct,0)) 年薪</span><br><span class="line">FROM employees</span><br><span class="line">WHERE salary*12*(1+IFNULL(commission_pct,0)) BETWEEN 100740 AND 187200;</span><br><span class="line"></span><br><span class="line">SELECT salary FROM employees</span><br><span class="line">WHERE salary &gt;= 8000 AND salary &lt;= 14000;</span><br><span class="line"></span><br><span class="line">SELECT salary FROM employees</span><br><span class="line">WHERE salary BETWEEN 8000 AND 14000;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">in(...)的使用：</span><br><span class="line"></span><br><span class="line">特点：</span><br><span class="line">可以简化or的使用，</span><br><span class="line">记住：</span><br><span class="line">1、如果内容不匹配页不会报错，只是不返回任何内容</span><br><span class="line">2、会自动将字符类型转换为数值型(如果需要)</span><br><span class="line">*/</span><br><span class="line">-- 案例1：查询在80、90、100号部门工作的员工信息</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE department_id = 80 OR department_id = 90 OR department_id = 100;</span><br><span class="line"></span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE department_id IN(80,90,100);</span><br><span class="line">-- where department_id in(80,90,&apos;100&apos;,null);</span><br><span class="line"></span><br><span class="line">SELECT * FROM departments;</span><br><span class="line"></span><br><span class="line">-- 案例2：查询工种编号是IT_PROG或是ST_CLERK或是AD_VP的员工信息</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE job_id IN(&apos;IT_PROG&apos;,&apos;ST_CLERK&apos;,&apos;AD_VP&apos;);</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">not的使用：</span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">#案例1：查询哪些员工没有奖金</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE commission_pct IS NULL;</span><br><span class="line"></span><br><span class="line">#案例2：查询哪些员工有奖金</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE commission_pct IS NOT NULL;</span><br><span class="line"></span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE NOT commission_pct IS NULL;</span><br></pre></td></tr></table></figure>
+<h1 id="进阶3："><a href="#进阶3：" class="headerlink" title="进阶3："></a>进阶3：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">排序查询：</span><br><span class="line"></span><br><span class="line">语法：</span><br><span class="line">select 查询列表 --②</span><br><span class="line">from 表名	--①</span><br><span class="line">where 条件	--③</span><br><span class="line">order by 排序列表 asc|desc --④</span><br><span class="line"></span><br><span class="line">排序列表：</span><br><span class="line">单个字段、多个字段、函数、别名、表达式</span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line">1、asc可以省略，默认升序排列</span><br><span class="line">`666`</span><br><span class="line">总结：</span><br><span class="line">order by子句出现在最后位置，除了limit...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line">#单个字段：</span><br><span class="line">-- 案例1：按工资从低到高排序</span><br><span class="line">SELECT last_name,salary</span><br><span class="line">FROM employees</span><br><span class="line">ORDER BY salary ASC;</span><br><span class="line"></span><br><span class="line">SELECT last_name,salary</span><br><span class="line">FROM employees</span><br><span class="line">ORDER BY salary;</span><br><span class="line">-- 案例2：按工资从高到低排序</span><br><span class="line">SELECT last_name,salary</span><br><span class="line">FROM employees</span><br><span class="line">ORDER BY salary DESC;</span><br><span class="line"></span><br><span class="line">#多个字段：</span><br><span class="line">-- 案例：部门编号&gt;50的按工资从高到低排序，如果一样，再按frist_name升序</span><br><span class="line">SELECT * FROM employees</span><br><span class="line">WHERE department_id &gt; 50</span><br><span class="line">ORDER BY salary DESC,first_name ASC;</span><br><span class="line"></span><br><span class="line">#按表达式排序</span><br><span class="line">-- 案例：将姓名中包含e字符的年薪和姓名显示出来，并且按年薪进行降序</span><br><span class="line">SELECT last_name,salary*12*(1+IFNULL(commission_pct,0)) 年薪</span><br><span class="line">FROM employees</span><br><span class="line">WHERE last_name LIKE &apos;%e%&apos;</span><br><span class="line">ORDER BY salary*12*(1+IFNULL(commission_pct,0)) DESC;</span><br><span class="line"></span><br><span class="line">#按别名排序</span><br><span class="line">-- 案例：将姓名中包含e字符的年薪和姓名显示出来，并且按年薪进行降序</span><br><span class="line">SELECT last_name,salary*12*(1+IFNULL(commission_pct,0)) 年薪</span><br><span class="line">FROM employees</span><br><span class="line">WHERE last_name LIKE &apos;%e%&apos;</span><br><span class="line">ORDER BY 年薪 DESC;</span><br><span class="line"></span><br><span class="line">#按函数排序</span><br><span class="line">-- 案例：显示所有有奖金的员工姓名、奖金、姓名的长度，按姓名的长度从低到高排序</span><br><span class="line">-- length()函数的使用</span><br><span class="line">SELECT last_Name,commission_pct,LENGTH(last_name) 长度</span><br><span class="line">FROM employees</span><br><span class="line">WHERE commission_pct IS NOT NULL</span><br><span class="line">ORDER BY LENGTH(last_name);</span><br><span class="line"></span><br><span class="line">SELECT last_Name,commission_pct,LENGTH(last_name) 长度</span><br><span class="line">FROM employees</span><br><span class="line">WHERE commission_pct IS NOT NULL</span><br><span class="line">ORDER BY 长度;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/09/14/17. MYSQL数据库5.5安装(win7)及使用17.9.4/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/09/25/19. SQL-JDBC/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
