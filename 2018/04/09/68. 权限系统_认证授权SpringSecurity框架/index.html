@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>9. SSM框架整合 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="使用过的开源框架,">
+  
+
+  <meta name="description" content="第一章 SpringSecurity-简介1    简介 https://docs.spring.io/spring-security/site/docs/4.2.10.RELEASE/guides/html5/helloworld-xml.html   SpringSecurity融合Spring技术栈，提供JavaEE应    用的整体安全解决方案； Spring Security为基于Jav">
+<meta name="keywords" content="使用过的开源框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9. SSM框架整合">
+<meta property="og:url" content="http://yoursite.com/2018/04/09/68. 权限系统_认证授权SpringSecurity框架/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="第一章 SpringSecurity-简介1    简介 https://docs.spring.io/spring-security/site/docs/4.2.10.RELEASE/guides/html5/helloworld-xml.html   SpringSecurity融合Spring技术栈，提供JavaEE应    用的整体安全解决方案； Spring Security为基于Jav">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531181744.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531181821.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531181905.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531182124.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531182151.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531182609.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531182637.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531183350.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531183445.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531183736.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531183926.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184346.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184449.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184729.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184849.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184930.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195137.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195209.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195412.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195510.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195553.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195851.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195949.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200141.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200226.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200248.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200419.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200446.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200512.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200541.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083038.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083112.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083241.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083355.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083432.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083624.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083655.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083729.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083805.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083855.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083950.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601084432.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601084714.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085028.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085322.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085345.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085707.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085759.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085831.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085910.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090011.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090038.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090157.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090221.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090307.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090352.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602233802.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602233852.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234003.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234056.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234232.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234259.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234355.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234517.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234721.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602235552.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603000014.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603000037.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603000117.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603000139.png">
+<meta property="og:updated_time" content="2019-06-08T15:01:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9. SSM框架整合">
+<meta name="twitter:description" content="第一章 SpringSecurity-简介1    简介 https://docs.spring.io/spring-security/site/docs/4.2.10.RELEASE/guides/html5/helloworld-xml.html   SpringSecurity融合Spring技术栈，提供JavaEE应    用的整体安全解决方案； Spring Security为基于Jav">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531181744.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-SpringSecurity-简介"><span class="toc-text">第一章 SpringSecurity-简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-简介"><span class="toc-text">1    简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-概念"><span class="toc-text">2    概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-文档"><span class="toc-text">3    文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-支持的身份认证模式"><span class="toc-text">4    支持的身份认证模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-模块划分"><span class="toc-text">5    模块划分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4种使用方式"><span class="toc-text">6    4种使用方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二章-SpringSecurity-HelloWorld"><span class="toc-text">第二章 SpringSecurity-HelloWorld</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-测试环境搭建"><span class="toc-text">2.1 测试环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-创建普通maven-war工程-spring-security-helloworld"><span class="toc-text">2.1.1 创建普通maven-war工程:spring-security-helloworld</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-web-xml配置"><span class="toc-text">2.1.2 web.xml配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-spring配置-spring-xml"><span class="toc-text">2.1.3 spring配置:spring.xml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-4-导入实验资源"><span class="toc-text">2.1.4 导入实验资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-运行测试"><span class="toc-text">2.1.5 运行测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-引入SpringSecurity框架"><span class="toc-text">2.2 引入SpringSecurity框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1-添加security-pom依赖"><span class="toc-text">2.2.1 添加security-pom依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-2-web-xml中添加SpringSecurity的Filter进行安全控制"><span class="toc-text">2.2.2 web.xml中添加SpringSecurity的Filter进行安全控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-3-加入SpringSecurity配置类"><span class="toc-text">2.2.3 加入SpringSecurity配置类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三章-SpringSecurity-实验"><span class="toc-text">第三章 SpringSecurity-实验</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-实验一：授权首页和静态资源"><span class="toc-text">3.1    实验一：授权首页和静态资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-实验二：默认及自定义登录页"><span class="toc-text">3.2    实验二：默认及自定义登录页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-实验三：自定义表单登录逻辑分析"><span class="toc-text">3.3 实验三：自定义表单登录逻辑分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4实验四：自定义认证用户信息"><span class="toc-text">3.4实验四：自定义认证用户信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5实验五：用户注销完成"><span class="toc-text">3.5实验五：用户注销完成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-实验六：基于角色的访问控制"><span class="toc-text">3.6 实验六：基于角色的访问控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-实验七：自定义访问拒绝处理页面"><span class="toc-text">3.7 实验七：自定义访问拒绝处理页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-实验八：记住我功能"><span class="toc-text">3.8 实验八：记住我功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-1-记住我功能-免登录原理"><span class="toc-text">3.8.1 记住我功能-免登录原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-2-记住我-数据版"><span class="toc-text">3.8.2 记住我-数据版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#引入pom-xml-包"><span class="toc-text">引入pom.xml 包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置数据源"><span class="toc-text">配置数据源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建表"><span class="toc-text">创建表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置记住我"><span class="toc-text">设置记住我</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第四章-认证"><span class="toc-text">第四章 认证</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-方式一：重写jdbcAuthentication规则-不推荐"><span class="toc-text">4.1 方式一：重写jdbcAuthentication规则(不推荐)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1-使用默认的查询用户语句"><span class="toc-text">4.1.1 使用默认的查询用户语句</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-2-使用默认的查询权限语句"><span class="toc-text">4.1.2 使用默认的查询权限语句</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-方式二：自定义UserDetailsService检索用户"><span class="toc-text">4.2 方式二：自定义UserDetailsService检索用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-实现UserDetailService接口loadUserByUsername-String-username-方法"><span class="toc-text">4.2.1 实现UserDetailService接口loadUserByUsername(String username)方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-实验步骤"><span class="toc-text">4.2.2 实验步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-创建表结构"><span class="toc-text">1 创建表结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-配置-configure-AuthenticationManagerBuilder-auth"><span class="toc-text">2 配置 configure(AuthenticationManagerBuilder auth)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-编写UserDetailService实现"><span class="toc-text">3 编写UserDetailService实现:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-运行测试结果，密码不一致，跳转到登录页，并提示错误消息"><span class="toc-text">4 运行测试结果，密码不一致，跳转到登录页，并提示错误消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-3-debug测试登录-断点调试"><span class="toc-text">4.2.3 debug测试登录-断点调试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-断点-方法栈"><span class="toc-text">1 断点-方法栈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-自定义UserDetailService实现类"><span class="toc-text">2 自定义UserDetailService实现类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Dao层认证提供者-DaoAuthenticationProvider"><span class="toc-text">3 Dao层认证提供者: DaoAuthenticationProvider</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-抽象层用户认证提供者-AbstractUserDetailsAuthenticationProvider"><span class="toc-text">4 抽象层用户认证提供者: AbstractUserDetailsAuthenticationProvider</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-基于数据库-MD5密码-认证-debug"><span class="toc-text">4.3 基于数据库(MD5密码)认证 (debug)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-1-配置-configure-AuthenticationManagerBuilder-auth"><span class="toc-text">4.3.1 配置 configure(AuthenticationManagerBuilder auth)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-2-引入MD5加密工具类：MD5Util-java"><span class="toc-text">4.3.2 引入MD5加密工具类：MD5Util.java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-3-PasswordEncoder接口实现类：AppPasswordEncoder"><span class="toc-text">4.3.3 PasswordEncoder接口实现类：AppPasswordEncoder</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-4-Debug测试，主要测试matches方法的调用过程"><span class="toc-text">4.3.4 Debug测试，主要测试matches方法的调用过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-表单提交密码：rawPassword"><span class="toc-text">1     表单提交密码：rawPassword</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-数据库存储密码-：encodePassword"><span class="toc-text">2     数据库存储密码 ：encodePassword</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-调用自定义密码验证器"><span class="toc-text">3     调用自定义密码验证器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-密码不一致，抛异常：Bad-credentials-密码一致，通过认证"><span class="toc-text">4     密码不一致，抛异常：Bad credentials ;密码一致，通过认证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-创建UsernamePasswordAuthenticationToken-对象，封装认证信息"><span class="toc-text">5     创建UsernamePasswordAuthenticationToken 对象，封装认证信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-5-源码参考"><span class="toc-text">4.3.5 源码参考</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-principal-认证主体-数据库中查询User数据"><span class="toc-text">1 principal 认证主体-数据库中查询User数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-authentication-getCredentials-认证密码-表单中密码"><span class="toc-text">2 authentication.getCredentials() 认证密码(表单中密码)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-authoritiesMapper-mapAuthorities-user-getAuthorities-认证权限集合"><span class="toc-text">3 authoritiesMapper.mapAuthorities(user.getAuthorities()) 认证权限集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-认证细节：包括客户端ip和sessionid"><span class="toc-text">4 认证细节：包括客户端ip和sessionid</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-result对象（UsernamePasswordAuthenticationToken）详细描述"><span class="toc-text">5 result对象（UsernamePasswordAuthenticationToken）详细描述</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-基于数据库-BCryptPasswordEncoder-密码加密认证"><span class="toc-text">4.4 基于数据库(BCryptPasswordEncoder)密码加密认证</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-1-PasswordEncoder接口"><span class="toc-text">4.4.1 PasswordEncoder接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-2-使用BCryptPasswordEncoder进行密码加密"><span class="toc-text">4.4.2 使用BCryptPasswordEncoder进行密码加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-3-本地测试：main方法"><span class="toc-text">4.4.3 本地测试：main方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-4-服务器运行测试"><span class="toc-text">4.4.4 服务器运行测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第五章-细粒度权限控制"><span class="toc-text">第五章 细粒度权限控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-前置细节【Role和Authority的区别】"><span class="toc-text">5.1 前置细节【Role和Authority的区别】</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-用户拥有的权限表示"><span class="toc-text">5.1.1 用户拥有的权限表示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-给资源授予权限（角色或权限）"><span class="toc-text">5.1.2 给资源授予权限（角色或权限）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-3-权限：【roles和authorities区别】"><span class="toc-text">5.1.3 权限：【roles和authorities区别】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-4-验证用户权限"><span class="toc-text">5.1.4 验证用户权限</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-通过角色（权限）验证："><span class="toc-text">1)    通过角色（权限）验证：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-细粒度的资源控制"><span class="toc-text">5.2 细粒度的资源控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-细粒度的资源控制相应注解"><span class="toc-text">5.3 细粒度的资源控制相应注解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-1-开启注解控制权限模式"><span class="toc-text">5.3.1 开启注解控制权限模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-2-几个权限检查注解"><span class="toc-text">5.3.2 几个权限检查注解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-PreAuthorize：方法执行前检查"><span class="toc-text">1 @PreAuthorize：方法执行前检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-PostAuthorize：方法执行后检查，失败抛异常"><span class="toc-text">2 @PostAuthorize：方法执行后检查，失败抛异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-PostFilter：允许方法调用，但是按照表达式过滤方法结果"><span class="toc-text">3 @PostFilter：允许方法调用，但是按照表达式过滤方法结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-PreFilter：允许方法调用，但必须在进入方法前过滤输入值"><span class="toc-text">4 @PreFilter：允许方法调用，但必须在进入方法前过滤输入值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Secured：拥有指定角色才可以访问方法"><span class="toc-text">5 @Secured：拥有指定角色才可以访问方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-细粒度的资源控制注解中可写的表达式"><span class="toc-text">5.4 细粒度的资源控制注解中可写的表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-5-细粒度权限控制实现步骤-★"><span class="toc-text">5.5 细粒度权限控制实现步骤 ★</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-1-开启全局的细粒度方法级别权限控制功能"><span class="toc-text">5.5.1 开启全局的细粒度方法级别权限控制功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-2-将手动授权的方式注释掉"><span class="toc-text">5.5.2 将手动授权的方式注释掉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-3-给访问资源的方法增加注解，进行访问授权"><span class="toc-text">5.5.3 给访问资源的方法增加注解，进行访问授权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-4-通过数据库加载用户权限"><span class="toc-text">5.5.4 通过数据库加载用户权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-5-准备数据"><span class="toc-text">5.5.5 准备数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-5-6-测试结果"><span class="toc-text">5.5.6 测试结果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第六章-SpringSecurity-原理"><span class="toc-text">第六章 SpringSecurity-原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-认证原理-过滤器链的调用"><span class="toc-text">6.1 认证原理-过滤器链的调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-源码调试分析"><span class="toc-text">1 源码调试分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-过滤器"><span class="toc-text">2 过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-debug走起…"><span class="toc-text">3 debug走起…</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-初始化方法"><span class="toc-text">3.1 初始化方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-过滤器：功能扩展的多个过滤器-gt-责任链设计模式"><span class="toc-text">3.2 过滤器：功能扩展的多个过滤器-&gt;责任链设计模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-获取过滤器链中的过滤器，封装为虚拟的VirtualFilterChain对象，并开始执行过滤"><span class="toc-text">3.3 获取过滤器链中的过滤器，封装为虚拟的VirtualFilterChain对象，并开始执行过滤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-开始一个一个的执行过滤器"><span class="toc-text">3.4 开始一个一个的执行过滤器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-自定义过滤器"><span class="toc-text">3.5 自定义过滤器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-认证原理-相关过滤器解释"><span class="toc-text">6.2 认证原理-相关过滤器解释</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-SecurityContextPersistenceFilter"><span class="toc-text">1    SecurityContextPersistenceFilter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-WebAsyncManagerIntegrationFilter"><span class="toc-text">2.    WebAsyncManagerIntegrationFilter</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-HeaderWriterFilter"><span class="toc-text">3.    HeaderWriterFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-CsrfFilter"><span class="toc-text">4.    CsrfFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-LogoutFilter"><span class="toc-text">5.    LogoutFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-UsernamePasswordAuthenticationFilter"><span class="toc-text">6.    UsernamePasswordAuthenticationFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-DefaultLoginPageGeneratingFilter"><span class="toc-text">7.    DefaultLoginPageGeneratingFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-BasicAuthenticationFilter"><span class="toc-text">8.    BasicAuthenticationFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-RequestCacheAwareFilter"><span class="toc-text">9.    RequestCacheAwareFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-SecurityContextHolderAwareRequestFilter"><span class="toc-text">10.    SecurityContextHolderAwareRequestFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-AnonymousAuthenticationFilter"><span class="toc-text">11.    AnonymousAuthenticationFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-SessionManagementFilter"><span class="toc-text">12.    SessionManagementFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-ExceptionTranslationFilter"><span class="toc-text">13.    ExceptionTranslationFilter</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-认证原理-重点UsernamePasswordAuthenticationFilter"><span class="toc-text">6.3 认证原理-重点UsernamePasswordAuthenticationFilter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-1-UsernamePasswordAuthencationFilter源码流程-不带图"><span class="toc-text">6.3.1 UsernamePasswordAuthencationFilter源码流程-不带图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-2-UsernamePasswordAuthencationFilter源码流程-带图"><span class="toc-text">6.3.2 UsernamePasswordAuthencationFilter源码流程-带图</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-执行过滤器，获取到页面的用户名和密码"><span class="toc-text">1 执行过滤器，获取到页面的用户名和密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-将username和password包装成UsernamePasswordAuthenticationToken"><span class="toc-text">2 将username和password包装成UsernamePasswordAuthenticationToken</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-获取系统的认证管理器（AuthenticationManager）来调用authenticate方法完成认证（this-getAuthenticationManager-authenticate-authRequest-）"><span class="toc-text">3 获取系统的认证管理器（AuthenticationManager）来调用authenticate方法完成认证（this.getAuthenticationManager().authenticate(authRequest)）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-eventPublisher-publishAuthenticationSuccess-result-认证成功"><span class="toc-text">4 eventPublisher.publishAuthenticationSuccess(result);认证成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-successfulAuthentication-request-response-chain-authResult"><span class="toc-text">5 successfulAuthentication(request, response, chain, authResult);</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-3-断点参考"><span class="toc-text">6.3.3 断点参考</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-认证原理-流程及相关类（API）"><span class="toc-text">6.4 认证原理-流程及相关类（API）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-1-认证流程"><span class="toc-text">6.4.1 认证流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-2-默认执行顺序"><span class="toc-text">6.4.2 默认执行顺序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-UsernamePasswordAuthenticationFilter"><span class="toc-text">1 UsernamePasswordAuthenticationFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-DaoAuthenticationProvider（实现了-AuthenticationProvider）"><span class="toc-text">2 DaoAuthenticationProvider（实现了 AuthenticationProvider）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-3-相关类"><span class="toc-text">6.4.3 相关类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-WebSecurityConfigurerAdapter"><span class="toc-text">1.    WebSecurityConfigurerAdapter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-SecurityContextHolder"><span class="toc-text">2.    SecurityContextHolder</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-AuthenticationManagerBuilder"><span class="toc-text">3.    AuthenticationManagerBuilder</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-UserDetailsService"><span class="toc-text">4.    UserDetailsService</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-UserDetails"><span class="toc-text">5.    UserDetails</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-Authentication"><span class="toc-text">6.    Authentication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-GrantedAuthority"><span class="toc-text">7.    GrantedAuthority</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-AuthenticationManager"><span class="toc-text">8.    AuthenticationManager</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-AuthenticationProvider"><span class="toc-text">9.    AuthenticationProvider</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-AuthorityUtils"><span class="toc-text">10.    AuthorityUtils</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-AbstractAuthenticationProcessingFilter"><span class="toc-text">11.    AbstractAuthenticationProcessingFilter</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-HttpSecurity"><span class="toc-text">12.    HttpSecurity</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-PasswordEncoder"><span class="toc-text">13.    PasswordEncoder</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-BCryptPasswordEncoder"><span class="toc-text">14.    BCryptPasswordEncoder</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-5-授权原理-AOP-MethodSecurityInterceptor"><span class="toc-text">6.5 授权原理-AOP-MethodSecurityInterceptor</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-1-例如"><span class="toc-text">6.5.1 例如</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-2-拦截器invoke方法"><span class="toc-text">6.5.2 拦截器invoke方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-3-支持各种功能的投票器"><span class="toc-text">6.5.3 支持各种功能的投票器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-4-投票器标识"><span class="toc-text">6.5.4 投票器标识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-5-AccessDecisionManager利用系统中AccessDecisionVoter（投票器）进行授权操作："><span class="toc-text">6.5.5 AccessDecisionManager利用系统中AccessDecisionVoter（投票器）进行授权操作：</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-68. 权限系统_认证授权SpringSecurity框架" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">9. SSM框架整合</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.04.09</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="第一章-SpringSecurity-简介"><a href="#第一章-SpringSecurity-简介" class="headerlink" title="第一章 SpringSecurity-简介"></a>第一章 SpringSecurity-简介</h1><h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1    简介"></a>1    简介</h2><ul>
+<li><a href="https://docs.spring.io/spring-security/site/docs/4.2.10.RELEASE/guides/html5/helloworld-xml.html" target="_blank" rel="noopener">https://docs.spring.io/spring-security/site/docs/4.2.10.RELEASE/guides/html5/helloworld-xml.html</a>  </li>
+<li>SpringSecurity融合Spring技术栈，提供JavaEE应    用的整体安全解决方案；</li>
+<li>Spring Security为基于Java EE的企业软件应用提供全面的安全服务。</li>
+<li>Spring Security只需要少量配置，就能构建一个强大的安全的应用系统。  </li>
+<li>目前市面上受欢迎的两个安全框架：Apache Shiro、SpringSecurity；</li>
+<li>SpringSecurity可以无缝整合Spring应用，具有强大的自动化web安全管控功能。而Shiro是一个轻量级强大的安全框架，可以脱离web应用来提供安全管控，但是对于web的一些定制安全需要手动编写；SpringBoot底层默认整合SpringSecurity作为安全框架，所以我们推荐web应用使用SpringSecurity来控制安全；<h2 id="2-概念"><a href="#2-概念" class="headerlink" title="2    概念"></a>2    概念</h2></li>
+<li>认证</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">authentication：身份验证</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>“身份验证”是指建立主体（principal）的过程，主体就是他们声称是谁（“主体”通常指用户、设备或在应用程序中可以执行动作的其他系统）。也就是“证明你是谁”</p>
+<ul>
+<li>授权</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">authorization：授权</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>“授权”是指确定主体（principal）是否被允许执行系统中某个动作的过程。 也就是“你能做什么！”</p>
+<ul>
+<li>为了达到“授权”决策（安全框架决定你是否有权限做此事），“身份验证”（authentication）过程已经建立了主体的身份（Principal）</li>
+</ul>
+</blockquote>
+<h2 id="3-文档"><a href="#3-文档" class="headerlink" title="3    文档"></a>3    文档</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Hello Spring Security &lt;https://github.com/spring-projects/spring-security/tree/4.2.10.RELEASE/samples/javaconfig/helloworld &gt; 基于Java配置整合示例</span><br><span class="line">Hello Spring Security Boot &lt;https://github.com/spring-projects/spring-security/tree/4.2.10.RELEASE/samples/boot/helloworld&gt; 与SpringBoot整合案例</span><br><span class="line">Hello Spring Security XML &lt;https://github.com/spring-projects/spring-security/tree/4.2.10.RELEASE/samples/xml/helloworld&gt; 基于XML方式整合示例</span><br><span class="line">Hello Spring MVC Security &lt;https://github.com/spring-projects/spring-security/tree/4.2.10.RELEASE/samples/javaconfig/hellomvc&gt; SpringMVC集成示例</span><br><span class="line">Custom Login Form &lt;https://github.com/spring-projects/spring-security/tree/4.2.10.RELEASE/samples/javaconfig/form&gt; 自定义登录表单示例</span><br></pre></td></tr></table></figure>
+<h2 id="4-支持的身份认证模式"><a href="#4-支持的身份认证模式" class="headerlink" title="4    支持的身份认证模式"></a>4    支持的身份认证模式</h2><blockquote>
+<p>在身份验证级别，Spring Security支持广泛的认证模型。这些认证模型中的大部分要么由第三方提供，要么由相关标准机构（如互联网工程任务组）开发。此外，Spring Security提供了自己的一套身份验证功能。具体而言，Spring Security当前支持与所有这些技术的身份验证集成；</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">HTTP BASIC身份验证标头</span><br><span class="line">HTTP BASIC authentication headers (an IETF RFC-based standard)</span><br><span class="line">参考：https://blog.csdn.net/lvxinzhi/article/details/49000003</span><br><span class="line"></span><br><span class="line">HTTP Digest身份验证标头</span><br><span class="line">HTTP Digest authentication headers (an IETF RFC-based standard)</span><br><span class="line"></span><br><span class="line">HTTP X.509客户端证书交换</span><br><span class="line">HTTP X.509 client certificate exchange (an IETF RFC-based standard)</span><br><span class="line"></span><br><span class="line">LDAP（一种非常常见的跨平台身份验证方法，特别是在大型环境中）</span><br><span class="line">LDAP (a very common approach to cross-platform authentication needs, especially in large environments)</span><br><span class="line"></span><br><span class="line">基于表单的身份验证（用于简单的用户界面需求）</span><br><span class="line">Form-based authentication (for simple user interface needs)</span><br><span class="line"></span><br><span class="line">OpenID身份验证</span><br><span class="line">OpenID authentication</span><br><span class="line"></span><br><span class="line">基于预先建立的请求标头的身份验证</span><br><span class="line">Authentication based on pre-established request headers (such as Computer Associates Siteminder)</span><br><span class="line"></span><br><span class="line">Jasig中央认证服务（也称为CAS，是一种流行的开源单点登录系统）</span><br><span class="line">Jasig Central Authentication Service (otherwise known as CAS, which is a popular open source single sign-on system)</span><br><span class="line"></span><br><span class="line">远程方法调用（RMI）和HttpInvoker（Spring远程协议）的透明身份验证上下文传播</span><br><span class="line">Transparent authentication context propagation for Remote Method Invocation (RMI) and HttpInvoker (a Spring remoting protocol)</span><br><span class="line"></span><br><span class="line">自动“记住我”身份验证</span><br><span class="line">Automatic &quot;remember-me&quot; authentication (so you can tick a box to avoid re-authentication for a predetermined period of time)</span><br><span class="line"></span><br><span class="line">匿名身份验证（允许每个未经身份验证自动承担特定的安全身份）</span><br><span class="line">Anonymous authentication (allowing every unauthenticated call to automatically assume a particular security identity)</span><br><span class="line"></span><br><span class="line">Runas身份验证（如果一个调用应继续使用不同的安全标识，则非常有用）</span><br><span class="line">Run-as authentication (which is useful if one call should proceed with a different security identity)</span><br><span class="line"></span><br><span class="line">Java身份验证和授权服务（JAAS）</span><br><span class="line">Java Authentication and Authorization Service (JAAS)</span><br><span class="line"></span><br><span class="line">JavaEE容器身份验证（如果需要，您仍然可以使用容器管理身份验证）</span><br><span class="line">Java EE container authentication (so you can still use Container Managed Authentication if desired)</span><br><span class="line"></span><br><span class="line">Java开源单点登录（JOSSO）</span><br><span class="line">Java Open Source Single Sign-On (JOSSO) *</span><br><span class="line"></span><br><span class="line">OpenNMS网络管理平台*</span><br><span class="line">OpenNMS Network Management Platform *</span><br><span class="line"></span><br><span class="line">您自己的身份验证系统</span><br><span class="line">Your own authentication systems (see below)</span><br><span class="line"></span><br><span class="line">其他</span><br><span class="line">Kerberos</span><br><span class="line">AppFuse *</span><br><span class="line">AndroMDA *</span><br><span class="line">Mule ESB *</span><br><span class="line">Direct Web Request (DWR) *</span><br><span class="line">Grails *</span><br><span class="line">Tapestry *</span><br><span class="line">JTrac *</span><br><span class="line">Jasypt *</span><br><span class="line">Roller *</span><br><span class="line">Elastic Path *</span><br><span class="line">Atlassian Crowd *</span><br></pre></td></tr></table></figure>
+<h2 id="5-模块划分"><a href="#5-模块划分" class="headerlink" title="5    模块划分"></a>5    模块划分</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Core - spring-security-core.jar  核心模块</span><br><span class="line">核心认证、授权功能、支持jdbc-user功能、支持独立的Spring应用</span><br><span class="line"></span><br><span class="line">Remoting - spring-security-remoting.jar  远程交互模块</span><br><span class="line">一般不需要，可以使用Spring Remoting功能简化远程客户端交互</span><br><span class="line"></span><br><span class="line">Web - spring-security-web.jar  web安全模块</span><br><span class="line">web项目使用，基于URL的访问控制（access-control）</span><br><span class="line"></span><br><span class="line">Config - spring-security-config.jar  java配置模块</span><br><span class="line">必须依赖包，包含解析xml方式和java 注解方式来使用SpringSecurity功能</span><br><span class="line"></span><br><span class="line">LDAP - spring-security-ldap.jar  ldap（轻量目录访问协议）支持模块</span><br><span class="line">可选依赖包，LDAP功能支持</span><br><span class="line"></span><br><span class="line">ACL - spring-security-acl.jar  ACL支持</span><br><span class="line">ACL（Access-Control-List）访问控制列表</span><br><span class="line">细粒度的资源访问控制(RBAC+ACL)</span><br><span class="line"></span><br><span class="line">CAS - spring-security-cas.jar  CAS整合支持</span><br><span class="line">CAS（Central Authentication Service）中央认证服务。开源ApereoCAS整合</span><br><span class="line"></span><br><span class="line">OpenID - spring-security-openid.jar  OpenID认证方式支持</span><br><span class="line">OpenID Web身份验证支持。 用于针对外部OpenID服务器对用户进行身份验证</span><br><span class="line">（微信,qq，新浪微博等第三方登录</span><br><span class="line">）</span><br><span class="line">Test - spring-security-test.jar  测试模块</span><br><span class="line">快速的测试SpringSecurity应用</span><br></pre></td></tr></table></figure>
+<h2 id="6-4种使用方式"><a href="#6-4种使用方式" class="headerlink" title="6    4种使用方式"></a>6    4种使用方式</h2><ul>
+<li>一种是全部利用配置文件，将用户、权限、资源(url)硬编码在xml文件中</li>
+<li>二种是用户和权限用数据库存储，而资源(url)和权限的对应采用硬编码配置</li>
+<li>三种是细分角色和权限，并将用户、角色、权限和资源均采用数据库存储，并且自定义过滤器，代替原有的FilterSecurityInterceptor过滤器， 并分别实现AccessDecisionManager、InvocationSecurityMetadataSourceService和UserDetailsService，并在配置文件中进行相应配置。</li>
+<li>四是修改springsecurity的源代码，主要是修改InvocationSecurityMetadataSourceService和UserDetailsService两个类。<ul>
+<li>InvocationSecurityMetadataSourceService</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>将配置文件或数据库中存储的资源(url)提取出来加工成为url和权限列表的Map供Security使用<br>-<ul>
+<li>UserDetailsService</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>提取用户名和权限组成一个完整的(UserDetails)User对象，该对象可以提供用户的详细信息供AuthentationManager进行认证与授权使用</li>
+</ul>
+</blockquote>
+<h1 id="第二章-SpringSecurity-HelloWorld"><a href="#第二章-SpringSecurity-HelloWorld" class="headerlink" title="第二章 SpringSecurity-HelloWorld"></a>第二章 SpringSecurity-HelloWorld</h1><h2 id="2-1-测试环境搭建"><a href="#2-1-测试环境搭建" class="headerlink" title="2.1 测试环境搭建"></a>2.1 测试环境搭建</h2><h3 id="2-1-1-创建普通maven-war工程-spring-security-helloworld"><a href="#2-1-1-创建普通maven-war工程-spring-security-helloworld" class="headerlink" title="2.1.1 创建普通maven-war工程:spring-security-helloworld"></a>2.1.1 创建普通maven-war工程:spring-security-helloworld</h3><p>pom文件增加依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;4.3.20.RELEASE&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;jsp-api&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.2&lt;/version&gt;</span><br><span class="line">			&lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;servlet-api&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;2.5&lt;/version&gt;</span><br><span class="line">			&lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;jstl&lt;/artifactId&gt;</span><br><span class="line">			&lt;version&gt;1.2&lt;/version&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-2-web-xml配置"><a href="#2-1-2-web-xml配置" class="headerlink" title="2.1.2 web.xml配置"></a>2.1.2 web.xml配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">&lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;</span><br><span class="line">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</span><br><span class="line">&lt;init-param&gt;</span><br><span class="line">&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">&lt;param-value&gt;classpath:spring.xml&lt;/param-value&gt;</span><br><span class="line">&lt;/init-param&gt;</span><br><span class="line">&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br><span class="line">&lt;/servlet&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">&lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;</span><br><span class="line">&lt;url-pattern&gt;/&lt;/url-pattern&gt;</span><br><span class="line">&lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-3-spring配置-spring-xml"><a href="#2-1-3-spring配置-spring-xml" class="headerlink" title="2.1.3 spring配置:spring.xml"></a>2.1.3 spring配置:spring.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</span><br><span class="line">xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd</span><br><span class="line">http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd&quot;&gt;</span><br><span class="line">&lt;context:component-scan base-package=&quot;com.atguigu.security&quot;&gt;&lt;/context:component-scan&gt;</span><br><span class="line">&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</span><br><span class="line">&lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;mvc:annotation-driven /&gt;</span><br><span class="line">&lt;mvc:default-servlet-handler /&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-4-导入实验资源"><a href="#2-1-4-导入实验资源" class="headerlink" title="2.1.4 导入实验资源"></a>2.1.4 导入实验资源</h3><ul>
+<li>导入页面</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531181744.png" alt></p>
+<ul>
+<li>导入controller</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531181821.png" alt></p>
+<h3 id="2-1-5-运行测试"><a href="#2-1-5-运行测试" class="headerlink" title="2.1.5 运行测试"></a>2.1.5 运行测试</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531181905.png" alt></p>
+<h2 id="2-2-引入SpringSecurity框架"><a href="#2-2-引入SpringSecurity框架" class="headerlink" title="2.2 引入SpringSecurity框架"></a>2.2 引入SpringSecurity框架</h2><h3 id="2-2-1-添加security-pom依赖"><a href="#2-2-1-添加security-pom依赖" class="headerlink" title="2.2.1 添加security-pom依赖"></a>2.2.1 添加security-pom依赖</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.security&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-security-web&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;4.2.10.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.security&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-security-config&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;4.2.10.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- 标签库 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.security&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-security-taglibs&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;4.2.10.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-2-web-xml中添加SpringSecurity的Filter进行安全控制"><a href="#2-2-2-web-xml中添加SpringSecurity的Filter进行安全控制" class="headerlink" title="2.2.2 web.xml中添加SpringSecurity的Filter进行安全控制"></a>2.2.2 web.xml中添加SpringSecurity的Filter进行安全控制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">&lt;filter-name&gt;springSecurityFilterChain&lt;/filter-name&gt;&lt;!--名称固定,不能变--&gt;</span><br><span class="line">&lt;filter-class&gt;org.springframework.web.filter.DelegatingFilterProxy&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">&lt;filter-name&gt;springSecurityFilterChain&lt;/filter-name&gt;</span><br><span class="line">&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-3-加入SpringSecurity配置类"><a href="#2-2-3-加入SpringSecurity配置类" class="headerlink" title="2.2.3 加入SpringSecurity配置类"></a>2.2.3 加入SpringSecurity配置类</h3><p>@Configuration、@Bean 注解作用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebSecurity</span><br><span class="line">public class AppWebSecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.2.4 启动测试效果</p>
+<ul>
+<li>所有资源访问受限（包括静态资源）</li>
+<li>需要一个默认的登录页面（框架自带的）</li>
+<li>账号密码错误会有提示</li>
+<li>查看登录页面的源码，发现有个hidden-input；name=”_csrf” 这是SpringSecurity帮我们防止“跨站请求伪造”攻击；还可以防止表单重复提交。</li>
+<li>。。。</li>
+<li><a href="http://localhost:8080/spring-security-helloworld/login?error" target="_blank" rel="noopener">http://localhost:8080/spring-security-helloworld/login?error</a></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531182124.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531182151.png" alt></p>
+<h1 id="第三章-SpringSecurity-实验"><a href="#第三章-SpringSecurity-实验" class="headerlink" title="第三章 SpringSecurity-实验"></a>第三章 SpringSecurity-实验</h1><h2 id="3-1-实验一：授权首页和静态资源"><a href="#3-1-实验一：授权首页和静态资源" class="headerlink" title="3.1    实验一：授权首页和静态资源"></a>3.1    实验一：授权首页和静态资源</h2><ul>
+<li>配置类（AppWebSecurityConfig extends WebSecurityConfigurerAdapter）</li>
+<li>重写configure(HttpSecurity http)方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebSecurity</span><br><span class="line">public class AppWebSecurityConfig extends WebSecurityConfigurerAdapter &#123; </span><br><span class="line">@Override</span><br><span class="line">protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">//super.configure(http); //取消默认配置 </span><br><span class="line">http.authorizeRequests()</span><br><span class="line">.antMatchers(&quot;/layui/**&quot;,&quot;/index.jsp&quot;).permitAll() //设置匹配的资源放行</span><br><span class="line">.anyRequest().authenticated(); //剩余任何资源必须认证</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>测试结果<ul>
+<li>静态资源和index.jsp都可以访问</li>
+<li>不存在的资源</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531182609.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531182637.png" alt></p>
+<h2 id="3-2-实验二：默认及自定义登录页"><a href="#3-2-实验二：默认及自定义登录页" class="headerlink" title="3.2    实验二：默认及自定义登录页"></a>3.2    实验二：默认及自定义登录页</h2><ul>
+<li>开启formLogin()功能</li>
+<li>静态资源和index.jsp都可以访问</li>
+<li>不存在的资源<ul>
+<li><a href="http://localhost/spring-security-helloworld/xxx" target="_blank" rel="noopener">http://localhost/spring-security-helloworld/xxx</a> 重定向到登录页</li>
+<li><a href="http://localhost/spring-security-helloworld/layui/xxx" target="_blank" rel="noopener">http://localhost/spring-security-helloworld/layui/xxx</a>  404错误</li>
+</ul>
+</li>
+<li>总结：默认表单登录页面的规则<br>1）、自动生成一个登录页<br>2）、登录请求被提交到  /login    POST下<br>3）、生成隐藏域，可以防重复提交和跨站请求伪造；<br><code>&lt;input name=&quot;_csrf&quot; type=&quot;hidden&quot; value=&quot;755f0b3c-0965-430b-852e-dcf6c77e7edb&quot; /&gt;</code><br>为了测试方便，先禁用这个功能: <code>http.csrf().disable();</code><br>4）、默认提交的字段名为：<code>name=&#39;password&#39;  name=&#39;username&#39;</code></li>
+<li>指定登录页<ul>
+<li>http.formLogin().loginPage(“/index.jsp”); //去到指定的登录页</li>
+<li>静态资源和index.jsp都可以访问</li>
+<li>不存在的资源</li>
+</ul>
+</li>
+</ul>
+<p><a href="http://localhost/spring-security-helloworld/xxx" target="_blank" rel="noopener">http://localhost/spring-security-helloworld/xxx</a> 重定向到自定义登录页<br>υ    <a href="http://localhost/spring-security-helloworld/layui/xxx" target="_blank" rel="noopener">http://localhost/spring-security-helloworld/layui/xxx</a> 404错误</p>
+<h2 id="3-3-实验三：自定义表单登录逻辑分析"><a href="#3-3-实验三：自定义表单登录逻辑分析" class="headerlink" title="3.3 实验三：自定义表单登录逻辑分析"></a>3.3 实验三：自定义表单登录逻辑分析</h2><ul>
+<li>表单提交地址：${PATH }/index.jsp</li>
+<li>表单提交请求方式：post</li>
+<li>表单提交请求失败，提取错误消息：<code>${SPRING_SECURITY_LAST_EXCEPTION.message}</code></li>
+<li>如何提交表单：<ul>
+<li>引入jquery:<code>&lt;script src=&quot;${PATH }/layui/jquery.min.js&quot;&gt;&lt;/script&gt;</code></li>
+<li><code>$(&quot;form&quot;).submit();</code></li>
+<li>表单提交参数名称： <code>username  password</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>提交请求被拒绝</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531183350.png" alt></p>
+<p>暂时禁用csrf：http.csrf().disable();</p>
+<ul>
+<li><p>登录逻辑分析<br>/</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">**默认登录页面</span><br><span class="line">   * /login GET - the login form </span><br><span class="line">   * /login POST - process the credentials and if valid authenticate the user </span><br><span class="line">   * /login?error GET - redirect here for failed authentication attempts </span><br><span class="line">   * /login?logout GET - redirect here after successfully logging out </span><br><span class="line"></span><br><span class="line">   * 定制登录页面：loginPage(&quot;/index.jsp&quot;)：规定登录页的地址在哪里</span><br><span class="line">   * /index.jsp GET - the login form </span><br><span class="line">   * /index.jsp POST - process the credentials and if valid authenticate the user</span><br><span class="line">   * /index.jsp?error  GET - redirect here for failed authentication attempts </span><br><span class="line">   * /index.jsp?logout GET - redirect here after successfully logging out </span><br><span class="line">* $&#123;SPRING_SECURITY_LAST_EXCEPTION.message&#125;可以取出错误消息</span><br><span class="line">   */</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试结果</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531183445.png" alt></p>
+<h2 id="3-4实验四：自定义认证用户信息"><a href="#3-4实验四：自定义认证用户信息" class="headerlink" title="3.4实验四：自定义认证用户信息"></a>3.4实验四：自定义认证用户信息</h2><ul>
+<li>自定义认证用户信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">auth.inMemoryAuthentication()</span><br><span class="line">.withUser(&quot;zhangsan&quot;).password(&quot;123456&quot;).roles(&quot;ADMIN&quot;)</span><br><span class="line">.and()</span><br><span class="line">.withUser(&quot;lisi&quot;).password(&quot;123123&quot;).authorities(&quot;USER&quot;,&quot;MANAGER&quot;);</span><br></pre></td></tr></table></figure>
+<pre><code>- CSRF跨站请求伪造
+- SpringSecurity添加了csrf功能【DefaultCsrfToken】，所有的表单提交为了防止跨站请求伪造，我们需要加上_csrf项; 或者，暂时禁用`http.csrf().disable();`
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;hidden&quot; name=&quot;$&#123;_csrf.parameterName&#125;&quot; value=&quot;$&#123;_csrf.token&#125;&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><ul>
+<li><code>${_csrf}  ===&gt;&gt;&gt;  org.springframework.security.web.csrf.DefaultCsrfToken@19116cfd</code></li>
+<li><code>&lt;input type=&quot;hidden&quot; name=&quot;_csrf&quot; value=&quot;310988c2-3f9d-4651-9e19-6ef4b2c4aa3a&quot;/&gt;</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>如果不禁用csrf,默认是开启的状态；页面不设置csrf表单域，那么，提交登录请求会报错</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531183736.png" alt></p>
+<ul>
+<li>令牌值变化：<ul>
+<li>如果登录成功（用户名，密码正确），令牌会被删除，</li>
+<li>重新回到登录页或后退网页，令牌会重新生成；</li>
+<li>如果登录失败（用户名，密码错误），令牌不变。</li>
+<li>刷新登录页，令牌值也不变</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>作用：    <ul>
+<li>防止别的网站伪造数据，提交请求到我们的网站。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531183926.png" alt>    </p>
+<ul>
+<li>扩展-了解XSS<blockquote>
+<ul>
+<li>XSS攻击全称跨站脚本攻击，是为不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS，XSS是一种在web应用中的计算机安全漏洞，它允许恶意web用户将代码植入到提供给其它用户使用的页面中。 </li>
+<li>CSRF（Cross-site request forgery）跨站请求伪造，也被称为“One Click Attack”或者Session Riding，通常缩写为CSRF或者XSRF，是一种对网站的恶意利用。尽管听起来像跨站脚本（XSS），但它与XSS非常不同，XSS利用站点内的信任用户，而CSRF则通过伪装成受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性。</li>
+</ul>
+</blockquote>
+<h2 id="3-5实验五：用户注销完成"><a href="#3-5实验五：用户注销完成" class="headerlink" title="3.5实验五：用户注销完成"></a>3.5实验五：用户注销完成</h2></li>
+<li>添加注销功能（logout）http.logout()默认规则    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1)	/logout：退出系统</span><br><span class="line">2)	如果csrf开启，必须post方式的/logout请求，表单中需要增加csrf token</span><br><span class="line">3)	logoutUrl()；退出系统需要发送的请求</span><br><span class="line">4)	logoutSuccessUrl()；退出系统成功以后要跳转的页面地址</span><br><span class="line">5)	addLogoutHandler()：自定义注销处理器</span><br><span class="line">6)	deleteCookies()：指定需要删除的cookie</span><br><span class="line">7)	invalidateHttpSession()：session失效（DEBUG）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-6-实验六：基于角色的访问控制"><a href="#3-6-实验六：基于角色的访问控制" class="headerlink" title="3.6 实验六：基于角色的访问控制"></a>3.6 实验六：基于角色的访问控制</h2><ul>
+<li>设置资源可以访问的角色</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http.authorizeRequests().antMatchers(&quot;/layui/**&quot;,&quot;/index.jsp&quot;).permitAll() //允许所有人都访问静态资源，无论登录（认证）与否</span><br><span class="line">.antMatchers(&quot;/level1/**&quot;).hasRole(&quot;学徒&quot;)</span><br><span class="line">.antMatchers(&quot;/level2/**&quot;).hasRole(&quot;大师&quot;)</span><br><span class="line">.antMatchers(&quot;/level3/**&quot;).hasRole(&quot;宗师&quot;)</span><br><span class="line">.anyRequest().authenticated(); //放置最后，以上没有规定的都需要权限认证。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：<ul>
+<li>将<code>.anyRequest().authenticated()</code>错误的设置在前面，后面的设置就不起作用了。</li>
+<li>设置所有,”/**”都可以访问，其他再进行的设置就不会起作用了</li>
+<li>设置匿名访问/level3/**  可以不用登录，匿名访问：<code>.anyRequest().anonymous();</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>拥有该角色的资源可以访问，否则不可以访问</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">auth.inMemoryAuthentication()</span><br><span class="line">.withUser(&quot;zhangsan&quot;).password(&quot;123456&quot;).roles(&quot;ADMIN&quot;,&quot;学徒&quot;,&quot;宗师&quot;)</span><br><span class="line">.and()</span><br><span class="line">.withUser(&quot;自定义访问拒绝处理页面，lisi&quot;).password(&quot;111111&quot;).authorities(&quot;USER&quot;,&quot;MANGER&quot;);</span><br></pre></td></tr></table></figure>
+<h2 id="3-7-实验七：自定义访问拒绝处理页面"><a href="#3-7-实验七：自定义访问拒绝处理页面" class="headerlink" title="3.7 实验七：自定义访问拒绝处理页面"></a>3.7 实验七：自定义访问拒绝处理页面</h2><ul>
+<li>直接增加处理映射界面</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.exceptionHandling().accessDeniedPage(&quot;/unauth.html&quot;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在控制器类中增加映射处理</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/unauth.html&quot;)</span><br><span class="line">public String unauth()&#123;</span><br><span class="line">return &quot;unauth&quot;;</span><br><span class="line">&#125;</span><br><span class="line">λ	增加显示页面，将main.jsp复制,命名为unauth.jsp，增加一句提示信息</span><br><span class="line">&lt;h1&gt;你无权访问该页面...&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>测试显示效果</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184346.png" alt></p>
+<ul>
+<li>自定义异常处理器</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">http.exceptionHandling().accessDeniedHandler(new AccessDeniedHandler() &#123;</span><br><span class="line">@Override</span><br><span class="line">public void handle(HttpServletRequest request, HttpServletResponse response,</span><br><span class="line">AccessDeniedException accessDeniedException) throws IOException, ServletException &#123;</span><br><span class="line">request.setAttribute(&quot;message&quot;, accessDeniedException.getMessage());</span><br><span class="line">request.getRequestDispatcher(&quot;/WEB-INF/views/unauth.jsp&quot;).forward(request, response);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="3-8-实验八：记住我功能"><a href="#3-8-实验八：记住我功能" class="headerlink" title="3.8 实验八：记住我功能"></a>3.8 实验八：记住我功能</h2><h3 id="3-8-1-记住我功能-免登录原理"><a href="#3-8-1-记住我功能-免登录原理" class="headerlink" title="3.8.1 记住我功能-免登录原理"></a>3.8.1 记住我功能-免登录原理</h3><ul>
+<li>http.rememberMe();</li>
+<li>默认规则<ul>
+<li>页面checkbox提交remember-me参数</li>
+<li>默认记住2周登录状态：AbstractRememberMeServices</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184449.png" alt></p>
+<p>-</p>
+<pre><code>- 会在cookie中保存名为：remember-me的cookie
+</code></pre><ul>
+<li>记住了以前登录的状态，以后再访问就不用登录了</li>
+<li>登录后页面，关闭浏览器，直接访问：<br><a href="http://localhost/spring-security-helloworld/main.html" target="_blank" rel="noopener">http://localhost/spring-security-helloworld/main.html</a> 可以成功访问，不必登录。</li>
+<li>这种方式，token值是放置在内存中的，服务器端重启tomcat,token会失效。需要将token记录在数据库持久化才不会失效。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184729.png" alt></p>
+<h2 id="3-8-2-记住我-数据版"><a href="#3-8-2-记住我-数据版" class="headerlink" title="3.8.2 记住我-数据版"></a>3.8.2 记住我-数据版</h2><h3 id="引入pom-xml-包"><a href="#引入pom-xml-包" class="headerlink" title="引入pom.xml 包"></a>引入pom.xml 包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-orm&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;4.3.20.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;com.alibaba&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;druid&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.1.12&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;!-- mysql驱动 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;5.1.47&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="配置数据源"><a href="#配置数据源" class="headerlink" title="配置数据源"></a>配置数据源</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置数据源 --&gt;</span><br><span class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;</span><br><span class="line">&lt;property name=&quot;username&quot; value=&quot;root&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;password&quot; value=&quot;root&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://192.168.137.3:3306/security?useSSL=false&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt; </span><br><span class="line">&lt;!--  jdbcTemplate--&gt;</span><br><span class="line">&lt;bean id=&quot;jdbcTemplate&quot; class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</span><br><span class="line">&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><p>create table persistent_logins (username varchar(64) not null, series varchar(64) primary key,token varchar(64) not null, last_used timestamp not null)</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184849.png" alt></p>
+<h3 id="设置记住我"><a href="#设置记住我" class="headerlink" title="设置记住我"></a>设置记住我</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">DataSource dataSource;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">//。。。</span><br><span class="line">//记住我</span><br><span class="line">JdbcTokenRepositoryImpl ptr = new JdbcTokenRepositoryImpl();</span><br><span class="line">ptr.setDataSource(dataSource);</span><br><span class="line">http.rememberMe().tokenRepository(ptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531184930.png" alt></p>
+<h1 id="第四章-认证"><a href="#第四章-认证" class="headerlink" title="第四章 认证"></a>第四章 认证</h1><p>使用数据库保存/查询用户数据，完成认证功能</p>
+<h2 id="4-1-方式一：重写jdbcAuthentication规则-不推荐"><a href="#4-1-方式一：重写jdbcAuthentication规则-不推荐" class="headerlink" title="4.1 方式一：重写jdbcAuthentication规则(不推荐)"></a>4.1 方式一：重写jdbcAuthentication规则(不推荐)</h2><ul>
+<li>基于数据库的RBAC查询出我们需要的用户以及这些用户的权限（权限标识、角色）</li>
+<li>创建和SpringSecurity要求一模一样的表，然后用默认jdbcAuthentication</li>
+<li>更新jdbcAuthentication里面所有我们需要实际运行的sql</li>
+<li>authoritiesByUsernameQuery：根据用户名查询他权限的sql</li>
+<li>usersByUsernameQuery：根据用户名查询用户的sql</li>
+<li>…….：更多的sql均可定义</li>
+</ul>
+<h3 id="4-1-1-使用默认的查询用户语句"><a href="#4-1-1-使用默认的查询用户语句" class="headerlink" title="4.1.1 使用默认的查询用户语句"></a>4.1.1 使用默认的查询用户语句</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth.jdbcAuthentication().usersByUsernameQuery(&quot;zhangsan&quot;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195137.png" alt></p>
+<h3 id="4-1-2-使用默认的查询权限语句"><a href="#4-1-2-使用默认的查询权限语句" class="headerlink" title="4.1.2 使用默认的查询权限语句"></a>4.1.2 使用默认的查询权限语句</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auth.jdbcAuthentication().authoritiesByUsernameQuery(&quot;zhangsan&quot;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195209.png" alt></p>
+<h2 id="4-2-方式二：自定义UserDetailsService检索用户"><a href="#4-2-方式二：自定义UserDetailsService检索用户" class="headerlink" title="4.2 方式二：自定义UserDetailsService检索用户"></a>4.2 方式二：自定义UserDetailsService检索用户</h2><h3 id="4-2-1-实现UserDetailService接口loadUserByUsername-String-username-方法"><a href="#4-2-1-实现UserDetailService接口loadUserByUsername-String-username-方法" class="headerlink" title="4.2.1 实现UserDetailService接口loadUserByUsername(String username)方法"></a>4.2.1 实现UserDetailService接口loadUserByUsername(String username)方法</h3><h3 id="4-2-2-实验步骤"><a href="#4-2-2-实验步骤" class="headerlink" title="4.2.2 实验步骤"></a>4.2.2 实验步骤</h3><h4 id="1-创建表结构"><a href="#1-创建表结构" class="headerlink" title="1 创建表结构"></a>1 创建表结构</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">security实验\security.sql</span><br></pre></td></tr></table></figure>
+<h4 id="2-配置-configure-AuthenticationManagerBuilder-auth"><a href="#2-配置-configure-AuthenticationManagerBuilder-auth" class="headerlink" title="2 配置 configure(AuthenticationManagerBuilder auth)"></a>2 配置 configure(AuthenticationManagerBuilder auth)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">UserDetailsService userDetailsService;//用户详情查询服务组件的接口</span><br><span class="line"> </span><br><span class="line">@Override</span><br><span class="line">protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;</span><br><span class="line">//根据用户名查询出用户的详细信息</span><br><span class="line">auth.userDetailsService(userDetailsService); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-编写UserDetailService实现"><a href="#3-编写UserDetailService实现" class="headerlink" title="3 编写UserDetailService实现:"></a>3 编写UserDetailService实现:</h4><p>1)    接口及已有实现类</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195412.png" alt></p>
+<p>2)    实现UserDetailService接口，提供自定义实现类<br><code>org.springframework.security.core.userdetails.UserDetailsService</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">package com.security.component;</span><br><span class="line"></span><br><span class="line">import java.util.Map;</span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.jdbc.core.JdbcTemplate;</span><br><span class="line">import org.springframework.security.core.authority.*;</span><br><span class="line">import org.springframework.security.core.userdetails.User;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"> </span><br><span class="line">//按照用户名查询用户详情的接口</span><br><span class="line">@Service</span><br><span class="line">public class AppUserDetailsServiceImpl implements UserDetailsService &#123;</span><br><span class="line">@Autowired</span><br><span class="line">JdbcTemplate jdbcTemplate;</span><br><span class="line"> </span><br><span class="line">@Override</span><br><span class="line">public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException &#123;</span><br><span class="line">String queryUser = &quot;SELECT * FROM `t_admin` WHERE loginacct=?&quot;;</span><br><span class="line">    </span><br><span class="line">//1、查询指定用户的信息</span><br><span class="line">Map&lt;String, Object&gt; map = jdbcTemplate.queryForMap(queryUser, username);</span><br><span class="line">    </span><br><span class="line">//2、将查询到的用户封装到框架使用的UserDetails里面</span><br><span class="line">return new User(map.get(&quot;loginacct&quot;).toString(), map.get(&quot;userpswd&quot;).toString(), </span><br><span class="line">AuthorityUtils.createAuthorityList(&quot;ADMIN&quot;,&quot;USER&quot;));//暂时写死，过后数据库中查</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-运行测试结果，密码不一致，跳转到登录页，并提示错误消息"><a href="#4-运行测试结果，密码不一致，跳转到登录页，并提示错误消息" class="headerlink" title="4 运行测试结果，密码不一致，跳转到登录页，并提示错误消息"></a>4 运行测试结果，密码不一致，跳转到登录页，并提示错误消息</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195510.png" alt></p>
+<h3 id="4-2-3-debug测试登录-断点调试"><a href="#4-2-3-debug测试登录-断点调试" class="headerlink" title="4.2.3 debug测试登录-断点调试"></a>4.2.3 debug测试登录-断点调试</h3><h4 id="1-断点-方法栈"><a href="#1-断点-方法栈" class="headerlink" title="1 断点-方法栈"></a>1 断点-方法栈</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195553.png" alt></p>
+<h4 id="2-自定义UserDetailService实现类"><a href="#2-自定义UserDetailService实现类" class="headerlink" title="2 自定义UserDetailService实现类"></a>2 自定义UserDetailService实现类</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195851.png" alt></p>
+<h4 id="3-Dao层认证提供者-DaoAuthenticationProvider"><a href="#3-Dao层认证提供者-DaoAuthenticationProvider" class="headerlink" title="3 Dao层认证提供者: DaoAuthenticationProvider"></a>3 Dao层认证提供者: DaoAuthenticationProvider</h4><p>Dao层认证提供者DaoAuthenticationProvider，用于调用自定义的UserDetailService实现类方法</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531195949.png" alt></p>
+<h4 id="4-抽象层用户认证提供者-AbstractUserDetailsAuthenticationProvider"><a href="#4-抽象层用户认证提供者-AbstractUserDetailsAuthenticationProvider" class="headerlink" title="4 抽象层用户认证提供者: AbstractUserDetailsAuthenticationProvider"></a>4 抽象层用户认证提供者: AbstractUserDetailsAuthenticationProvider</h4><p>抽象层用户认证提供者，获取dao层查找的认证用户信息，被封装成UserDetails对象，User类是UserDetails接口实现类</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200141.png" alt></p>
+<p>1)    org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.DefaultPreAuthenticationChecks认证用户账号是否被锁定，是否启用，是否过期；用户表中可以增加这些字段。</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200226.png" alt></p>
+<p>2)    public interface Authentication extends Principal 封装表单提交的认证信息</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200248.png" alt></p>
+<ul>
+<li>认证用户名和密码；盐值为null</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200419.png" alt></p>
+<ul>
+<li>采用org.springframework.security.authentication.encoding.BasePasswordEncoder默认加密器对表单提交明文加密（其实并没有进行任何加密，明文无变化）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200446.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200512.png" alt></p>
+<ul>
+<li>总结</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531200541.png" alt></p>
+<h2 id="4-3-基于数据库-MD5密码-认证-debug"><a href="#4-3-基于数据库-MD5密码-认证-debug" class="headerlink" title="4.3 基于数据库(MD5密码)认证 (debug)"></a>4.3 基于数据库(MD5密码)认证 (debug)</h2><p>使用数据库保存/查询用户数据，完成认证功能</p>
+<h3 id="4-3-1-配置-configure-AuthenticationManagerBuilder-auth"><a href="#4-3-1-配置-configure-AuthenticationManagerBuilder-auth" class="headerlink" title="4.3.1 配置 configure(AuthenticationManagerBuilder auth)"></a>4.3.1 配置 configure(AuthenticationManagerBuilder auth)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.security.crypto.password.PasswordEncoder</span><br><span class="line">//测试：分析源码（验证密码不一致）</span><br><span class="line">auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);</span><br></pre></td></tr></table></figure>
+<h3 id="4-3-2-引入MD5加密工具类：MD5Util-java"><a href="#4-3-2-引入MD5加密工具类：MD5Util-java" class="headerlink" title="4.3.2 引入MD5加密工具类：MD5Util.java"></a>4.3.2 引入MD5加密工具类：MD5Util.java</h3><h3 id="4-3-3-PasswordEncoder接口实现类：AppPasswordEncoder"><a href="#4-3-3-PasswordEncoder接口实现类：AppPasswordEncoder" class="headerlink" title="4.3.3 PasswordEncoder接口实现类：AppPasswordEncoder"></a>4.3.3 PasswordEncoder接口实现类：AppPasswordEncoder</h3><p>@<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Service</span><br><span class="line">public class AppPasswordEncoder implements PasswordEncoder &#123;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">   * 密码加密的算法</span><br><span class="line">   */</span><br><span class="line">@Override</span><br><span class="line">public String encode(CharSequence rawPassword) &#123;</span><br><span class="line">String digestPwd = MD5Util.digestPwd(rawPassword.toString());</span><br><span class="line">return digestPwd;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">   * 比较登录密码和数据库存储密码是否一致</span><br><span class="line">   * rawPassword:页面的明文密码</span><br><span class="line">   * encodedPassword：数据库的密文密码</span><br><span class="line">   */</span><br><span class="line">@Override</span><br><span class="line">public boolean matches(CharSequence rawPassword, String encodedPassword) &#123;</span><br><span class="line">//使用自己的工具类</span><br><span class="line">String digestPwd = MD5Util.digestPwd(rawPassword.toString());</span><br><span class="line">return digestPwd.equals(encodedPassword);</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-3-4-Debug测试，主要测试matches方法的调用过程"><a href="#4-3-4-Debug测试，主要测试matches方法的调用过程" class="headerlink" title="4.3.4 Debug测试，主要测试matches方法的调用过程"></a>4.3.4 Debug测试，主要测试matches方法的调用过程</h3><h4 id="1-表单提交密码：rawPassword"><a href="#1-表单提交密码：rawPassword" class="headerlink" title="1     表单提交密码：rawPassword"></a>1     表单提交密码：rawPassword</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083038.png" alt></p>
+<h4 id="2-数据库存储密码-：encodePassword"><a href="#2-数据库存储密码-：encodePassword" class="headerlink" title="2     数据库存储密码 ：encodePassword"></a>2     数据库存储密码 ：encodePassword</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083112.png" alt></p>
+<h4 id="3-调用自定义密码验证器"><a href="#3-调用自定义密码验证器" class="headerlink" title="3     调用自定义密码验证器"></a>3     调用自定义密码验证器</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083241.png" alt></p>
+<h4 id="4-密码不一致，抛异常：Bad-credentials-密码一致，通过认证"><a href="#4-密码不一致，抛异常：Bad-credentials-密码一致，通过认证" class="headerlink" title="4     密码不一致，抛异常：Bad credentials ;密码一致，通过认证"></a>4     密码不一致，抛异常：Bad credentials ;密码一致，通过认证</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083355.png" alt></p>
+<h4 id="5-创建UsernamePasswordAuthenticationToken-对象，封装认证信息"><a href="#5-创建UsernamePasswordAuthenticationToken-对象，封装认证信息" class="headerlink" title="5     创建UsernamePasswordAuthenticationToken 对象，封装认证信息"></a>5     创建UsernamePasswordAuthenticationToken 对象，封装认证信息</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083432.png" alt></p>
+<h3 id="4-3-5-源码参考"><a href="#4-3-5-源码参考" class="headerlink" title="4.3.5 源码参考"></a>4.3.5 源码参考</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">protected Authentication createSuccessAuthentication(Object principal,Authentication authentication, UserDetails user) &#123;</span><br><span class="line">// Ensure we return the original credentials the user supplied,</span><br><span class="line">// so subsequent attempts are successful even with encoded passwords.</span><br><span class="line">// Also ensure we return the original getDetails(), so that future</span><br><span class="line">// authentication events after cache expiry contain the details </span><br><span class="line">UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(</span><br><span class="line">principal, authentication.getCredentials(),</span><br><span class="line">authoritiesMapper.mapAuthorities(user.getAuthorities())  );//封装用户权限信息 </span><br><span class="line">result.setDetails(authentication.getDetails()); //封装用户信息</span><br><span class="line">return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-principal-认证主体-数据库中查询User数据"><a href="#1-principal-认证主体-数据库中查询User数据" class="headerlink" title="1 principal 认证主体-数据库中查询User数据"></a>1 principal 认证主体-数据库中查询User数据</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083624.png" alt></p>
+<h4 id="2-authentication-getCredentials-认证密码-表单中密码"><a href="#2-authentication-getCredentials-认证密码-表单中密码" class="headerlink" title="2 authentication.getCredentials() 认证密码(表单中密码)"></a>2 authentication.getCredentials() 认证密码(表单中密码)</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083655.png" alt></p>
+<h4 id="3-authoritiesMapper-mapAuthorities-user-getAuthorities-认证权限集合"><a href="#3-authoritiesMapper-mapAuthorities-user-getAuthorities-认证权限集合" class="headerlink" title="3 authoritiesMapper.mapAuthorities(user.getAuthorities()) 认证权限集合"></a>3 authoritiesMapper.mapAuthorities(user.getAuthorities()) 认证权限集合</h4><p>该用户拥有的权限，暂时写死在代码中的，后期要根据用户查询所拥有的权限</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083729.png" alt></p>
+<h4 id="4-认证细节：包括客户端ip和sessionid"><a href="#4-认证细节：包括客户端ip和sessionid" class="headerlink" title="4 认证细节：包括客户端ip和sessionid"></a>4 认证细节：包括客户端ip和sessionid</h4><p>org.springframework.security.web.authentication.WebAuthenticationDetails</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083805.png" alt></p>
+<h4 id="5-result对象（UsernamePasswordAuthenticationToken）详细描述"><a href="#5-result对象（UsernamePasswordAuthenticationToken）详细描述" class="headerlink" title="5 result对象（UsernamePasswordAuthenticationToken）详细描述"></a>5 result对象（UsernamePasswordAuthenticationToken）详细描述</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083855.png" alt></p>
+<h2 id="4-4-基于数据库-BCryptPasswordEncoder-密码加密认证"><a href="#4-4-基于数据库-BCryptPasswordEncoder-密码加密认证" class="headerlink" title="4.4 基于数据库(BCryptPasswordEncoder)密码加密认证"></a>4.4 基于数据库(BCryptPasswordEncoder)密码加密认证</h2><h3 id="4-4-1-PasswordEncoder接口"><a href="#4-4-1-PasswordEncoder接口" class="headerlink" title="4.4.1 PasswordEncoder接口"></a>4.4.1 PasswordEncoder接口</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601083950.png" alt></p>
+<h3 id="4-4-2-使用BCryptPasswordEncoder进行密码加密"><a href="#4-4-2-使用BCryptPasswordEncoder进行密码加密" class="headerlink" title="4.4.2 使用BCryptPasswordEncoder进行密码加密"></a>4.4.2 使用BCryptPasswordEncoder进行密码加密</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//推荐密码加密器用这个BCryptPasswordEncoder; 将一个字符串加密成一个永不重复的密文</span><br><span class="line">//1、加盐+加随机数</span><br><span class="line">auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-3-本地测试：main方法"><a href="#4-4-3-本地测试：main方法" class="headerlink" title="4.4.3 本地测试：main方法"></a>4.4.3 本地测试：main方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">BCryptPasswordEncoder pe = new BCryptPasswordEncoder();</span><br><span class="line"> </span><br><span class="line">//$2a$10$WzKk37ncOPynOSxyFGkxWu3ys7xaf7L/9uUhfVYVOCFTqeHkgJvOq</span><br><span class="line">//$2a$10$VmWwIx/uxNQabCYl3I5mZ.U9sQvpiM/xAhX69Skg0EWyDm3twQfcO</span><br><span class="line">//$2a$10$2Ig1mxqlb033XcU7aB0Ck.OZouRLsHUkJyIl9Mzi40FIY6grcEUr6</span><br><span class="line">//大致的规律：$2a$10$+&quot;xxx&quot;+&quot;/&quot;+&quot;xxx&quot;</span><br><span class="line">String encode = pe.encode(&quot;123456&quot;);</span><br><span class="line">System.out.println(encode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-4-4-服务器运行测试"><a href="#4-4-4-服务器运行测试" class="headerlink" title="4.4.4 服务器运行测试"></a>4.4.4 服务器运行测试</h3><p>将main方法生成的密文存储到数据库中（注意：userpswd字段长度），重新启动服务器进行测试。</p>
+<h1 id="第五章-细粒度权限控制"><a href="#第五章-细粒度权限控制" class="headerlink" title="第五章 细粒度权限控制"></a>第五章 细粒度权限控制</h1><h2 id="5-1-前置细节【Role和Authority的区别】"><a href="#5-1-前置细节【Role和Authority的区别】" class="headerlink" title="5.1 前置细节【Role和Authority的区别】"></a>5.1 前置细节【Role和Authority的区别】</h2><h3 id="5-1-1-用户拥有的权限表示"><a href="#5-1-1-用户拥有的权限表示" class="headerlink" title="5.1.1 用户拥有的权限表示"></a>5.1.1 用户拥有的权限表示</h3><ul>
+<li>roles(“ADMIN”,”学徒”,”宗师”) </li>
+<li>authorities(“USER”,”MANAGER”);</li>
+</ul>
+<h3 id="5-1-2-给资源授予权限（角色或权限）"><a href="#5-1-2-给资源授予权限（角色或权限）" class="headerlink" title="5.1.2 给资源授予权限（角色或权限）"></a>5.1.2 给资源授予权限（角色或权限）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//.antMatchers(&quot;/level1/**&quot;).hasRole(&quot;学徒&quot;)</span><br><span class="line">//.antMatchers(&quot;/level1/**&quot;).hasAnyRole(&quot;学徒&quot;,&quot;ADMIN&quot;)//拥有任何一个角色都可以访问</span><br><span class="line">.antMatchers(&quot;/level1/**&quot;).hasAnyAuthority(&quot;学徒&quot;,&quot;ADMIN&quot;) //拥有任何一个权限都可以访问</span><br><span class="line">.antMatchers(&quot;/level2/**&quot;).hasRole(&quot;大师&quot;)</span><br><span class="line">.antMatchers(&quot;/level3/**&quot;).hasRole(&quot;宗师&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="5-1-3-权限：【roles和authorities区别】"><a href="#5-1-3-权限：【roles和authorities区别】" class="headerlink" title="5.1.3 权限：【roles和authorities区别】"></a>5.1.3 权限：【roles和authorities区别】</h3><ul>
+<li>roles(“ADMIN”,”学徒”,”宗师”) <ul>
+<li>增加”ROLE_”前缀存放：【”ROLE_ADMIN”,”ROLE_学徒”,”ROLE_宗师”】</li>
+<li>表示拥有的权限。一个角色表示的是多个权限</li>
+<li>用户传入的角色不能以ROLE_开头，否则会报错。ROLE_是自动加上的</li>
+<li>如果我们保存的用户的角色：直接传入角色的名字，权限【new SimpleGrantedAuthority(“ROLE_” + role)】保存即可</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>authorities(“USER”,”MANAGER”);<ul>
+<li>原样存放：【”USER”,”MANAGER”】</li>
+<li>表示拥有的权限。</li>
+<li>如果我们保存的是真正的权限；直接传入权限名字，权限【new SimpleGrantedAuthority(role)】保存</li>
+<li>无论是Role还是Authority都保存在  List<grantedauthority>,每个用户都拥有自己的权限集合-&gt;List<grantedauthority></grantedauthority></grantedauthority></li>
+</ul>
+</li>
+</ul>
+<h3 id="5-1-4-验证用户权限"><a href="#5-1-4-验证用户权限" class="headerlink" title="5.1.4 验证用户权限"></a>5.1.4 验证用户权限</h3><h4 id="1-通过角色（权限）验证："><a href="#1-通过角色（权限）验证：" class="headerlink" title="1)    通过角色（权限）验证："></a>1)    通过角色（权限）验证：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.antMatchers(&quot;/level1/**&quot;).hasRole(&quot;学徒&quot;)</span><br><span class="line">.antMatchers(&quot;/level1/**&quot;).hasAnyRole(&quot;学徒&quot;,&quot;ADMIN&quot;)</span><br><span class="line">拥有任何一个角色都可以访问</span><br><span class="line">验证时会自动增加&quot;ROLE_&quot;进行查找验证：</span><br><span class="line">    【&quot;ROLE_学徒&quot;,&quot;ROLE_ADMIN&quot;】</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601084432.png" alt></p>
+<p>通过权限验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.antMatchers(&quot;/level1/**&quot;).hasAuthority(&quot;学徒&quot;)</span><br><span class="line">.antMatchers(&quot;/level1/**&quot;).hasAnyAuthority(&quot;学徒&quot;,&quot;ADMIN&quot;) </span><br><span class="line">拥有任何一个权限都可以访问</span><br><span class="line">验证时原样查找进行验证：【&quot;学徒&quot;,&quot;ADMIN&quot;】</span><br></pre></td></tr></table></figure>
+<h2 id="5-2-细粒度的资源控制"><a href="#5-2-细粒度的资源控制" class="headerlink" title="5.2 细粒度的资源控制"></a>5.2 细粒度的资源控制</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">authenticated()：通过认证的用户都可以访问</span><br><span class="line">permitAll()：允许所有人访问，即使未登录</span><br><span class="line">authorizeRequests()：更细粒度的控制</span><br><span class="line">access(String)： //SpEL：Spring表达式</span><br><span class="line">.access(&quot;hasRole(&apos;大师&apos;) AND hasAuthority(&apos;user:delete&apos;) OR hasIpAddress(&apos;192.168.50.15&apos;)&quot;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601084714.png" alt></p>
+<h2 id="5-3-细粒度的资源控制相应注解"><a href="#5-3-细粒度的资源控制相应注解" class="headerlink" title="5.3 细粒度的资源控制相应注解"></a>5.3 细粒度的资源控制相应注解</h2><p>使用注解与SpEl进行细粒度权限控制</p>
+<h3 id="5-3-1-开启注解控制权限模式"><a href="#5-3-1-开启注解控制权限模式" class="headerlink" title="5.3.1 开启注解控制权限模式"></a>5.3.1 开启注解控制权限模式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@EnableWebSecurity：开启 Spring Security 注解</span><br><span class="line">@EnableGlobalMethodSecurity(prePostEnabled=true)：开启全局的细粒度方法级别权限控制功能</span><br></pre></td></tr></table></figure>
+<h3 id="5-3-2-几个权限检查注解"><a href="#5-3-2-几个权限检查注解" class="headerlink" title="5.3.2 几个权限检查注解"></a>5.3.2 几个权限检查注解</h3><h4 id="1-PreAuthorize：方法执行前检查"><a href="#1-PreAuthorize：方法执行前检查" class="headerlink" title="1 @PreAuthorize：方法执行前检查"></a>1 @PreAuthorize：方法执行前检查</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@PreAuthorize(&quot;hasRole(&apos;ADMIN&apos;)&quot;)  </span><br><span class="line">public void addUser(User user)&#123;  </span><br><span class="line">    //如果具有ROLE_ADMIN 权限 则访问该方法  </span><br><span class="line">    ....  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-PostAuthorize：方法执行后检查，失败抛异常"><a href="#2-PostAuthorize：方法执行后检查，失败抛异常" class="headerlink" title="2 @PostAuthorize：方法执行后检查，失败抛异常"></a>2 @PostAuthorize：方法执行后检查，失败抛异常</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@PostAuthorize：允许方法调用，但是，如果表达式结果为false抛出异常  </span><br><span class="line">//returnObject可以获取返回对象user，判断user属性username是否和访问该方法的用户对象的用户名一样。不一样则抛出异常。  </span><br><span class="line">@PostAuthorize(&quot;returnObject.user.username==principal.username&quot;)  </span><br><span class="line">public User getUser(int userId)&#123;  </span><br><span class="line">   //允许进入</span><br><span class="line">...  </span><br><span class="line">    return user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-PostFilter：允许方法调用，但是按照表达式过滤方法结果"><a href="#3-PostFilter：允许方法调用，但是按照表达式过滤方法结果" class="headerlink" title="3 @PostFilter：允许方法调用，但是按照表达式过滤方法结果"></a>3 @PostFilter：允许方法调用，但是按照表达式过滤方法结果</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//将结果过滤，即选出性别为男的用户  </span><br><span class="line">@PostFilter(&quot;returnObject.user.sex==&apos;男&apos; &quot;)  </span><br><span class="line">public List&lt;User&gt; getUserList()&#123;  </span><br><span class="line">    //允许进入</span><br><span class="line">    ...  </span><br><span class="line">    return user; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-PreFilter：允许方法调用，但必须在进入方法前过滤输入值"><a href="#4-PreFilter：允许方法调用，但必须在进入方法前过滤输入值" class="headerlink" title="4 @PreFilter：允许方法调用，但必须在进入方法前过滤输入值"></a>4 @PreFilter：允许方法调用，但必须在进入方法前过滤输入值</h4><h4 id="5-Secured：拥有指定角色才可以访问方法"><a href="#5-Secured：拥有指定角色才可以访问方法" class="headerlink" title="5 @Secured：拥有指定角色才可以访问方法"></a>5 @Secured：拥有指定角色才可以访问方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Secured(&apos;ADMIN&apos;)   等价于    @PreAuthorize(&quot;hasRole(&apos;ADMIN&apos;)&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="5-4-细粒度的资源控制注解中可写的表达式"><a href="#5-4-细粒度的资源控制注解中可写的表达式" class="headerlink" title="5.4 细粒度的资源控制注解中可写的表达式"></a>5.4 细粒度的资源控制注解中可写的表达式</h2><p><a href="https://docs.spring.io/spring-security/site/docs/4.0.1.RELEASE/reference/htmlsingle/#el-common-built-in" target="_blank" rel="noopener">https://docs.spring.io/spring-security/site/docs/4.0.1.RELEASE/reference/htmlsingle/#el-common-built-in</a><br>所有能使用的表达式见上面文档连接</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085028.png" alt></p>
+<h2 id="5-5-细粒度权限控制实现步骤-★"><a href="#5-5-细粒度权限控制实现步骤-★" class="headerlink" title="5.5 细粒度权限控制实现步骤 ★"></a>5.5 细粒度权限控制实现步骤 ★</h2><h3 id="5-5-1-开启全局的细粒度方法级别权限控制功能"><a href="#5-5-1-开启全局的细粒度方法级别权限控制功能" class="headerlink" title="5.5.1 开启全局的细粒度方法级别权限控制功能"></a>5.5.1 开启全局的细粒度方法级别权限控制功能</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@EnableGlobalMethodSecurity(prePostEnabled = true)</span><br><span class="line">@EnableWebSecurity</span><br><span class="line">@Configuration</span><br><span class="line">public class AppSecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-2-将手动授权的方式注释掉"><a href="#5-5-2-将手动授权的方式注释掉" class="headerlink" title="5.5.2 将手动授权的方式注释掉"></a>5.5.2 将手动授权的方式注释掉</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//.antMatchers(&quot;/level1/**&quot;).hasRole(&quot;学徒&quot;)</span><br><span class="line">//.antMatchers(&quot;/level1/**&quot;).hasAnyRole(&quot;学徒&quot;,&quot;ADMIN&quot;)</span><br><span class="line">//.antMatchers(&quot;/level1/**&quot;).hasAnyAuthority(&quot;学徒&quot;,&quot;ADMIN&quot;)</span><br><span class="line">//.antMatchers(&quot;/level1/**&quot;).hasAuthority(&quot;学徒&quot;)</span><br><span class="line">//.antMatchers(&quot;/level2/**&quot;).hasRole(&quot;大师&quot;)</span><br><span class="line">//.antMatchers(&quot;/level3/**&quot;).hasRole(&quot;宗师&quot;)</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-3-给访问资源的方法增加注解，进行访问授权"><a href="#5-5-3-给访问资源的方法增加注解，进行访问授权" class="headerlink" title="5.5.3 给访问资源的方法增加注解，进行访问授权"></a>5.5.3 给访问资源的方法增加注解，进行访问授权</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class GongfuController &#123; </span><br><span class="line">/**</span><br><span class="line">   * 授权（权限检查）使用AOP；MethodSecurityInterceptor</span><br><span class="line">   *                 方法执行之前AccessDecisionManager利用投票机制决定这个方法是否可运行</span><br><span class="line"> * </span><br><span class="line">   */</span><br><span class="line">@PreAuthorize(&quot;hasRole(&apos;学徒&apos;) AND hasAuthority(&apos;luohan&apos;)&quot;)</span><br><span class="line">@GetMapping(&quot;/level1/1&quot;)</span><br><span class="line">public String leve1Page()&#123;</span><br><span class="line">return &quot;/level1/1&quot;;</span><br><span class="line">&#125;</span><br><span class="line">@PreAuthorize(&quot;hasRole(&apos;学徒&apos;) AND hasAuthority(&apos;wudang&apos;)&quot;)</span><br><span class="line">@GetMapping(&quot;/level1/2&quot;)</span><br><span class="line">public String leve1Page2()&#123;</span><br><span class="line">return &quot;/level1/2&quot;;</span><br><span class="line">&#125;</span><br><span class="line">@PreAuthorize(&quot;hasRole(&apos;学徒&apos;) AND hasAuthority(&apos;quanzhen&apos;)&quot;)</span><br><span class="line">@GetMapping(&quot;/level1/3&quot;)</span><br><span class="line">public String leve1Page3()&#123;</span><br><span class="line">return &quot;/level1/3&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-4-通过数据库加载用户权限"><a href="#5-5-4-通过数据库加载用户权限" class="headerlink" title="5.5.4 通过数据库加载用户权限"></a>5.5.4 通过数据库加载用户权限</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class AppUserDetailsServiceImpl implements UserDetailsService &#123;</span><br><span class="line"> </span><br><span class="line">@Autowired</span><br><span class="line">JdbcTemplate jdbcTemplate ;</span><br><span class="line"> </span><br><span class="line">@Override</span><br><span class="line">public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException &#123;</span><br><span class="line">String sql = &quot;select  * from t_admin where loginacct=?&quot;;</span><br><span class="line">Map&lt;String, Object&gt; map = jdbcTemplate.queryForMap(sql, username);</span><br><span class="line"> </span><br><span class="line">//查询用户拥有的角色集合</span><br><span class="line">String sql1=&quot;SELECT t_role.* FROM t_role LEFT JOIN t_admin_role ON t_admin_role.roleid=t_role.id WHERE t_admin_role.adminid=?&quot;;                </span><br><span class="line">List&lt;Map&lt;String, Object&gt;&gt; roleList = jdbcTemplate.query(sql1, new ColumnMapRowMapper(), map.get(&quot;id&quot;));</span><br><span class="line"> </span><br><span class="line">//查询用户拥有的权限集合</span><br><span class="line">String sql2 = &quot;SELECT distinct t_permission.* FROM t_permission LEFT JOIN t_role_permission ON t_role_permission.permissionid = t_permission.id LEFT JOIN t_admin_role ON t_admin_role.roleid=t_role_permission.roleid WHERE t_admin_role.adminid=?&quot;;</span><br><span class="line">List&lt;Map&lt;String, Object&gt;&gt; permissionList = jdbcTemplate.query(sql2, new ColumnMapRowMapper(), map.get(&quot;id&quot;));</span><br><span class="line"> </span><br><span class="line">//用户权限=【角色+权限】</span><br><span class="line">Set&lt;GrantedAuthority&gt; authorities = new HashSet&lt;GrantedAuthority&gt;();</span><br><span class="line">                </span><br><span class="line">for (Map&lt;String, Object&gt; rolemap : roleList) &#123;</span><br><span class="line">String rolename = rolemap.get(&quot;name&quot;).toString();</span><br><span class="line">authorities.add(new SimpleGrantedAuthority(&quot;ROLE_&quot;+rolename));</span><br><span class="line">&#125;                </span><br><span class="line">for (Map&lt;String, Object&gt; permissionmap : permissionList) &#123;</span><br><span class="line">String permissionName = permissionmap.get(&quot;name&quot;).toString();</span><br><span class="line">if(!StringUtils.isEmpty(permissionName)) &#123;</span><br><span class="line">authorities.add(new SimpleGrantedAuthority(permissionName));</span><br><span class="line">&#125;                        </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">//return new User(map.get(&quot;loginacct&quot;).toString(),map.get(&quot;userpswd&quot;).toString(),</span><br><span class="line">//AuthorityUtils.createAuthorityList(&quot;ADMIN&quot;,&quot;USER&quot;));</span><br><span class="line">return new User(map.get(&quot;loginacct&quot;).toString(),map.get(&quot;userpswd&quot;).toString(),authorities);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-5-5-准备数据"><a href="#5-5-5-准备数据" class="headerlink" title="5.5.5 准备数据"></a>5.5.5 准备数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//查询用户拥有的角色集合</span><br><span class="line">SELECT </span><br><span class="line">  t_role.* </span><br><span class="line">FROM</span><br><span class="line">  t_role </span><br><span class="line">  LEFT JOIN t_admin_role </span><br><span class="line">    ON t_admin_role.roleid = t_role.id </span><br><span class="line">WHERE t_admin_role.userid = 1</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085322.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//查询用户拥有的权限集合</span><br><span class="line">SELECT DISTINCT </span><br><span class="line">  t_permission.* </span><br><span class="line">FROM</span><br><span class="line">  t_permission </span><br><span class="line">  LEFT JOIN t_role_permission </span><br><span class="line">    ON t_role_permission.permissionid = t_permission.id </span><br><span class="line">  LEFT JOIN t_admin_role </span><br><span class="line">    ON t_admin_role.roleid = t_role_permission.roleid </span><br><span class="line">WHERE t_admin_role.userid = 1</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085345.png" alt></p>
+<h3 id="5-5-6-测试结果"><a href="#5-5-6-测试结果" class="headerlink" title="5.5.6 测试结果"></a>5.5.6 测试结果</h3><p>登录认证通过，可以登录到成功页面  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">访问【学徒】角色下的资源：</span><br><span class="line">/level1/1 罗汉拳不可以访问</span><br><span class="line">/level1/2 武当长拳可以访问</span><br><span class="line">/level1/3 全真剑法不可以访问</span><br></pre></td></tr></table></figure>
+<h1 id="第六章-SpringSecurity-原理"><a href="#第六章-SpringSecurity-原理" class="headerlink" title="第六章 SpringSecurity-原理"></a>第六章 SpringSecurity-原理</h1><h2 id="6-1-认证原理-过滤器链的调用"><a href="#6-1-认证原理-过滤器链的调用" class="headerlink" title="6.1 认证原理-过滤器链的调用"></a>6.1 认证原理-过滤器链的调用</h2><h3 id="1-源码调试分析"><a href="#1-源码调试分析" class="headerlink" title="1 源码调试分析"></a>1 源码调试分析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">•	程序入口</span><br><span class="line">•	打断点-第一批次</span><br><span class="line">•	运行调试</span><br><span class="line">•	打断点-关键点</span><br></pre></td></tr></table></figure>
+<h3 id="2-过滤器"><a href="#2-过滤器" class="headerlink" title="2 过滤器"></a>2 过滤器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">&lt;filter-name&gt;springSecurityFilterChain&lt;/filter-name&gt;</span><br><span class="line">&lt;filter-class&gt;org.springframework.web.filter.DelegatingFilterProxy&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">&lt;filter-name&gt;springSecurityFilterChain&lt;/filter-name&gt;</span><br><span class="line">&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-debug走起…"><a href="#3-debug走起…" class="headerlink" title="3 debug走起…"></a>3 debug走起…</h3><h4 id="3-1-初始化方法"><a href="#3-1-初始化方法" class="headerlink" title="3.1 初始化方法"></a>3.1 初始化方法</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085707.png" alt></p>
+<h4 id="3-2-过滤器：功能扩展的多个过滤器-gt-责任链设计模式"><a href="#3-2-过滤器：功能扩展的多个过滤器-gt-责任链设计模式" class="headerlink" title="3.2 过滤器：功能扩展的多个过滤器-&gt;责任链设计模式"></a>3.2 过滤器：功能扩展的多个过滤器-&gt;责任链设计模式</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085759.png" alt></p>
+<h4 id="3-3-获取过滤器链中的过滤器，封装为虚拟的VirtualFilterChain对象，并开始执行过滤"><a href="#3-3-获取过滤器链中的过滤器，封装为虚拟的VirtualFilterChain对象，并开始执行过滤" class="headerlink" title="3.3 获取过滤器链中的过滤器，封装为虚拟的VirtualFilterChain对象，并开始执行过滤"></a>3.3 获取过滤器链中的过滤器，封装为虚拟的VirtualFilterChain对象，并开始执行过滤</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085831.png" alt></p>
+<h4 id="3-4-开始一个一个的执行过滤器"><a href="#3-4-开始一个一个的执行过滤器" class="headerlink" title="3.4 开始一个一个的执行过滤器"></a>3.4 开始一个一个的执行过滤器</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601085910.png" alt></p>
+<h4 id="3-5-自定义过滤器"><a href="#3-5-自定义过滤器" class="headerlink" title="3.5 自定义过滤器"></a>3.5 自定义过滤器</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090011.png" alt></p>
+<h2 id="6-2-认证原理-相关过滤器解释"><a href="#6-2-认证原理-相关过滤器解释" class="headerlink" title="6.2 认证原理-相关过滤器解释"></a>6.2 认证原理-相关过滤器解释</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090038.png" alt></p>
+<h3 id="1-SecurityContextPersistenceFilter"><a href="#1-SecurityContextPersistenceFilter" class="headerlink" title="1    SecurityContextPersistenceFilter"></a>1    SecurityContextPersistenceFilter</h3><ul>
+<li>过滤器链头，是从 SecurityContextRepository 中取出用户认证信息，默认实现为 HttpSessionSecurityContextRepository，它会从 Session 中取出已认证的用户信息，提高效率，避免每次请求都要查询用户认证信息</li>
+<li>取出之后会放入 SecurityContextHolder 中，以便其它 filter 使用，SecurityContextHolder 使用 ThreadLocal 存储用户认证信息，保证线程之间信息隔离，最后再 finally 中清除该信息</li>
+</ul>
+<h3 id="2-WebAsyncManagerIntegrationFilter"><a href="#2-WebAsyncManagerIntegrationFilter" class="headerlink" title="2.    WebAsyncManagerIntegrationFilter"></a>2.    WebAsyncManagerIntegrationFilter</h3><p>提供了对 SecurityContext 和 WebAsyncManager 的集成，会把 SecurityContext 设置到异步线程，使其也能获取到用户上下文认证信息</p>
+<h4 id="3-HeaderWriterFilter"><a href="#3-HeaderWriterFilter" class="headerlink" title="3.    HeaderWriterFilter"></a>3.    HeaderWriterFilter</h4><p>会往请求的 Header 中添加相应的信息<br>响应头：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090157.png" alt></p>
+<p>请求头：</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090221.png" alt></p>
+<h4 id="4-CsrfFilter"><a href="#4-CsrfFilter" class="headerlink" title="4.    CsrfFilter"></a>4.    CsrfFilter</h4><p>跨域请求伪造过滤器，通过客户端穿来的 token 与服务端存储的 token 进行对比来判断请求</p>
+<h4 id="5-LogoutFilter"><a href="#5-LogoutFilter" class="headerlink" title="5.    LogoutFilter"></a>5.    LogoutFilter</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.security.web.authentication.logout.LogoutFilter</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090307.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190601090352.png" alt></p>
+<p>匹配URL，默认为 /logout，匹配成功后则会用户退出，清除认证信息，若有自己的退出逻辑，该过滤器可以关闭</p>
+<h4 id="6-UsernamePasswordAuthenticationFilter"><a href="#6-UsernamePasswordAuthenticationFilter" class="headerlink" title="6.    UsernamePasswordAuthenticationFilter"></a>6.    UsernamePasswordAuthenticationFilter</h4><blockquote>
+<p>登录认证过滤器，默认是对 /login 的 POST 请求进行认证，首先该方法会调用 attemptAuthentication 尝试认证获取一个 Authentication 认证对象，<br>然后通过 sessionStrategy.onAuthentication 执行持久化，也就是保存认证信息，然后转向下一个 Filter，<br>最后调用 successfulAuthentication 执行认证后事件<br>attemptAuthentication 该方法是认证的主要方法，  </p>
+</blockquote>
+<p>认证基本流程为 UserDeatilService 根据用户名获取到用户信息，然后通过 UserDetailsChecker.<br>check 对用户状态进行校验，最后通过 additionalAuthenticationChecks 方法对用户密码进行校验完后认证后，返回一个认证对象</p>
+<h4 id="7-DefaultLoginPageGeneratingFilter"><a href="#7-DefaultLoginPageGeneratingFilter" class="headerlink" title="7.    DefaultLoginPageGeneratingFilter"></a>7.    DefaultLoginPageGeneratingFilter</h4><p>当请求为登录请求时，生成简单的登录页面，可以关闭</p>
+<h4 id="8-BasicAuthenticationFilter"><a href="#8-BasicAuthenticationFilter" class="headerlink" title="8.    BasicAuthenticationFilter"></a>8.    BasicAuthenticationFilter</h4><p>Http Basic 认证的支持，该认证会把用户名密码使用 base64 编码后放入 header 中传输，认证成功后会把用户信息放入 SecurityContextHolder 中</p>
+<h4 id="9-RequestCacheAwareFilter"><a href="#9-RequestCacheAwareFilter" class="headerlink" title="9.    RequestCacheAwareFilter"></a>9.    RequestCacheAwareFilter</h4><p>恢复被打断时的请求</p>
+<h4 id="10-SecurityContextHolderAwareRequestFilter"><a href="#10-SecurityContextHolderAwareRequestFilter" class="headerlink" title="10.    SecurityContextHolderAwareRequestFilter"></a>10.    SecurityContextHolderAwareRequestFilter</h4><p>针对 Servlet api 不同版本做一些包装</p>
+<h4 id="11-AnonymousAuthenticationFilter"><a href="#11-AnonymousAuthenticationFilter" class="headerlink" title="11.    AnonymousAuthenticationFilter"></a>11.    AnonymousAuthenticationFilter</h4><p>SecurityContextHolder 中认证信息为空，则会创建一个匿名用户到 SecurityContextHolder 中</p>
+<h4 id="12-SessionManagementFilter"><a href="#12-SessionManagementFilter" class="headerlink" title="12.    SessionManagementFilter"></a>12.    SessionManagementFilter</h4><p>与登录认证拦截时作用一样，持久化用户登录信息，可以保存到 Session 中，也可以保存到 cookie 或 redis 中</p>
+<h4 id="13-ExceptionTranslationFilter"><a href="#13-ExceptionTranslationFilter" class="headerlink" title="13.    ExceptionTranslationFilter"></a>13.    ExceptionTranslationFilter</h4><p>异常拦截，处于 Filter 链条后部，只能拦截其后面的节点并着重处理 AuthenticationException 与 AccessDeniedException 异常</p>
+<h2 id="6-3-认证原理-重点UsernamePasswordAuthenticationFilter"><a href="#6-3-认证原理-重点UsernamePasswordAuthenticationFilter" class="headerlink" title="6.3 认证原理-重点UsernamePasswordAuthenticationFilter"></a>6.3 认证原理-重点UsernamePasswordAuthenticationFilter</h2><h3 id="6-3-1-UsernamePasswordAuthencationFilter源码流程-不带图"><a href="#6-3-1-UsernamePasswordAuthencationFilter源码流程-不带图" class="headerlink" title="6.3.1 UsernamePasswordAuthencationFilter源码流程-不带图"></a>6.3.1 UsernamePasswordAuthencationFilter源码流程-不带图</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1、获取到页面的用户名和密码</span><br><span class="line">2、将username和password包装成UsernamePasswordAuthenticationToken</span><br><span class="line">3、获取系统的认证管理器（AuthenticationManager）来调用authenticate方法完成认证</span><br><span class="line">3.1）AuthenticationManager获取ProviderManager来调用ProviderManager.authenticate()</span><br><span class="line">3.2）ProviderManager获取到所有的AuthenticationProvider判断当前的提供者能否支持，如果支持provider.authenticate(authentication);</span><br><span class="line">现在我们DaoAuthenticationProvider（ authentication ：页面封装用户名和密码的对象）</span><br><span class="line">3.2.1）retrieveUser(username, (UsernamePasswordAuthenticationToken) authentication);</span><br><span class="line">3.2.1.1）loadedUser = this.getUserDetailsService().loadUserByUsername(username);</span><br><span class="line">（调用我们自己的UserDetailsService来去数据库查用户，按照用户名查出来的用户的详细信息）封装成UserDetails</span><br><span class="line">3.2.2）preAuthenticationChecks.check(user);（预检查，账号是否被锁定等…）</span><br><span class="line">3.2.3）additionalAuthenticationChecks（附加的认证检查）</span><br><span class="line">3.2.3.1）使用passwordEncoder. matches检查页面的密码和数据库的密码是否一致</span><br><span class="line">3.2.4）postAuthenticationChecks.check(user);（后置认证，检查密码是否过期）</span><br><span class="line">3.2.5）createSuccessAuthentication：将认证成功信息重新封装成UsernamePasswordAuthenticationToken</span><br><span class="line">3.3）3.2又返回了一个新的UsernamePasswordAuthenticationToken，然后擦掉密码</span><br><span class="line">4、 eventPublisher.publishAuthenticationSuccess(result);告诉所有监听器认证成功了</span><br></pre></td></tr></table></figure>
+<h3 id="6-3-2-UsernamePasswordAuthencationFilter源码流程-带图"><a href="#6-3-2-UsernamePasswordAuthencationFilter源码流程-带图" class="headerlink" title="6.3.2 UsernamePasswordAuthencationFilter源码流程-带图"></a>6.3.2 UsernamePasswordAuthencationFilter源码流程-带图</h3><h4 id="1-执行过滤器，获取到页面的用户名和密码"><a href="#1-执行过滤器，获取到页面的用户名和密码" class="headerlink" title="1 执行过滤器，获取到页面的用户名和密码"></a>1 执行过滤器，获取到页面的用户名和密码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class UsernamePasswordAuthenticationFilter extends  AbstractAuthenticationProcessingFilter</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602233802.png" alt></p>
+<h4 id="2-将username和password包装成UsernamePasswordAuthenticationToken"><a href="#2-将username和password包装成UsernamePasswordAuthenticationToken" class="headerlink" title="2 将username和password包装成UsernamePasswordAuthenticationToken"></a>2 将username和password包装成UsernamePasswordAuthenticationToken</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602233852.png" alt></p>
+<h4 id="3-获取系统的认证管理器（AuthenticationManager）来调用authenticate方法完成认证（this-getAuthenticationManager-authenticate-authRequest-）"><a href="#3-获取系统的认证管理器（AuthenticationManager）来调用authenticate方法完成认证（this-getAuthenticationManager-authenticate-authRequest-）" class="headerlink" title="3 获取系统的认证管理器（AuthenticationManager）来调用authenticate方法完成认证（this.getAuthenticationManager().authenticate(authRequest)）"></a>3 获取系统的认证管理器（AuthenticationManager）来调用authenticate方法完成认证（this.getAuthenticationManager().authenticate(authRequest)）</h4><p>3.1）、 AuthenticationManager获取ProviderManager来调用ProviderManager.authenticate() </p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234003.png" alt></p>
+<p>3.2）、 ProviderManager获取到所有的AuthenticationProvider判断当前的提供者能否支持，如果支持provider.authenticate(authentication);<br>DaoAuthenticationProvider（ authentication ：页面封装用户名和密码的对象）</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234056.png" alt></p>
+<ul>
+<li>3.2.1）、retrieveUser(username, (UsernamePasswordAuthenticationToken) authentication);</li>
+<li>3.2.1.1）、 loadedUser = this.getUserDetailsService().loadUserByUsername(username);<br>（调用我们自己的UserDetailsService来去数据库查用户，按照用户名查出来的用户的详细信息）封装成UserDetail</li>
+<li>3.2.2）、 preAuthenticationChecks.check(user);（预检查，账号是否被锁定等…）</li>
+<li><p>3.2.3）、 additionalAuthenticationChecks（附加的认证检查）</p>
+<ul>
+<li>3.2.3.1）、使用passwordEncoder. matches检查页面的密码和数据库的密码是否一致</li>
+</ul>
+</li>
+<li><p>3.2.4）、 postAuthenticationChecks.check(user);（后置认证，检查密码是否过期）</p>
+</li>
+<li>3.2.5）、 createSuccessAuthentication：将认证成功的信息重新封装成UsernamePasswordAuthenticationToken</li>
+<li>3.3）、 3.2又返回了一个新的UsernamePasswordAuthenticationToken，然后擦掉密码</li>
+</ul>
+<h4 id="4-eventPublisher-publishAuthenticationSuccess-result-认证成功"><a href="#4-eventPublisher-publishAuthenticationSuccess-result-认证成功" class="headerlink" title="4 eventPublisher.publishAuthenticationSuccess(result);认证成功"></a>4 eventPublisher.publishAuthenticationSuccess(result);认证成功</h4><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234232.png" alt></p>
+<h4 id="5-successfulAuthentication-request-response-chain-authResult"><a href="#5-successfulAuthentication-request-response-chain-authResult" class="headerlink" title="5 successfulAuthentication(request, response, chain, authResult);"></a>5 successfulAuthentication(request, response, chain, authResult);</h4><ul>
+<li>通过调用 SecurityContextHolder.getContext().setAuthentication(…)  将 Authentication 对象赋给当前的 SecurityContext </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234259.png" alt></p>
+<ul>
+<li>org.springframework.security.core.context.SecurityContextHolderStrategy</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234355.png" alt></p>
+<ul>
+<li>ThreadLocal线程数据绑定</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234517.png" alt></p>
+<ul>
+<li>SecurityContextHolder.getContext()；就能获取到之前认证好的Authentication对象（UsernamePasswordAuthenticationToken）<h3 id="6-3-3-断点参考"><a href="#6-3-3-断点参考" class="headerlink" title="6.3.3 断点参考"></a>6.3.3 断点参考</h3></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602234721.png" alt></p>
+<h2 id="6-4-认证原理-流程及相关类（API）"><a href="#6-4-认证原理-流程及相关类（API）" class="headerlink" title="6.4 认证原理-流程及相关类（API）"></a>6.4 认证原理-流程及相关类（API）</h2><p>认证&amp;授权</p>
+<h3 id="6-4-1-认证流程"><a href="#6-4-1-认证流程" class="headerlink" title="6.4.1 认证流程"></a>6.4.1 认证流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.	用户使用用户名和密码登录</span><br><span class="line">2.	用户名密码被过滤器（默认为 UsernamePasswordAuthenticationFilter）获取到，封装成 Authentication（UsernamePasswordAuthenticationToken）</span><br><span class="line">3.	token（Authentication实现类）传递给 AuthenticationManager 进行认证</span><br><span class="line">4.	AuthenticationManager 认证成功后返回一个封装了用户权限信息的 Authentication 对象</span><br><span class="line">5.	通过调用 SecurityContextHolder.getContext().setAuthentication(...)  将 Authentication 对象赋给当前的 SecurityContext </span><br><span class="line">6.	将用户的信息保存到当前线程上，共享起来</span><br><span class="line">7.	SecurityContextHolder.getContext()；就能获取到之前认证好的Authentication对象（UsernamePasswordAuthenticationToken）</span><br></pre></td></tr></table></figure>
+<h3 id="6-4-2-默认执行顺序"><a href="#6-4-2-默认执行顺序" class="headerlink" title="6.4.2 默认执行顺序"></a>6.4.2 默认执行顺序</h3><h4 id="1-UsernamePasswordAuthenticationFilter"><a href="#1-UsernamePasswordAuthenticationFilter" class="headerlink" title="1 UsernamePasswordAuthenticationFilter"></a>1 UsernamePasswordAuthenticationFilter</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1)	用户通过url：/login 登录，该过滤器接收表单用户名密码</span><br><span class="line">2)	判断用户名密码是否为空</span><br><span class="line">3)	生成 UsernamePasswordAuthenticationToken</span><br><span class="line">4)	将 Authentiction 传给 AuthenticationManager接口的 authenticate 方法进行认证处理</span><br><span class="line">5)	AuthenticationManager 默认是实现类为 ProviderManager ，ProviderManager 委托给 AuthenticationProvider 进行处理</span><br><span class="line">6)	UsernamePasswordAuthenticationFilter 继承了 AbstractAuthenticationProcessingFilter 抽象类，AbstractAuthenticationProcessingFilter 在 successfulAuthentication 方法中对登录成功进行了处理，通过 SecurityContextHolder.getContext().setAuthentication() 方法将 Authentication 认证信息对象绑定到 SecurityContext</span><br><span class="line">7)	下次请求时，在过滤器链头的 SecurityContextPersistenceFilter 会从 Session 中取出用户信息并生成 Authentication（默认为 UsernamePasswordAuthenticationToken），并通过 SecurityContextHolder.getContext().setAuthentication() 方法将 Authentication 认证信息对象绑定到 SecurityContext</span><br><span class="line">8)	需要权限才能访问的请求会从 SecurityContext 中获取用户的权限进行验证</span><br></pre></td></tr></table></figure>
+<h4 id="2-DaoAuthenticationProvider（实现了-AuthenticationProvider）"><a href="#2-DaoAuthenticationProvider（实现了-AuthenticationProvider）" class="headerlink" title="2 DaoAuthenticationProvider（实现了 AuthenticationProvider）"></a>2 DaoAuthenticationProvider（实现了 AuthenticationProvider）</h4><ul>
+<li>通过 UserDetailsService 获取 UserDetails</li>
+<li>将 UserDetails 和 UsernamePasswordAuthenticationToken 进行认证匹配用户名密码是否正确</li>
+<li>若正确则通过 UserDetails 中用户的权限、用户名等信息生成新的 Authentication 认证对象并返回</li>
+</ul>
+<h3 id="6-4-3-相关类"><a href="#6-4-3-相关类" class="headerlink" title="6.4.3 相关类"></a>6.4.3 相关类</h3><h4 id="1-WebSecurityConfigurerAdapter"><a href="#1-WebSecurityConfigurerAdapter" class="headerlink" title="1.    WebSecurityConfigurerAdapter"></a>1.    WebSecurityConfigurerAdapter</h4><ul>
+<li>为创建 WebSecurityConfigurer 实例提供方便的基类，重写它的 configure 方法来设置安全细节</li>
+<li>configure(HttpSecurity http)：重写该方法，通过 http 对象的 authorizeRequests()方法定义URL访问权限，默认会为 formLogin() 提供一个简单的测试HTML页面</li>
+<li>configure (AuthenticationManagerBuilder auth)：通过 auth 对象的方法添加身份验证<h4 id="2-SecurityContextHolder"><a href="#2-SecurityContextHolder" class="headerlink" title="2.    SecurityContextHolder"></a>2.    SecurityContextHolder</h4></li>
+<li>SecurityContextHolder 用于存储安全上下文信息（如操作用户是谁、用户是否被认证、用户权限有哪些），它用 ThreadLocal 来保存 SecurityContext，者意味着 Spring Security 在用户登录时自动绑定到当前现场，用户退出时，自动清除当前线程认证信息，SecurityContext 中含有正在访问系统用户的详细信息</li>
+</ul>
+<h3 id="3-AuthenticationManagerBuilder"><a href="#3-AuthenticationManagerBuilder" class="headerlink" title="3.    AuthenticationManagerBuilder"></a>3.    AuthenticationManagerBuilder</h3><ul>
+<li>用于构建认证 AuthenticationManager 认证，允许快速构建内存认证、LDAP身份认证、JDBC身份验证，添加 userDetailsService（获取认证信息数据） 和 AuthenticationProvider’s（定义认证方式）</li>
+</ul>
+<h4 id="4-UserDetailsService"><a href="#4-UserDetailsService" class="headerlink" title="4.    UserDetailsService"></a>4.    UserDetailsService</h4><p>该接口仅有一个方法 loadUserByUsername，Spring Security 通过该方法获取用户信息</p>
+<h4 id="5-UserDetails"><a href="#5-UserDetails" class="headerlink" title="5.    UserDetails"></a>5.    UserDetails</h4><ul>
+<li>代表了Spring Security的用户实体类，带有用户名、密码、权限特性等性质，可以自己实现该接口，供 Spring Security 安全认证使用，Spring Security 默认使用的是内置的 User 类</li>
+<li>将从数据库获取的 User 对象传入实现该接口的类，并获取 User 对象的值来让类实现该接口的方法</li>
+<li>通过 Authentication.getPrincipal() 的返回类型是 Object，但很多情况下其返回的其实是一个 UserDetails 的实例 </li>
+</ul>
+<h4 id="6-Authentication"><a href="#6-Authentication" class="headerlink" title="6.    Authentication"></a>6.    Authentication</h4><p>Authentication 是一个接口，用来表示用户认证信息，在用户登录认证之前相关信息（用户传过来的用户名密码）会封装为一个 Authentication 具体实现类对象，默认情况下为 UsernamePasswordAuthenticationToken，登录之后（通过AuthenticationManager认证）会生成一个更详细的、包含权限的对象，然后把它保存在权限线程本地的 SecurityContext 中，供后续权限鉴定用<br>Authentication.principal可以获取到已经认证的用户详细信息<br> UsernamePasswordAuthenticationToken （密码被擦除，authenticated=true）</p>
+<h4 id="7-GrantedAuthority"><a href="#7-GrantedAuthority" class="headerlink" title="7.    GrantedAuthority"></a>7.    GrantedAuthority</h4><p>GrantedAuthority 是一个接口，它定义了一个 getAuthorities() 方法返回当前 Authentication 对象的拥有权限字符串，用户有权限是一个 GrantedAuthority 数组，每一个 GrantedAuthority 对象代表一种用户权限</p>
+<h4 id="8-AuthenticationManager"><a href="#8-AuthenticationManager" class="headerlink" title="8.    AuthenticationManager"></a>8.    AuthenticationManager</h4><ul>
+<li>AuthenticationManager 是用来处理认证请求的接口，它只有一个方法 authenticate()，该方法接收一个 Authentication 作为对象，如果认证成功则返回一个封装了当前用户权限信息的 Authentication 对象进行返回</li>
+<li>它默认的实现是 ProviderManager，但它不处理认证请求，而是将委托给 AuthenticationProvider 列表，然后依次使用 AuthenticationProvider 进行认证，如果有一个 AuthenticationProvider 认证的结果不为null，则表示成功（否则失败，抛出 ProviderNotFoundException），之后不在进行其它 AuthenticationProvider 认证，并作为结果保存在 ProviderManager</li>
+<li>认证校验时最常用的方式就是通过用户名加载 UserDetails，然后比较 UserDetails 密码与请求认证是否一致，一致则通过，Security 内部的 DaoAuthenticationProvider 就是使用这种方式</li>
+<li>认证成功后加载 UserDetails 来封装要返回的 Authentication 对象，加载的 UserDetails 对象是包含用户权限等信息的。认证成功返回的 Authentication 对象将会保存在当前的 SecurityContext 中 </li>
+</ul>
+<h4 id="9-AuthenticationProvider"><a href="#9-AuthenticationProvider" class="headerlink" title="9.    AuthenticationProvider"></a>9.    AuthenticationProvider</h4><ul>
+<li>AuthenticationProvider 是一个身份认证接口，实现该接口来定制自己的认证方式，可通过 UserDetailsSevice 对获取数据库中的数据</li>
+<li>该接口中有两个需要实现的方法：</li>
+<li>Authentication authenticate(Authentication authentication)：认证处理，返回一个 Authentication 的实现类则代表成功，返回 null 则为认证失败</li>
+<li>supports(Class&lt;?&gt; aClass)：如果该 AuthenticationProvider 支持传入的 Authentication 认证对象，则返回 true ，如：return aClass.equals(UsernamePasswordAuthenticationToken.class); </li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190602235552.png" alt></p>
+<h4 id="10-AuthorityUtils"><a href="#10-AuthorityUtils" class="headerlink" title="10.    AuthorityUtils"></a>10.    AuthorityUtils</h4><p>是一个工具包，用于操作 GrantedAuthority 集合的实用方法：<br>commaSeparatedStringToAuthorityList(String authorityString)：从逗号分隔符中创建 GrantedAuthority 对象数组，帮我们快速创建出权限的集合</p>
+<h4 id="11-AbstractAuthenticationProcessingFilter"><a href="#11-AbstractAuthenticationProcessingFilter" class="headerlink" title="11.    AbstractAuthenticationProcessingFilter"></a>11.    AbstractAuthenticationProcessingFilter</h4><ul>
+<li>该抽象类继承了 GenericFilterBean，是处理 form 登录的过滤器，与 form 登录相关的所有操作都在该抽象类的子类中进行（UsernamePasswordAuthenticationFilter 为其子类），比如获取表单中的用户名、密码，然后进行认证等操作</li>
+<li>该类在 doFilter 方法中通过 attemptAuthentication() 方法进行用户信息逻辑认证，认证成功会将用户信息设置到 Session 中</li>
+</ul>
+<h4 id="12-HttpSecurity"><a href="#12-HttpSecurity" class="headerlink" title="12.    HttpSecurity"></a>12.    HttpSecurity</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">用于配置全局 Http 请求的权限控制规则，对哪些请求进行验证、不验证等</span><br><span class="line">常用方法：</span><br><span class="line">authorizeRequests()：返回一个配置对象用于配置请求的访问限制</span><br><span class="line">formLogin()：返回表单配置对象，当什么都不指定时会提供一个默认的，如配置登录请求，还有登录成功页面</span><br><span class="line">logout()：返回登出配置对象，可通过logoutUrl设置退出url</span><br><span class="line">antMatchers：匹配请求路径或请求动作类型，如：.antMatchers(&quot;/admin/**&quot;)</span><br><span class="line"></span><br><span class="line">addFilterBefore: 在某过滤器之前添加 filter</span><br><span class="line">addFilterAfter：在某过滤器之后添加 filter</span><br><span class="line">addFilterAt：在某过滤器相同位置添加 filter，不会覆盖相同位置的 filter</span><br><span class="line">hasRole：结合 antMatchers 一起使用，设置请求允许访问的角色权限或IP，如：</span><br><span class="line">.antMatchers(&quot;/admin/**&quot;).hasAnyRole(&quot;ROLE_ADMIN&quot;,&quot;ROLE_USER&quot;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">access(String)        </span><br><span class="line"></span><br><span class="line">SpringEL表达式结果为true时可访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">anonymous()        </span><br><span class="line"></span><br><span class="line">匿名可访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">denyAll()        </span><br><span class="line"></span><br><span class="line">用户不可以访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">fullyAuthenticated()        </span><br><span class="line"></span><br><span class="line">用户完全认证访问（非remember me下自动登录）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hasAnyAuthority(String…)        </span><br><span class="line"></span><br><span class="line">参数中任意权限可访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hasAnyRole(String…)        </span><br><span class="line"></span><br><span class="line">参数中任意角色可访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hasAuthority(String)        </span><br><span class="line"></span><br><span class="line">某一权限的用户可访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hasRole(String)        </span><br><span class="line"></span><br><span class="line">某一角色的用户可访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">permitAll()        </span><br><span class="line"></span><br><span class="line">所有用户可访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">rememberMe()        </span><br><span class="line"></span><br><span class="line">允许通过remember me登录的用户访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">authenticated()        </span><br><span class="line"></span><br><span class="line">用户登录后可访问</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hasIpAddress(String)        </span><br><span class="line"></span><br><span class="line">用户来自参数中的IP可访问</span><br></pre></td></tr></table></figure>
+<h4 id="13-PasswordEncoder"><a href="#13-PasswordEncoder" class="headerlink" title="13.    PasswordEncoder"></a>13.    PasswordEncoder</h4><p>Spring 提供的一个用于对密码加密的接口，首选实现类为 BCryptPasswordEncoder </p>
+<h4 id="14-BCryptPasswordEncoder"><a href="#14-BCryptPasswordEncoder" class="headerlink" title="14.    BCryptPasswordEncoder"></a>14.    BCryptPasswordEncoder</h4><p>spring security中的BCryptPasswordEncoder方法采用SHA-256 +随机盐+密钥  对密码进行加密。SHA系列是Hash算法，不是加密算法，使用加密算法意味着可以解密（这个与编码/解码一样），但是采用Hash处理，其过程是不可逆的。</p>
+<ul>
+<li>（1）加密(encode)：注册用户时，使用SHA-256+随机盐+密钥把用户输入的密码进行hash处理，得到密码的hash值，然后将其存入数据库中。</li>
+<li>（2）密码匹配(matches)：用户登录时，密码匹配阶段并没有进行密码解密（因为密码经过Hash处理，是不可逆的），而是使用相同的算法把用户输入的密码进行hash处理，得到密码的hash值，然后将其与从数据库中查询到的密码hash值进行比较。如果两者相同，说明用户输入的密码正确。<br>这正是为什么处理密码时要用hash算法，而不用加密算法。因为这样处理即使数据库泄漏，黑客也很难破解密码</li>
+</ul>
+<h2 id="6-5-授权原理-AOP-MethodSecurityInterceptor"><a href="#6-5-授权原理-AOP-MethodSecurityInterceptor" class="headerlink" title="6.5 授权原理-AOP-MethodSecurityInterceptor"></a>6.5 授权原理-AOP-MethodSecurityInterceptor</h2><p>MethodSecurityInterceptor（基于AOP模式进行权限检查）</p>
+<ul>
+<li>授权（权限检查机制）采用AOP机制：<br>org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor</li>
+<li>方法执行前org.springframework.security.access.AccessDecisionManager通过投票机制决定这个方法是否可以被执行</li>
+</ul>
+<h3 id="6-5-1-例如"><a href="#6-5-1-例如" class="headerlink" title="6.5.1 例如"></a>6.5.1 例如</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@PreAuthorize(value=&quot;hasRole(&apos;学徒&apos;) AND hasAuthority(&apos;luohan&apos;)&quot;)</span><br><span class="line">@GetMapping(&quot;/level1/1&quot;)</span><br><span class="line">public String leve1Page1()&#123;</span><br><span class="line">return &quot;/level1/1&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-5-2-拦截器invoke方法"><a href="#6-5-2-拦截器invoke方法" class="headerlink" title="6.5.2 拦截器invoke方法"></a>6.5.2 拦截器invoke方法</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603000014.png" alt></p>
+<h3 id="6-5-3-支持各种功能的投票器"><a href="#6-5-3-支持各种功能的投票器" class="headerlink" title="6.5.3 支持各种功能的投票器"></a>6.5.3 支持各种功能的投票器</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603000037.png" alt></p>
+<h3 id="6-5-4-投票器标识"><a href="#6-5-4-投票器标识" class="headerlink" title="6.5.4 投票器标识"></a>6.5.4 投票器标识</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603000117.png" alt></p>
+<h3 id="6-5-5-AccessDecisionManager利用系统中AccessDecisionVoter（投票器）进行授权操作："><a href="#6-5-5-AccessDecisionManager利用系统中AccessDecisionVoter（投票器）进行授权操作：" class="headerlink" title="6.5.5 AccessDecisionManager利用系统中AccessDecisionVoter（投票器）进行授权操作："></a>6.5.5 AccessDecisionManager利用系统中AccessDecisionVoter（投票器）进行授权操作：</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190603000139.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1）AffirmativeBased：有一个拒绝都不行</span><br><span class="line">2）ConsensusBased：赞成票数大于拒绝即可</span><br><span class="line">3）UnanimousBased：至少有一个赞成，不能全弃权和任何一个拒绝</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/04/04/67. 前端_Bootstrap框架概述/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/04/11/69. 日志框架概述/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

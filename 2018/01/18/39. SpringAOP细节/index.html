@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>5. SpringAOP细节 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Spring框架,SSM框架,">
+  
+
+  <meta name="description" content="概述1  切入点表达式12345678execution(修饰符 返回值类型        包+类+方法(参数列表) )execution([权限修饰符] [返回值类型] [简单类名/全类名] [方法名]([参数列表]))任意修饰符任意返回值 包下的任意类+类中的任意方法名+方法中的任意参数列表//@After(value=&amp;quot;execution( * com.aop.aspectJ.*.">
+<meta name="keywords" content="Spring框架,SSM框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5. SpringAOP细节">
+<meta property="og:url" content="http://yoursite.com/2018/01/18/39. SpringAOP细节/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概述1  切入点表达式12345678execution(修饰符 返回值类型        包+类+方法(参数列表) )execution([权限修饰符] [返回值类型] [简单类名/全类名] [方法名]([参数列表]))任意修饰符任意返回值 包下的任意类+类中的任意方法名+方法中的任意参数列表//@After(value=&amp;quot;execution( * com.aop.aspectJ.*.">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uc7j.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4uv36.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4K15n.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4K0a9.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4K7xf.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4KqsS.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4KLqg.png">
+<meta property="og:updated_time" content="2019-06-08T14:46:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5. SpringAOP细节">
+<meta name="twitter:description" content="概述1  切入点表达式12345678execution(修饰符 返回值类型        包+类+方法(参数列表) )execution([权限修饰符] [返回值类型] [简单类名/全类名] [方法名]([参数列表]))任意修饰符任意返回值 包下的任意类+类中的任意方法名+方法中的任意参数列表//@After(value=&amp;quot;execution( * com.aop.aspectJ.*.">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/12/E4uc7j.md.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-1-切入点表达式"><span class="toc-text">5.1 切入点表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-1-作用"><span class="toc-text">5.1.1 作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-2-语法细节"><span class="toc-text">5.1.2 语法细节</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-2-当前连接点细节"><span class="toc-text">5.2 当前连接点细节</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-1-概述"><span class="toc-text">5.2.1 概述</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-3通知"><span class="toc-text">5.3通知</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-1-概述"><span class="toc-text">5.3.1 概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-2前置通知"><span class="toc-text">5.3.2前置通知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-3后置通知"><span class="toc-text">5.3.3后置通知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-4返回通知"><span class="toc-text">5.3.4返回通知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-5异常通知"><span class="toc-text">5.3.5异常通知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-6环绕通知"><span class="toc-text">5.3.6环绕通知</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-4-重用切入点定义"><span class="toc-text">5.4 重用切入点定义</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-39. SpringAOP细节" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">5. SpringAOP细节</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.01.18</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>1  切入点表达式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">execution(修饰符 返回值类型        包+类+方法(参数列表) )</span><br><span class="line">execution([权限修饰符] [返回值类型] [简单类名/全类名] [方法名]([参数列表]))</span><br><span class="line">任意修饰符任意返回值 包下的任意类+类中的任意方法名+方法中的任意参数列表</span><br><span class="line">//@After(value=&quot;execution( * com.aop.aspectJ.*.*(..))&quot;)</span><br><span class="line">定义及使用切入点表达式</span><br><span class="line">@Pointcut(value=&quot;execution( *  com.spring.aop.aspectJ.*.*(..))&quot;)</span><br><span class="line">	public void declarePointcut() &#123;&#125;</span><br><span class="line">@After(value=&quot;declarePointcut()&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>2  连接点对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JoinPoint</span><br><span class="line">proceedingJoinPoint</span><br></pre></td></tr></table></figure>
+<p>3  切面的优先级</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通过@Order  注解来指定切面的优先级,</span><br><span class="line">需要指定 int 类型的值， 值越小优先级越高。</span><br><span class="line">默认值就是 int 的最大值.</span><br></pre></td></tr></table></figure>
+<p>4  重用切入点表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在切面中，随便定义一个方法，</span><br><span class="line">然后使用@PointCut 注解定义切入点表达式. </span><br><span class="line">然后在各个通知的注解中就可以使用方法名() </span><br><span class="line">来使用定义好的切入点表达式.</span><br></pre></td></tr></table></figure>
+<h1 id="5-1-切入点表达式"><a href="#5-1-切入点表达式" class="headerlink" title="5.1 切入点表达式"></a>5.1 切入点表达式</h1><h2 id="5-1-1-作用"><a href="#5-1-1-作用" class="headerlink" title="5.1.1 作用"></a>5.1.1 作用</h2><pre><code>通过表达式的方式定位一个或多个具体的连接点。
+</code></pre><h2 id="5-1-2-语法细节"><a href="#5-1-2-语法细节" class="headerlink" title="5.1.2 语法细节"></a>5.1.2 语法细节</h2><p>1)切入点表达式的语法格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution([权限修饰符] [返回值类型] [简单类名/全类名] [方法名]([参数列表]))</span><br></pre></td></tr></table></figure>
+<p>2)举例说明 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">表达式	execution(* com.atguigu.spring.ArithmeticCalculator.*(..))</span><br><span class="line">含义	ArithmeticCalculator接口中声明的所有方法。</span><br><span class="line">        第一个“*”代表任意修饰符及任意返回值。</span><br><span class="line">        第二个“*”代表任意方法。</span><br><span class="line">        “..”匹配任意数量、任意类型的参数。</span><br><span class="line">        若目标类、接口与该切面类在同一个包中可以省略包名</span><br></pre></td></tr></table></figure>
+<p>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">表达式	execution(public * ArithmeticCalculator.*(..))</span><br><span class="line">含义	ArithmeticCalculator接口的所有公有方法</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">表达式	execution(public double ArithmeticCalculator.*(..))</span><br><span class="line">含义	ArithmeticCalculator接口中返回double类型数值的方法</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">表达式	execution(public double ArithmeticCalculator.*(double, ..))</span><br><span class="line">含义	第一个参数为double类型的方法。</span><br><span class="line">        “..” 匹配任意数量、任意类型的参数。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">表达式	execution(public double ArithmeticCalculator.*(double, double))</span><br><span class="line">含义	参数类型为double，double类型的方法</span><br></pre></td></tr></table></figure>
+<p>3）在AspectJ中，切入点表达式可以通过<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">“&amp;&amp;”、“||”、“!”等操作符结合起来。</span><br><span class="line">表达式	execution (* *.add(int,..)) || execution(* *.sub(int,..))</span><br><span class="line">含义	任意类中第一个参数为int类型的add方法或sub方法</span><br><span class="line">表达式	!execution (* *.add(int,..)) </span><br><span class="line">含义	匹配不是任意类中第一个参数为int类型的add方法</span><br></pre></td></tr></table></figure></p>
+<p>5.1.3切入点表达式应用到实际的切面类中</p>
+<p><a href="https://imgchr.com/i/E4uc7j" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/12/E4uc7j.md.png" alt="E4uc7j.md.png"></a></p>
+<h1 id="5-2-当前连接点细节"><a href="#5-2-当前连接点细节" class="headerlink" title="5.2 当前连接点细节"></a>5.2 当前连接点细节</h1><h2 id="5-2-1-概述"><a href="#5-2-1-概述" class="headerlink" title="5.2.1 概述"></a>5.2.1 概述</h2><blockquote>
+<p>切入点表达式通常都会是从宏观上定位一组方法，<br>和具体某个通知的注解结合起来就能够确定对应的连接点。<br>那么就一个具体的连接点而言，<br>我们可能会关心这个连接点的一些具体信息，<br>例如：<br>当前连接点所在方法的方法名、当前传入的参数值等等。<br>这些信息都封装在JoinPoint接口的实例对象中。<br>5.2.2 JoinPoint</p>
+</blockquote>
+<p><a href="https://imgchr.com/i/E4uv36" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/12/E4uv36.md.png" alt="E4uv36.md.png"></a></p>
+<h1 id="5-3通知"><a href="#5-3通知" class="headerlink" title="5.3通知"></a>5.3通知</h1><h2 id="5-3-1-概述"><a href="#5-3-1-概述" class="headerlink" title="5.3.1 概述"></a>5.3.1 概述</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1)在具体的连接点上要执行的操作。  </span><br><span class="line">2)一个切面可以包括一个或者多个通知。  </span><br><span class="line">3)通知所使用的注解的值往往是切入点表达式。</span><br></pre></td></tr></table></figure>
+<h2 id="5-3-2前置通知"><a href="#5-3-2前置通知" class="headerlink" title="5.3.2前置通知"></a>5.3.2前置通知</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1)前置通知：在方法执行之前执行的通知</span><br><span class="line">2)使用@Before注解</span><br></pre></td></tr></table></figure>
+<h2 id="5-3-3后置通知"><a href="#5-3-3后置通知" class="headerlink" title="5.3.3后置通知"></a>5.3.3后置通知</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1)后置通知：后置通知是在连接点完成之后执行的，即连接点返回结果或者抛出异常的时候</span><br><span class="line">2)使用@After注解</span><br></pre></td></tr></table></figure>
+<h2 id="5-3-4返回通知"><a href="#5-3-4返回通知" class="headerlink" title="5.3.4返回通知"></a>5.3.4返回通知</h2><blockquote>
+<p>1)返回通知：无论连接点是正常返回还是抛出异常，后置通知都会执行。如果只想在连接点返回的时候记录日志，应使用返回通知代替后置通知。<br>2)使用@AfterReturning注解,在返回通知中访问连接点的返回值</p>
+<blockquote>
+<p>①在返回通知中，只要将returning属性添加到@AfterReturning注解中，就可以访问连接点的返回值。该属性的值即为用来传入返回值的参数名称<br>②必须在通知方法的签名中添加一个同名参数。在运行时Spring AOP会通过这个参数传递返回值<br>③原始的切点表达式需要出现在pointcut属性中</p>
+</blockquote>
+</blockquote>
+<p><img src="https://s2.ax1x.com/2019/05/12/E4K15n.png" alt="E4K15n.png"></p>
+<h2 id="5-3-5异常通知"><a href="#5-3-5异常通知" class="headerlink" title="5.3.5异常通知"></a>5.3.5异常通知</h2><blockquote>
+<p>1)异常通知：只在连接点抛出异常时才执行异常通知<br>2)将throwing属性添加到@AfterThrowing注解中，也可以访问连接点抛出的异常。Throwable是所有错误和异常类的顶级父类，所以在异常通知方法可以捕获到任何错误和异常。<br>3)如果只对某种特殊的异常类型感兴趣，可以将参数声明为其他异常的参数类型。然后通知就只在抛出这个类型及其子类的异常时才被执行  </p>
+</blockquote>
+<h2 id="5-3-6环绕通知"><a href="#5-3-6环绕通知" class="headerlink" title="5.3.6环绕通知"></a>5.3.6环绕通知</h2><blockquote>
+<p>1)环绕通知是所有通知类型中功能最为强大的，能够全面地控制连接点，甚至可以控制是否执行连接点。<br>2)对于环绕通知来说，连接点的参数类型必须是ProceedingJoinPoint。它是 JoinPoint的子接口，允许控制何时执行，是否执行连接点。<br>3)在环绕通知中需要明确调用ProceedingJoinPoint的proceed()方法来执行被代理的方法。如果忘记这样做就会导致通知被执行了，但目标方法没有被执行。<br>4)注意：环绕通知的方法需要返回目标方法执行之后的结果，即调用 joinPoint.proceed();的返回值，否则会出现空指针异常。</p>
+</blockquote>
+<p><a href="https://imgchr.com/i/E4K0a9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/12/E4K0a9.png" alt="E4K0a9.png"></a></p>
+<h1 id="5-4-重用切入点定义"><a href="#5-4-重用切入点定义" class="headerlink" title="5.4 重用切入点定义"></a>5.4 重用切入点定义</h1><blockquote>
+<p>1)在编写AspectJ切面时，可以直接在通知注解中书写切入点表达式。但同一个切点表达式可能会在多个通知中重复出现。<br>2)在AspectJ切面中，可以通过@Pointcut注解将一个切入点声明成简单的方法。切入点的方法体通常是空的，因为将切入点定义与应用程序逻辑混在一起是不合理的。<br>3)切入点方法的访问控制符同时也控制着这个切入点的可见性。如果切入点要在多个切面中共用，最好将它们集中在一个公共的类中。在这种情况下，它们必须被声明为public。在引入这个切入点时，必须将类名也包括在内。如果类没有与这个切面放在同一个包中，还必须包含包名。<br>4)其他通知可以通过方法名称引入该切入点</p>
+</blockquote>
+<p>[<img src="https://s2.ax1x.com/2019/05/12/E4K7xf.md.png" alt="E4K7xf.md.png">]</p>
+<p>5.4指定切面的优先级<br>1)在同一个连接点上应用不止一个切面时，除非明确指定，否则它们的优先级是不确定的。<br>2)切面的优先级可以通过实现Ordered接口或利用@Order注解指定。<br>3)实现Ordered接口，getOrder()方法的返回值越小，优先级越高。<br>4)若使用@Order注解，序号出现在注解中</p>
+<p><img src="https://s2.ax1x.com/2019/05/13/E4KqsS.png" alt="E4KqsS.png"></p>
+<p><img src="https://s2.ax1x.com/2019/05/13/E4KLqg.png" alt="E4KLqg.png"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/01/15/38. SpringAOP概述/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/01/22/40. Spring以XML方式配置切面 /">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

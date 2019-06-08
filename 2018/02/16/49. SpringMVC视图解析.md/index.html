@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>7. SpringMVC视图解析.md | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,SpringMVC框架,">
+  
+
+  <meta name="description" content="1 SpringMVC如何解析视图概述1）不论控制器返回一个String,ModelAndView,View都会转换为ModelAndView对象，由视图解析器解析视图，然后，进行页面的跳转。2）视图解析源码分析：重要的两个接口3）断点调试源码4）流程图https://s2.ax1x.com/2019/05/03/EUXvEq.png 2 视图和视图解析器 1）请求处理方法执行完成后，最终返回一个">
+<meta name="keywords" content="SSM框架,SpringMVC框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="7. SpringMVC视图解析.md">
+<meta property="og:url" content="http://yoursite.com/2018/02/16/49. SpringMVC视图解析.md/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="1 SpringMVC如何解析视图概述1）不论控制器返回一个String,ModelAndView,View都会转换为ModelAndView对象，由视图解析器解析视图，然后，进行页面的跳转。2）视图解析源码分析：重要的两个接口3）断点调试源码4）流程图https://s2.ax1x.com/2019/05/03/EUXvEq.png 2 视图和视图解析器 1）请求处理方法执行完成后，最终返回一个">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUXpXd.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUXwH1.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUXr4K.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUXfHI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUjZUx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUj1rd.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUjgiV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUjTd1.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUjxLd.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUviJf.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUvASS.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUv3SU.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUvcmd.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUvb0s.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUxpX4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUxEh6.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUxe1O.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUxMBd.png">
+<meta property="og:updated_time" content="2019-06-08T14:47:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="7. SpringMVC视图解析.md">
+<meta name="twitter:description" content="1 SpringMVC如何解析视图概述1）不论控制器返回一个String,ModelAndView,View都会转换为ModelAndView对象，由视图解析器解析视图，然后，进行页面的跳转。2）视图解析源码分析：重要的两个接口3）断点调试源码4）流程图https://s2.ax1x.com/2019/05/03/EUXvEq.png 2 视图和视图解析器 1）请求处理方法执行完成后，最终返回一个">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/03/EUXpXd.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-SpringMVC如何解析视图概述"><span class="toc-text">1 SpringMVC如何解析视图概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-视图和视图解析器"><span class="toc-text">2 视图和视图解析器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-视图"><span class="toc-text">3 视图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-JstlView"><span class="toc-text">5 JstlView</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-实验代码"><span class="toc-text">5.1 实验代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-视图解析器"><span class="toc-text">6 视图解析器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-常用的视图解析器实现类"><span class="toc-text">7 常用的视图解析器实现类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8mvc-view-controller标签"><span class="toc-text">8mvc:view-controller标签</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9重定向"><span class="toc-text">9重定向</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-49. SpringMVC视图解析.md" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">7. SpringMVC视图解析.md</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.02.16</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="1-SpringMVC如何解析视图概述"><a href="#1-SpringMVC如何解析视图概述" class="headerlink" title="1 SpringMVC如何解析视图概述"></a>1 SpringMVC如何解析视图概述</h1><p>1）不论控制器返回一个String,ModelAndView,View都会转换为ModelAndView对象，由视图解析器解析视图，然后，进行页面的跳转。<br><img src="https://s2.ax1x.com/2019/05/03/EUXpXd.png" alt="image"><br>2）视图解析源码分析：重要的两个接口<br><img src="https://s2.ax1x.com/2019/05/03/EUXwH1.png" alt="image"><br><img src="https://s2.ax1x.com/2019/05/03/EUXr4K.png" alt="image"><br>3）断点调试源码<br><img src="https://s2.ax1x.com/2019/05/03/EUXfHI.png" alt="image"><br>4）流程图<br><a href="https://s2.ax1x.com/2019/05/03/EUXvEq.png" target="_blank" rel="noopener">https://s2.ax1x.com/2019/05/03/EUXvEq.png</a></p>
+<h1 id="2-视图和视图解析器"><a href="#2-视图和视图解析器" class="headerlink" title="2 视图和视图解析器"></a>2 视图和视图解析器</h1><blockquote>
+<p>1）请求处理方法执行完成后，最终返回一个 ModelAndView 对象。对于那些返回 String，View 或 ModeMap 等类型的处理方法，Spring MVC 也会在内部将它们装配成一个 ModelAndView 对象，它包含了逻辑名和模型对象的视图<br>2）Spring MVC 借助视图解析器（ViewResolver）得到最终的视图对象（View），最终的视图可以是 JSP ，也可能是 Excel、JFreeChart等各种表现形式的视图<br>3）对于最终究竟采取何种视图对象对模型数据进行渲染，处理器并不关心，处理器工作重点聚焦在生产模型数据的工作上，从而实现 MVC 的充分解耦  </p>
+</blockquote>
+<h1 id="3-视图"><a href="#3-视图" class="headerlink" title="3 视图"></a>3 视图</h1><p>1）视图的作用是渲染模型数据，将模型里的数据以某种形式呈现给客户。<br>2）为了实现视图模型和具体实现技术的解耦，Spring 在 org.springframework.web.servlet 包中定义了一个高度抽象的 View 接口：<br><img src="https://s2.ax1x.com/2019/05/03/EUjZUx.png" alt="image"><br>3）==视图对象由视图解析器负责实例化==。由于视图是==无状态==的，所以他们不会有==线程安全==的问题<br>6.4 常用的视图实现类<br><img src="https://s2.ax1x.com/2019/05/03/EUj1rd.png" alt="image"></p>
+<h1 id="5-JstlView"><a href="#5-JstlView" class="headerlink" title="5 JstlView"></a>5 JstlView</h1><p>1）若项目中使用了JSTL，则SpringMVC 会自动把视图由InternalResourceView转为 JstlView  （==断点调试，将JSTL的jar包增加到项目中，视图解析器会自动修改为JstlView==）<br>2）若使用 JSTL 的 fmt 标签则需要在 SpringMVC 的配置文件中配置国际化资源文件<br><img src="https://s2.ax1x.com/2019/05/03/EUjgiV.png" alt="image"><br>3）若希望直接响应通过 SpringMVC 渲染的页面，可以使用 mvc:view-controller 标签实现<br><img src="https://s2.ax1x.com/2019/05/03/EUjTd1.png" alt="image"></p>
+<h2 id="5-1-实验代码"><a href="#5-1-实验代码" class="headerlink" title="5.1 实验代码"></a>5.1 实验代码</h2><p>1）增加jstl标签 jar包（断点调试，这时的View对象就是JstlView）<br>  <img src="https://s2.ax1x.com/2019/05/03/EUjxLd.png" alt="image">  </p>
+<h1 id="6-视图解析器"><a href="#6-视图解析器" class="headerlink" title="6 视图解析器"></a>6 视图解析器</h1><p>1）SpringMVC 为逻辑视图名的解析提供了不同的策略，可以在 SpringMVC 上下文中配置一种或多种解析策略，并指定他们之间的先后顺序。每一种映射策略对应一个具体的视图解析器实现类。<br>2）视图解析器的作用比较单一：将逻辑视图解析为一个具体的视图对象。<br>3）所有的视图解析器都必须实现 ViewResolver 接口：<br><img src="https://s2.ax1x.com/2019/05/03/EUviJf.png" alt="image"></p>
+<h1 id="7-常用的视图解析器实现类"><a href="#7-常用的视图解析器实现类" class="headerlink" title="7 常用的视图解析器实现类"></a>7 常用的视图解析器实现类</h1><p><img src="https://s2.ax1x.com/2019/05/03/EUvASS.png" alt="image"><br>1）程序员可以选择一种视图解析器或混用多种视图解析器<br>2）每个视图解析器都实现了 Ordered 接口并开放出一个 order 属性，可以通过 order 属性指定解析器的优先顺序，order  越小优先级越高。<br>3）SpringMVC 会按视图解析器顺序的优先顺序对逻辑视图名进行解析，直到解析成功并返回视图对象，否则将抛出 ServletException 异常<br>4）InternalResourceViewResolver<br>①JSP 是最常见的视图技术，可以使用 InternalResourceViewResolve作为视图解析器：<br>②<img src="https://s2.ax1x.com/2019/05/03/EUv3SU.png" alt="image"></p>
+<h1 id="8mvc-view-controller标签"><a href="#8mvc-view-controller标签" class="headerlink" title="8mvc:view-controller标签"></a>8mvc:view-controller标签</h1><p>1）若希望直接响应通过 SpringMVC 渲染的页面，可以使用 mvc:view-controller 标签实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 直接配置响应的页面：无需经过控制器来执行结果 --&gt;</span><br><span class="line">&lt;mvc:view-controller path=&quot;/success&quot; view-name=&quot;success&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>2）请求的路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8080/SpringMVC_02_View/success</span><br></pre></td></tr></table></figure>
+<p>3）配置<a href="mvc:view-controller" target="_blank" rel="noopener">mvc:view-controller</a>会导致其他请求路径失效<br>       解决办法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 在实际开发过程中都需要配置mvc:annotation-driven标签 --&gt;</span><br><span class="line">&lt;mvc:annotation-driven/&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="9重定向"><a href="#9重定向" class="headerlink" title="9重定向"></a>9重定向</h1><p>1）关于重定向  </p>
+<blockquote>
+<p>①一般情况下，控制器方法返回字符串类型的值会被当成逻辑视图名处理<br>②如果返回的字符串中带 forward: 或 redirect: 前缀时，SpringMVC 会对他们进行特殊处理：将 forward: 和 redirect: 当成指示符，其后的字符串作为 URL 来处理<br>③redirect:success.jsp：会完成一个到 success.jsp的重定向的操作<br>④forward:success.jsp：会完成一个到 success.jsp的转发操作   </p>
+</blockquote>
+<p>2）定义页面链接 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;springmvc/testRedirect&quot;&gt;testRedirect&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p>3）定义控制器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/testRedirect&quot;)</span><br><span class="line">public String testRedirect()&#123;</span><br><span class="line">System.out.println(&quot;testRedirect&quot;);</span><br><span class="line">return &quot;redirect:/index.jsp&quot;;</span><br><span class="line">//return &quot;forward:/index.jsp&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4）源码分析：重定向原理<br>1.源码分析：重定向原理<br><img src="https://s2.ax1x.com/2019/05/03/EUvcmd.png" alt="image"> </p>
+<p><img src="https://s2.ax1x.com/2019/05/03/EUvb0s.png" alt="image"></p>
+<p><img src="https://s2.ax1x.com/2019/05/03/EUxpX4.png" alt="image"></p>
+<p><img src="https://s2.ax1x.com/2019/05/03/EUxEh6.png" alt="image"></p>
+<p><img src="https://s2.ax1x.com/2019/05/03/EUxe1O.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return &quot;forward:/index.jsp&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/05/03/EUxMBd.png" alt="image"></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/02/14/48. SpringMVC处理响应数据/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/02/17/50. SpringMVC综合案例RESTRUL_CRUD/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

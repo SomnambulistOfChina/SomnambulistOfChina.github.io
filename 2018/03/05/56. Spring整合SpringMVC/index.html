@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>14. Spring整合SpringMVC | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,SpringMVC框架,">
+  
+
+  <meta name="description" content="概览 Spring 与 Springmvc 是否需要整合?     不需要 : 单独使用Springmvc,将之前Spring中的配置全部迁移到Springmvc中即可。[不建议] 需要    ：Spring与Springmvc同时使用。 Springmvc只负责web相关的处理。 其他的都交给Spring处理。Spring ： 数据源、 AOP 、 声明式事务管理 ..... Springmvc">
+<meta name="keywords" content="SSM框架,SpringMVC框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="14. Spring整合SpringMVC">
+<meta property="og:url" content="http://yoursite.com/2018/03/05/56. Spring整合SpringMVC/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概览 Spring 与 Springmvc 是否需要整合?     不需要 : 单独使用Springmvc,将之前Spring中的配置全部迁移到Springmvc中即可。[不建议] 需要    ：Spring与Springmvc同时使用。 Springmvc只负责web相关的处理。 其他的都交给Spring处理。Spring ： 数据源、 AOP 、 声明式事务管理 ..... Springmvc">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDAbxe.png">
+<meta property="og:updated_time" content="2019-06-08T14:47:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="14. Spring整合SpringMVC">
+<meta name="twitter:description" content="概览 Spring 与 Springmvc 是否需要整合?     不需要 : 单独使用Springmvc,将之前Spring中的配置全部迁移到Springmvc中即可。[不建议] 需要    ：Spring与Springmvc同时使用。 Springmvc只负责web相关的处理。 其他的都交给Spring处理。Spring ： 数据源、 AOP 、 声明式事务管理 ..... Springmvc">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/06/EDAbxe.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概览"><span class="toc-text">概览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Spring-与SpringMVC的整合问题："><span class="toc-text">1 Spring 与SpringMVC的整合问题：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Spring整合SpringMVC-解决方案配置监听器"><span class="toc-text">2 Spring整合SpringMVC_解决方案配置监听器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1）监听器配置"><span class="toc-text">1）监听器配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2）创建Spring的bean的配置文件：beans-xml"><span class="toc-text">2）创建Spring的bean的配置文件：beans.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3）springmvc配置文件：springmvc-xml"><span class="toc-text">3）springmvc配置文件：springmvc.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-SpringIOC-容器和-SpringMVC-IOC-容器的关系"><span class="toc-text">3 SpringIOC 容器和 SpringMVC IOC 容器的关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-SpringMVC对比Struts2"><span class="toc-text">4 SpringMVC对比Struts2</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-56. Spring整合SpringMVC" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">14. Spring整合SpringMVC</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.03.05</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><ol>
+<li>Spring 与 Springmvc 是否需要整合?  </li>
+</ol>
+<ul>
+<li>不需要 : 单独使用Springmvc,将之前Spring中的配置全部迁移到Springmvc中即可。[不建议]</li>
+<li>需要    ：Spring与Springmvc同时使用。 Springmvc只负责web相关的处理。 其他的都交给Spring处理。<pre><code>Spring ： 数据源、 AOP 、 声明式事务管理 .....
+Springmvc: 与web相关的。 
+</code></pre></li>
+</ul>
+<ol start="2">
+<li>Spring的容器对象如何创建 ?</li>
+</ol>
+<ul>
+<li>非WEB环境:  直接在main方法或者是junit测试方法中创建Spring容器对象. </li>
+<li>WEB环境  :  希望在服务器启动时，就将Spring的容器对象创建好。<br><strong>思路:</strong>   <blockquote>
+<ul>
+<li>通过监听器监听ServletContext对象的创建.</li>
+<li>因为ServletContext对象是在服务器启动时创建，并且只会被创建一次。 </li>
+<li>当监听到ServletContext对象被创建时，在对应的事件处理方法中，将Spring的容器对象创建出来.  </li>
+<li>然后再将Spring容器对象保存到ServletContext中， 共享给每个组件.  </li>
+<li><strong>Spring提供好的监听器(快捷键直接使用)</strong>: ==ContextLoaderListener==  </li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<ol start="3">
+<li>Bean对象被创建两次的问题<blockquote>
+<ul>
+<li>因为Spring与Springmvc都进行了组件扫描， 所以会将扫描到的组件管理到自己的容器中。 </li>
+<li>正常情况Springmvc只负责web相关的，也就是Handler， Spring要负责除了web之外的，也就是Service 、Dao.</li>
+<li>所以在组件扫描的配置中，需要使用<a href="context:include-filter" target="_blank" rel="noopener">context:include-filter</a>和<a href="context:exclude-filter" target="_blank" rel="noopener">context:exclude-filter</a>进行过滤.</li>
+</ul>
+</blockquote>
+</li>
+<li>Spring容器与 Springmvc容器的关系:父子关系<pre><code>**Spring是父容器，Springmvc是子容器. 子可以访问父，父不能访问子。**    
+</code></pre></li>
+<li>扩展</li>
+</ol>
+<ul>
+<li>Spring容器: </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Root WebApplicationContext: startup date [Thu Mar 07 11:36:05 CST 2019]; root of context hierarchy</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Springmvc容器: </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WebApplicationContext for namespace &apos;springDispatcherServlet-servlet&apos;: startup date [Thu Mar 07 11:37:35 CST 2019]; parent: Root WebApplicationContext</span><br></pre></td></tr></table></figure>
+<ul>
+<li>如何在Handler方法中获取到Spring的容器对象?<br>第一种</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(ApplicationContext)sc.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);</span><br></pre></td></tr></table></figure>
+<p>第二种</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WebApplicationContextUtils.getWebApplicationContext(sc);</span><br></pre></td></tr></table></figure>
+<h1 id="1-Spring-与SpringMVC的整合问题："><a href="#1-Spring-与SpringMVC的整合问题：" class="headerlink" title="1 Spring 与SpringMVC的整合问题："></a>1 Spring 与SpringMVC的整合问题：</h1><p>1）需要进行 Spring 整合 SpringMVC 吗 ?<br>2）还是否需要再加入 Spring 的 IOC 容器 ?<br>3）是否需要在web.xml 文件中配置启动 Spring IOC 容器的 ContextLoaderListener ?  </p>
+<ul>
+<li>需要: 通常情况下, 类似于数据源, 事务, 整合其他框架都是放在 Spring 的配置文件          中(而不是放在 SpringMVC 的配置文件中).   <blockquote>
+<p>实际上放入 Spring 配置文件对应的 IOC 容器中的还有 Service 和 Dao. </p>
+</blockquote>
+</li>
+<li>不需要: 都放在 SpringMVC 的配置文件中. 也可以分多个 Spring 的配置文件, 然后使用 import 节点导入其他的配置文件 <h1 id="2-Spring整合SpringMVC-解决方案配置监听器"><a href="#2-Spring整合SpringMVC-解决方案配置监听器" class="headerlink" title="2 Spring整合SpringMVC_解决方案配置监听器"></a>2 Spring整合SpringMVC_解决方案配置监听器</h1><h2 id="1）监听器配置"><a href="#1）监听器配置" class="headerlink" title="1）监听器配置"></a>1）监听器配置</h2></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置启动 Spring IOC 容器的 Listener --&gt;</span><br><span class="line">&lt;context-param&gt;</span><br><span class="line">&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">&lt;param-value&gt;classpath:beans.xml&lt;/param-value&gt;</span><br><span class="line">&lt;/context-param&gt;</span><br><span class="line">&lt;listener&gt;</span><br><span class="line">&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2）创建Spring的bean的配置文件：beans-xml"><a href="#2）创建Spring的bean的配置文件：beans-xml" class="headerlink" title="2）创建Spring的bean的配置文件：beans.xml"></a>2）创建Spring的bean的配置文件：beans.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd&quot;&gt;</span><br><span class="line">&lt;!-- 设置扫描组件的包 --&gt;</span><br><span class="line">&lt;context:component-scan base-package=&quot;com.atguigu.springmvc&quot;/&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- 配置数据源, 整合其他框架, 事务等. --&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3）springmvc配置文件：springmvc-xml"><a href="#3）springmvc配置文件：springmvc-xml" class="headerlink" title="3）springmvc配置文件：springmvc.xml"></a>3）springmvc配置文件：springmvc.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</span><br><span class="line">xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd</span><br><span class="line">http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd&quot;&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- 设置扫描组件的包 --&gt;</span><br><span class="line">&lt;context:component-scan base-package=&quot;com.atguigu.springmvc&quot;/&gt; </span><br><span class="line">&lt;!-- 配置视图解析器 --&gt;</span><br><span class="line">&lt;bean id=&quot;internalResourceViewResolver&quot;</span><br><span class="line">   class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</span><br><span class="line">&lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;/&gt;</span><br><span class="line">&lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"> </span><br><span class="line">&lt;mvc:default-servlet-handler/&gt; </span><br><span class="line">&lt;mvc:annotation-driven/&gt; </span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<p>在HelloWorldHandler、UserService类中增加构造方法，启动服务器，查看构造器执行情况。</p>
+<blockquote>
+<p>问题: 若 Spring 的 IOC 容器和 SpringMVC 的 IOC 容器扫描的包有重合的部分, 就会导致有的 bean 会被创建 2 次.  </p>
+</blockquote>
+<p>解决:  </p>
+<ul>
+<li>使 Spring 的 IOC 容器扫描的包和 SpringMVC 的 IOC 容器扫描的包没有重合的部分.   </li>
+<li>使用 exclude-filter 和 include-filter 子节点来规定只能扫描的注解<br>springmvc.xml</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package=&quot;com.atguigu.springmvc&quot; use-default-filters=&quot;false&quot;&gt;</span><br><span class="line">&lt;context:include-filter type=&quot;annotation&quot;</span><br><span class="line">           expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;</span><br><span class="line">&lt;context:include-filter type=&quot;annotation&quot;</span><br><span class="line">           expression=&quot;org.springframework.web.bind.annotation.ControllerAdvice&quot;/&gt;</span><br><span class="line">&lt;/context:component-scan&gt;</span><br><span class="line"> </span><br><span class="line">beans.xml</span><br><span class="line">&lt;context:component-scan base-package=&quot;com.atguigu.springmvc&quot;&gt;</span><br><span class="line">&lt;context:exclude-filter type=&quot;annotation&quot;</span><br><span class="line">        expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;</span><br><span class="line">&lt;context:exclude-filter type=&quot;annotation&quot;</span><br><span class="line">        expression=&quot;org.springframework.web.bind.annotation.ControllerAdvice&quot;/&gt;</span><br><span class="line">&lt;/context:component-scan&gt;</span><br><span class="line">&lt;!-- 配置数据源, 整合其他框架, 事务等. --&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="3-SpringIOC-容器和-SpringMVC-IOC-容器的关系"><a href="#3-SpringIOC-容器和-SpringMVC-IOC-容器的关系" class="headerlink" title="3 SpringIOC 容器和 SpringMVC IOC 容器的关系"></a>3 SpringIOC 容器和 SpringMVC IOC 容器的关系</h1><p>SpringMVC 的 IOC 容器中的 bean 可以来引用 Spring IOC 容器中的 bean.<br>==反之则不行==. Spring IOC 容器中的 bean 却不能来引用 SpringMVC IOC 容器中的 bean<br>1）在 Spring MVC 配置文件中引用业务层的 Bean<br>2）多个 Spring IOC 容器之间可以设置为父子关系，以实现良好的解耦。<br>3）Spring MVC WEB 层容器可作为 “业务层” Spring 容器的子容器：<br>即 WEB 层容器可以引用业务层容器的 Bean，而业务层容器却访问不到 WEB 层容器的 Bean<br><a href="https://imgchr.com/i/EDAbxe" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/06/EDAbxe.png" alt="EDAbxe.png"></a></p>
+<h1 id="4-SpringMVC对比Struts2"><a href="#4-SpringMVC对比Struts2" class="headerlink" title="4 SpringMVC对比Struts2"></a>4 SpringMVC对比Struts2</h1><p>1） Spring MVC 的入口是 Servlet, 而 Struts2 是 FilterSpring MVC 会稍微比 Struts2 快些.<br>2） Spring MVC 是基于方法设计, 而 Sturts2 是基于类,<br>    每次发一次请求都会实例一个 Action.<br>4）Spring MVC 使用更加简洁, 开发效率Spring MVC确实比 struts2 高: 支持 JSR303, 处  理ajax 的请求更方便<br>5）Struts2 的 OGNL 表达式使页面的开发效率相比 Spring MVC 更高些. </p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/03/01/55. SpringMVC运行流程图解/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/03/09/57. MyBatis简介/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

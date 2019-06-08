@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>4. MyBatis 映射文件 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,MyBatis框架,">
+  
+
+  <meta name="description" content="4.1 Mybatis映射文件简介1)MyBatis 的真正强大在于它的映射语句，也是它的魔力所在。由于它的异常强大，映射器的 XML 文件就显得相对简单。如果拿它跟具有相同功能的 JDBC 代码进行对比，你会立即发现省掉了将近 95% 的代码。MyBatis 就是针对 SQL 构建的，并且比普通的方法做的更好。2)SQL 映射文件有很少的几个顶级元素（按照它们应该被定义的顺序）： cache –">
+<meta name="keywords" content="SSM框架,MyBatis框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4. MyBatis 映射文件">
+<meta property="og:url" content="http://yoursite.com/2018/03/16/60. MyBatis 映射文件/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="4.1 Mybatis映射文件简介1)MyBatis 的真正强大在于它的映射语句，也是它的魔力所在。由于它的异常强大，映射器的 XML 文件就显得相对简单。如果拿它跟具有相同功能的 JDBC 代码进行对比，你会立即发现省掉了将近 95% 的代码。MyBatis 就是针对 SQL 构建的，并且比普通的方法做的更好。2)SQL 映射文件有很少的几个顶级元素（按照它们应该被定义的顺序）： cache –">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/07/EsoBJP.md.png">
+<meta property="og:updated_time" content="2019-06-08T14:42:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4. MyBatis 映射文件">
+<meta name="twitter:description" content="4.1 Mybatis映射文件简介1)MyBatis 的真正强大在于它的映射语句，也是它的魔力所在。由于它的异常强大，映射器的 XML 文件就显得相对简单。如果拿它跟具有相同功能的 JDBC 代码进行对比，你会立即发现省掉了将近 95% 的代码。MyBatis 就是针对 SQL 构建的，并且比普通的方法做的更好。2)SQL 映射文件有很少的几个顶级元素（按照它们应该被定义的顺序）： cache –">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/07/EsoBJP.md.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#4-1-Mybatis映射文件简介"><span class="toc-text">4.1 Mybatis映射文件简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-2-Mybatis使用insert-update-delete-select完成sql-CRUD"><span class="toc-text">4.2 Mybatis使用insert|update|delete|select完成sql CRUD</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-1-select-查"><span class="toc-text">4.2.1 select 查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Mapper接口方法"><span class="toc-text">1)Mapper接口方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Mapper映射文件"><span class="toc-text">2)Mapper映射文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-2-insert-增／加"><span class="toc-text">4.2.2 insert 增／加</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Mapper接口方法-1"><span class="toc-text">1)Mapper接口方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Mapper映射文件-1"><span class="toc-text">2)Mapper映射文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-3-update-改"><span class="toc-text">4.2.3  update 改</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Mapper接口方法-2"><span class="toc-text">1)Mapper接口方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Mapper映射文件-2"><span class="toc-text">2)Mapper映射文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-4-delete-删"><span class="toc-text">4.2.4  delete 删</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Mapper接口方法-3"><span class="toc-text">1)Mapper接口方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Mapper映射文件-3"><span class="toc-text">2)Mapper映射文件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-3主键生成方式、获取主键值"><span class="toc-text">4.3主键生成方式、获取主键值</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-1-主键生成方式"><span class="toc-text">4.3.1    主键生成方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-2-获取主键值"><span class="toc-text">4.3.2 获取主键值</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-4-参数传递"><span class="toc-text">4.4 参数传递</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-1-参数传递的方式"><span class="toc-text">4.4.1 参数传递的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-单个普通类型参数"><span class="toc-text">1)单个普通类型参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-多个参数"><span class="toc-text">2)多个参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-命名参数"><span class="toc-text">3)命名参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-POJO"><span class="toc-text">4)POJO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Map"><span class="toc-text">5)Map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Collection-Array"><span class="toc-text">6)Collection/Array</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-2-参数传递源码分析"><span class="toc-text">4.4.2 参数传递源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-以命名参数为例"><span class="toc-text">1)以命名参数为例:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-源码"><span class="toc-text">2)源码:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-3-参数处理"><span class="toc-text">4.4.3 参数处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-参数位置支持的属性"><span class="toc-text">1)参数位置支持的属性:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-4-参数的获取方式"><span class="toc-text">4.4.4 参数的获取方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-5-select查询的几种情况"><span class="toc-text">4.5 select查询的几种情况</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-查询单行数据返回单个对象"><span class="toc-text">1)查询单行数据返回单个对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-查询多行数据返回对象的集合"><span class="toc-text">2)查询多行数据返回对象的集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-查询单行数据返回Map集合"><span class="toc-text">3)查询单行数据返回Map集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-查询多行数据返回Map集合"><span class="toc-text">4)查询多行数据返回Map集合</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-6-resultType自动映射"><span class="toc-text">4.6 resultType自动映射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-7-resultMap自定义映射"><span class="toc-text">4.7 resultMap自定义映射</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-1-id-amp-result"><span class="toc-text">4.7.1  id&amp;result</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-2-association"><span class="toc-text">4.7.2  association</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-使用级联的方式"><span class="toc-text">2)使用级联的方式:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Association‘"><span class="toc-text">3)Association‘</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-3-association-分步查询"><span class="toc-text">4.7.3  association 分步查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-4-association-分步查询使用延迟加载"><span class="toc-text">4.7.4  association 分步查询使用延迟加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-5-collection"><span class="toc-text">4.7.5 collection</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-6-collection-分步查询"><span class="toc-text">4.7.6 collection 分步查询</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-7-collection-分步查询使用延迟加载"><span class="toc-text">4.7.7 collection 分步查询使用延迟加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-8-扩展-分步查询多列值的传递"><span class="toc-text">4.7.8 扩展: 分步查询多列值的传递</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-9-扩展-association-或-collection的-fetchType属性"><span class="toc-text">4.7.9 扩展: association 或 collection的 fetchType属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-0-扩展：表链接"><span class="toc-text">4.8.0 扩展：表链接</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-60. MyBatis 映射文件" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">4. MyBatis 映射文件</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.03.16</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="4-1-Mybatis映射文件简介"><a href="#4-1-Mybatis映射文件简介" class="headerlink" title="4.1 Mybatis映射文件简介"></a>4.1 Mybatis映射文件简介</h1><p>1)MyBatis 的真正强大在于它的映射语句，也是它的魔力所在。由于它的异常强大，映射器的 XML 文件就显得相对简单。如果拿它跟具有相同功能的 JDBC 代码进行对比，你会立即发现省掉了将近 95% 的代码。MyBatis 就是针对 SQL 构建的，并且比普通的方法做的更好。<br>2)SQL 映射文件有很少的几个顶级元素（按照它们应该被定义的顺序）：</p>
+<pre><code>cache – 给定命名空间的缓存配置。
+cache-ref – 其他命名空间缓存配置的引用。
+resultMap – 是最复杂也是最强大的元素，用来描述如何从数据库结果集中来加载对象。
+【parameterMap – 已废弃！老式风格的参数映射。内联参数是首选,这个元素可能在将来被移除，这里不会记录。】
+sql – 可被其他语句引用的可重用语句块。
+insert – 映射插入语句
+update – 映射更新语句
+delete – 映射删除语句
+select – 映射查询语
+</code></pre><h1 id="4-2-Mybatis使用insert-update-delete-select完成sql-CRUD"><a href="#4-2-Mybatis使用insert-update-delete-select完成sql-CRUD" class="headerlink" title="4.2 Mybatis使用insert|update|delete|select完成sql CRUD"></a>4.2 Mybatis使用insert|update|delete|select完成sql CRUD</h1><h2 id="4-2-1-select-查"><a href="#4-2-1-select-查" class="headerlink" title="4.2.1 select 查"></a>4.2.1 select 查</h2><h3 id="1-Mapper接口方法"><a href="#1-Mapper接口方法" class="headerlink" title="1)Mapper接口方法"></a>1)Mapper接口方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Employee getEmployeeById(Integer id );</span><br></pre></td></tr></table></figure>
+<h3 id="2-Mapper映射文件"><a href="#2-Mapper映射文件" class="headerlink" title="2)Mapper映射文件"></a>2)Mapper映射文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getEmployeeById&quot; </span><br><span class="line">          resultType=&quot;com.atguigu.mybatis.beans.Employee&quot; </span><br><span class="line">          databaseId=&quot;mysql&quot;&gt;</span><br><span class="line">		 select * from tbl_employee where id = $&#123;_parameter&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-2-insert-增／加"><a href="#4-2-2-insert-增／加" class="headerlink" title="4.2.2 insert 增／加"></a>4.2.2 insert 增／加</h2><h3 id="1-Mapper接口方法-1"><a href="#1-Mapper接口方法-1" class="headerlink" title="1)Mapper接口方法"></a>1)Mapper接口方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Integer  insertEmployee(Employee employee);</span><br></pre></td></tr></table></figure>
+<h3 id="2-Mapper映射文件-1"><a href="#2-Mapper映射文件-1" class="headerlink" title="2)Mapper映射文件"></a>2)Mapper映射文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;insertEmployee&quot; </span><br><span class="line">		parameterType=&quot;com.atguigu.mybatis.beans.Employee&quot;  </span><br><span class="line">			databaseId=&quot;mysql&quot;&gt;</span><br><span class="line">		insert into tbl_employee(last_name,email,gender) values(#&#123;lastName&#125;,#&#123;email&#125;,#&#123;gender&#125;)</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-3-update-改"><a href="#4-2-3-update-改" class="headerlink" title="4.2.3  update 改"></a>4.2.3  update 改</h2><h3 id="1-Mapper接口方法-2"><a href="#1-Mapper接口方法-2" class="headerlink" title="1)Mapper接口方法"></a>1)Mapper接口方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Boolean  updateEmployee(Employee employee);</span><br></pre></td></tr></table></figure>
+<h3 id="2-Mapper映射文件-2"><a href="#2-Mapper映射文件-2" class="headerlink" title="2)Mapper映射文件"></a>2)Mapper映射文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;update id=&quot;updateEmployee&quot; &gt;</span><br><span class="line">		update tbl_employee set last_name = #&#123;lastName&#125;,</span><br><span class="line">							    email = #&#123;email&#125;,</span><br><span class="line">							    gender = #&#123;gender&#125;</span><br><span class="line">							    where id = #&#123;id&#125;</span><br><span class="line">&lt;/update&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-2-4-delete-删"><a href="#4-2-4-delete-删" class="headerlink" title="4.2.4  delete 删"></a>4.2.4  delete 删</h2><h3 id="1-Mapper接口方法-3"><a href="#1-Mapper接口方法-3" class="headerlink" title="1)Mapper接口方法"></a>1)Mapper接口方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public void  deleteEmployeeById(Integer id );</span><br></pre></td></tr></table></figure>
+<h3 id="2-Mapper映射文件-3"><a href="#2-Mapper映射文件-3" class="headerlink" title="2)Mapper映射文件"></a>2)Mapper映射文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;delete id=&quot;deleteEmployeeById&quot; &gt;</span><br><span class="line">		delete from tbl_employee where id = #&#123;id&#125;</span><br><span class="line">&lt;/delete&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="4-3主键生成方式、获取主键值"><a href="#4-3主键生成方式、获取主键值" class="headerlink" title="4.3主键生成方式、获取主键值"></a>4.3主键生成方式、获取主键值</h1><h2 id="4-3-1-主键生成方式"><a href="#4-3-1-主键生成方式" class="headerlink" title="4.3.1    主键生成方式"></a>4.3.1    主键生成方式</h2><p>1)支持主键自增，例如MySQL数据库<br>2)不支持主键自增，例如Oracle数据库  </p>
+<p> 需求: 插入一条新数据，立马查询这条数据. </p>
+<h2 id="4-3-2-获取主键值"><a href="#4-3-2-获取主键值" class="headerlink" title="4.3.2 获取主键值"></a>4.3.2 获取主键值</h2><p>1)若数据库支持自动生成主键的字段（比如 MySQL 和 SQL Server），则可以设置 useGeneratedKeys=”true”，然后再把 keyProperty 设置到目标属性上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;insertEmployee&quot; 	parameterType=&quot;com.atguigu.mybatis.beans.Employee&quot;  </span><br><span class="line">			databaseId=&quot;mysql&quot;</span><br><span class="line">			useGeneratedKeys=&quot;true&quot;</span><br><span class="line">			keyProperty=&quot;id&quot;&gt;</span><br><span class="line">		insert into tbl_employee(last_name,email,gender) values(#&#123;lastName&#125;,#&#123;email&#125;,#&#123;gender&#125;)</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+<p>2)而对于不支持自增型主键的数据库（例如 Oracle），则可以使用 selectKey 子元素：selectKey  元素将会首先运行，id  会被设置，然后插入语句会被调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;insertEmployee&quot; </span><br><span class="line">		parameterType=&quot;com.atguigu.mybatis.beans.Employee&quot;  </span><br><span class="line">			databaseId=&quot;oracle&quot;&gt;</span><br><span class="line">		&lt;selectKey order=&quot;BEFORE&quot; keyProperty=&quot;id&quot; </span><br><span class="line">                                       resultType=&quot;integer&quot;&gt;</span><br><span class="line">			select employee_seq.nextval from dual </span><br><span class="line">		&lt;/selectKey&gt;	</span><br><span class="line">		insert into orcl_employee(id,last_name,email,gender) values(#&#123;id&#125;,#&#123;lastName&#125;,#&#123;email&#125;,#&#123;gender&#125;)</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+<p>或者是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;insertEmployee&quot; </span><br><span class="line">		parameterType=&quot;com.atguigu.mybatis.beans.Employee&quot;  </span><br><span class="line">			databaseId=&quot;oracle&quot;&gt;</span><br><span class="line">		&lt;selectKey order=&quot;AFTER&quot; keyProperty=&quot;id&quot; </span><br><span class="line">                                         resultType=&quot;integer&quot;&gt;</span><br><span class="line">			select employee_seq.currval from dual </span><br><span class="line">		&lt;/selectKey&gt;	</span><br><span class="line">	insert into orcl_employee(id,last_name,email,gender) values(employee_seq.nextval,#&#123;lastName&#125;,#&#123;email&#125;,#&#123;gender&#125;)</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="4-4-参数传递"><a href="#4-4-参数传递" class="headerlink" title="4.4 参数传递"></a>4.4 参数传递</h1><h2 id="4-4-1-参数传递的方式"><a href="#4-4-1-参数传递的方式" class="headerlink" title="4.4.1 参数传递的方式"></a>4.4.1 参数传递的方式</h2><h3 id="1-单个普通类型参数"><a href="#1-单个普通类型参数" class="headerlink" title="1)单个普通类型参数"></a>1)单个普通类型参数</h3><pre><code>可以接受基本类型，包装类型，字符串类型等。这种情况MyBatis可直接使用这个参数，不需要经过任何处理。
+</code></pre><h3 id="2-多个参数"><a href="#2-多个参数" class="headerlink" title="2)多个参数"></a>2)多个参数</h3><pre><code>任意多个参数，都会被MyBatis重新包装成一个Map传入。Map的key是param1，param2，或者0，1…，值就是参数的值
+</code></pre><h3 id="3-命名参数"><a href="#3-命名参数" class="headerlink" title="3)命名参数"></a>3)命名参数</h3><pre><code>为参数使用@Param起一个名字，MyBatis就会将这些参数封装进map中，key就是我们自己指定的名字
+</code></pre><h3 id="4-POJO"><a href="#4-POJO" class="headerlink" title="4)POJO"></a>4)POJO</h3><pre><code>当这些参数属于我们业务POJO时，我们直接传递POJO
+</code></pre><h3 id="5-Map"><a href="#5-Map" class="headerlink" title="5)Map"></a>5)Map</h3><pre><code>我们也可以封装多个参数为map，直接传递
+</code></pre><h3 id="6-Collection-Array"><a href="#6-Collection-Array" class="headerlink" title="6)Collection/Array"></a>6)Collection/Array</h3><pre><code>会被MyBatis封装成一个map传入, Collection对应的key是collection,Array对应的key是array. 如果确定是List集合，key还可以是list.
+</code></pre><h2 id="4-4-2-参数传递源码分析"><a href="#4-4-2-参数传递源码分析" class="headerlink" title="4.4.2 参数传递源码分析"></a>4.4.2 参数传递源码分析</h2><h3 id="1-以命名参数为例"><a href="#1-以命名参数为例" class="headerlink" title="1)以命名参数为例:"></a>1)以命名参数为例:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public Employee getEmployeeByIdAndLastName</span><br><span class="line">(@Param(&quot;id&quot;)Integer id, @Param(&quot;lastName&quot;)String lastName);</span><br></pre></td></tr></table></figure>
+<h3 id="2-源码"><a href="#2-源码" class="headerlink" title="2)源码:"></a>2)源码:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public Object getNamedParams(Object[] args) &#123;</span><br><span class="line">    final int paramCount = names.size();</span><br><span class="line">    if (args == null || paramCount == 0) &#123;</span><br><span class="line">      return null;</span><br><span class="line">    &#125; else if (!hasParamAnnotation &amp;&amp; paramCount == 1) &#123;</span><br><span class="line">      return args[names.firstKey()];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      final Map&lt;String, Object&gt; param = new ParamMap&lt;Object&gt;();</span><br><span class="line">      int i = 0;</span><br><span class="line">      for (Map.Entry&lt;Integer, String&gt; entry : names.entrySet()) &#123;</span><br><span class="line">        param.put(entry.getValue(), args[entry.getKey()]);</span><br><span class="line">        // add generic param names (param1, param2, ...)</span><br><span class="line">        final String genericParamName = GENERIC_NAME_PREFIX + String.valueOf(i + 1);</span><br><span class="line">        // ensure not to overwrite parameter named with @Param</span><br><span class="line">        if (!names.containsValue(genericParamName)) &#123;</span><br><span class="line">          param.put(genericParamName, args[entry.getKey()]);</span><br><span class="line">        &#125;</span><br><span class="line">        i++;</span><br><span class="line">      &#125;</span><br><span class="line">      return param;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-4-3-参数处理"><a href="#4-4-3-参数处理" class="headerlink" title="4.4.3 参数处理"></a>4.4.3 参数处理</h2><h3 id="1-参数位置支持的属性"><a href="#1-参数位置支持的属性" class="headerlink" title="1)参数位置支持的属性:"></a>1)参数位置支持的属性:</h3><p>javaType、jdbcType、mode、numericScale、resultMap、typeHandler、jdbcTypeName、expression  </p>
+<p>2)实际上通常被设置的是：可能为空的列名指定 jdbcType ,例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into orcl_employee(id,last_name,email,gender) values(employee_seq.nextval,#&#123;lastName,jdbcType=NULL &#125;,#&#123;email&#125;,#&#123;gender&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="4-4-4-参数的获取方式"><a href="#4-4-4-参数的获取方式" class="headerlink" title="4.4.4 参数的获取方式"></a>4.4.4 参数的获取方式</h2><blockquote>
+<p>1)#{key}：获取参数的值，预编译到SQL中。安全。<br>2)${key}：获取参数的值，拼接到SQL中。有SQL注入问题。</p>
+</blockquote>
+<h1 id="4-5-select查询的几种情况"><a href="#4-5-select查询的几种情况" class="headerlink" title="4.5 select查询的几种情况"></a>4.5 select查询的几种情况</h1><h2 id="1-查询单行数据返回单个对象"><a href="#1-查询单行数据返回单个对象" class="headerlink" title="1)查询单行数据返回单个对象"></a>1)查询单行数据返回单个对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Employee getEmployeeById(Integer id );</span><br></pre></td></tr></table></figure>
+<h2 id="2-查询多行数据返回对象的集合"><a href="#2-查询多行数据返回对象的集合" class="headerlink" title="2)查询多行数据返回对象的集合"></a>2)查询多行数据返回对象的集合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Employee&gt; getAllEmps();</span><br></pre></td></tr></table></figure>
+<h2 id="3-查询单行数据返回Map集合"><a href="#3-查询单行数据返回Map集合" class="headerlink" title="3)查询单行数据返回Map集合"></a>3)查询单行数据返回Map集合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Map&lt;String,Object&gt; getEmployeeByIdReturnMap(Integer id );</span><br></pre></td></tr></table></figure>
+<h2 id="4-查询多行数据返回Map集合"><a href="#4-查询多行数据返回Map集合" class="headerlink" title="4)查询多行数据返回Map集合"></a>4)查询多行数据返回Map集合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@MapKey(&quot;id&quot;) // 指定使用对象的哪个属性来充当map的key</span><br><span class="line">public Map&lt;Integer,Employee&gt;  getAllEmpsReturnMap();</span><br></pre></td></tr></table></figure>
+<h1 id="4-6-resultType自动映射"><a href="#4-6-resultType自动映射" class="headerlink" title="4.6 resultType自动映射"></a>4.6 resultType自动映射</h1><blockquote>
+<p>1)autoMappingBehavior默认是PARTIAL，开启自动映射的功能。唯一的要求是结果集列名和javaBean属性名一致  </p>
+</blockquote>
+<blockquote>
+<p>2)如果autoMappingBehavior设置为null则会取消自动映射  </p>
+</blockquote>
+<blockquote>
+<p>3)数据库字段命名规范，POJO属性符合驼峰命名法，如A_COLUMNaColumn，我们可以开启自动驼峰命名规则映射功能，mapUnderscoreToCamelCase=true</p>
+</blockquote>
+<h1 id="4-7-resultMap自定义映射"><a href="#4-7-resultMap自定义映射" class="headerlink" title="4.7 resultMap自定义映射"></a>4.7 resultMap自定义映射</h1><pre><code>1)自定义resultMap，实现高级结果集映射
+2)id ：用于完成主键值的映射
+3)result ：用于完成普通列的映射
+4)association ：一个复杂的类型关联;许多结果将包成这种类型
+5)collection ： 复杂类型的集
+</code></pre><h2 id="4-7-1-id-amp-result"><a href="#4-7-1-id-amp-result" class="headerlink" title="4.7.1  id&amp;result"></a>4.7.1  id&amp;result</h2><p><a href="https://imgchr.com/i/EsoBJP" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/07/EsoBJP.md.png" alt="EsoBJP.md.png"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getEmployeeById&quot; resultMap=&quot;myEmp&quot;&gt;</span><br><span class="line">	select id, last_name,email, gender from tbl_employee where id =#&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">&lt;resultMap type=&quot;com.atguigu.mybatis.beans.Employee&quot; id=&quot;myEmp&quot;&gt;</span><br><span class="line">		&lt;id column=&quot;id&quot;  property=&quot;id&quot; /&gt;</span><br><span class="line">		&lt;result column=&quot;last_name&quot; property=&quot;lastName&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;email&quot; property=&quot;email&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;gender&quot; property=&quot;gender&quot;/&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-7-2-association"><a href="#4-7-2-association" class="headerlink" title="4.7.2  association"></a>4.7.2  association</h2><p>1)POJO中的属性可能会是一个对象,我们可以使用联合查询，并以级联属性的方式封装对象.使用association标签定义对象的封装规则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class Department &#123;</span><br><span class="line">	private Integer id ; </span><br><span class="line">	private String departmentName ;</span><br><span class="line">//  省略 get/set方法</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Employee &#123;</span><br><span class="line">	private Integer id ; </span><br><span class="line">	private String lastName; </span><br><span class="line">	private String email ;</span><br><span class="line">	private String gender ;</span><br><span class="line">	private Department dept ;</span><br><span class="line">    // 省略 get/set方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-使用级联的方式"><a href="#2-使用级联的方式" class="headerlink" title="2)使用级联的方式:"></a>2)使用级联的方式:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getEmployeeAndDept&quot; resultMap=&quot;myEmpAndDept&quot; &gt;</span><br><span class="line">		SELECT e.id eid, e.last_name, e.email,e.gender ,d.id did, d.dept_name FROM tbl_employee e , tbl_dept d   WHERE e.d_id = d.id  AND e.id = #&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;resultMap type=&quot;com.atguigu.mybatis.beans.Employee&quot; id=&quot;myEmpAndDept&quot;&gt;</span><br><span class="line">		&lt;id column=&quot;eid&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;last_name&quot; property=&quot;lastName&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;email&quot; property=&quot;email&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;gender&quot; property=&quot;gender&quot;/&gt;</span><br><span class="line">	    &lt;!-- 级联的方式 --&gt;</span><br><span class="line">		&lt;result column=&quot;did&quot; property=&quot;dept.id&quot;/&gt;</span><br><span class="line">	&lt;result column=&quot;dept_name&quot; property=&quot;dept.departmentName&quot;/&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-Association‘"><a href="#3-Association‘" class="headerlink" title="3)Association‘"></a>3)Association‘</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;resultMap type=&quot;com.atguigu.mybatis.beans.Employee&quot; id=&quot;myEmpAndDept&quot;&gt;</span><br><span class="line">		&lt;id column=&quot;eid&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;last_name&quot; property=&quot;lastName&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;email&quot; property=&quot;email&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;gender&quot; property=&quot;gender&quot;/&gt;</span><br><span class="line">		&lt;association property=&quot;dept&quot; javaType=&quot;com.atguigu.mybatis.beans.Department&quot;&gt;</span><br><span class="line">			&lt;id column=&quot;did&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">			&lt;result column=&quot;dept_name&quot; property=&quot;departmentName&quot;/&gt;</span><br><span class="line">		&lt;/association&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-7-3-association-分步查询"><a href="#4-7-3-association-分步查询" class="headerlink" title="4.7.3  association 分步查询"></a>4.7.3  association 分步查询</h2><p>1)实际的开发中，对于每个实体类都应该有具体的增删改查方法，也就是DAO层， 因此<br>对于查询员工信息并且将对应的部门信息也查询出来的需求，就可以通过分步的方式<br>完成查询。  </p>
+<blockquote>
+<p>①先通过员工的id查询员工信息<br>②再通过查询出来的员工信息中的外键(部门id)查询对应的部门信息. </p>
+<blockquote>
+<p>cha xun查询查询之前先 建立两个文件<br>DepartmentMapper.java<br>DepartmentMapper.jps<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getEmployeeAndDeptStep&quot; resultMap=&quot;myEmpAndDeptStep&quot;&gt;</span><br><span class="line">		 select id, last_name, email,gender,d_id  from tbl_employee where id =#&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">	</span><br><span class="line">&lt;resultMap type=&quot;com.mybatis.beans.Employee&quot; id=&quot;myEmpAndDeptStep&quot;&gt;</span><br><span class="line">		&lt;id column=&quot;id&quot;  property=&quot;id&quot; /&gt;</span><br><span class="line">		&lt;result column=&quot;last_name&quot; property=&quot;lastName&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;email&quot; property=&quot;email&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;gender&quot; property=&quot;gender&quot;/&gt;</span><br><span class="line">		&lt;association property=&quot;dept&quot; 			select=&quot;com.mybatis.dao.DepartmentMapper.getDeptById&quot; </span><br><span class="line">				column=&quot;d_id&quot; fetchType=&quot;eager&quot;&gt;</span><br><span class="line">		&lt;/association&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+<h2 id="4-7-4-association-分步查询使用延迟加载"><a href="#4-7-4-association-分步查询使用延迟加载" class="headerlink" title="4.7.4  association 分步查询使用延迟加载"></a>4.7.4  association 分步查询使用延迟加载</h2><p>1)在分步查询的基础上，可以使用延迟加载来提升查询的效率，只需要在全局的<br>Settings中进行如下的配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 开启延迟加载 --&gt;</span><br><span class="line">&lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;!-- 设置加载的数据是按需还是全部 --&gt;</span><br><span class="line">&lt;setting name=&quot;aggressiveLazyLoading&quot; value=&quot;false&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-7-5-collection"><a href="#4-7-5-collection" class="headerlink" title="4.7.5 collection"></a>4.7.5 collection</h2><p>1)POJO中的属性可能会是一个集合对象,我们可以使用联合查询，并以级联属性的方式封装对象.使用collection标签定义对象的封装规则<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Department &#123;</span><br><span class="line">	private Integer id ; </span><br><span class="line">	private String departmentName ;</span><br><span class="line">	private List&lt;Employee&gt; emps ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2)Collection<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getDeptAndEmpsById&quot; resultMap=&quot;myDeptAndEmps&quot;&gt;</span><br><span class="line">		SELECT d.id did, d.dept_name ,e.id eid ,e.last_name ,e.email,e.gender </span><br><span class="line">		FROM tbl_dept d  LEFT OUTER JOIN tbl_employee e ON  d.id = e.d_id </span><br><span class="line">		WHERE d.id = #&#123;id&#125;</span><br><span class="line">	&lt;/select&gt;</span><br><span class="line">	&lt;resultMap type=&quot;com.atguigu.mybatis.beans.Department&quot; id=&quot;myDeptAndEmps&quot;&gt;</span><br><span class="line">		&lt;id column=&quot;did&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">		&lt;result column=&quot;dept_name&quot; property=&quot;departmentName&quot;/&gt;</span><br><span class="line">		&lt;!-- </span><br><span class="line">			property: 关联的属性名</span><br><span class="line">			ofType: 集合中元素的类型</span><br><span class="line">		 --&gt;</span><br><span class="line">		&lt;collection property=&quot;emps&quot;  ofType=&quot;com.atguigu.mybatis.beans.Employee&quot;&gt;</span><br><span class="line">			&lt;id column=&quot;eid&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">			&lt;result column=&quot;last_name&quot; property=&quot;lastName&quot;/&gt;</span><br><span class="line">			&lt;result column=&quot;email&quot; property=&quot;email&quot;/&gt;</span><br><span class="line">			&lt;result column=&quot;gender&quot; property=&quot;gender&quot;/&gt;</span><br><span class="line">		&lt;/collection&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-7-6-collection-分步查询"><a href="#4-7-6-collection-分步查询" class="headerlink" title="4.7.6 collection 分步查询"></a>4.7.6 collection 分步查询</h3><p>1)实际的开发中，对于每个实体类都应该有具体的增删改查方法，也就是DAO层， 因此<br>对于查询部门信息并且将对应的所有的员工信息也查询出来的需求，就可以通过分步的方式完成查询。  </p>
+<blockquote>
+<p>③先通过部门的id查询部门信息<br>④再通过部门id作为员工的外键查询对应的部门信息.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;getDeptAndEmpsByIdStep&quot; resultMap=&quot;myDeptAndEmpsStep&quot;&gt;</span><br><span class="line">	 	select id ,dept_name  from tbl_dept where id = #&#123;id&#125;</span><br><span class="line">	 &lt;/select&gt;</span><br><span class="line">	 &lt;resultMap type=&quot;com.atguigu.mybatis.beans.Department&quot; id=&quot;myDeptAndEmpsStep&quot;&gt;</span><br><span class="line">	 	&lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">	 	&lt;result column=&quot;dept_name&quot; property=&quot;departmentName&quot;/&gt;</span><br><span class="line">	 	&lt;collection property=&quot;emps&quot; </span><br><span class="line">	 			select=&quot;com.atguigu.mybatis.dao.EmployeeMapper.getEmpsByDid&quot;</span><br><span class="line">	 			column=&quot;id&quot;&gt;</span><br><span class="line">	 	&lt;/collection&gt;</span><br><span class="line"> &lt;/resultMap&gt;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="4-7-7-collection-分步查询使用延迟加载"><a href="#4-7-7-collection-分步查询使用延迟加载" class="headerlink" title="4.7.7 collection 分步查询使用延迟加载"></a>4.7.7 collection 分步查询使用延迟加载</h2><pre><code>懒加载 延迟加载 按需求加载
+（可以提高查询效率）
+标签&lt;seeting&gt; 加两行代码 
+直接去api里拷贝
+（严格区分大小写）
+</code></pre><h2 id="4-7-8-扩展-分步查询多列值的传递"><a href="#4-7-8-扩展-分步查询多列值的传递" class="headerlink" title="4.7.8 扩展: 分步查询多列值的传递"></a>4.7.8 扩展: 分步查询多列值的传递</h2><pre><code>&gt;1)如果分步查询时，需要传递给调用的查询中多个参数，则需要将多个参数封装成
+   Map来进行传递，语法如下: {k1=v1, k2=v2....}  
+
+2)在所调用的查询方，取值时就要参考Map的取值方式，需要严格的按照封装map
+   时所用的key来取值. 
+</code></pre><h2 id="4-7-9-扩展-association-或-collection的-fetchType属性"><a href="#4-7-9-扩展-association-或-collection的-fetchType属性" class="headerlink" title="4.7.9 扩展: association 或 collection的 fetchType属性"></a>4.7.9 扩展: association 或 collection的 fetchType属性</h2><pre><code>1)在&lt;association&gt;  和&lt;collection&gt;标签中都可以设置fetchType，
+  指定本次查询是否要使用延迟加载。默认为 fetchType=”lazy”,
+  如果本次的查询不想使用延迟加载，则可设置为fetchType=”eager”. 
+
+2)fetchType可以灵活的设置查询是否需要使用延迟加载，而不需要因为某个查询不想使用延迟加载将全局的延迟加载设置关闭.
+</code></pre><h3 id="4-8-0-扩展：表链接"><a href="#4-8-0-扩展：表链接" class="headerlink" title="4.8.0 扩展：表链接"></a>4.8.0 扩展：表链接</h3><pre><code>内链接 inner join on 取交集
+外链接
+    左外链 A left outer join B on
+    右外链 B left outer join A o
+    主表：主表的数据读取
+    从表： 从表只取与主表匹配的数据
+</code></pre>
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/03/14/59. MyBatis全局配置文件/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/03/19/62. MyBatis 缓存机制/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

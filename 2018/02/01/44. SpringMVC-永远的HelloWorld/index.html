@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2. SpringMVC-永远的HelloWorld | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,SpringMVC框架,">
+  
+
+  <meta name="description" content="概览  1.搭建工程环境2.在web.xml中配置Springmvc的前端控制器 DispatcherServlet3.编写Springmvc的核心配置文件   springmvc.xml    3.1 组件扫描    3.2 视图解析器4.编写请求处理器 、 请求处理方法5.准备视图页面6.浏览器端发送请求进行测试.    1. 新建Web工程，加入 jar 包（++jar包点击下载++）">
+<meta name="keywords" content="SSM框架,SpringMVC框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2. SpringMVC-永远的HelloWorld">
+<meta property="og:url" content="http://yoursite.com/2018/02/01/44. SpringMVC-永远的HelloWorld/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概览  1.搭建工程环境2.在web.xml中配置Springmvc的前端控制器 DispatcherServlet3.编写Springmvc的核心配置文件   springmvc.xml    3.1 组件扫描    3.2 视图解析器4.编写请求处理器 、 请求处理方法5.准备视图页面6.浏览器端发送请求进行测试.    1. 新建Web工程，加入 jar 包（++jar包点击下载++）">
+<meta property="og:locale" content="Java EE">
+<meta property="og:updated_time" content="2019-06-08T14:46:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2. SpringMVC-永远的HelloWorld">
+<meta name="twitter:description" content="概览  1.搭建工程环境2.在web.xml中配置Springmvc的前端控制器 DispatcherServlet3.编写Springmvc的核心配置文件   springmvc.xml    3.1 组件扫描    3.2 视图解析器4.编写请求处理器 、 请求处理方法5.准备视图页面6.浏览器端发送请求进行测试.    1. 新建Web工程，加入 jar 包（++jar包点击下载++）">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概览"><span class="toc-text">概览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-新建Web工程，加入-jar-包（-jar包点击下载-）"><span class="toc-text">1. 新建Web工程，加入 jar 包（++jar包点击下载++）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-在-web-xml-中配置-DispatcherServlet"><span class="toc-text">2. 在 web.xml 中配置 DispatcherServlet</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-增加配置"><span class="toc-text">3. 增加配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-需要创建一个入口页面，index-jsp"><span class="toc-text">4. 需要创建一个入口页面，index.jsp</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-编写处理请求的处理器，并标识为处理器"><span class="toc-text">5. 编写处理请求的处理器，并标识为处理器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-编写视图"><span class="toc-text">6. 编写视图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-部署测试："><span class="toc-text">7. 部署测试：</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-44. SpringMVC-永远的HelloWorld" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">2. SpringMVC-永远的HelloWorld</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.02.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><blockquote>
+<blockquote>
+<p>1.搭建工程环境<br>2.在web.xml中配置Springmvc的前端控制器 DispatcherServlet<br>3.编写Springmvc的核心配置文件   springmvc.xml<br>    3.1 组件扫描<br>    3.2 视图解析器<br>4.编写请求处理器 、 请求处理方法<br>5.准备视图页面<br>6.浏览器端发送请求进行测试. </p>
+</blockquote>
+</blockquote>
+<h1 id="1-新建Web工程，加入-jar-包（-jar包点击下载-）"><a href="#1-新建Web工程，加入-jar-包（-jar包点击下载-）" class="headerlink" title="1. 新建Web工程，加入 jar 包（++jar包点击下载++）"></a>1. 新建Web工程，加入 jar 包（++<a href="https://pan.baidu.com/s/134QX6K-F1nC2oGnE8bs9Ow" target="_blank" rel="noopener">jar包点击下载</a>++）</h1><blockquote>
+<blockquote>
+<p>   spring-aop-4.0.0.RELEASE.jar<br>    spring-beans-4.0.0.RELEASE.jar<br>    spring-context-4.0.0.RELEASE.jar<br>    spring-core-4.0.0.RELEASE.jar<br>    spring-expression-4.0.0.RELEASE.jar<br>    commons-logging-1.1.3.jar<br>    spring-web-4.0.0.RELEASE.jar<br>    spring-webmvc-4.0.0.RELEASE.jar  </p>
+</blockquote>
+</blockquote>
+<h1 id="2-在-web-xml-中配置-DispatcherServlet"><a href="#2-在-web-xml-中配置-DispatcherServlet" class="headerlink" title="2. 在 web.xml 中配置 DispatcherServlet"></a>2. 在 web.xml 中配置 DispatcherServlet</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   &lt;!-- 配置SpringMVC核心控制器： --&gt;</span><br><span class="line">&lt;servlet&gt;</span><br><span class="line">&lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;</span><br><span class="line">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</span><br><span class="line">&lt;!-- 配置DispatcherServlet的初始化參數：设置文件的路径和文件名称 --&gt;</span><br><span class="line">&lt;init-param&gt;</span><br><span class="line">        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">        &lt;param-value&gt;classpath:springmvc.xml&lt;/param-value&gt;</span><br><span class="line">&lt;/init-param&gt;</span><br><span class="line">&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br><span class="line">&lt;/servlet&gt;</span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">&lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;</span><br><span class="line">&lt;url-pattern&gt;/&lt;/url-pattern&gt;</span><br><span class="line">&lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>解释配置文件的名称定义规则:
+    实际上也可以不通过 contextConfigLocation 来配置 SpringMVC 的配置文件, 而使用默认的.默认的配置文件为: /WEB-INF/&lt;servlet-name&gt;-servlet.xml
+加入 Spring MVC 的配置文件：springmvc.xml
+增加名称空间
+</code></pre><h1 id="3-增加配置"><a href="#3-增加配置" class="headerlink" title="3. 增加配置"></a>3. 增加配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 设置扫描组件的包： --&gt;`</span><br><span class="line">	&lt;context:component-scan base-package=&quot;com.atguigu.springmvc&quot;/&gt;</span><br><span class="line">	 </span><br><span class="line">	&lt;!-- 配置映射解析器：如何将控制器返回的结果字符串，转换为一个物理的视图文件--&gt;</span><br><span class="line">	&lt;bean id=&quot;internalResourceViewResolver&quot; </span><br><span class="line">	  class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</span><br><span class="line">	&lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;/&gt;</span><br><span class="line">	&lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="4-需要创建一个入口页面，index-jsp"><a href="#4-需要创建一个入口页面，index-jsp" class="headerlink" title="4. 需要创建一个入口页面，index.jsp"></a>4. 需要创建一个入口页面，index.jsp</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;$&#123;pageContext.request.contextPath &#125;/helloworld&quot;&gt;Hello World&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="5-编写处理请求的处理器，并标识为处理器"><a href="#5-编写处理请求的处理器，并标识为处理器" class="headerlink" title="5. 编写处理请求的处理器，并标识为处理器"></a>5. 编写处理请求的处理器，并标识为处理器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.lbb.springmvc.controller;</span><br><span class="line">	</span><br><span class="line">	import org.springframework.stereotype.Controller;</span><br><span class="line">	import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">	</span><br><span class="line">	@Controller  //声明Bean对象，为一个控制器组件</span><br><span class="line">	public class HelloWorldController &#123;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 映射请求的名称：用于客户端请求；类似Struts2中action映射配置的action名称</span><br><span class="line">	 * 1. 使用 @RequestMapping 注解来映射请求的 URL</span><br><span class="line">	 * 2. 返回值会通过视图解析器解析为实际的物理视图, 对于 InternalResourceViewResolver 视图解析器, </span><br><span class="line">	 * 会做如下的解析:</span><br><span class="line">	 *                 通过 prefix + returnVal + suffix 这样的方式得到实际的物理视图, 然后做转发操作.</span><br><span class="line">	 *                 /WEB-INF/views/success.jsp</span><br><span class="line">	 */</span><br><span class="line">	@RequestMapping(value=&quot;/helloworld&quot;,method=RequestMethod.GET)</span><br><span class="line">	public String helloworld()&#123;</span><br><span class="line">	     System.out.println(&quot;hello,world&quot;);</span><br><span class="line">	     return &quot;success&quot;; //结果如何跳转呢？需要配置映射解析器</span><br><span class="line">	&#125;        </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="6-编写视图"><a href="#6-编写视图" class="headerlink" title="6. 编写视图"></a>6. 编写视图</h1><pre><code>创建/WEB-INF/views/success.jsp
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h4&gt;Sucess Page&lt;/h4&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="7-部署测试："><a href="#7-部署测试：" class="headerlink" title="7. 部署测试："></a>7. 部署测试：</h1><p>浏览器输入<br><a href="http://localhost:8080/SpringMVC_01_HelloWorld/index.jsp" target="_blank" rel="noopener">http://localhost:8080/SpringMVC_01_HelloWorld/index.jsp</a></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/01/29/43. SpringMVC简介/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/02/05/45. SpringMVC-HelloWorld深度解析/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

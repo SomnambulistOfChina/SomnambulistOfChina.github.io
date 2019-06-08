@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>8. Spring声明式事务管理 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Spring框架,SSM框架,">
+  
+
+  <meta name="description" content="概述声明式事务管理 1234567891011121314151617181920211. Spring既支持编程式事务管理，   也支持声明式事务管理.   2. 事务管理器： DataSourceTransactionManager3. 基于注解:	3.1  &amp;lt;tx:annotation-driven transaction-manger=&amp;quot;指定事务管理器&amp;quot;/&amp;gt;">
+<meta name="keywords" content="Spring框架,SSM框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8. Spring声明式事务管理">
+<meta property="og:url" content="http://yoursite.com/2018/01/26/42. Spring声明式事务管理/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概述声明式事务管理 1234567891011121314151617181920211. Spring既支持编程式事务管理，   也支持声明式事务管理.   2. 事务管理器： DataSourceTransactionManager3. 基于注解:	3.1  &amp;lt;tx:annotation-driven transaction-manger=&amp;quot;指定事务管理器&amp;quot;/&amp;gt;">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4Q7DS.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4QHHg.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4Qxg0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4lFUJ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4lnKK.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4l8PA.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4lJ2t.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4lfZF.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4l4IJ.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E4loGR.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E41AeS.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/13/E41VoQ.md.png">
+<meta property="og:updated_time" content="2019-06-08T14:46:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8. Spring声明式事务管理">
+<meta name="twitter:description" content="概述声明式事务管理 1234567891011121314151617181920211. Spring既支持编程式事务管理，   也支持声明式事务管理.   2. 事务管理器： DataSourceTransactionManager3. 基于注解:	3.1  &amp;lt;tx:annotation-driven transaction-manger=&amp;quot;指定事务管理器&amp;quot;/&amp;gt;">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/13/E4Q7DS.md.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-1事务简介"><span class="toc-text">8.1事务简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-2-Spring事务管理"><span class="toc-text">8.2 Spring事务管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-1编程式事务管理"><span class="toc-text">8.2.1编程式事务管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-2-声明式事务管理"><span class="toc-text">8.2.2 声明式事务管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-4事务管理器的主要实现"><span class="toc-text">8.2.4事务管理器的主要实现</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-3-测试数据准备"><span class="toc-text">8.3 测试数据准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-1-需求"><span class="toc-text">8.3.1 需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-2-数据库表"><span class="toc-text">8.3.2 数据库表</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-4-初步实现"><span class="toc-text">8.4 初步实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-5-事务的传播行为"><span class="toc-text">8.5 事务的传播行为</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-1-简介"><span class="toc-text">8.5.1 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-2-测试"><span class="toc-text">8.5.2 测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-5-3-补充"><span class="toc-text">8.5.3 补充</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-6-事务的隔离级别"><span class="toc-text">8.6 事务的隔离级别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-6-1-数据库事务并发问题"><span class="toc-text">8.6.1 数据库事务并发问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-6-2-隔离级别"><span class="toc-text">8.6.2 隔离级别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-6-3-在Spring中指定事务隔离级别"><span class="toc-text">8.6.3 在Spring中指定事务隔离级别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-7-触发事务回滚的异常"><span class="toc-text">8.7 触发事务回滚的异常</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-7-1默认情况"><span class="toc-text">8.7.1默认情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-7-2设置途经"><span class="toc-text">8.7.2设置途经</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-8-事务的超时和只读属性"><span class="toc-text">8.8 事务的超时和只读属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-8-1简介"><span class="toc-text">8.8.1简介</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-42. Spring声明式事务管理" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">8. Spring声明式事务管理</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.01.26</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>声明式事务管理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1. Spring既支持编程式事务管理，   也支持声明式事务管理.   </span><br><span class="line">2. 事务管理器： DataSourceTransactionManager</span><br><span class="line">3. 基于注解:</span><br><span class="line">	3.1  &lt;tx:annotation-driven transaction-manger=&quot;指定事务管理器&quot;/&gt;</span><br><span class="line">	3.2  @Transactional</span><br><span class="line">	     a.  该注解可以加在类上或者是方法上. </span><br><span class="line">	     b.  事务的传播行为 ： propgation = REQUIRED / REQUIRES_NEW</span><br><span class="line"> 	     c.  事务的隔离级别 :  isolation  = 读未提交  、 读已提交  、 可重复读  、 串行化</span><br><span class="line">	     d.  事务的回滚与不回滚</span><br><span class="line">	     e.  事务的只读设置    readOnly = true  /  false . </span><br><span class="line">	     f.  事务的超时设置    timeOut </span><br><span class="line">4. 基于xml</span><br><span class="line">   &lt;tx:advice  id=&quot;txAdvice&quot;  transaction-manager=&quot;&quot;&gt;</span><br><span class="line">	    &lt;tx:attributes&gt;</span><br><span class="line">		&lt;tx:method name=&quot;&quot;  .....&gt;</span><br><span class="line">	    &lt;/tx:attributes&gt;</span><br><span class="line">	&lt;/tx:advice&gt;</span><br><span class="line">	&lt;aop:config&gt;</span><br><span class="line">		&lt;aop:pointcut   expression=&quot;&quot;  id=&quot;txPointcut&quot;/&gt;</span><br><span class="line">		&lt;aop:advisor  advice-ref=&quot;txAdvice&quot;  pointcut-ref=&quot;txPointcut&quot;&gt;</span><br><span class="line">	&lt;/aop:config&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="8-1事务简介"><a href="#8-1事务简介" class="headerlink" title="8.1事务简介"></a>8.1事务简介</h1><blockquote>
+<p>1)在JavaEE企业级开发的应用领域，为了保证数据的完整性和一致性，必须引入数据库事务的概念，所以事务管理是企业级应用程序开发中必不可少的技术。<br>2)事务就是一组由于逻辑上紧密关联而合并成一个整体(工作单元)的多个数据库操作，这些操作要么都执行，要么都不执行。<br>3)事务的四个关键属性(ACID)  </p>
+<blockquote>
+<p>   ①原子性(atomicity)：“原子”的本意是“不可再分”，事务的原子性表现为一个事务中涉及到的多个操作在逻辑上缺一不可。事务的原子性要求事务中的所有操作要么都执行，要么都不执行。<br>   ②一致性(consistency)：“一致”指的是数据的一致，具体是指：所有数据都处于满足业务规则的一致性状态。一致性原则要求：一个事务中不管涉及到多少个操作，都必须保证事务执行之前数据是正确的，事务执行之后数据仍然是正确的。如果一个事务在执行的过程中，其中某一个或某几个操作失败了，则必须将其他所有操作撤销，将数据恢复到事务执行之前的状态，这就是回滚。<br>   ③隔离性(isolation)：在应用程序实际运行过程中，事务往往是并发执行的，所以很有可能有许多事务同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏。隔离性原则要求多个事务在并发执行过程中不会互相干扰。<br>     ④持久性(durability)：持久性原则要求事务执行完成后，对数据的修改永久的保存下来，不会因各种系统错误或其他意外情况而受到影响。通常情况下，事务对数据的修改应该被写入到持久化存储器中。</p>
+</blockquote>
+</blockquote>
+<h1 id="8-2-Spring事务管理"><a href="#8-2-Spring事务管理" class="headerlink" title="8.2 Spring事务管理"></a>8.2 Spring事务管理</h1><h2 id="8-2-1编程式事务管理"><a href="#8-2-1编程式事务管理" class="headerlink" title="8.2.1编程式事务管理"></a>8.2.1编程式事务管理</h2><p>1)使用原生的JDBC API进行事务管理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   ①获取数据库连接Connection对象</span><br><span class="line">②取消事务的自动提交</span><br><span class="line">③执行操作</span><br><span class="line">④正常完成操作时手动提交事务</span><br><span class="line">⑤执行失败时回滚事务</span><br><span class="line">⑥关闭相关资源</span><br></pre></td></tr></table></figure>
+<p>2)评价  </p>
+<blockquote>
+<ul>
+<li>使用原生的JDBC API实现事务管理是所有事务管理方式的基石，同时也是最典型的编程式事务管理。  </li>
+<li>编程式事务管理需要将事务管理代码嵌入到业务方法中来控制事务的提交和回滚。  </li>
+<li>在使用编程的方式管理事务时，必须在每个事务操作中包含额外的事务管理代码。  </li>
+<li>相对于核心业务而言，事务管理的代码显然属于非核心业务，  </li>
+<li>如果多个模块都使用同样模式的代码进行事务管理，显然会造成较大程度的代码冗余。</li>
+</ul>
+</blockquote>
+<h2 id="8-2-2-声明式事务管理"><a href="#8-2-2-声明式事务管理" class="headerlink" title="8.2.2 声明式事务管理"></a>8.2.2 声明式事务管理</h2><pre><code>大多数情况下声明式事务比编程式事务管理更好：它将事务管理代码从业务方法中分离出来，以声明的方式来实现事务管理。
+事务管理代码的固定模式作为一种横切关注点，可以通过AOP方法模块化，进而借助Spring AOP框架实现声明式事务管理。
+Spring在不同的事务管理API之上定义了一个抽象层，通过配置的方式使其生效，从而让应用程序开发人员不必了解事务管理API的底层实现细节，就可以使用Spring的事务管理机制。
+Spring既支持编程式事务管理，也支持声明式的事务管理。
+</code></pre><p>8.2.3 Spring提供的事务管理器</p>
+<ul>
+<li>Spring从不同的事务管理API中抽象出了一整套事务管理机制，让事务管理代码从特定的事务技术中独立出来。开发人员通过配置的方式进行事务管理，而不必了解其底层是如何实现的。</li>
+<li>Spring的核心事务管理抽象是它为事务管理封装了一组独立于技术的方法。无论使用Spring的哪种事务管理策略(编程式或声明式)，事务管理器都是必须的。</li>
+<li>事务管理器可以以普通的bean的形式声明在Spring IOC容器中。<h2 id="8-2-4事务管理器的主要实现"><a href="#8-2-4事务管理器的主要实现" class="headerlink" title="8.2.4事务管理器的主要实现"></a>8.2.4事务管理器的主要实现</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1)DataSourceTransactionManager：</span><br><span class="line">    在应用程序中只需要处理一个数据源，而且通过JDBC存取。</span><br><span class="line">2)JtaTransactionManager：</span><br><span class="line">    在JavaEE应用服务器上用JTA(Java Transaction API)进行事务管理</span><br><span class="line">3)HibernateTransactionManager：</span><br><span class="line">    用Hibernate框架存取数据库</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><a href="https://imgchr.com/i/E4Q7DS" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E4Q7DS.md.png" alt="E4Q7DS.md.png"></a></p>
+<h1 id="8-3-测试数据准备"><a href="#8-3-测试数据准备" class="headerlink" title="8.3 测试数据准备"></a>8.3 测试数据准备</h1><h2 id="8-3-1-需求"><a href="#8-3-1-需求" class="headerlink" title="8.3.1 需求"></a>8.3.1 需求</h2><p><a href="https://imgchr.com/i/E4QHHg" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E4QHHg.md.png" alt="E4QHHg.md.png"></a></p>
+<h2 id="8-3-2-数据库表"><a href="#8-3-2-数据库表" class="headerlink" title="8.3.2 数据库表"></a>8.3.2 数据库表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE book (</span><br><span class="line">  isbn VARCHAR (50) PRIMARY KEY,</span><br><span class="line">  book_name VARCHAR (100),</span><br><span class="line">  price INT</span><br><span class="line">) ;</span><br><span class="line"></span><br><span class="line">CREATE TABLE book_stock (</span><br><span class="line">  isbn VARCHAR (50) PRIMARY KEY,</span><br><span class="line">  stock INT</span><br><span class="line">  ) ;</span><br><span class="line"></span><br><span class="line">CREATE TABLE account (</span><br><span class="line">  username VARCHAR (50) PRIMARY KEY,</span><br><span class="line">  balance INT</span><br><span class="line">) ;</span><br><span class="line"></span><br><span class="line">INSERT INTO account (`username`,`balance`) VALUES (&apos;Tom&apos;,100000);</span><br><span class="line">INSERT INTO account (`username`,`balance`) VALUES (&apos;Jerry&apos;,150000);</span><br><span class="line"></span><br><span class="line">INSERT INTO book (`isbn`,`book_name`,`price`) VALUES (&apos;ISBN-001&apos;,&apos;book01&apos;,100);</span><br><span class="line">INSERT INTO book (`isbn`,`book_name`,`price`) VALUES (&apos;ISBN-002&apos;,&apos;book02&apos;,200);</span><br><span class="line">INSERT INTO book (`isbn`,`book_name`,`price`) VALUES (&apos;ISBN-003&apos;,&apos;book03&apos;,300);</span><br><span class="line">INSERT INTO book (`isbn`,`book_name`,`price`) VALUES (&apos;ISBN-004&apos;,&apos;book04&apos;,400);</span><br><span class="line">INSERT INTO book (`isbn`,`book_name`,`price`) VALUES (&apos;ISBN-005&apos;,&apos;book05&apos;,500);</span><br><span class="line"></span><br><span class="line">INSERT INTO book_stock (`isbn`,`stock`) VALUES (&apos;ISBN-001&apos;,1000);</span><br><span class="line">INSERT INTO book_stock (`isbn`,`stock`) VALUES (&apos;ISBN-002&apos;,2000);</span><br><span class="line">INSERT INTO book_stock (`isbn`,`stock`) VALUES (&apos;ISBN-003&apos;,3000);</span><br><span class="line">INSERT INTO book_stock (`isbn`,`stock`) VALUES (&apos;ISBN-004&apos;,4000);</span><br><span class="line">INSERT INTO book_stock (`isbn`,`stock`) VALUES (&apos;ISBN-005&apos;,5000);</span><br></pre></td></tr></table></figure>
+<h1 id="8-4-初步实现"><a href="#8-4-初步实现" class="headerlink" title="8.4 初步实现"></a>8.4 初步实现</h1><p>1)配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置事务管理器 --&gt;</span><br><span class="line">&lt;bean id=&quot;transactionManager&quot; </span><br><span class="line">	class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</span><br><span class="line">	&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;	  </span><br><span class="line">&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- 启用事务注解 --&gt;</span><br><span class="line">&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>2)在需要进行事务控制的方法上加注解 @Transactional</p>
+<h1 id="8-5-事务的传播行为"><a href="#8-5-事务的传播行为" class="headerlink" title="8.5 事务的传播行为"></a>8.5 事务的传播行为</h1><h2 id="8-5-1-简介"><a href="#8-5-1-简介" class="headerlink" title="8.5.1 简介"></a>8.5.1 简介</h2><ul>
+<li>当事务方法被另一个事务方法调用时，必须指定事务应该如何传播。例如：方法可能继续在现有事务中运行，也可能开启一个新事务，并在自己的事务中运行。</li>
+<li>事务的传播行为可以由传播属性指定。Spring定义了7种类传播行为。</li>
+</ul>
+<p><img src="https://s2.ax1x.com/2019/05/13/E4Qxg0.png" alt="E4Qxg0.png"></p>
+<p>事务传播属性可以在@Transactional注解的propagation属性中定义。</p>
+<h2 id="8-5-2-测试"><a href="#8-5-2-测试" class="headerlink" title="8.5.2 测试"></a>8.5.2 测试</h2><p><img src="https://s2.ax1x.com/2019/05/13/E4lFUJ.png" alt="E4lFUJ.png"></p>
+<p>1). 说明<br>①REQUIRED传播行为<br>当bookService的purchase()方法被另一个事务方法checkout()调用时，它默认会在现有的事务内运行。这个默认的传播行为就是REQUIRED。因此在checkout()方法的开始和终止边界内只有一个事务。这个事务只在checkout()方法结束的时候被提交，结果用户一本书都买不了。</p>
+<p><a href="https://imgchr.com/i/E4lnKK" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E4lnKK.md.png" alt="E4lnKK.md.png"></a></p>
+<p>②. REQUIRES_NEW传播行为<br>表示该方法必须启动一个新事务，并在自己的事务内运行。如果有事务在运行，就应该先挂起它。</p>
+<p><a href="https://imgchr.com/i/E4l8PA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E4l8PA.md.png" alt="E4l8PA.md.png"></a></p>
+<h2 id="8-5-3-补充"><a href="#8-5-3-补充" class="headerlink" title="8.5.3 补充"></a>8.5.3 补充</h2><p>在Spring 2.x事务通知中，可以像下面这样在<a href="tx:method" target="_blank" rel="noopener">tx:method</a>元素中设定传播事务属性。</p>
+<p><a href="https://imgchr.com/i/E4lJ2t" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E4lJ2t.md.png" alt="E4lJ2t.md.png"></a></p>
+<h1 id="8-6-事务的隔离级别"><a href="#8-6-事务的隔离级别" class="headerlink" title="8.6 事务的隔离级别"></a>8.6 事务的隔离级别</h1><h2 id="8-6-1-数据库事务并发问题"><a href="#8-6-1-数据库事务并发问题" class="headerlink" title="8.6.1 数据库事务并发问题"></a>8.6.1 数据库事务并发问题</h2><pre><code>假设现在有两个事务：Transaction01和Transaction02并发执行。
+</code></pre><p>1)脏读</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   ①Transaction01将某条记录的AGE值从20修改为30。</span><br><span class="line">②Transaction02读取了Transaction01更新后的值：30。</span><br><span class="line">③Transaction01回滚，AGE值恢复到了20。</span><br><span class="line">④Transaction02读取到的30就是一个无效的值</span><br></pre></td></tr></table></figure>
+<p>。<br>2)不可重复读</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   ①Transaction01读取了AGE值为20。</span><br><span class="line">②Transaction02将AGE值修改为30。</span><br><span class="line">③Transaction01再次读取AGE值为30，和第一次读取不一致。</span><br></pre></td></tr></table></figure>
+<p>3)幻读</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   ①Transaction01读取了STUDENT表中的一部分数据。</span><br><span class="line">②Transaction02向STUDENT表中插入了新的行。</span><br><span class="line">③Transaction01读取了STUDENT表时，多出了一些行。</span><br></pre></td></tr></table></figure>
+<h2 id="8-6-2-隔离级别"><a href="#8-6-2-隔离级别" class="headerlink" title="8.6.2 隔离级别"></a>8.6.2 隔离级别</h2><blockquote>
+<p>数据库系统必须具有隔离并发运行各个事务的能力，<br>使它们不会相互影响，避免各种并发问题。<br>一个事务与其他事务隔离的程度称为隔离级别。<br>SQL标准中规定了多种事务隔离级别，<br>不同隔离级别对应不同的干扰程度，<br>隔离级别越高，数据一致性就越好，但并发性越弱。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1)读未提交：READ UNCOMMITTED</span><br><span class="line">       允许Transaction01读取Transaction02未提交的修改。</span><br><span class="line">2)读已提交：READ COMMITTED</span><br><span class="line">	   要求Transaction01只能读取Transaction02已提交的修改。</span><br><span class="line">3)可重复读：REPEATABLE READ</span><br><span class="line">	   确保Transaction01可以多次从一个字段中读取到相同的值，即Transaction01执行期间禁止其它事务对这个字段进行更新。</span><br><span class="line">4)串行化：SERIALIZABLE</span><br><span class="line">	   确保Transaction01可以多次从一个表中读取到相同的行，在Transaction01执行期间，禁止其它事务对这个表进行添加、更新、删除操作。可以避免任何并发问题，但性能十分低下。</span><br><span class="line">5)各个隔离级别解决并发问题的能力见下表</span><br><span class="line">	脏读	     不可重  复读	幻读</span><br><span class="line">READ UNCOMMITTED	有	 有	    有</span><br><span class="line">READ COMMITTED	    无 	 有	    有</span><br><span class="line">REPEATABLE READ	    无	 无	    有</span><br><span class="line">SERIALIZABLE	    无	 无	    无</span><br></pre></td></tr></table></figure>
+<p>6)各种数据库产品对事务隔离级别的支持程度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">                    Oracle	    MySQL</span><br><span class="line">READ UNCOMMITTED	    ×	    √</span><br><span class="line">READ COMMITTED	    √(默认)	    √</span><br><span class="line">REPEATABLE READ	        ×   	√(默认)</span><br><span class="line">SERIALIZABLE    	    √      	√</span><br></pre></td></tr></table></figure>
+<h2 id="8-6-3-在Spring中指定事务隔离级别"><a href="#8-6-3-在Spring中指定事务隔离级别" class="headerlink" title="8.6.3 在Spring中指定事务隔离级别"></a>8.6.3 在Spring中指定事务隔离级别</h2><p>1)注解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用@Transactional注解声明式地管理事务时</span><br><span class="line">可以在@Transactional的isolation属性中设置隔离级别</span><br></pre></td></tr></table></figure>
+<p>2)XML</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在Spring 2.x事务通知中，可以在&lt;tx:method&gt;元素中指定隔离级别</span><br></pre></td></tr></table></figure>
+<p><a href="https://imgchr.com/i/E4lfZF" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E4lfZF.md.png" alt="E4lfZF.md.png"></a></p>
+<h1 id="8-7-触发事务回滚的异常"><a href="#8-7-触发事务回滚的异常" class="headerlink" title="8.7 触发事务回滚的异常"></a>8.7 触发事务回滚的异常</h1><h2 id="8-7-1默认情况"><a href="#8-7-1默认情况" class="headerlink" title="8.7.1默认情况"></a>8.7.1默认情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">捕获到RuntimeException或Error时回滚，而捕获到编译时异常不回滚。</span><br></pre></td></tr></table></figure>
+<h2 id="8-7-2设置途经"><a href="#8-7-2设置途经" class="headerlink" title="8.7.2设置途经"></a>8.7.2设置途经</h2><p>1)注解@Transactional 注解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   ① rollbackFor属性：指定遇到时必须进行回滚的异常类型，可以为多个</span><br><span class="line">② noRollbackFor属性：指定遇到时不回滚的异常类型，可以为多个</span><br></pre></td></tr></table></figure>
+<p><a href="https://imgchr.com/i/E4l4IJ" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E4l4IJ.md.png" alt="E4l4IJ.md.png"></a></p>
+<p>2)XML</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在Spring 2.x事务通知中，</span><br><span class="line">可以在&lt;tx:method&gt;元素中指定回滚规则。</span><br><span class="line">如果有不止一种异常则用逗号分隔。</span><br></pre></td></tr></table></figure>
+<p><a href="https://imgchr.com/i/E4loGR" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E4loGR.md.png" alt="E4loGR.md.png"></a></p>
+<h1 id="8-8-事务的超时和只读属性"><a href="#8-8-事务的超时和只读属性" class="headerlink" title="8.8 事务的超时和只读属性"></a>8.8 事务的超时和只读属性</h1><h2 id="8-8-1简介"><a href="#8-8-1简介" class="headerlink" title="8.8.1简介"></a>8.8.1简介</h2><ul>
+<li>由于事务可以在行和表上获得锁，因此长事务会占用资源，并对整体性能产生影响。</li>
+<li>如果一个事务只读取数据但不做修改，数据库引擎可以对这个事务进行优化。</li>
+<li>超时事务属性：事务在强制回滚之前可以保持多久。这样可以防止长期运行的事务占用资源。</li>
+<li>只读事务属性: 表示这个事务只读取数据但不更新数据, 这样可以帮助数据库引擎优化事务。<br>8.8.2设置<br>1)注解</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Transaction注解</span><br></pre></td></tr></table></figure>
+<p><a href="https://imgchr.com/i/E41AeS" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E41AeS.md.png" alt="E41AeS.md.png"></a></p>
+<p>2)XML</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在Spring 2.x事务通知中，超时和只读属性可以在&lt;tx:method&gt;元素中进行指定</span><br></pre></td></tr></table></figure>
+<p><a href="https://imgchr.com/i/E41VoQ" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/13/E41VoQ.md.png" alt="E41VoQ.md.png"></a></p>
+<p>8.9 基于XML文档的声明式事务配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置事务切面 --&gt;</span><br><span class="line">	&lt;aop:config&gt;</span><br><span class="line">		&lt;aop:pointcut </span><br><span class="line">			expression=&quot;execution(* com.atguigu.tx.component.service.BookShopServiceImpl.purchase(..))&quot; </span><br><span class="line">			id=&quot;txPointCut&quot;/&gt;</span><br><span class="line">		&lt;!-- 将切入点表达式和事务属性配置关联到一起 --&gt;</span><br><span class="line">		&lt;aop:advisor advice-ref=&quot;myTx&quot; pointcut-ref=&quot;txPointCut&quot;/&gt;</span><br><span class="line">	&lt;/aop:config&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;!-- 配置基于XML的声明式事务  --&gt;</span><br><span class="line">	&lt;tx:advice id=&quot;myTx&quot; transaction-manager=&quot;transactionManager&quot;&gt;</span><br><span class="line">		&lt;tx:attributes&gt;</span><br><span class="line">			&lt;!-- 设置具体方法的事务属性 --&gt;</span><br><span class="line">			&lt;tx:method name=&quot;find*&quot; read-only=&quot;true&quot;/&gt;</span><br><span class="line">			&lt;tx:method name=&quot;get*&quot; read-only=&quot;true&quot;/&gt;</span><br><span class="line">			&lt;tx:method name=&quot;purchase&quot; </span><br><span class="line">				isolation=&quot;READ_COMMITTED&quot; </span><br><span class="line">	no-rollback-for=&quot;java.lang.ArithmeticException,java.lang.NullPointerException&quot;</span><br><span class="line">				propagation=&quot;REQUIRES_NEW&quot;</span><br><span class="line">				read-only=&quot;false&quot;</span><br><span class="line">				timeout=&quot;10&quot;/&gt;</span><br><span class="line">		&lt;/tx:attributes&gt;</span><br><span class="line">	&lt;/tx:advice&gt;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/01/23/41. SpringJdbcTemplate /">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/01/29/43. SpringMVC简介/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>3. SpringMVC-HelloWorld深度解析 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,SpringMVC框架,">
+  
+
+  <meta name="description" content="1. HelloWorld运行原理1 启动Tomcat服务器    启动Tomcat服务器时，因为DispatcherServlet中配置了,DispatcherServlet会在服务器启动时加载，    因为还配置了，指定了Springmvc框架的核心配置文件，因此在加载DispatcherServlet时会读取核心配置文件，     进而将Springmvc的容器对象创建好.    在创建Sp">
+<meta name="keywords" content="SSM框架,SpringMVC框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3. SpringMVC-HelloWorld深度解析">
+<meta property="og:url" content="http://yoursite.com/2018/02/05/45. SpringMVC-HelloWorld深度解析/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="1. HelloWorld运行原理1 启动Tomcat服务器    启动Tomcat服务器时，因为DispatcherServlet中配置了,DispatcherServlet会在服务器启动时加载，    因为还配置了，指定了Springmvc框架的核心配置文件，因此在加载DispatcherServlet时会读取核心配置文件，     进而将Springmvc的容器对象创建好.    在创建Sp">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/01/EJlpFS.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/01/EJluYF.png">
+<meta property="og:updated_time" content="2019-06-08T14:46:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3. SpringMVC-HelloWorld深度解析">
+<meta name="twitter:description" content="1. HelloWorld运行原理1 启动Tomcat服务器    启动Tomcat服务器时，因为DispatcherServlet中配置了,DispatcherServlet会在服务器启动时加载，    因为还配置了，指定了Springmvc框架的核心配置文件，因此在加载DispatcherServlet时会读取核心配置文件，     进而将Springmvc的容器对象创建好.    在创建Sp">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/01/EJlpFS.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-HelloWorld运行原理"><span class="toc-text">1. HelloWorld运行原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-HelloWorld请求流程图解："><span class="toc-text">2. HelloWorld请求流程图解：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-一般请求的映射路径名称和处理请求的方法名称最好一致"><span class="toc-text">3. 一般请求的映射路径名称和处理请求的方法名称最好一致</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-演示一个错误"><span class="toc-text">4. 演示一个错误</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-RequestMapping可以应用在什么地方"><span class="toc-text">5. @RequestMapping可以应用在什么地方</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-流程分析"><span class="toc-text">6. 流程分析:</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-基本步骤"><span class="toc-text">7. 基本步骤:</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-45. SpringMVC-HelloWorld深度解析" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">3. SpringMVC-HelloWorld深度解析</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.02.05</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="1-HelloWorld运行原理"><a href="#1-HelloWorld运行原理" class="headerlink" title="1. HelloWorld运行原理"></a>1. HelloWorld运行原理</h1><p>1 启动Tomcat服务器</p>
+<blockquote>
+<p>  启动Tomcat服务器时，因为DispatcherServlet中配置了<load-on-startup>,DispatcherServlet会在服务器启动时加载，<br>    因为还配置了<init-param>，指定了Springmvc框架的核心配置文件，因此在加载DispatcherServlet时会读取核心配置文件，<br>     进而将Springmvc的容器对象创建好.<br>    在创建Springmvc的容器对象时,<br>    会通过组件扫描，将加了@Controller注解的组件管理到容器中，<br>    因为在请求处理中的方法上加了@RequestMapping注解，<br>    所以也会分析到当前Springmvc可以处理哪些请求，<br>    以及哪些请求交给哪个请求处理中的请求处理方法进行处理. </init-param></load-on-startup></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">信息: Mapped URL path [/hello] onto handler &apos;helloWorldHandler&apos;</span><br><span class="line">       三月 04, 2019 10:24:02 上午 org.springframework.web.servlet.handler.AbstractUrlHandlerMapping registerHandler</span><br><span class="line">       信息: Mapped URL path [/hello.*] onto handler &apos;helloWorldHandler&apos;</span><br><span class="line">       三月 04, 2019 10:24:02 上午 org.springframework.web.servlet.handler.AbstractUrlHandlerMapping registerHandler</span><br><span class="line">       信息: Mapped URL path [/hello/] onto handler &apos;helloWorldHandler&apos;</span><br></pre></td></tr></table></figure>
+<p>2 浏览器端发送请求 <a href="http://localhost:8888/Springmvc01/hello" target="_blank" rel="noopener">http://localhost:8888/Springmvc01/hello</a><br>3 请求先到达web.xml中与DispatcherServlet中配置的<servlet-mapping>中的<url-pattern>进行匹配。匹配成功，将请求交给DispatcherServlet<br>4 DispatcherServlet根据请求映射，将当前的请求交给对应的请求处理器<br>5 请求处理器调用具体的请求处理方法进行当前请求的处理.处理完成后，返回一个字符串(逻辑视图名)<br>6 视图解析器结合prefix + 方法的返回值 + suffix生成一个物理视图路径，再通过转发的方式去往该视图.<br>7 浏览器端接收到响应，呈现结果。</url-pattern></servlet-mapping></p>
+<h1 id="2-HelloWorld请求流程图解："><a href="#2-HelloWorld请求流程图解：" class="headerlink" title="2. HelloWorld请求流程图解："></a>2. HelloWorld请求流程图解：</h1><p><img src="https://s2.ax1x.com/2019/05/01/EJlpFS.png" alt="image"></p>
+<h1 id="3-一般请求的映射路径名称和处理请求的方法名称最好一致"><a href="#3-一般请求的映射路径名称和处理请求的方法名称最好一致" class="headerlink" title="3. 一般请求的映射路径名称和处理请求的方法名称最好一致"></a>3. 一般请求的映射路径名称和处理请求的方法名称最好一致</h1><p>（实质上方法名称任意）  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value=&quot;/helloworld&quot;,method=RequestMethod.GET)</span><br><span class="line">public String helloworld()&#123;</span><br><span class="line">//public String abc123()&#123;</span><br><span class="line">System.out.println(&quot;hello,world&quot;);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-演示一个错误"><a href="#4-演示一个错误" class="headerlink" title="4. 演示一个错误"></a>4. 演示一个错误</h1><p>经常会出现配置上错误，把“/WEB-INF/views/”配置成了 “/WEB-INF/views”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;internalResourceViewResolver&quot; </span><br><span class="line">  class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</span><br><span class="line">&lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;/&gt;</span><br><span class="line">&lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>处理请求方式有哪几种</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public enum RequestMethod &#123;</span><br><span class="line">GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="5-RequestMapping可以应用在什么地方"><a href="#5-RequestMapping可以应用在什么地方" class="headerlink" title="5. @RequestMapping可以应用在什么地方"></a>5. @RequestMapping可以应用在什么地方</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 请求处理器</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">//@RequestMapping(value=&quot;/springmvc&quot;)</span><br><span class="line">@Controller</span><br><span class="line">public class RequestMappingHandler &#123;</span><br><span class="line">/**</span><br><span class="line">	 * 处理请求参数: </span><br><span class="line">	 * 	1.如果请求参数名与请求处理方法的形参名一致,Springmvc可以默认处理.</span><br><span class="line">	 * 	2.如果请求参数名与请求处理方法的形参名不一致，可以使用@RequestParam注解来帮助Springmvc处理请求参数. </span><br><span class="line">	 * 	  @RequestParam注解的属性:</span><br><span class="line">	 * 	   value : 用于指定请求参数名 </span><br><span class="line">	 * 	   required:  设置指定的请求参数是否必须要能获取到.</span><br><span class="line">	 * 	   defaultValue: 指定默认值, 如果从请求中获取不到对应的参数，且required=false, Springmvc</span><br><span class="line">	 * 					 会将一个null值赋值给当前的形参。</span><br><span class="line">	 * 					 可以通过defaultValue指定一个值替换默认的null值. </span><br><span class="line">	 *     </span><br><span class="line">	 * </span><br><span class="line">	 * 客户端的请求: testRequestParam?username=Tom&amp;age=22</span><br><span class="line">	 */</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * @RequestMapping 支持带占位符的URL</span><br><span class="line">	 * </span><br><span class="line">	 * @PathVariable  将占位符对应的值映射到形参中。</span><br><span class="line">	</span><br><span class="line">	 * 浏览器端的请求:testRequestMappingPathVariable/Tom/22</span><br><span class="line">	 * </span><br><span class="line">	 */</span><br><span class="line">	</span><br><span class="line">		</span><br><span class="line">	/**</span><br><span class="line">	 * @RequestMapping 可标注的位置</span><br><span class="line">	 * 	</span><br><span class="line">	 *  类上	  : 对当前类中所有的方法都起作用</span><br><span class="line">	 *  方法上  : 只对当前的方法起作用</span><br><span class="line">	 * 	</span><br><span class="line">	 *  类上+方法上: 如果类上与方法上都加了该注解，那么对于每一个请求处理方法来说, </span><br><span class="line">	 *  		      映射的请求就变成   类上@RequestMapping的URL + 方法上@RequestMapping的URL </span><br><span class="line">	 */</span><br><span class="line">	</span><br><span class="line">	@RequestMapping(value=&quot;/testRequestMappingPathVariable/&#123;username&#125;/&#123;age&#125;&quot;)</span><br><span class="line">	public String testRequestMappingPathVariable( @PathVariable(&quot;username&quot;) String username,</span><br><span class="line">													@PathVariable(&quot;age&quot;)Integer age  ) &#123;</span><br><span class="line">		System.out.println(username + &quot; , &quot; + age );</span><br><span class="line">		</span><br><span class="line">		return &quot;success&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 了解: </span><br><span class="line">	 * @RequestMapping 支持 Ant风格的URL</span><br><span class="line">	 * 三个匹配符:</span><br><span class="line">	 * 	 ? : 匹配一个任意字符</span><br><span class="line">	 * 	 * : 匹配任意个任意字符</span><br><span class="line">	 * 	 **: 匹配多层路径</span><br><span class="line">	 */</span><br><span class="line">	@RequestMapping(value=&quot;/testRequestMappingAnt/*/test??/**/end&quot;)</span><br><span class="line">	public String  testRequestMappingAnt() &#123;</span><br><span class="line">		</span><br><span class="line">		return &quot;success&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * @RequestMapping  method : 映射请求方式</span><br><span class="line">	 * </span><br><span class="line">	 * 请求方式: GET  POST  PUT  DELETE .....</span><br><span class="line">	 */</span><br><span class="line">	@RequestMapping(value=&quot;/testRequestMappingMethod&quot;, method= &#123;RequestMethod.POST,RequestMethod.GET&#125;)</span><br><span class="line">	public String  testRequestMappingMethod() &#123;</span><br><span class="line">		</span><br><span class="line">		return &quot;success&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * @RequestMapping 可标注的位置:</span><br><span class="line">	 * 	类上   :  对类中的每个方法都起作用</span><br><span class="line">	 *  方法上:  只对当前的方法起作用</span><br><span class="line">	 *  </span><br><span class="line">	 *  如果类上和方法上都加了个@RequestMapping注解，请求处理方法对应的URL映射就是 类上的URL + 方法上的URL.</span><br><span class="line">	 */</span><br><span class="line">	@RequestMapping(value=&quot;/testRequestMappingTarget&quot;)</span><br><span class="line">	public String  testRequestMappingTarget() &#123;</span><br><span class="line">		</span><br><span class="line">		return &quot;success&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="6-流程分析"><a href="#6-流程分析" class="headerlink" title="6. 流程分析:"></a>6. 流程分析:</h1><p><img src="https://s2.ax1x.com/2019/05/01/EJluYF.png" alt="image"></p>
+<h1 id="7-基本步骤"><a href="#7-基本步骤" class="headerlink" title="7. 基本步骤:"></a>7. 基本步骤:</h1><pre><code>&gt;a. 客户端请求提交到DispatcherServlet
+b. 由DispatcherServlet控制器查询一个或多个HandlerMapping，找到处理请求的Controller
+c. DispatcherServlet将请求提交到Controller（也称为Handler）
+d. Controller调用业务逻辑处理后，返回ModelAndView
+e. DispatcherServlet查询一个或多个ViewResoler视图解析器，找到ModelAndView指定的视图
+f. 视图负责将结果显示到客户端
+</code></pre>
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/02/01/44. SpringMVC-永远的HelloWorld/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/02/08/46. SpringMVC-REST/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

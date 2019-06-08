@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>6. MyBatis 缓存机制 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,MyBatis框架,">
+  
+
+  <meta name="description" content="6.1 缓存机制简介 1)MyBatis 包含一个非常强大的查询缓存特性,它可以非常方便地配置和定制。缓存可以极大的提升查询效率2)MyBatis系统中默认定义了两级缓存    一级缓存    二级缓存3)默认情况下，只有一级缓存（SqlSession级别的缓存，也称为本地缓存）开启。4)二级缓存需要手动开启和配置，他是基于namespace级别的缓存。5)为了提高扩展性。MyBatis定义了缓存">
+<meta name="keywords" content="SSM框架,MyBatis框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6. MyBatis 缓存机制">
+<meta property="og:url" content="http://yoursite.com/2018/03/19/62. MyBatis 缓存机制/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="6.1 缓存机制简介 1)MyBatis 包含一个非常强大的查询缓存特性,它可以非常方便地配置和定制。缓存可以极大的提升查询效率2)MyBatis系统中默认定义了两级缓存    一级缓存    二级缓存3)默认情况下，只有一级缓存（SqlSession级别的缓存，也称为本地缓存）开启。4)二级缓存需要手动开启和配置，他是基于namespace级别的缓存。5)为了提高扩展性。MyBatis定义了缓存">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/07/EsO17F.md.png">
+<meta property="og:updated_time" content="2019-06-08T14:42:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6. MyBatis 缓存机制">
+<meta name="twitter:description" content="6.1 缓存机制简介 1)MyBatis 包含一个非常强大的查询缓存特性,它可以非常方便地配置和定制。缓存可以极大的提升查询效率2)MyBatis系统中默认定义了两级缓存    一级缓存    二级缓存3)默认情况下，只有一级缓存（SqlSession级别的缓存，也称为本地缓存）开启。4)二级缓存需要手动开启和配置，他是基于namespace级别的缓存。5)为了提高扩展性。MyBatis定义了缓存">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/07/EsO17F.md.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#6-1-缓存机制简介"><span class="toc-text">6.1 缓存机制简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-2-一级缓存的使用"><span class="toc-text">6.2 一级缓存的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-3-一级缓存失效的几种情况"><span class="toc-text">6.3 一级缓存失效的几种情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-4-二级缓存的使用"><span class="toc-text">6.4 二级缓存的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-5-缓存的相关属性设置"><span class="toc-text">6.5 缓存的相关属性设置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-全局setting的cacheEnable-true："><span class="toc-text">1)全局setting的cacheEnable=true：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-select标签的useCache属性："><span class="toc-text">2)select标签的useCache属性：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-sql标签的flushCache属性："><span class="toc-text">3)sql标签的flushCache属性：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-sqlSession-clearCache-："><span class="toc-text">4)sqlSession.clearCache()：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-6-整合第三方缓存"><span class="toc-text">6.6 整合第三方缓存</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-62. MyBatis 缓存机制" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">6. MyBatis 缓存机制</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.03.19</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="6-1-缓存机制简介"><a href="#6-1-缓存机制简介" class="headerlink" title="6.1 缓存机制简介"></a>6.1 缓存机制简介</h1><blockquote>
+<p>1)MyBatis 包含一个非常强大的查询缓存特性,它可以非常方便地配置和定制。缓存可以极大的提升查询效率<br>2)MyBatis系统中默认定义了两级缓存<br>    一级缓存<br>    二级缓存<br>3)默认情况下，只有一级缓存（SqlSession级别的缓存，也称为本地缓存）开启。<br>4)二级缓存需要手动开启和配置，他是基于namespace级别的缓存。<br>5)为了提高扩展性。MyBatis定义了缓存接口Cache。我们可以通过实现Cache接口来自定义二级缓存  </p>
+</blockquote>
+<h1 id="6-2-一级缓存的使用"><a href="#6-2-一级缓存的使用" class="headerlink" title="6.2 一级缓存的使用"></a>6.2 一级缓存的使用</h1><p>1)一级缓存(local cache), 即本地缓存, 作用域默认为sqlSession。当  Session flush 或 close 后, 该 Session 中的所有 Cache 将被清空。<br>2)本地缓存不能被关闭, 但可以调用 clearCache() 来清空本地缓存, 或者改变缓存的作用域.<br>3)在mybatis3.1之后, 可以配置本地缓存的作用域. 在 mybatis.xml 中配置</p>
+<p><a href="https://imgchr.com/i/EsO17F" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/07/EsO17F.md.png" alt="EsO17F.md.png"></a></p>
+<p>4)一级缓存的工作机制<br>同一次会话期间只要查询过的数据都会保存在当前SqlSession的一个Map中<br>key: hashCode+查询的SqlId+编写的sql查询语句+参数</p>
+<h1 id="6-3-一级缓存失效的几种情况"><a href="#6-3-一级缓存失效的几种情况" class="headerlink" title="6.3 一级缓存失效的几种情况"></a>6.3 一级缓存失效的几种情况</h1><pre><code>1)不同的SqlSession对应不同的一级缓存
+2)同一个SqlSession但是查询条件不同
+3)同一个SqlSession两次查询期间执行了任何一次增删改操作
+4)同一个SqlSession两次查询期间手动清空了缓存
+</code></pre><h1 id="6-4-二级缓存的使用"><a href="#6-4-二级缓存的使用" class="headerlink" title="6.4 二级缓存的使用"></a>6.4 二级缓存的使用</h1><pre><code>1)二级缓存(second level cache)，全局作用域缓存 //全局缓存 
+2)二级缓存默认开启，但是需要手动配置 
+    最好配置上 防止升级出bug cacheEnabled=true
+3)MyBatis提供二级缓存的接口以及实现，缓存实现要求POJO实现Serializable接口
+4)二级缓存在 SqlSession 关闭或提交之后才会生效
+5)二级缓存使用的步骤:
+
+    ①全局配置文件中开启二级缓存&lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;
+    ②需要使用二级缓存的映射文件处使用cache配置缓存&lt;cache /&gt;
+    ③注意：POJO需要实现Serializable接口
+        添加序列号标示号（表示类有没有升级过） default serial VersionUID =1L
+    ps 注意要提交 二级缓存才起作用 
+6) 二级缓存工作机制
+    基于同一个namespace的多个SqlSession对象
+6)二级缓存相关的属性
+    ①eviction=“FIFO”：缓存回收策略（通俗的讲就是移除）：
+    LRU – 最近最少使用的：移除最长时间不被使用的对象。
+    FIFO – 先进先出：按对象进入缓存的顺序来移除它们。
+    SOFT – 软引用：移除基于垃圾回收器状态和软引用规则的对象。
+    WEAK – 弱引用：更积极地移除基于垃圾收集器状态和弱引用规则的对象。
+    默认的是 LRU。
+    ②flushInterval：刷新间隔，单位毫秒
+    默认情况是不设置，也就是没有刷新间隔，缓存仅仅调用语句时刷新
+    ③size：引用数目，正整数
+    代表缓存最多可以存储多少个对象，太大容易导致内存溢出
+    ④readOnly：只读设置简称-“只读”，true/false
+    true（不安全的，速度快）：只读缓存；MyBatis认为从缓存中获得的数据不会被修改，直接将缓存中的数据引用交给用户。。。
+         会给所有调用者返回缓存对象的相同实例。因此这些对象不能被修改。这提供了很重要的性能优势。
+    false（安全的，但是会有损耗，慢）：非只读，MyBatis认为从缓存中获取的数据会被修改，会使用序列化以及反序列化的技术克隆一份给用户。。。
+         读写缓存；会返回缓存对象的拷贝（通过序列化）。这会慢一些，但是安全，因此默认是 false。（一般使用false）
+
+    拓展：type：指定使用的缓存类，一般用在自定义缓存或者整合第三方缓存
+</code></pre><h1 id="6-5-缓存的相关属性设置"><a href="#6-5-缓存的相关属性设置" class="headerlink" title="6.5 缓存的相关属性设置"></a>6.5 缓存的相关属性设置</h1><h2 id="1-全局setting的cacheEnable-true："><a href="#1-全局setting的cacheEnable-true：" class="headerlink" title="1)全局setting的cacheEnable=true："></a>1)全局setting的cacheEnable=true：</h2><pre><code>配置二级缓存的开关，一级缓存一直是打开的。
+</code></pre><h2 id="2-select标签的useCache属性："><a href="#2-select标签的useCache属性：" class="headerlink" title="2)select标签的useCache属性："></a>2)select标签的useCache属性：</h2><pre><code>配置这个select是否使用二级缓存。一级缓存一直是使用的
+</code></pre><h2 id="3-sql标签的flushCache属性："><a href="#3-sql标签的flushCache属性：" class="headerlink" title="3)sql标签的flushCache属性："></a>3)sql标签的flushCache属性：</h2><pre><code>增删改默认flushCache=true。sql执行以后，会同时清空一级和二级缓存。
+查询默认 flushCache=false。
+</code></pre><h2 id="4-sqlSession-clearCache-："><a href="#4-sqlSession-clearCache-：" class="headerlink" title="4)sqlSession.clearCache()："></a>4)sqlSession.clearCache()：</h2><pre><code>只是用来清除一级缓存。
+</code></pre><h1 id="6-6-整合第三方缓存"><a href="#6-6-整合第三方缓存" class="headerlink" title="6.6 整合第三方缓存"></a>6.6 整合第三方缓存</h1><p>1)为了提高扩展性。MyBatis定义了缓存接口Cache。我们可以通过实现Cache接口来自定义二级缓存</p>
+<p>2)EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider</p>
+<p>3)整合EhCache缓存的步骤:<br>    ①导入ehcache包，以及整合包，日志包<br>    ehcache-core-2.6.8.jar、mybatis-ehcache-1.0.3.jar<br>    slf4j-api-1.6.1.jar、slf4j-log4j12-1.6.2.jar<br>    ②编写ehcache.xml配置文件<br>    ③配置使用ehcache.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;ehcache xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line"> xsi:noNamespaceSchemaLocation=&quot;../config/ehcache.xsd&quot;&gt;</span><br><span class="line"> &lt;!-- 磁盘保存路径 --&gt;</span><br><span class="line"> &lt;diskStore path=&quot;D:\atguigu\ehcache&quot; /&gt;</span><br><span class="line"> </span><br><span class="line"> &lt;defaultCache </span><br><span class="line">   maxElementsInMemory=&quot;1000&quot; </span><br><span class="line">   maxElementsOnDisk=&quot;10000000&quot;</span><br><span class="line">   eternal=&quot;false&quot; </span><br><span class="line">   overflowToDisk=&quot;true&quot; </span><br><span class="line">   timeToIdleSeconds=&quot;120&quot;</span><br><span class="line">   timeToLiveSeconds=&quot;120&quot; </span><br><span class="line">   diskExpiryThreadIntervalSeconds=&quot;120&quot;</span><br><span class="line">   memoryStoreEvictionPolicy=&quot;LRU&quot;&gt;</span><br><span class="line"> &lt;/defaultCache&gt;</span><br><span class="line">&lt;/ehcache&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- </span><br><span class="line">属性说明：</span><br><span class="line">l diskStore：指定数据在磁盘中的存储位置。</span><br><span class="line">l defaultCache：当借助CacheManager.add(&quot;demoCache&quot;)创建Cache时，EhCache便会采用&lt;defalutCache/&gt;指定的的管理策略</span><br><span class="line"> </span><br><span class="line">以下属性是必须的：</span><br><span class="line">l maxElementsInMemory - 在内存中缓存的element的最大数目 </span><br><span class="line">l maxElementsOnDisk - 在磁盘上缓存的element的最大数目，若是0表示无穷大</span><br><span class="line">l eternal - 设定缓存的elements是否永远不过期。如果为true，则缓存的数据始终有效，如果为false那么还要根据timeToIdleSeconds，timeToLiveSeconds判断</span><br><span class="line">l overflowToDisk - 设定当内存缓存溢出的时候是否将过期的element缓存到磁盘上</span><br><span class="line"> </span><br><span class="line">以下属性是可选的：</span><br><span class="line">l timeToIdleSeconds - 当缓存在EhCache中的数据前后两次访问的时间超过timeToIdleSeconds的属性取值时，这些数据便会删除，默认值是0,也就是可闲置时间无穷大</span><br><span class="line">l timeToLiveSeconds - 缓存element的有效生命期，默认是0.,也就是element存活时间无穷大</span><br><span class="line"> diskSpoolBufferSizeMB 这个参数设置DiskStore(磁盘缓存)的缓存区大小.默认是30MB.每个Cache都应该有自己的一个缓冲区.</span><br><span class="line">l diskPersistent - 在VM重启的时候是否启用磁盘保存EhCache中的数据，默认是false。</span><br><span class="line">l diskExpiryThreadIntervalSeconds - 磁盘缓存的清理线程运行间隔，默认是120秒。每个120s，相应的线程会进行一次EhCache中数据的清理工作</span><br><span class="line">l memoryStoreEvictionPolicy - 当内存缓存达到最大，有新的element加入的时候， 移除缓存中element的策略。默认是LRU（最近最少使用），可选的有LFU（最不常使用）和FIFO（先进先出）</span><br><span class="line"> --&gt;</span><br></pre></td></tr></table></figure></p>
+<p>③配置cache标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;cache type=&quot;org.mybatis.caches.ehcache.EhcacheCache&quot;&gt;&lt;/cache&gt;</span><br></pre></td></tr></table></figure>
+<p>4）缓存的查找顺序：<br>二级缓存==&gt;一级换成 ==&gt;数据库 简称：二一库</p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/03/16/60. MyBatis 映射文件/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/03/21/63. MyBatis 逆向工程/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

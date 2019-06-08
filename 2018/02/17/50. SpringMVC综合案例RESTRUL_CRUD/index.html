@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>8. SpringMVC综合案例RESTRUL_CRUD | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,SpringMVC框架,">
+  
+
+  <meta name="description" content="1 RESTRUL_CRUD_需求1.1 显示所有员工信息1）URI：emps2）请求方式：GET3）显示效果   1.2 添加操作-去往添加页面1）显示添加页面：2）URI：emp3）请求方式：GET4）显示效果    1.3 添加操作-添加员工1）添加员工信息：2）URI：emp3）请求方式：POST4）显示效果：完成添加，重定向到 list 页面。 1.4    删除操作1）URL：emp/">
+<meta name="keywords" content="SSM框架,SpringMVC框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8. SpringMVC综合案例RESTRUL_CRUD">
+<meta property="og:url" content="http://yoursite.com/2018/02/17/50. SpringMVC综合案例RESTRUL_CRUD/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="1 RESTRUL_CRUD_需求1.1 显示所有员工信息1）URI：emps2）请求方式：GET3）显示效果   1.2 添加操作-去往添加页面1）显示添加页面：2）URI：emp3）请求方式：GET4）显示效果    1.3 添加操作-添加员工1）添加员工信息：2）URI：emp3）请求方式：POST4）显示效果：完成添加，重定向到 list 页面。 1.4    删除操作1）URL：emp/">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/04/EapJ9x.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/04/EaptgK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/04/EapauD.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/04/EapDUA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/04/EapRKS.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/04/EapWDg.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/04/Ea9Aqe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/04/Ea9nPI.png">
+<meta property="og:updated_time" content="2019-06-08T14:47:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="8. SpringMVC综合案例RESTRUL_CRUD">
+<meta name="twitter:description" content="1 RESTRUL_CRUD_需求1.1 显示所有员工信息1）URI：emps2）请求方式：GET3）显示效果   1.2 添加操作-去往添加页面1）显示添加页面：2）URI：emp3）请求方式：GET4）显示效果    1.3 添加操作-添加员工1）添加员工信息：2）URI：emp3）请求方式：POST4）显示效果：完成添加，重定向到 list 页面。 1.4    删除操作1）URL：emp/">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/04/EapJ9x.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-RESTRUL-CRUD-需求"><span class="toc-text">1 RESTRUL_CRUD_需求</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-显示所有员工信息"><span class="toc-text">1.1 显示所有员工信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-添加操作-去往添加页面"><span class="toc-text">1.2 添加操作-去往添加页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-添加操作-添加员工"><span class="toc-text">1.3 添加操作-添加员工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-删除操作"><span class="toc-text">1.4    删除操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-修改操作-去往修改页面"><span class="toc-text">1.5 修改操作-去往修改页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-修改操作-修改员工"><span class="toc-text">1.6 修改操作-修改员工</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-7-相关的类"><span class="toc-text">1.7 相关的类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-8-相关的页面"><span class="toc-text">1.8 相关的页面</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-搭建开发环境"><span class="toc-text">2 搭建开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1）拷贝jar包"><span class="toc-text">1）拷贝jar包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2）创建配置文件-springmvc-xml"><span class="toc-text">2）创建配置文件:springmvc.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3）配置核心控制器：web-xml"><span class="toc-text">3）配置核心控制器：web.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4）将-POST-请求转换为-PUT-或-DELETE-请求"><span class="toc-text">4）将 POST 请求转换为 PUT 或 DELETE 请求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5）创建相关页面"><span class="toc-text">5）创建相关页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6）增加实体类"><span class="toc-text">6）增加实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7）增加DAO类"><span class="toc-text">7）增加DAO类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-RESTRUL-CRUD-显示所有员工信息"><span class="toc-text">3 RESTRUL_CRUD_显示所有员工信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-RESTRUL-CRUD-添加操作"><span class="toc-text">4 RESTRUL_CRUD_添加操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-使用Spring的表单标签"><span class="toc-text">5 使用Spring的表单标签</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-添加员工实验代码"><span class="toc-text">6 添加员工实验代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-RESTRUL-CRUD-删除操作-amp-处理静态资源"><span class="toc-text">7 RESTRUL_CRUD_删除操作&amp;处理静态资源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-删除实验代码"><span class="toc-text">7.1 删除实验代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-HiddenHttpMethodFilter过滤器"><span class="toc-text">7.2 HiddenHttpMethodFilter过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-需要使用jQuery来转换请求方式"><span class="toc-text">7.3 需要使用jQuery来转换请求方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-关于mvc-default-servlet-handler-作用"><span class="toc-text">7.4 关于mvc:default-servlet-handler/作用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-6-删除操作流程图解"><span class="toc-text">7.6 删除操作流程图解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#8-RESTRUL-CRUD-修改操作"><span class="toc-text">8 RESTRUL_CRUD_修改操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-根据id查询员工对象，表单回显"><span class="toc-text">8.1 根据id查询员工对象，表单回显</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-提交表单，修改数据"><span class="toc-text">8.2 提交表单，修改数据</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-50. SpringMVC综合案例RESTRUL_CRUD" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">8. SpringMVC综合案例RESTRUL_CRUD</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.02.17</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="1-RESTRUL-CRUD-需求"><a href="#1-RESTRUL-CRUD-需求" class="headerlink" title="1 RESTRUL_CRUD_需求"></a>1 RESTRUL_CRUD_需求</h1><h2 id="1-1-显示所有员工信息"><a href="#1-1-显示所有员工信息" class="headerlink" title="1.1 显示所有员工信息"></a>1.1 显示所有员工信息</h2><p>1）URI：emps<br>2）请求方式：GET<br>3）显示效果<br><img src="https://s2.ax1x.com/2019/05/04/EapJ9x.png" alt="image">  </p>
+<h2 id="1-2-添加操作-去往添加页面"><a href="#1-2-添加操作-去往添加页面" class="headerlink" title="1.2 添加操作-去往添加页面"></a>1.2 添加操作-去往添加页面</h2><p>1）显示添加页面：<br>2）URI：emp<br>3）请求方式：GET<br>4）显示效果<br> <img src="https://s2.ax1x.com/2019/05/04/EaptgK.png" alt="image">  </p>
+<h2 id="1-3-添加操作-添加员工"><a href="#1-3-添加操作-添加员工" class="headerlink" title="1.3 添加操作-添加员工"></a>1.3 添加操作-添加员工</h2><p>1）添加员工信息：<br>2）URI：emp<br>3）请求方式：POST<br>4）显示效果：完成添加，重定向到 list 页面。<br><img src="https://s2.ax1x.com/2019/05/04/EapauD.png" alt="image"></p>
+<h2 id="1-4-删除操作"><a href="#1-4-删除操作" class="headerlink" title="1.4    删除操作"></a>1.4    删除操作</h2><p>1）URL：emp/{id}<br>2）请求方式：DELETE<br>3）删除后效果：对应记录从数据表中删除  </p>
+<h2 id="1-5-修改操作-去往修改页面"><a href="#1-5-修改操作-去往修改页面" class="headerlink" title="1.5 修改操作-去往修改页面"></a>1.5 修改操作-去往修改页面</h2><p>1）URI：emp/{id}<br>2）请求方式：GET<br>3）显示效果：回显表单。  </p>
+<h2 id="1-6-修改操作-修改员工"><a href="#1-6-修改操作-修改员工" class="headerlink" title="1.6 修改操作-修改员工"></a>1.6 修改操作-修改员工</h2><p>1）URI：emp<br>2）请求方式：PUT<br>3）显示效果：完成修改，重定向到 list 页面。  </p>
+<h2 id="1-7-相关的类"><a href="#1-7-相关的类" class="headerlink" title="1.7 相关的类"></a>1.7 相关的类</h2><pre><code>为了方便，省略了Service层
+</code></pre><p>1）实体类：Employee、Department<br>2）Handler：EmployeeHandler<br>3）Dao：EmployeeDao、DepartmentDao<br><img src="https://s2.ax1x.com/2019/05/04/EapDUA.png" alt="image"></p>
+<h2 id="1-8-相关的页面"><a href="#1-8-相关的页面" class="headerlink" title="1.8 相关的页面"></a>1.8 相关的页面</h2><p>1）list.jsp<br>2）input.jsp<br>3）edit.jsp  </p>
+<h1 id="2-搭建开发环境"><a href="#2-搭建开发环境" class="headerlink" title="2 搭建开发环境"></a>2 搭建开发环境</h1><h2 id="1）拷贝jar包"><a href="#1）拷贝jar包" class="headerlink" title="1）拷贝jar包"></a>1）拷贝jar包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">com.springsource.net.sf.cglib-2.2.0.jar</span><br><span class="line">com.springsource.org.aopalliance-1.0.0.jar</span><br><span class="line">com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar</span><br><span class="line">spring-aop-4.0.0.RELEASE.jar</span><br><span class="line">spring-aspects-4.0.0.RELEASE.jar</span><br><span class="line">commons-logging-1.1.3.jar</span><br><span class="line">spring-beans-4.0.0.RELEASE.jar</span><br><span class="line">spring-context-4.0.0.RELEASE.jar</span><br><span class="line">spring-core-4.0.0.RELEASE.jar</span><br><span class="line">spring-expression-4.0.0.RELEASE.jar</span><br><span class="line">spring-jdbc-4.0.0.RELEASE.jar</span><br><span class="line">spring-orm-4.0.0.RELEASE.jar</span><br><span class="line">spring-tx-4.0.0.RELEASE.jar</span><br><span class="line">spring-web-4.0.0.RELEASE.jar</span><br><span class="line">spring-webmvc-4.0.0.RELEASE.jar</span><br></pre></td></tr></table></figure>
+<h2 id="2）创建配置文件-springmvc-xml"><a href="#2）创建配置文件-springmvc-xml" class="headerlink" title="2）创建配置文件:springmvc.xml"></a>2）创建配置文件:springmvc.xml</h2><p>==增加context,mvc,beans名称空间。==</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;</span><br><span class="line">xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd</span><br><span class="line">http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 配置扫描的包：com.springmvc.crud --&gt;</span><br><span class="line">&lt;context:component-scan base-package=&quot;com.atguigu.springmvc&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 配置视图解析器：默认采用转发 --&gt;</span><br><span class="line">&lt;bean id=&quot;internalResourceViewResolver&quot; </span><br><span class="line">class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;</span><br><span class="line">&lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/views/&quot;/&gt;</span><br><span class="line">&lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt; </span><br><span class="line">&lt;!-- 解决静态资源请求 </span><br><span class="line">		 </span><br><span class="line">		  将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler，</span><br><span class="line">		  它会对进入 DispatcherServlet 的请求进行筛查，如果发现是没有经过映射的请求，</span><br><span class="line">		  就将该请求交由 WEB 应用服务器默认的 Servlet 处理，如果是经过映射的映射，才由 DispatcherServlet 继续处理</span><br><span class="line">	</span><br><span class="line">	 --&gt;</span><br><span class="line">	&lt;mvc:default-servlet-handler/&gt; </span><br><span class="line">	</span><br><span class="line">	&lt;!-- </span><br><span class="line">		mvc:default-servlet-handler可以解决静态资源访问的问题，但是会导致@RequestMapping映射的请求失效</span><br><span class="line">		需要再添加 &lt;mvc:annotation-driven/&gt;配置</span><br><span class="line">	 --&gt;</span><br><span class="line">	&lt;mvc:annotation-driven/&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3）配置核心控制器：web-xml"><a href="#3）配置核心控制器：web-xml" class="headerlink" title="3）配置核心控制器：web.xml"></a>3）配置核心控制器：web.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">&lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;</span><br><span class="line">&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;</span><br><span class="line">&lt;init-param&gt;</span><br><span class="line">&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">&lt;param-value&gt;classpath:springmvc.xml&lt;/param-value&gt;</span><br><span class="line">&lt;/init-param&gt;</span><br><span class="line">&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br><span class="line">&lt;/servlet&gt; </span><br><span class="line">&lt;servlet-mapping&gt;</span><br><span class="line">&lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;</span><br><span class="line">&lt;url-pattern&gt;/&lt;/url-pattern&gt;</span><br><span class="line">&lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4）将-POST-请求转换为-PUT-或-DELETE-请求"><a href="#4）将-POST-请求转换为-PUT-或-DELETE-请求" class="headerlink" title="4）将 POST 请求转换为 PUT 或 DELETE 请求"></a>4）将 POST 请求转换为 PUT 或 DELETE 请求</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;filter&gt;</span><br><span class="line">        &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;</span><br><span class="line">        &lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">        &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;</span><br><span class="line">        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="5）创建相关页面"><a href="#5）创建相关页面" class="headerlink" title="5）创建相关页面"></a>5）创建相关页面</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/WEB-INF/views/list.jsp</span><br><span class="line">index.jsp</span><br></pre></td></tr></table></figure>
+<h2 id="6）增加实体类"><a href="#6）增加实体类" class="headerlink" title="6）增加实体类"></a>6）增加实体类</h2><p><img src="https://s2.ax1x.com/2019/05/04/EapRKS.png" alt="image">    <img src="https://s2.ax1x.com/2019/05/04/EapWDg.png" alt="image">    </p>
+<h2 id="7）增加DAO类"><a href="#7）增加DAO类" class="headerlink" title="7）增加DAO类"></a>7）增加DAO类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">package com.springmvc.crud.dao;</span><br><span class="line"></span><br><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"> </span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line"> </span><br><span class="line">import com.atguigu.springmvc.crud.entities.Department;</span><br><span class="line">import com.atguigu.springmvc.crud.entities.Employee;</span><br><span class="line"> </span><br><span class="line">@Repository</span><br><span class="line">public class EmployeeDao &#123;</span><br><span class="line"> </span><br><span class="line">private static Map&lt;Integer, Employee&gt; employees = null;</span><br><span class="line"> </span><br><span class="line">@Autowired</span><br><span class="line">private DepartmentDao departmentDao;</span><br><span class="line"> </span><br><span class="line">static&#123;</span><br><span class="line">employees = new HashMap&lt;Integer, Employee&gt;();</span><br><span class="line"> </span><br><span class="line">employees.put(1001, new Employee(1001, &quot;E-AA&quot;, &quot;aa@163.com&quot;, 1, new Department(101, &quot;D-AA&quot;)));</span><br><span class="line">employees.put(1002, new Employee(1002, &quot;E-BB&quot;, &quot;bb@163.com&quot;, 1, new Department(102, &quot;D-BB&quot;)));</span><br><span class="line">employees.put(1003, new Employee(1003, &quot;E-CC&quot;, &quot;cc@163.com&quot;, 0, new Department(103, &quot;D-CC&quot;)));</span><br><span class="line">employees.put(1004, new Employee(1004, &quot;E-DD&quot;, &quot;dd@163.com&quot;, 0, new Department(104, &quot;D-DD&quot;)));</span><br><span class="line">employees.put(1005, new Employee(1005, &quot;E-EE&quot;, &quot;ee@163.com&quot;, 1, new Department(105, &quot;D-EE&quot;)));</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">private static Integer initId = 1006;</span><br><span class="line"> </span><br><span class="line">public void save(Employee employee)&#123;</span><br><span class="line">if(employee.getId() == null)&#123;</span><br><span class="line">employee.setId(initId++);</span><br><span class="line">&#125; </span><br><span class="line">employee.setDepartment(departmentDao.getDepartment(</span><br><span class="line">employee.getDepartment().getId()));</span><br><span class="line">employees.put(employee.getId(), employee);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public Collection&lt;Employee&gt; getAll()&#123;</span><br><span class="line">return employees.values();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public Employee get(Integer id)&#123;</span><br><span class="line">return employees.get(id);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public void delete(Integer id)&#123;</span><br><span class="line">employees.remove(id);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package com.springmvc.crud.dao;</span><br><span class="line"> </span><br><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"> </span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line"> </span><br><span class="line">import com.atguigu.springmvc.crud.entities.Department;</span><br><span class="line"> </span><br><span class="line">@Repository</span><br><span class="line">public class DepartmentDao &#123;</span><br><span class="line"> </span><br><span class="line">private static Map&lt;Integer, Department&gt; departments = null;</span><br><span class="line"> </span><br><span class="line">static&#123;</span><br><span class="line">departments = new LinkedHashMap&lt;Integer, Department&gt;();</span><br><span class="line"> </span><br><span class="line">departments.put(101, new Department(101, &quot;D-AA&quot;));</span><br><span class="line">departments.put(102, new Department(102, &quot;D-BB&quot;));</span><br><span class="line">departments.put(103, new Department(103, &quot;D-CC&quot;));</span><br><span class="line">departments.put(104, new Department(104, &quot;D-DD&quot;));</span><br><span class="line">departments.put(105, new Department(105, &quot;D-EE&quot;));</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public Collection&lt;Department&gt; getDepartments()&#123;</span><br><span class="line">return departments.values();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">public Department getDepartment(Integer id)&#123;</span><br><span class="line">return departments.get(id);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-RESTRUL-CRUD-显示所有员工信息"><a href="#3-RESTRUL-CRUD-显示所有员工信息" class="headerlink" title="3 RESTRUL_CRUD_显示所有员工信息"></a>3 RESTRUL_CRUD_显示所有员工信息</h1><p>1）增加页面链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;empList&quot;&gt;To Employee List&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p>2）增加处理器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package com.springmvc.crud.handlers;</span><br><span class="line"> </span><br><span class="line">import java.util.Map;</span><br><span class="line"> </span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.stereotype.Controller;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"> </span><br><span class="line">import com.atguigu.springmvc.crud.dao.EmployeeDao;</span><br><span class="line"> </span><br><span class="line">@Controller</span><br><span class="line">public class EmployeeHandler &#123;</span><br><span class="line"> </span><br><span class="line">@Autowired</span><br><span class="line">private EmployeeDao employeeDao ;</span><br><span class="line"> </span><br><span class="line">@RequestMapping(&quot;/empList&quot;)</span><br><span class="line">public String empList(Map&lt;String,Object&gt; map)&#123;</span><br><span class="line">map.put(&quot;empList&quot;, employeeDao.getAll());        //默认存放到request域中        </span><br><span class="line">return &quot;list&quot;;</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3）SpringMVC中没遍历的标签，需要使用jstl标签进行集合遍历增加jstl标签库jar包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;</span><br><span class="line">    pageEncoding=&quot;UTF-8&quot;%&gt;</span><br><span class="line">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;    </span><br><span class="line">    </span><br><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 </span><br><span class="line">Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;c:if test=&quot;$&#123;empty requestScope.empList &#125;&quot;&gt;</span><br><span class="line">对不起，没有找到任何员工！</span><br><span class="line">&lt;/c:if&gt;</span><br><span class="line">&lt;c:if test=&quot;$&#123;!empty requestScope.empList &#125;&quot;&gt;</span><br><span class="line">&lt;table border=&quot;1&quot; cellpadding=&quot;10&quot; cellspacing=&quot;0&quot;&gt;                </span><br><span class="line">&lt;tr&gt;</span><br><span class="line">&lt;td&gt;EmpId&lt;/td&gt;</span><br><span class="line">&lt;td&gt;LastName&lt;/td&gt;</span><br><span class="line">&lt;td&gt;Gender&lt;/td&gt;</span><br><span class="line">&lt;td&gt;Email&lt;/td&gt;</span><br><span class="line">&lt;td&gt;DepartmentName&lt;/td&gt;</span><br><span class="line">&lt;td&gt;Edit&lt;/td&gt;</span><br><span class="line">&lt;td&gt;Delete&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line">&lt;c:forEach items=&quot;$&#123;requestScope.empList &#125;&quot; var=&quot;emp&quot;&gt;</span><br><span class="line">&lt;tr&gt;</span><br><span class="line">&lt;td&gt;$&#123;emp.id &#125;&lt;/td&gt;</span><br><span class="line">&lt;td&gt;$&#123;emp.lastName &#125;&lt;/td&gt;</span><br><span class="line">&lt;td&gt;$&#123;emp.gender==0?&quot;Female&quot;:&quot;Male&quot; &#125;&lt;/td&gt;</span><br><span class="line">&lt;td&gt;$&#123;emp.email &#125;&lt;/td&gt;</span><br><span class="line">&lt;td&gt;$&#123;emp.department.departmentName &#125;&lt;/td&gt;</span><br><span class="line">&lt;td&gt;&lt;a href=&quot;&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">&lt;td&gt;&lt;a href=&quot;&quot;&gt;Delete&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;                </span><br><span class="line">&lt;/c:forEach&gt;        </span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/c:if&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="4-RESTRUL-CRUD-添加操作"><a href="#4-RESTRUL-CRUD-添加操作" class="headerlink" title="4 RESTRUL_CRUD_添加操作"></a>4 RESTRUL_CRUD_添加操作</h1><p>1）在list.jsp上增加连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;empInput&quot;&gt;Add Employee&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p>2）增加处理器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value=&quot;/empInput&quot;,method=RequestMethod.GET)</span><br><span class="line">public String empInput(Map&lt;String,Object&gt; map)&#123;</span><br><span class="line">map.put(&quot;deptList&quot;, departmentDao.getDepartments());</span><br><span class="line">//解决错误：java.lang.IllegalStateException: Neither BindingResult nor plain target object for bean name &apos;command&apos; available as request attribute</span><br><span class="line">Employee employee = new Employee();</span><br><span class="line">//map.put(&quot;command&quot;, employee);</span><br><span class="line">map.put(&quot;employee&quot;, employee);</span><br><span class="line">return &quot;add&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3）显示添加页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;</span><br><span class="line">    pageEncoding=&quot;UTF-8&quot; import=&quot;java.util.*&quot;%&gt;</span><br><span class="line">&lt;%@ taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;</span><br><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 </span><br><span class="line">Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--</span><br><span class="line">1.为什么使用SpringMVC的form标签  </span><br><span class="line">① 快速开发  </span><br><span class="line">② 表单回显  </span><br><span class="line">2.可以通过modelAttribute指定绑定的模型属性，</span><br><span class="line">若没有指定该属性，则默认从request域中查找command的表单的bean</span><br><span class="line">如果该属性也不存在，那么，则会发生错误。</span><br><span class="line"> --&gt;</span><br><span class="line"> &lt;form:form action=&quot;empAdd&quot; method=&quot;POST&quot; modelAttribute=&quot;employee&quot;&gt;</span><br><span class="line">         LastName : &lt;form:input path=&quot;lastName&quot;/&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">         Email : &lt;form:input path=&quot;email&quot;/&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">         &lt;%</span><br><span class="line">                 Map&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</span><br><span class="line">                 map.put(&quot;1&quot;, &quot;Male&quot;);</span><br><span class="line">                 map.put(&quot;0&quot;,&quot;Female&quot;);</span><br><span class="line">                 request.setAttribute(&quot;genders&quot;, map);</span><br><span class="line">         %&gt;</span><br><span class="line">        Gender : &lt;br&gt;&lt;form:radiobuttons path=&quot;gender&quot; items=&quot;$&#123;genders &#125;&quot; delimiter=&quot;&lt;br&gt;&quot;/&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">         DeptName : </span><br><span class="line">                 &lt;form:select path=&quot;department.id&quot; </span><br><span class="line">                                                 items=&quot;$&#123;deptList &#125;&quot; </span><br><span class="line">                                                 itemLabel=&quot;departmentName&quot; </span><br><span class="line">                                                 itemValue=&quot;id&quot;&gt;&lt;/form:select&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">                 &lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line"> &lt;/form:form&gt; </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>4）显示表单信息时，会报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">HTTP Status 500 - </span><br><span class="line"> </span><br><span class="line">type Exception report</span><br><span class="line">message </span><br><span class="line">description The server encountered an internal error () that prevented it from fulfilling this request.</span><br><span class="line">exception </span><br><span class="line">org.apache.jasper.JasperException: An exception occurred processing JSP page /WEB-INF/views/add.jsp at line 18</span><br><span class="line">15:                         ② 表单回显</span><br><span class="line">16:          --&gt;</span><br><span class="line">17:          &lt;form:form action=&quot;empAdd&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">18:                  LastName : &lt;form:input path=&quot;lastName&quot;/&gt;</span><br><span class="line">19:                  Email : &lt;form:input path=&quot;email&quot;/&gt;</span><br><span class="line">20:                  &lt;%</span><br><span class="line">21:                          Map&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</span><br><span class="line">Stacktrace:</span><br><span class="line">        org.apache.jasper.servlet.JspServletWrapper.handleJspException(JspServletWrapper.java:505)</span><br><span class="line">        org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:410)</span><br><span class="line">        org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:337)</span><br><span class="line">        org.apache.jasper.servlet.JspServlet.service(JspServlet.java:266)</span><br><span class="line">        javax.servlet.http.HttpServlet.service(HttpServlet.java:803)</span><br><span class="line">        org.springframework.web.servlet.view.InternalResourceView.renderMergedOutputModel(InternalResourceView.java:209)</span><br><span class="line">        org.springframework.web.servlet.view.AbstractView.render(AbstractView.java:266)</span><br><span class="line">        org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1225)</span><br><span class="line">        org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1012)</span><br><span class="line">        org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:959)</span><br><span class="line">        org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:876)</span><br><span class="line">        org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:931)</span><br><span class="line">        org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:822)</span><br><span class="line">        javax.servlet.http.HttpServlet.service(HttpServlet.java:690)</span><br><span class="line">        org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:807)</span><br><span class="line">        javax.servlet.http.HttpServlet.service(HttpServlet.java:803)</span><br><span class="line">        org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:77)</span><br><span class="line">        org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:108)</span><br><span class="line">root cause </span><br><span class="line">java.lang.IllegalStateException: Neither BindingResult nor plain target object for bean name &apos;command&apos; available as request attribute</span><br><span class="line">        org.springframework.web.servlet.support.BindStatus.&lt;init&gt;(BindStatus.java:141)</span><br></pre></td></tr></table></figure></p>
+<h1 id="5-使用Spring的表单标签"><a href="#5-使用Spring的表单标签" class="headerlink" title="5 使用Spring的表单标签"></a>5 使用Spring的表单标签</h1><p>1）通过 SpringMVC的表单标签可以实现将模型数据中的属性和 HTML 表单元素相绑定，以实现表单数据更便捷编辑和表单值的回显<br>2）form 标签  </p>
+<blockquote>
+<ul>
+<li>一般情况下，通过 GET 请求获取表单页面，而通过 POST 请求提交表单页面，因此获取表单页面和提交表单页面的 URL 是相同的。</li>
+<li>只要满足该最佳条件的契约，<a href="form:form" target="_blank" rel="noopener">form:form</a> 标签就无需通过 action 属性指定表单提交的 URL</li>
+<li>可以通过 modelAttribute属性指定绑定的模型属性，若没有指定该属性，则默认从 request 域对象中读取 command 的表单 bean，如果该属性值也不存在，则会发生错误。 </li>
+</ul>
+</blockquote>
+<p>3）SpringMVC 提供了多个表单组件标签，如 <a href="form:input/" target="_blank" rel="noopener">form:input/</a>、<a href="form:select/" target="_blank" rel="noopener">form:select/</a> 等，用以绑定表单字段的属性值，它们的共有属性如下：</p>
+<blockquote>
+<ul>
+<li>path：表单字段，对应 html 元素的 name 属性，支持级联属性</li>
+<li>htmlEscape：是否对表单值的 HTML 特殊字符进行转换，默认值为 true</li>
+<li>cssClass：表单组件对应的 CSS 样式类名</li>
+<li>cssErrorClass：表单组件的数据存在错误时，采取的 CSS 样式  </li>
+</ul>
+</blockquote>
+<p>4）form:input、form:password、form:hidden、form:textarea：对应 HTML 表单的 text、password、hidden、textarea 标签<br>5）form:radiobutton：单选框组件标签，当表单 bean 对应的属性值和 value 值相等时，单选框被选中<br>6）form:radiobuttons：单选框组标签，用于构造多个单选框  </p>
+<blockquote>
+<ul>
+<li>items：可以是一个 List、String[] 或 Map</li>
+<li>itemValue：指定 radio 的 value 值。可以是集合中 bean 的一个属性值</li>
+<li>itemLabel：指定 radio 的 label 值</li>
+<li>delimiter：多个单选框可以通过 delimiter 指定分隔符</li>
+</ul>
+</blockquote>
+<p>7）form:checkbox：复选框组件。用于构造单个复选框<br>8）form:checkboxs：用于构造多个复选框。使用方式同   form:radiobuttons 标签<br>9）form:select：用于构造下拉框组件。使用方式同 form:radiobuttons 标签<br>10）form:option：下拉框选项组件标签。使用方式同 form:radiobuttons 标签<br>11）form:errors：显示表单组件或数据校验所对应的错误  </p>
+<blockquote>
+<ul>
+<li>&lt;form:errors path= “*” /&gt; ：显示表单所有的错误</li>
+<li>&lt;form:errors path= “user*” /&gt; ：显示所有以 user 为前缀的属性对应的错误</li>
+<li>&lt;form:errors path= “username” /&gt; ：显示特定表单对象属性的错误</li>
+</ul>
+</blockquote>
+<h1 id="6-添加员工实验代码"><a href="#6-添加员工实验代码" class="headerlink" title="6 添加员工实验代码"></a>6 添加员工实验代码</h1><p>1）表单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;</span><br><span class="line">    pageEncoding=&quot;UTF-8&quot; import=&quot;java.util.*&quot;%&gt;</span><br><span class="line">&lt;%@ taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;</span><br><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span><br><span class="line"> &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- </span><br><span class="line">1.为什么使用SpringMVC的form标签</span><br><span class="line">① 快速开发</span><br><span class="line">② 表单回显</span><br><span class="line">2.可以通过modelAttribute指定绑定的模型属性，</span><br><span class="line">若没有指定该属性，则默认从request域中查找command的表单的bean</span><br><span class="line">如果该属性也不存在，那么，则会发生错误。</span><br><span class="line"> --&gt;</span><br><span class="line"> &lt;form:form action=&quot;empAdd&quot; method=&quot;POST&quot; modelAttribute=&quot;employee&quot;&gt;</span><br><span class="line">         LastName : &lt;form:input path=&quot;lastName&quot; /&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">         Email : &lt;form:input path=&quot;email&quot; /&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">         &lt;%</span><br><span class="line">                 Map&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</span><br><span class="line">                 map.put(&quot;1&quot;, &quot;Male&quot;);</span><br><span class="line">                 map.put(&quot;0&quot;,&quot;Female&quot;);</span><br><span class="line">                 request.setAttribute(&quot;genders&quot;, map);</span><br><span class="line">         %&gt;</span><br><span class="line">         Gender : &lt;br&gt;&lt;form:radiobuttons path=&quot;gender&quot; items=&quot;$&#123;genders &#125;&quot; delimiter=&quot;&lt;br&gt;&quot;/&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">         DeptName : </span><br><span class="line">                 &lt;form:select path=&quot;department.id&quot; </span><br><span class="line">                                                 items=&quot;$&#123;deptList &#125;&quot; </span><br><span class="line">                                                 itemLabel=&quot;departmentName&quot; </span><br><span class="line">                                                 itemValue=&quot;id&quot;&gt;&lt;/form:select&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">                 &lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line"> &lt;/form:form&gt; </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>2）控制器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class EmployeeHandler &#123;</span><br><span class="line">@RequestMapping(value=&quot;/empAdd&quot;,method=RequestMethod.POST)</span><br><span class="line">public String empAdd(Employee employee)&#123;</span><br><span class="line">employeeDao.save(employee);</span><br><span class="line">return &quot;redirect:/empList&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="7-RESTRUL-CRUD-删除操作-amp-处理静态资源"><a href="#7-RESTRUL-CRUD-删除操作-amp-处理静态资源" class="headerlink" title="7 RESTRUL_CRUD_删除操作&amp;处理静态资源"></a>7 RESTRUL_CRUD_删除操作&amp;处理静态资源</h1><h2 id="7-1-删除实验代码"><a href="#7-1-删除实验代码" class="headerlink" title="7.1 删除实验代码"></a>7.1 删除实验代码</h2><p>1）页面链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;td&gt;&lt;a href=&quot;/empDelete/$&#123;emp.id &#125;&quot;&gt;Delete&lt;/a&gt;&lt;/td&gt;</span><br></pre></td></tr></table></figure>
+<p>2）控制器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value=&quot;/empDelete/&#123;id&#125;&quot; ,method=RequestMethod.DELETE)</span><br><span class="line">public String empDelete(@PathVariable(&quot;id&quot;) Integer id)&#123;</span><br><span class="line">employeeDao.delete(id);</span><br><span class="line">return &quot;redirect:/empList&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="7-2-HiddenHttpMethodFilter过滤器"><a href="#7-2-HiddenHttpMethodFilter过滤器" class="headerlink" title="7.2 HiddenHttpMethodFilter过滤器"></a>7.2 HiddenHttpMethodFilter过滤器</h2><p>发起请求，无法执行，因为delete请求必须通过post请求转换为delete请求，借助：HiddenHttpMethodFilter过滤器</p>
+<h2 id="7-3-需要使用jQuery来转换请求方式"><a href="#7-3-需要使用jQuery来转换请求方式" class="headerlink" title="7.3 需要使用jQuery来转换请求方式"></a>7.3 需要使用jQuery来转换请求方式</h2><p>1）加入jQuery库文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/scripts/jquery-1.9.1.min.js</span><br></pre></td></tr></table></figure>
+<p>2）jQuery库文件不起作用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">警告: No mapping found for HTTP request with URI [/SpringMVC_03_RESTFul_CRUD/scripts/jquery-1.9.1.min.js] in DispatcherServlet with name &apos;springDispatcherServlet&apos;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/05/04/Ea9Aqe.png" alt="image"></p>
+<p>3）解决办法，SpringMVC 处理静态资源  </p>
+<blockquote>
+<p>①为什么会有这样的问题:<br>优雅的 REST 风格的资源URL 不希望带 .html 或 .do 等后缀，若将 DispatcherServlet 请求映射配置为 /, 则 Spring MVC 将捕获 WEB 容器的所有请求, 包括静态资源的请求, SpringMVC 会将他们当成一个普通请求处理, 因找不到对应处理器将导致错误。<br>②解决: 在 SpringMVC 的配置文件中配置 <a href="mvc:default-servlet-handler/" target="_blank" rel="noopener">mvc:default-servlet-handler/</a><br>4）配置后，原来的请求又不好使了<br>        需要配置&lt;mvc:annotation-driven /&gt;</p>
+</blockquote>
+<h2 id="7-4-关于mvc-default-servlet-handler-作用"><a href="#7-4-关于mvc-default-servlet-handler-作用" class="headerlink" title="7.4 关于mvc:default-servlet-handler/作用"></a>7.4 关于<a href="mvc:default-servlet-handler/" target="_blank" rel="noopener">mvc:default-servlet-handler/</a>作用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- </span><br><span class="line">&lt;mvc:default-servlet-handler/&gt; 将在 SpringMVC 上下文中定义一个 DefaultServletHttpRequestHandler，</span><br><span class="line">它会对进入 DispatcherServlet 的请求进行筛查，如果发现是没有经过映射的请求，</span><br><span class="line">就将该请求交由 WEB 应用服务器默认的 Servlet 处理，如果不是静态资源的请求，才由 DispatcherServlet 继续处理</span><br><span class="line">一般 WEB 应用服务器默认的 Servlet 的名称都是 default。</span><br><span class="line">若所使用的 WEB 服务器的默认 Servlet 名称不是 default，则需要通过 default-servlet-name 属性显式指定        </span><br><span class="line">参考：CATALINA_HOME/config/web.xml</span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;default&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-class&gt;org.apache.catalina.servlets.DefaultServlet&lt;/servlet-class&gt;</span><br><span class="line">        &lt;init-param&gt;</span><br><span class="line">            &lt;param-name&gt;debug&lt;/param-name&gt;</span><br><span class="line">            &lt;param-value&gt;0&lt;/param-value&gt;</span><br><span class="line">        &lt;/init-param&gt;</span><br><span class="line">        &lt;init-param&gt;</span><br><span class="line">            &lt;param-name&gt;listings&lt;/param-name&gt;</span><br><span class="line">            &lt;param-value&gt;false&lt;/param-value&gt;</span><br><span class="line">        &lt;/init-param&gt;</span><br><span class="line">        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line">该标签属性default-servlet-name默认值是&quot;default&quot;,可以省略。        </span><br><span class="line">&lt;mvc:default-servlet-handler/&gt;        </span><br><span class="line"> --&gt;</span><br><span class="line">&lt;mvc:default-servlet-handler default-servlet-name=&quot;default&quot;/&gt;</span><br><span class="line">	7.7.5 通过jQuery转换为DELETE请求</span><br><span class="line">&lt;td&gt;&lt;a class=&quot;delete&quot; href=&quot;empDelete/$&#123;emp.id &#125;&quot;&gt;Delete&lt;/a&gt;&lt;/td&gt;</span><br><span class="line">&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;</span><br><span class="line">&lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;DELETE&quot;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;scripts/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">$(function()&#123;</span><br><span class="line">$(&quot;.delete&quot;).click(function()&#123;</span><br><span class="line">var href = $(this).attr(&quot;href&quot;);</span><br><span class="line">$(&quot;form&quot;).attr(&quot;action&quot;,href).submit();</span><br><span class="line">return false ;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="7-6-删除操作流程图解"><a href="#7-6-删除操作流程图解" class="headerlink" title="7.6 删除操作流程图解"></a>7.6 删除操作流程图解</h1><p><img src="https://s2.ax1x.com/2019/05/04/Ea9nPI.png" alt="image"></p>
+<h1 id="8-RESTRUL-CRUD-修改操作"><a href="#8-RESTRUL-CRUD-修改操作" class="headerlink" title="8 RESTRUL_CRUD_修改操作"></a>8 RESTRUL_CRUD_修改操作</h1><h2 id="8-1-根据id查询员工对象，表单回显"><a href="#8-1-根据id查询员工对象，表单回显" class="headerlink" title="8.1 根据id查询员工对象，表单回显"></a>8.1 根据id查询员工对象，表单回显</h2><p>1）页面链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;td&gt;&lt;a href=&quot;empEdit/$&#123;emp.id &#125;&quot;&gt;Edit&lt;/a&gt;&lt;/td&gt;</span><br></pre></td></tr></table></figure>
+<p>2）控制器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//修改员工 - 表单回显</span><br><span class="line">@RequestMapping(value=&quot;/empEdit/&#123;id&#125;&quot;,method=RequestMethod.GET)</span><br><span class="line">public String empEdit(@PathVariable(&quot;id&quot;) Integer id,Map&lt;String,Object&gt; map)&#123;</span><br><span class="line">map.put(&quot;employee&quot;, employeeDao.get(id));</span><br><span class="line">map.put(&quot;deptList&quot;,departmentDao.getDepartments());</span><br><span class="line">return &quot;edit&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3）修改页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;</span><br><span class="line">    pageEncoding=&quot;UTF-8&quot; import=&quot;java.util.*&quot;%&gt;</span><br><span class="line">&lt;%@ taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;</span><br><span class="line">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;</span><br><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span><br><span class="line"> &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- </span><br><span class="line">1.为什么使用SpringMVC的form标签</span><br><span class="line">① 快速开发</span><br><span class="line">② 表单回显</span><br><span class="line">2.可以通过modelAttribute指定绑定的模型属性，</span><br><span class="line">若没有指定该属性，则默认从request域中查找command的表单的bean</span><br><span class="line">如果该属性也不存在，那么，则会发生错误。</span><br><span class="line">修改功能需要增加绝对路径，相对路径会报错，路径不对</span><br><span class="line"> --&gt;</span><br><span class="line"> &lt;form:form action=&quot;$&#123;pageContext.request.contextPath &#125;/empUpdate&quot; </span><br><span class="line">method=&quot;POST&quot; modelAttribute=&quot;employee&quot;&gt;                        </span><br><span class="line">&lt;%--</span><br><span class="line">         LastName : &lt;form:input path=&quot;lastName&quot; /&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">          --%&gt;</span><br><span class="line">                 &lt;form:hidden path=&quot;id&quot;/&gt;</span><br><span class="line">                 &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;PUT&quot;&gt;</span><br><span class="line">                 &lt;%-- 这里不要使用form:hidden标签，否则会报错。 </span><br><span class="line">&lt;form:hidden path=&quot;_method&quot; value=&quot;PUT&quot;/&gt;</span><br><span class="line">                         Spring的隐含标签，没有value属性，同时,path指定的值，在模型对象中也没有这个属性(_method)，所以回显时会报错。</span><br><span class="line">                         org.springframework.beans.NotReadablePropertyException: </span><br><span class="line">                         Invalid property &apos;_method&apos; of bean class [com.atguigu.springmvc.crud.entities.Employee]: </span><br><span class="line">                         Bean property &apos;_method&apos; is not readable or has an invalid getter method: </span><br><span class="line">                         Does the return type of the getter match the parameter type of the setter?</span><br><span class="line">                  --%&gt;</span><br><span class="line">                          </span><br><span class="line">         Email : &lt;form:input path=&quot;email&quot; /&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">         &lt;%</span><br><span class="line">                 Map&lt;String,String&gt; map = new HashMap&lt;String,String&gt;();</span><br><span class="line">                 map.put(&quot;1&quot;, &quot;Male&quot;);</span><br><span class="line">                 map.put(&quot;0&quot;,&quot;Female&quot;);</span><br><span class="line">                 request.setAttribute(&quot;genders&quot;, map);</span><br><span class="line">         %&gt;</span><br><span class="line">         Gender : &lt;br&gt;&lt;form:radiobuttons path=&quot;gender&quot; items=&quot;$&#123;genders &#125;&quot; delimiter=&quot;&lt;br&gt;&quot;/&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">         DeptName : </span><br><span class="line">                 &lt;form:select path=&quot;department.id&quot; </span><br><span class="line">                                                 items=&quot;$&#123;deptList &#125;&quot; </span><br><span class="line">                                                 itemLabel=&quot;departmentName&quot; </span><br><span class="line">                                                 itemValue=&quot;id&quot;&gt;&lt;/form:select&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">                 &lt;input type=&quot;submit&quot; value=&quot;Submit&quot;&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line"> &lt;/form:form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="8-2-提交表单，修改数据"><a href="#8-2-提交表单，修改数据" class="headerlink" title="8.2 提交表单，修改数据"></a>8.2 提交表单，修改数据</h2><p>1）控制器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value=&quot;/empUpdate&quot;,method=RequestMethod.PUT)</span><br><span class="line">public String empUpdate(Employee employee)&#123;</span><br><span class="line">employeeDao.save(employee);              </span><br><span class="line">return &quot;redirect:/empList&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/02/16/49. SpringMVC视图解析.md/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/02/20/51. SpringMVC处理JSON/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

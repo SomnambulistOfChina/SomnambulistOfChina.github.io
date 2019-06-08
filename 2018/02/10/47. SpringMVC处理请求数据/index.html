@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>5. SpringMVC处理请求数据 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,SpringMVC框架,">
+  
+
+  <meta name="description" content="概览 Springmvc如何处理请求数据? Springmvc会结合 请求对象(请求数据的来源) 与 请求处理方法(请求数据的去向) 进行分析， 最终将请求数据映射到请求处理方法对应的形参中 .  @RequestParam   value=”请求参数名”  required=”true/false”   defaultValue=”默认值” @RequestHeader @CookieValue">
+<meta name="keywords" content="SSM框架,SpringMVC框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5. SpringMVC处理请求数据">
+<meta property="og:url" content="http://yoursite.com/2018/02/10/47. SpringMVC处理请求数据/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概览 Springmvc如何处理请求数据? Springmvc会结合 请求对象(请求数据的来源) 与 请求处理方法(请求数据的去向) 进行分析， 最终将请求数据映射到请求处理方法对应的形参中 .  @RequestParam   value=”请求参数名”  required=”true/false”   defaultValue=”默认值” @RequestHeader @CookieValue">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUGnUA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUtba4.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUapUe.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUaVDf.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/03/EUdwTS.png">
+<meta property="og:updated_time" content="2019-06-08T14:47:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5. SpringMVC处理请求数据">
+<meta name="twitter:description" content="概览 Springmvc如何处理请求数据? Springmvc会结合 请求对象(请求数据的来源) 与 请求处理方法(请求数据的去向) 进行分析， 最终将请求数据映射到请求处理方法对应的形参中 .  @RequestParam   value=”请求参数名”  required=”true/false”   defaultValue=”默认值” @RequestHeader @CookieValue">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/03/EUGnUA.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概览"><span class="toc-text">概览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1请求处理方法签名"><span class="toc-text">1请求处理方法签名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-RequestParam注解"><span class="toc-text">2 @RequestParam注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-实验代码"><span class="toc-text">2.1 实验代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-RequestHeader-注解"><span class="toc-text">3 @RequestHeader 注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-实验代码"><span class="toc-text">3.1 实验代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-CookieValue-注解"><span class="toc-text">4 @CookieValue 注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1实验代码"><span class="toc-text">4.1实验代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-使用POJO作为参数"><span class="toc-text">5 使用POJO作为参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1实验代码"><span class="toc-text">5.1实验代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-使用Servlet原生API作为参数"><span class="toc-text">6 使用Servlet原生API作为参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-实验代码"><span class="toc-text">6.1 实验代码</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-47. SpringMVC处理请求数据" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">5. SpringMVC处理请求数据</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.02.10</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><ol>
+<li>Springmvc如何处理请求数据?<br> Springmvc会结合 请求对象(请求数据的来源) 与 请求处理方法(请求数据的去向) 进行分析， 最终将请求数据映射到请求处理方法对应的形参中 . </li>
+<li>@RequestParam   value=”请求参数名”  required=”true/false”   defaultValue=”默认值”</li>
+<li>@RequestHeader</li>
+<li>@CookieValue</li>
+<li>使用POJO封装请求参数 ，要求请求参数名与POJO的属性名一致. </li>
+<li>使用原生的ServletAPI ： HttpServletRequest  HttpServletResponse  HttpSession …</li>
+</ol>
+<h1 id="1请求处理方法签名"><a href="#1请求处理方法签名" class="headerlink" title="1请求处理方法签名"></a>1请求处理方法签名</h1><p>1）Spring MVC 通过分析处理方法的签名(方法名+ 参数列表)，HTTP请 求信息绑定到处理方法的相应形参中。<br>2）Spring MVC 对控制器处理方法签名的限制是很宽松的，几乎可以按喜欢的任何方式对方法进行签名。<br>3）必要时可以对方法及方法入参标注相应的注解（ @PathVariable 、@RequestParam、@RequestHeader 等）、<br>4）Spring MVC 框架会将 HTTP 请求的信息绑定到相应的方法入参中，并根据方法的返回值类型做出相应的后续处理。  </p>
+<h1 id="2-RequestParam注解"><a href="#2-RequestParam注解" class="headerlink" title="2 @RequestParam注解"></a>2 @RequestParam注解</h1><p>1）在处理方法入参处使用 @RequestParam 可以把请求参数传递给请求方法<br>2）value：参数名<br>3）required：是否必须。默认为 true, 表示请求参数中必须包含对应的参数，若不存在，将抛出异常<br>4）defaultValue: 默认值，当没有传递参数时使用该值</p>
+<h2 id="2-1-实验代码"><a href="#2-1-实验代码" class="headerlink" title="2.1 实验代码"></a>2.1 实验代码</h2><p>1）增加控制器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @RequestParam 注解用于映射请求参数</span><br><span class="line"> *         value 用于映射请求参数名称</span><br><span class="line"> *         required 用于设置请求参数是否必须的</span><br><span class="line"> *         defaultValue 设置默认值，当没有传递参数时使用该值</span><br><span class="line"> */</span><br><span class="line">@RequestMapping(value=&quot;/testRequestParam&quot;)</span><br><span class="line">public String testRequestParam(</span><br><span class="line">@RequestParam(value=&quot;username&quot;) String username,</span><br><span class="line">@RequestParam(value=&quot;age&quot;,required=false,defaultValue=&quot;0&quot;) int age)&#123;</span><br><span class="line">System.out.println(&quot;testRequestParam - username=&quot;+username +&quot;,age=&quot;+age);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2）增加页面链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--测试 请求参数 @RequestParam 注解使用 --&gt;</span><br><span class="line">&lt;a href=&quot;springmvc/testRequestParam?username=atguigu&amp;age=10&quot;&gt;testRequestParam&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="3-RequestHeader-注解"><a href="#3-RequestHeader-注解" class="headerlink" title="3 @RequestHeader 注解"></a>3 @RequestHeader 注解</h1><p>1）使用 @RequestHeader 绑定请求报头的属性值<br>2）请求头包含了若干个属性，服务器可据此获知客户端的信息，通过 @RequestHeader 即可将请求头中的属性值绑定到处理方法的入参中<br><img src="https://s2.ax1x.com/2019/05/03/EUGnUA.png" alt="image"></p>
+<h2 id="3-1-实验代码"><a href="#3-1-实验代码" class="headerlink" title="3.1 实验代码"></a>3.1 实验代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//了解: 映射请求头信息 用法同 @RequestParam</span><br><span class="line">@RequestMapping(value=&quot;/testRequestHeader&quot;)</span><br><span class="line">public String testRequestHeader(@RequestHeader(value=&quot;Accept-Language&quot;) String al)&#123;</span><br><span class="line">System.out.println(&quot;testRequestHeader - Accept-Language：&quot;+al);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br><span class="line">&lt;!-- 测试 请求头@RequestHeader 注解使用 --&gt;</span><br><span class="line">&lt;a href=&quot;springmvc/testRequestHeader&quot;&gt;testRequestHeader&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="4-CookieValue-注解"><a href="#4-CookieValue-注解" class="headerlink" title="4 @CookieValue 注解"></a>4 @CookieValue 注解</h1><p>1）使用 @CookieValue 绑定请求中的 Cookie 值<br>2）@CookieValue 可让处理方法入参绑定某个 Cookie 值<br><img src="https://s2.ax1x.com/2019/05/03/EUtba4.png" alt="image"></p>
+<h2 id="4-1实验代码"><a href="#4-1实验代码" class="headerlink" title="4.1实验代码"></a>4.1实验代码</h2><p>1）增加控制器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//了解:@CookieValue: 映射一个 Cookie 值. 属性同 @RequestParam</span><br><span class="line">@RequestMapping(&quot;/testCookieValue&quot;)</span><br><span class="line">public String testCookieValue(@CookieValue(&quot;JSESSIONID&quot;) String sessionId) &#123;</span><br><span class="line">System.out.println(&quot;testCookieValue: sessionId: &quot; + sessionId);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2）增加页面链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--测试 请求Cookie @CookieValue 注解使用 --&gt;</span><br><span class="line">&lt;a href=&quot;springmvc/testCookieValue&quot;&gt;testCookieValue&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="5-使用POJO作为参数"><a href="#5-使用POJO作为参数" class="headerlink" title="5 使用POJO作为参数"></a>5 使用POJO作为参数</h1><p>1）使用 POJO 对象绑定请求参数值<br>2）Spring MVC 会按请求参数名和 POJO 属性名进行自动匹配，自动为该对象填充属性值。支持级联属性。如：dept.deptId、dept.address.tel 等</p>
+<h2 id="5-1实验代码"><a href="#5-1实验代码" class="headerlink" title="5.1实验代码"></a>5.1实验代码</h2><p>1）增加控制器方法、表单页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Spring MVC 会按请求参数名和 POJO 属性名进行自动匹配， 自动为该对象填充属性值。</span><br><span class="line"> * 支持级联属性</span><br><span class="line"> *                 如：dept.deptId、dept.address.tel 等</span><br><span class="line"> */</span><br><span class="line">@RequestMapping(&quot;/testPOJO&quot;)</span><br><span class="line">public String testPojo(User user) &#123;</span><br><span class="line">System.out.println(&quot;testPojo: &quot; + user);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 测试 POJO 对象传参，支持级联属性 --&gt;</span><br><span class="line">&lt;form action=&quot; testPOJO&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">username: &lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br&gt;</span><br><span class="line">password: &lt;input type=&quot;password&quot; name=&quot;password&quot;/&gt;&lt;br&gt;</span><br><span class="line">email: &lt;input type=&quot;text&quot; name=&quot;email&quot;/&gt;&lt;br&gt;</span><br><span class="line">age: &lt;input type=&quot;text&quot; name=&quot;age&quot;/&gt;&lt;br&gt;</span><br><span class="line">city: &lt;input type=&quot;text&quot; name=&quot;address.city&quot;/&gt;&lt;br&gt;</span><br><span class="line">province: &lt;input type=&quot;text&quot; name=&quot;address.province&quot;/&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;Submit&quot;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/05/03/EUapUe.png" alt="image"></p>
+<p>2）增加实体类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">package com.springmvc.entities;</span><br><span class="line">public class Address &#123;</span><br><span class="line">private String province;</span><br><span class="line">private String city;</span><br><span class="line">//get/set</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">package.com.springmvc.entities;</span><br><span class="line">public class User &#123;</span><br><span class="line">private Integer id ;</span><br><span class="line">private String username;</span><br><span class="line">private String password;</span><br><span class="line">private String email;</span><br><span class="line">private int age;</span><br><span class="line">private Address address;</span><br><span class="line">//get/set </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3）执行结果：<br><img src="https://s2.ax1x.com/2019/05/03/EUaVDf.png" alt="image"></p>
+<p>4）如果中文有乱码，需要配置字符编码过滤器，且配置其他过滤器之前，<br>如（HiddenHttpMethodFilter），否则不起作用。（思考method=”get”请求的乱码问题怎么解决的）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置字符集 --&gt;</span><br><span class="line">	&lt;filter&gt;</span><br><span class="line">		&lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;</span><br><span class="line">		&lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;</span><br><span class="line">		&lt;init-param&gt;</span><br><span class="line">			&lt;param-name&gt;encoding&lt;/param-name&gt;</span><br><span class="line">			&lt;param-value&gt;UTF-8&lt;/param-value&gt;</span><br><span class="line">		&lt;/init-param&gt;</span><br><span class="line">		&lt;init-param&gt;</span><br><span class="line">			&lt;param-name&gt;forceEncoding&lt;/param-name&gt;</span><br><span class="line">			&lt;param-value&gt;true&lt;/param-value&gt;</span><br><span class="line">		&lt;/init-param&gt;</span><br><span class="line">	&lt;/filter&gt;</span><br><span class="line">	&lt;filter-mapping&gt;</span><br><span class="line">		&lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;</span><br><span class="line">		&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">	&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="6-使用Servlet原生API作为参数"><a href="#6-使用Servlet原生API作为参数" class="headerlink" title="6 使用Servlet原生API作为参数"></a>6 使用Servlet原生API作为参数</h1><p>1）MVC 的 Handler 方法可以接受哪些 ServletAPI 类型的参数</p>
+<blockquote>
+<p>1)HttpServletRequest<br>2)HttpServletResponse<br>3)HttpSession<br>4)java.security.Principal //安全相关<br>5)Locale //国际化 本地化<br>6)InputStream //输入流<br>7)OutputStream //输出流<br>8)Reader //字符流 输入<br>9)Writer //字符流 输出  </p>
+</blockquote>
+<p>2）源码参考：AnnotationMethodHandlerAdapter L866<br><img src="https://s2.ax1x.com/2019/05/03/EUdwTS.png" alt="image"><br>3）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected Object resolveStandardArgument(Class&lt;?&gt; parameterType, NativeWebRequest webRequest) throws Exception &#123;</span><br><span class="line">HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);</span><br><span class="line">HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);</span><br><span class="line"> </span><br><span class="line">if (ServletRequest.class.isAssignableFrom(parameterType) ||</span><br><span class="line">MultipartRequest.class.isAssignableFrom(parameterType)) &#123;</span><br><span class="line">Object nativeRequest = webRequest.getNativeRequest(parameterType);</span><br><span class="line">if (nativeRequest == null) &#123;</span><br><span class="line">throw new IllegalStateException(</span><br><span class="line">&quot;Current request is not of type [&quot; + parameterType.getName() + &quot;]: &quot; + request);</span><br><span class="line">&#125;</span><br><span class="line">return nativeRequest;</span><br><span class="line">&#125;</span><br><span class="line">else if (ServletResponse.class.isAssignableFrom(parameterType)) &#123;</span><br><span class="line">this.responseArgumentUsed = true;</span><br><span class="line">Object nativeResponse = webRequest.getNativeResponse(parameterType);</span><br><span class="line">if (nativeResponse == null) &#123;</span><br><span class="line">throw new IllegalStateException(</span><br><span class="line">&quot;Current response is not of type [&quot; + parameterType.getName() + &quot;]: &quot; + response);</span><br><span class="line">&#125;</span><br><span class="line">return nativeResponse;</span><br><span class="line">&#125;</span><br><span class="line">else if (HttpSession.class.isAssignableFrom(parameterType)) &#123;</span><br><span class="line">return request.getSession();</span><br><span class="line">&#125;</span><br><span class="line">else if (Principal.class.isAssignableFrom(parameterType)) &#123;</span><br><span class="line">return request.getUserPrincipal();</span><br><span class="line">&#125;</span><br><span class="line">else if (Locale.class.equals(parameterType)) &#123;</span><br><span class="line">return RequestContextUtils.getLocale(request);</span><br><span class="line">&#125;</span><br><span class="line">else if (InputStream.class.isAssignableFrom(parameterType)) &#123;</span><br><span class="line">return request.getInputStream();</span><br><span class="line">&#125;</span><br><span class="line">else if (Reader.class.isAssignableFrom(parameterType)) &#123;</span><br><span class="line">return request.getReader();</span><br><span class="line">&#125;</span><br><span class="line">else if (OutputStream.class.isAssignableFrom(parameterType)) &#123;</span><br><span class="line">this.responseArgumentUsed = true;</span><br><span class="line">eturn response.getOutputStream();</span><br><span class="line">&#125;</span><br><span class="line">else if (Writer.class.isAssignableFrom(parameterType)) &#123;</span><br><span class="line">this.responseArgumentUsed = true;</span><br><span class="line">return response.getWriter();</span><br><span class="line">&#125;</span><br><span class="line">return super.resolveStandardArgument(parameterType, webRequest);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="6-1-实验代码"><a href="#6-1-实验代码" class="headerlink" title="6.1 实验代码"></a>6.1 实验代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 可以使用 Serlvet 原生的 API 作为目标方法的参数 具体支持以下类型</span><br><span class="line"> * </span><br><span class="line"> * HttpServletRequest </span><br><span class="line"> * HttpServletResponse </span><br><span class="line"> * HttpSession</span><br><span class="line"> * java.security.Principal </span><br><span class="line"> * Locale InputStream </span><br><span class="line"> * OutputStream </span><br><span class="line"> * Reader </span><br><span class="line"> * Writer</span><br><span class="line"> * @throws IOException </span><br><span class="line"> */</span><br><span class="line">@RequestMapping(&quot;/testServletAPI&quot;)</span><br><span class="line">public void testServletAPI(HttpServletRequest request,HttpServletResponse response, Writer out) throws IOException &#123;</span><br><span class="line">System.out.println(&quot;testServletAPI, &quot; + request + &quot;, &quot; + response);</span><br><span class="line">out.write(&quot;hello springmvc&quot;);</span><br><span class="line">//return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 测试 Servlet API 作为处理请求参数 --&gt;</span><br><span class="line">&lt;a href=&quot;springmvc/testServletAPI&quot;&gt;testServletAPI&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/02/08/46. SpringMVC-REST/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/02/14/48. SpringMVC处理响应数据/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

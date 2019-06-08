@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>4. SpringAOP概述 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Spring框架,SSM框架,">
+  
+
+  <meta name="description" content="概述 AOP  面向切面编程.  AOP 术语1横切关注点 、 切面 、 通知 、 目标 、 代理 、 连接点 、 切入点   123@Component  // 标识为一个组件@Aspect     // 标识为一个切面@Order(0)  //优先级  AspectJ  1AspectJ 不属于Spring.  但是AspectJ是比较完整流行的AOP框架. Spring对AspectJ进行了">
+<meta name="keywords" content="Spring框架,SSM框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4. SpringAOP概述">
+<meta property="og:url" content="http://yoursite.com/2018/01/15/38. SpringAOP概述/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概述 AOP  面向切面编程.  AOP 术语1横切关注点 、 切面 、 通知 、 目标 、 代理 、 连接点 、 切入点   123@Component  // 标识为一个组件@Aspect     // 标识为一个切面@Order(0)  //优先级  AspectJ  1AspectJ 不属于Spring.  但是AspectJ是比较完整流行的AOP框架. Spring对AspectJ进行了">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/EhL3VA.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/EhOYw9.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/EhXZ6O.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/12/E4mJgO.png">
+<meta property="og:updated_time" content="2019-06-08T14:46:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4. SpringAOP概述">
+<meta name="twitter:description" content="概述 AOP  面向切面编程.  AOP 术语1横切关注点 、 切面 、 通知 、 目标 、 代理 、 连接点 、 切入点   123@Component  // 标识为一个组件@Aspect     // 标识为一个切面@Order(0)  //优先级  AspectJ  1AspectJ 不属于Spring.  但是AspectJ是比较完整流行的AOP框架. Spring对AspectJ进行了">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/12/EhL3VA.md.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-1-AOP简介"><span class="toc-text">4.1 AOP简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-2-AOP术语"><span class="toc-text">4.2 AOP术语</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-1-横切关注点"><span class="toc-text">4.2.1 横切关注点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-2-切面-Aspect"><span class="toc-text">4.2.2 切面(Aspect)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-3-通知-Advice"><span class="toc-text">4.2.3 通知(Advice)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-4-目标-Target"><span class="toc-text">4.2.4 目标(Target)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-5-代理-Proxy"><span class="toc-text">4.2.5 代理(Proxy)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-6-连接点-Joinpoint"><span class="toc-text">4.2.6 连接点(Joinpoint)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-7-切入点-pointcut-："><span class="toc-text">4.2.7 切入点(pointcut)：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-8-图解"><span class="toc-text">4.2.8 图解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-3-AspectJ"><span class="toc-text">4.3 AspectJ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-1-简介"><span class="toc-text">4.3.1    简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-2-在Spring中启用AspectJ注解支持"><span class="toc-text">4.3.2    在Spring中启用AspectJ注解支持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-3-用AspectJ注解声明切面"><span class="toc-text">4.3.3 用AspectJ注解声明切面</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-38. SpringAOP概述" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">4. SpringAOP概述</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.01.15</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><ol>
+<li>AOP  面向切面编程. </li>
+<li>AOP 术语<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">横切关注点 、 切面 、 通知 、 目标 、 代理 、 连接点 、 切入点</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Component  // 标识为一个组件</span><br><span class="line">@Aspect     // 标识为一个切面</span><br><span class="line">@Order(0)  //优先级</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>AspectJ </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AspectJ 不属于Spring.  但是AspectJ是比较完整流行的AOP框架. Spring对AspectJ进行了支持. 支持注解以及XML两种方式.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>AspectJ 注解开发<br> 4.1 组件扫描<br> 4.2 开启注解支持  &lt;aop: aspectj-autoproxy/&gt;<br> 4.3 切面    </p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过@Component注解标识为一个组件 在通过@Aspect注解标识为切面</span><br></pre></td></tr></table></figure>
+<p>4.4 通知  </p>
+<ul>
+<li><p>前置通知：在目标方法执行之前执行. </p>
+<ul>
+<li>@Before :标识前置通知    </li>
+<li>value: 用于指定切入点表达式  </li>
+<li>JoinPoint: 连接点对象， 用于描述连接点相关的信息  </li>
+</ul>
+</li>
+<li><p>后置通知：在目标方法执行之后执行 </p>
+<ul>
+<li>@After 不管目标方法有没有抛出异常都会执行,不能获取到目标方法的返回值.</li>
+</ul>
+</li>
+<li><p>返回通知：在目标方法正常执行结束后执行，  </p>
+<ul>
+<li>@AfterReturning 可以获取到方法的返回值.  </li>
+</ul>
+</li>
+<li><p>获取目标方法的返回值:  </p>
+<ul>
+<li>通过returning来指定一个形参名，来接收目标方法的返回值.  </li>
+</ul>
+</li>
+<li><p>异常通知 </p>
+<ul>
+<li>@AfterThrowing在目标方法抛出异常以后执行.<ul>
+<li>获取目标方法抛出的异常: 通过throwing来指定一个形参名， 来接收目标方法抛出的异常</li>
+<li>可以通过形参的类型来设置抛出指定异常后再执行异常通知.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>环绕通知          环绕着整个目标方法.  <ul>
+<li>@Around可以理解为 前置 后置 返回 异常 通知的结合.<br>更类似于动态代理InvocationHandler中的invoke方法的处理。<h1 id="4-1-AOP简介"><a href="#4-1-AOP简介" class="headerlink" title="4.1 AOP简介"></a>4.1 AOP简介</h1><blockquote>
+<p>1)AOP(Aspect-Oriented Programming，面向切面编程)：<br>是一种新的方法论，是对统 OOP(Object-OrientedProgramming，面向对象编程)的补充。<br>2)AOP编程操作的主要对象是切面(aspect)，而切面用于模块化横切关注点（公共功能）。<br>3)在应用AOP编程时，仍然需要定义公共功能，但可以明确的定义这个功能应用在哪里，以什么方式应用，并且不必修改受影响的类。这样一来横切关注点就被模块化到特殊的类里——这样的类我们通常称之为“切面”。<br>4)AOP的好处：   </p>
+<blockquote>
+<p>① 每个事物逻辑位于一个位置，代码不分散，便于维护和升级<br>② 业务模块更简洁，只包含核心业务代码<br>③ AOP图解  </p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="https://imgchr.com/i/EhL3VA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/12/EhL3VA.md.png" alt="EhL3VA.md.png"></a></p>
+<h1 id="4-2-AOP术语"><a href="#4-2-AOP术语" class="headerlink" title="4.2 AOP术语"></a>4.2 AOP术语</h1><h2 id="4-2-1-横切关注点"><a href="#4-2-1-横切关注点" class="headerlink" title="4.2.1 横切关注点"></a>4.2.1 横切关注点</h2><p>从每个方法中抽取出来的同一类非核心业务。</p>
+<h2 id="4-2-2-切面-Aspect"><a href="#4-2-2-切面-Aspect" class="headerlink" title="4.2.2 切面(Aspect)"></a>4.2.2 切面(Aspect)</h2><p>封装横切关注点信息的类，每个关注点体现为一个通知方法。</p>
+<h2 id="4-2-3-通知-Advice"><a href="#4-2-3-通知-Advice" class="headerlink" title="4.2.3 通知(Advice)"></a>4.2.3 通知(Advice)</h2><p>切面必须要完成的各个具体工作</p>
+<h2 id="4-2-4-目标-Target"><a href="#4-2-4-目标-Target" class="headerlink" title="4.2.4 目标(Target)"></a>4.2.4 目标(Target)</h2><p>被通知的对象</p>
+<h2 id="4-2-5-代理-Proxy"><a href="#4-2-5-代理-Proxy" class="headerlink" title="4.2.5 代理(Proxy)"></a>4.2.5 代理(Proxy)</h2><p>向目标对象应用通知之后创建的代理对象</p>
+<h2 id="4-2-6-连接点-Joinpoint"><a href="#4-2-6-连接点-Joinpoint" class="headerlink" title="4.2.6 连接点(Joinpoint)"></a>4.2.6 连接点(Joinpoint)</h2><p>横切关注点在程序代码中的具体体现，对应程序执行的某个特定位置。<br>例如：类某个方法调用前、调用后、方法捕获到异常后等。</p>
+<blockquote>
+<p>在应用程序中可以使用横纵两个坐标来定位一个具体的连接点：<br><a href="https://imgchr.com/i/EhOYw9" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/12/EhOYw9.md.png" alt="EhOYw9.md.png"></a></p>
+</blockquote>
+<h2 id="4-2-7-切入点-pointcut-："><a href="#4-2-7-切入点-pointcut-：" class="headerlink" title="4.2.7 切入点(pointcut)："></a>4.2.7 切入点(pointcut)：</h2><blockquote>
+<p>定位连接点的方式。每个类的方法中都包含多个连接点，所以连接点是类中客观存在的事物。<br>如果把连接点看作数据库中的记录，那么切入点就是查询条件——AOP可以通过切入点定位到特定的连接点。<br>切点通过org.springframework.aop.Pointcut 接口进行描述，它使用类和方法作为连接点的查询条件。</p>
+</blockquote>
+<h2 id="4-2-8-图解"><a href="#4-2-8-图解" class="headerlink" title="4.2.8 图解"></a>4.2.8 图解</h2><p><img src="https://s2.ax1x.com/2019/05/12/EhXZ6O.png" alt="EhXZ6O.png"></p>
+<h1 id="4-3-AspectJ"><a href="#4-3-AspectJ" class="headerlink" title="4.3 AspectJ"></a>4.3 AspectJ</h1><h2 id="4-3-1-简介"><a href="#4-3-1-简介" class="headerlink" title="4.3.1    简介"></a>4.3.1    简介</h2><blockquote>
+<p>AspectJ：Java社区里最完整最流行的AOP框架。<br>在Spring2.0以上版本中，可以使用基于AspectJ注解或基于XML配置的AOP。<br>Spring AOP旨在通过Spring IoC提供一个简单的AOP实现，以解决编码人员面临的最常出现的问题。<br>这并不是完整的AOP解决方案，它只能用于Spring容器管理的beans。<br>AspectJ是最原始的AOP实现技术，提供了完整的AOP解决方案。<br>AspectJ更为健壮，相对于Spring AOP也显得更为复杂。<br>值得注意的是，AspectJ能够被应用于所有的领域对象。</p>
+</blockquote>
+<h2 id="4-3-2-在Spring中启用AspectJ注解支持"><a href="#4-3-2-在Spring中启用AspectJ注解支持" class="headerlink" title="4.3.2    在Spring中启用AspectJ注解支持"></a>4.3.2    在Spring中启用AspectJ注解支持</h2><p>1)导入JAR包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">com.springsource.net.sf.cglib-2.2.0.jar</span><br><span class="line">com.springsource.org.aopalliance-1.0.0.jar</span><br><span class="line">com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar</span><br><span class="line">spring-aop-4.0.0.RELEASE.jar</span><br><span class="line">spring-aspects-4.0.0.RELEASE.jar</span><br></pre></td></tr></table></figure></p>
+<p>2)引入aop名称空间<br><img src="https://s2.ax1x.com/2019/05/12/E4mJgO.png" alt="E4mJgO.png"></p>
+<p>3)配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;aop:aspectj-autoproxy&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当Spring IOC容器侦测到bean配置文件中的<a href="aop:aspectj-autoproxy" target="_blank" rel="noopener">aop:aspectj-autoproxy</a>元素时，会自动为    与AspectJ切面匹配的bean创建代理</p>
+</blockquote>
+<h2 id="4-3-3-用AspectJ注解声明切面"><a href="#4-3-3-用AspectJ注解声明切面" class="headerlink" title="4.3.3 用AspectJ注解声明切面"></a>4.3.3 用AspectJ注解声明切面</h2><blockquote>
+<p>1)要在Spring中声明AspectJ切面，只需要在IOC容器中将切面声明为bean实例。<br>2)当在Spring IOC容器中初始化AspectJ切面之后，Spring IOC容器就会为那些与 AspectJ切面相匹配的bean创建代理。<br>3)在AspectJ注解中，切面只是一个带有@Aspect注解的Java类，它往往要包含很多通知。<br>4)通知是标注有某种注解的简单的Java方法。<br>5)AspectJ支持5种类型的通知注解：<br>① @Before：前置通知，在方法执行之前执行<br>② @After：后置通知，在方法执行之后执行<br>③ @AfterRunning：返回通知，在方法返回结果之后执行<br>④ @AfterThrowing：异常通知，在方法抛出异常之后执行<br>⑥ @Around：环绕通知，围绕着方法执行</p>
+</blockquote>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/01/12/37. SpringAOP前奏/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/01/18/39. SpringAOP细节/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

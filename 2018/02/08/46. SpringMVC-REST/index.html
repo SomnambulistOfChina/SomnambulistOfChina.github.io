@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>4. SpringMVC-REST | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,SpringMVC框架,">
+  
+
+  <meta name="description" content="概览：  Http中定义了四种表示操作的动词 , GET  POST  PUT  DELETE , 对应  查询  添加  修改  删除 操作. 也就意味着完成什么样的操作需要通过对应的请求方式来发送请求.  HiddenHttpMethodFilter: 在满足转换条件的情况下， 将客户端的请求转换为对应的PUT/DELETE。 需要满足的条件:当前的请求方式必须是POST 从当前的请求中能通过">
+<meta name="keywords" content="SSM框架,SpringMVC框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4. SpringMVC-REST">
+<meta property="og:url" content="http://yoursite.com/2018/02/08/46. SpringMVC-REST/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概览：  Http中定义了四种表示操作的动词 , GET  POST  PUT  DELETE , 对应  查询  添加  修改  删除 操作. 也就意味着完成什么样的操作需要通过对应的请求方式来发送请求.  HiddenHttpMethodFilter: 在满足转换条件的情况下， 将客户端的请求转换为对应的PUT/DELETE。 需要满足的条件:当前的请求方式必须是POST 从当前的请求中能通过">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/02/ENQJ1g.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/01/EJ3kV0.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/01/EJ3dsA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/01/EJ3IoV.png">
+<meta property="og:updated_time" content="2019-06-08T14:46:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="4. SpringMVC-REST">
+<meta name="twitter:description" content="概览：  Http中定义了四种表示操作的动词 , GET  POST  PUT  DELETE , 对应  查询  添加  修改  删除 操作. 也就意味着完成什么样的操作需要通过对应的请求方式来发送请求.  HiddenHttpMethodFilter: 在满足转换条件的情况下， 将客户端的请求转换为对应的PUT/DELETE。 需要满足的条件:当前的请求方式必须是POST 从当前的请求中能通过">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/02/ENQJ1g.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概览："><span class="toc-text">概览：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-1-REST参考资料："><span class="toc-text">3.1 REST参考资料：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-2-REST是什么？"><span class="toc-text">3.2 REST是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-3-HiddenHttpMethodFilter过滤器源码分析"><span class="toc-text">3.3 HiddenHttpMethodFilter过滤器源码分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-4-实验代码"><span class="toc-text">3.4 实验代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1）配置HiddenHttpMethodFilter过滤器"><span class="toc-text">1）配置HiddenHttpMethodFilter过滤器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2）代码"><span class="toc-text">2）代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3）请求链接"><span class="toc-text">3）请求链接</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-46. SpringMVC-REST" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">4. SpringMVC-REST</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.02.08</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概览："><a href="#概览：" class="headerlink" title="概览："></a>概览：</h1><blockquote>
+<ol>
+<li>Http中定义了四种表示操作的动词 , GET  POST  PUT  DELETE , 对应  查询  添加  修改  删除 操作.<br> 也就意味着完成什么样的操作需要通过对应的请求方式来发送请求. </li>
+<li>HiddenHttpMethodFilter:<br> 在满足转换条件的情况下， 将客户端的请求转换为对应的PUT/DELETE。<br> 需要满足的条件:<pre><code>当前的请求方式必须是POST
+从当前的请求中能通过 _method 获取到对应的请求参数值. 
+</code></pre></li>
+<li>REST  CRUD<br> 查询   user/1001    ==GET==<br>添加   user        == POST==<br>删除   user/1001    ==POST(_method=DELETE) -&gt;HiddenHttpMethodFilter -&gt;DELETE<br>修改   user        ==POST(_method=PUT)-&gt;HiddenHttpMethodFilter-&gt;PUT==<br><img src="https://s2.ax1x.com/2019/05/02/ENQJ1g.png" alt="image"></li>
+</ol>
+</blockquote>
+<h1 id="3-1-REST参考资料："><a href="#3-1-REST参考资料：" class="headerlink" title="3.1 REST参考资料："></a>3.1 REST参考资料：</h1><p>1）理解本真的REST架构风格:   <a href="http://kb.cnblogs.com/page/186516/" target="_blank" rel="noopener">http://kb.cnblogs.com/page/186516/</a><br>2）REST: <a href="http://www.infoq.com/cn/articles/rest-introduction" target="_blank" rel="noopener">http://www.infoq.com/cn/articles/rest-introduction</a>  </p>
+<h1 id="3-2-REST是什么？"><a href="#3-2-REST是什么？" class="headerlink" title="3.2 REST是什么？"></a>3.2 REST是什么？</h1><p>1）REST：即 Representational State Transfer。（资源）表现层状态转化。是目前最流行的一种互联网软件架构。它结构清晰、符合标准、易于理解、扩展方便，所以正得到越来越多网站的采用  </p>
+<blockquote>
+<p>①资源（Resources）：网络上的一个实体，或者说是网络上的一个具体信息。<br>它可以是一段文本、一张图片、一首歌曲、一种服务，总之就是一个具体的存在。<br>可以用一个URI（统一资源定位符）指向它，每种资源对应一个特定的 URI 。<br>获取这个资源，访问它的URI就可以，因此 URI 即为每一个资源的独一无二的识别符。<br>②表现层（Representation）：把资源具体呈现出来的形式，叫做它的表现层（Representation）。比如，文本可以用 txt 格式表现，也可以用 HTML 格式、XML 格式、JSON 格式表现，甚至可以采用二进制格式。<br>③状态转化（State Transfer）：每发出一个请求，就代表了客户端和服务器的一次交互过程。HTTP协议，是一个无状态协议，即所有的状态都保存在服务器端。因此，如果客户端想要操作服务器，必须通过某种手段，让服务器端发生“状态转化”（State Transfer)而这种转化是建立在表现层之上的，所以就是 “表现层状态转化”。<br>④具体说，就是 HTTP 协议里面，四个表示操作方式的动词：GET、POST、PUT、DELETE。它们分别对应四种基本操作：GET 用来获取资源，POST 用来新建资源，PUT 用来更新资源，DELETE 用来删除资源。<br>2）URL风格<br>示例：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/order/1   HTTP GET ：得到 id = 1 的 order           gerOrder?id=1</span><br><span class="line">/order/1   HTTP DELETE：删除 id = 1的 order         deleteOrder?id=1</span><br><span class="line">/order     HTTP PUT：更新order   </span><br><span class="line">/order      HTTP POST：新增 order</span><br></pre></td></tr></table></figure>
+<p>3）HiddenHttpMethodFilter  </p>
+<blockquote>
+<p>浏览器 form 表单只支持 GET 与 POST 请求，而DELETE、PUT 等 method 并不<br>支持，Spring3.0 添加了一个过滤器，可以将这些请求转换为标准的 http 方法，使<br>得支持 GET、POST、PUT 与 DELETE 请求。</p>
+</blockquote>
+<h1 id="3-3-HiddenHttpMethodFilter过滤器源码分析"><a href="#3-3-HiddenHttpMethodFilter过滤器源码分析" class="headerlink" title="3.3 HiddenHttpMethodFilter过滤器源码分析"></a>3.3 HiddenHttpMethodFilter过滤器源码分析</h1><p>1）为什么请求隐含参数名称必须叫做”_method”<br><img src="https://s2.ax1x.com/2019/05/01/EJ3kV0.png" alt="image"><br>2）hiddenHttpMethodFilter 的处理过程!<br><img src="https://s2.ax1x.com/2019/05/01/EJ3dsA.png" alt="image"></p>
+<p><img src="https://s2.ax1x.com/2019/05/01/EJ3IoV.png" alt="image"></p>
+<h1 id="3-4-实验代码"><a href="#3-4-实验代码" class="headerlink" title="3.4 实验代码"></a>3.4 实验代码</h1><h2 id="1）配置HiddenHttpMethodFilter过滤器"><a href="#1）配置HiddenHttpMethodFilter过滤器" class="headerlink" title="1）配置HiddenHttpMethodFilter过滤器"></a>1）配置HiddenHttpMethodFilter过滤器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 支持REST风格的过滤器：可以将POST请求转换为PUT或DELETE请求 --&gt;</span><br><span class="line">&lt;filter&gt;</span><br><span class="line">&lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;</span><br><span class="line">&lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">&lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;</span><br><span class="line">&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2）代码"><a href="#2）代码" class="headerlink" title="2）代码"></a>2）代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 1.测试REST风格的  GET,POST,PUT,DELETE 操作</span><br><span class="line"> * 以CRUD为例：</span><br><span class="line"> * 新增: /order POST</span><br><span class="line"> * 修改: /order/1 PUT           update?id=1</span><br><span class="line"> * 获取: /order/1 GET                get?id=1</span><br><span class="line"> * 删除: /order/1 DELETE        delete?id=1</span><br><span class="line"> </span><br><span class="line"> * 2.如何发送PUT请求或DELETE请求?</span><br><span class="line"> * ①.配置HiddenHttpMethodFilter</span><br><span class="line"> * ②.需要发送POST请求</span><br><span class="line"> * ③.需要在发送POST请求时携带一个 name=&quot;_method&quot;的隐含域，值为PUT或DELETE</span><br><span class="line"> </span><br><span class="line"> * 3.在SpringMVC的目标方法中如何得到id值呢?</span><br><span class="line"> *   使用@PathVariable注解</span><br><span class="line"> */</span><br><span class="line">@RequestMapping(value=&quot;/testRESTGet/&#123;id&#125;&quot;,method=RequestMethod.GET)</span><br><span class="line">public String testRESTGet(@PathVariable(value=&quot;id&quot;) Integer id)&#123;</span><br><span class="line">System.out.println(&quot;testRESTGet id=&quot;+id);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@RequestMapping(value=&quot;/testRESTPost&quot;,method=RequestMethod.POST)</span><br><span class="line">public String testRESTPost()&#123;</span><br><span class="line">System.out.println(&quot;testRESTPost&quot;);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@RequestMapping(value=&quot;/testRESTPut/&#123;id&#125;&quot;,method=RequestMethod.PUT)</span><br><span class="line">public String testRESTPut(@PathVariable(&quot;id&quot;) Integer id)&#123;</span><br><span class="line">System.out.println(&quot;testRESTPut id=&quot;+id);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@RequestMapping(value=&quot;/testRESTDelete/&#123;id&#125;&quot;,method=RequestMethod.DELETE)</span><br><span class="line">public String testRESTDelete(@PathVariable(&quot;id&quot;) Integer id)&#123;</span><br><span class="line">System.out.println(&quot;testRESTDelete id=&quot;+id);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3）请求链接"><a href="#3）请求链接" class="headerlink" title="3）请求链接"></a>3）请求链接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 实验1 测试 REST风格 GET 请求 --&gt;</span><br><span class="line">&lt;a href=&quot;springmvc/testRESTGet/1&quot;&gt;testREST GET&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- 实验2 测试 REST风格 POST 请求 --&gt;</span><br><span class="line">&lt;form action=&quot;springmvc/testRESTPost&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;testRESTPost&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- 实验3 测试 REST风格 PUT 请求 --&gt;</span><br><span class="line">&lt;form action=&quot;springmvc/testRESTPut/1&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">&lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;PUT&quot;&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;testRESTPut&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"> </span><br><span class="line">&lt;!-- 实验4 测试 REST风格 DELETE 请求 --&gt;</span><br><span class="line">&lt;form action=&quot;springmvc/testRESTDelete/1&quot; method=&quot;POST&quot;&gt;</span><br><span class="line">&lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;DELETE&quot;&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;testRESTDelete&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/02/05/45. SpringMVC-HelloWorld深度解析/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/02/10/47. SpringMVC处理请求数据/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

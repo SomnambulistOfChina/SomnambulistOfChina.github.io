@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>3. SpringAOP前奏 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Spring框架,SSM框架,">
+  
+
+  <meta name="description" content="概述动态代理  代理模式的原理  1234使用一个代理对象将目标对象包装起来. 然后使用代理对象&amp;quot;取代&amp;quot;目标对象.   所有对目标对象的操作都需要通过代理对象.  代理对象也可以决定是否以及何时将方法的调用转回到目标对象.  动态代理的方式 (面试)  12   基于接口实现动态代理: JDK动态代理基于继承实现动态代理(第三方): Cglib  javassist 等.  J">
+<meta name="keywords" content="Spring框架,SSM框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3. SpringAOP前奏">
+<meta property="og:url" content="http://yoursite.com/2018/01/12/37. SpringAOP前奏/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概述动态代理  代理模式的原理  1234使用一个代理对象将目标对象包装起来. 然后使用代理对象&amp;quot;取代&amp;quot;目标对象.   所有对目标对象的操作都需要通过代理对象.  代理对象也可以决定是否以及何时将方法的调用转回到目标对象.  动态代理的方式 (面试)  12   基于接口实现动态代理: JDK动态代理基于继承实现动态代理(第三方): Cglib  javassist 等.  J">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/24/EVfNu9.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/24/EVhPKJ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/24/EVhePK.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/24/EVh3VI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/24/EVh8at.png">
+<meta property="og:updated_time" content="2019-06-08T14:46:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="3. SpringAOP前奏">
+<meta name="twitter:description" content="概述动态代理  代理模式的原理  1234使用一个代理对象将目标对象包装起来. 然后使用代理对象&amp;quot;取代&amp;quot;目标对象.   所有对目标对象的操作都需要通过代理对象.  代理对象也可以决定是否以及何时将方法的调用转回到目标对象.  动态代理的方式 (面试)  12   基于接口实现动态代理: JDK动态代理基于继承实现动态代理(第三方): Cglib  javassist 等.  J">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/04/24/EVfNu9.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-1-提出问题"><span class="toc-text">3.1 提出问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-1-情景：数学计算器"><span class="toc-text">3.1.1 情景：数学计算器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-2-动态代理"><span class="toc-text">3.2 动态代理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-1-动态代理的原理"><span class="toc-text">3.2.1 动态代理的原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-2-动态代理的方式"><span class="toc-text">3.2.2 动态代理的方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-3-数学计算器的改进"><span class="toc-text">3.3 数学计算器的改进</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-1-日志处理器"><span class="toc-text">3.3.1 日志处理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-2-验证处理器"><span class="toc-text">3.3.2 验证处理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-3-测试代码"><span class="toc-text">3.3.3 测试代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-4-保存生成的动态代理类"><span class="toc-text">3.3.4 保存生成的动态代理类</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-37. SpringAOP前奏" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">3. SpringAOP前奏</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.01.12</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>动态代理</p>
+<ol>
+<li>代理模式的原理</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用一个代理对象将目标对象包装起来. </span><br><span class="line">然后使用代理对象&quot;取代&quot;目标对象.   </span><br><span class="line">所有对目标对象的操作都需要通过代理对象.  </span><br><span class="line">代理对象也可以决定是否以及何时将方法的调用转回到目标对象.</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>动态代理的方式 (面试)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   基于接口实现动态代理: JDK动态代理</span><br><span class="line">基于继承实现动态代理(第三方): Cglib  javassist 等.</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>JDK动态代理</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Proxy  :  是所有动态代理类的父类，主要用于创建动态代理类 或者 代理类的对象. </span><br><span class="line">		  Object proxy =  newProxyInstance(ClassLoader, Interfaces ,InvocationHandler)</span><br><span class="line">		  Class  proxyClass = getProxyClass(ClassLoader,Interfaces );</span><br><span class="line">  InvocationHandler: 主要用于完成代理过程.</span><br><span class="line">		  invoke(proxy, Mehtod , args)</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><p>动态代理相关的问题分析:</p>
+<pre><code>1.获取到的Object类型的代理对象可以强制转换成目标对象实现过的接口类型.  
+但是不能转换成目标类型的. 
+
+2.代理对象调用代理方法， 会执行InvocationHandler中的invoke方法.
+(InvocationHandler中的invoke方法何时执行?)
+
+   a. 在调用newproxyInstance方法的时候， 我们将自己创建好的InvocatHandler对象 myH 传入到该方法中. 
+
+   b. 在newProxyInstance方法中， 会获取到代理类中的带InvocationHandler参数的构造器
+    (参考Proxy类中729行),
+      然后再执行该构造器，将我们传入的myH又传入到了构造器中，
+      (参考Proxy类中的739行)
+
+   c. 在代理类的构造器中，通过super(h) 将我们出入的myH又传入到了父类Proxy的构造器中. 
+
+  d. 在Proxy的构造器中，又将我们传入的myH赋值给成员变量h(参考Proxy中的266行)
+
+   e. 在代理类中的每个代理方法中，都一行 super.h.invoke()方法，因为super.h获取到的对象实际就是我们自己创建的myH
+
+   f. 因此, 代理对象调用代理方法，代理方法中的super.h.invoke 就会调用到我们自己创建好的myH对象中的invoke方法.
+</code></pre><h1 id="3-1-提出问题"><a href="#3-1-提出问题" class="headerlink" title="3.1 提出问题"></a>3.1 提出问题</h1><h2 id="3-1-1-情景：数学计算器"><a href="#3-1-1-情景：数学计算器" class="headerlink" title="3.1.1 情景：数学计算器"></a>3.1.1 情景：数学计算器</h2><p>1)    要求<br>①执行加减乘除运算<br>②日志：在程序执行期间追踪正在发生的活动<br>③验证：希望计算器只能处理正数的运算<br><img src="https://s2.ax1x.com/2019/04/24/EVfNu9.png" alt="image"><br>2)    常规实现  </p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 需求:</span><br><span class="line"> * 	核心业务: + - * / </span><br><span class="line">	非核心业务: 记录日志。 在运算的前后记录日志.</span><br><span class="line">	</span><br><span class="line">      问题:</span><br><span class="line">      1. 代码分散</span><br><span class="line">      2. 代码混乱</span><br><span class="line"></span><br><span class="line"> * 希望: </span><br><span class="line"> * 	  1.将非核心业务代码从核心业务代码中提取(抽取),再定义到某个特定的位置.  </span><br><span class="line"> * 	  2.在核心业务方法执行时动态的将非核心业务功能作用上去. </span><br><span class="line"> * </span><br><span class="line"> * 涉及到的技术:</span><br><span class="line"> * 	  代理模式 动态代理</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class ArithmeticCalculatorImpl  implements ArithmeticCalculator	&#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int add(int i, int j) &#123;</span><br><span class="line">		System.out.println(&quot;AtGuigu==&gt;The method add begin with [ &quot; +i+ &quot;,&quot; + j + &quot; ]&quot;);</span><br><span class="line">		int result = i + j ;</span><br><span class="line">		System.out.println(&quot;AtGuigu==&gt;The method add end wiht result : &quot; + result );</span><br><span class="line">		return result ;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int sub(int i, int j) &#123;</span><br><span class="line">		System.out.println(&quot;AtGuigu==&gt;The method sub begin with [ &quot; +i+ &quot;,&quot; + j + &quot; ]&quot;);</span><br><span class="line">		int result = i - j ; </span><br><span class="line">		System.out.println(&quot;AtGuigu==&gt;The method sub end wiht result : &quot; + result );</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int mul(int i, int j) &#123;</span><br><span class="line">		System.out.println(&quot;AtGuigu==&gt;The method mul begin with [ &quot; +i+ &quot;,&quot; + j + &quot; ]&quot;);</span><br><span class="line">		int result = i * j ;</span><br><span class="line">		System.out.println(&quot;AtGuigu==&gt;The method mul end wiht result : &quot; + result );</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public int div(int i, int j) &#123;</span><br><span class="line">		System.out.println(&quot;AtGuigu==&gt;The method div begin with [ &quot; +i+ &quot;,&quot; + j + &quot; ]&quot;);</span><br><span class="line">		int result = i / j ; </span><br><span class="line">		System.out.println(&quot;AtGuigu==&gt;The method div end wiht result : &quot; + result );</span><br><span class="line">		return result ;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>3)    问题<br>①代码混乱：越来越多的非业务需求(日志和验证等)加入后，原有的业务方法急剧膨胀。每个方法在处理核心逻辑的同时还必须兼顾其他多个关注点。<br>②代码分散: 以日志需求为例，只是为了满足这个单一需求，就不得不在多个模块（方法）里多次重复相同的日志代码。如果日志需求发生变化，必须修改所有模块。  </p>
+<h1 id="3-2-动态代理"><a href="#3-2-动态代理" class="headerlink" title="3.2 动态代理"></a>3.2 动态代理</h1><h2 id="3-2-1-动态代理的原理"><a href="#3-2-1-动态代理的原理" class="headerlink" title="3.2.1 动态代理的原理"></a>3.2.1 动态代理的原理</h2><p>代理设计模式的原理：==使用一个代理将原本对象包装起来==，然后用该代理对象”取代”原始对象。任何对原始对象的调用都要通过代理。代理对象决定是否以及何时将方法调用转到原始对象上。<br><img src="https://s2.ax1x.com/2019/04/24/EVhPKJ.png" alt="image"></p>
+<h2 id="3-2-2-动态代理的方式"><a href="#3-2-2-动态代理的方式" class="headerlink" title="3.2.2 动态代理的方式"></a>3.2.2 动态代理的方式</h2><p>1)    基于接口实现动态代理： JDK动态代理<br>2)    基于继承实现动态代理： Cglib、Javassist动态代理 </p>
+<h1 id="3-3-数学计算器的改进"><a href="#3-3-数学计算器的改进" class="headerlink" title="3.3 数学计算器的改进"></a>3.3 数学计算器的改进</h1><h2 id="3-3-1-日志处理器"><a href="#3-3-1-日志处理器" class="headerlink" title="3.3.1 日志处理器"></a>3.3.1 日志处理器</h2><p><img src="https://s2.ax1x.com/2019/04/24/EVhePK.png" alt="image"></p>
+<h2 id="3-3-2-验证处理器"><a href="#3-3-2-验证处理器" class="headerlink" title="3.3.2 验证处理器"></a>3.3.2 验证处理器</h2><p><img src="https://s2.ax1x.com/2019/04/24/EVh3VI.png" alt="image"></p>
+<h2 id="3-3-3-测试代码"><a href="#3-3-3-测试代码" class="headerlink" title="3.3.3 测试代码"></a>3.3.3 测试代码</h2><p><img src="https://s2.ax1x.com/2019/04/24/EVh8at.png" alt="image"></p>
+<h2 id="3-3-4-保存生成的动态代理类"><a href="#3-3-4-保存生成的动态代理类" class="headerlink" title="3.3.4 保存生成的动态代理类"></a>3.3.4 保存生成的动态代理类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在测试方法中加入如下代码：</span><br><span class="line"> Properties properties = System.getProperties();</span><br><span class="line">	 properties.put(&quot;sun.misc.ProxyGenerator.saveGeneratedFiles&quot;, &quot;true&quot;);</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/01/06/36. SpringIOC容器和Bean的配置/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/01/15/38. SpringAOP概述/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>2. MyBatis HelloWorld | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,MyBatis框架,">
+  
+
+  <meta name="description" content="2.1 开发环境的准备1)导入MyBatis框架的jar包、Mysql驱动包、log4j的jar包123myBatis-3.4.1.jarmysql-connector-java-5.1.37-bin.jarlog4j.jar 2)导入log4j 的配置文件12345678910111213141516171819202122&amp;lt;?xml version=&amp;quot;1.0&amp;quot; enc">
+<meta name="keywords" content="SSM框架,MyBatis框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2. MyBatis HelloWorld">
+<meta property="og:url" content="http://yoursite.com/2018/03/11/58. MyBatis HelloWorld/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="2.1 开发环境的准备1)导入MyBatis框架的jar包、Mysql驱动包、log4j的jar包123myBatis-3.4.1.jarmysql-connector-java-5.1.37-bin.jarlog4j.jar 2)导入log4j 的配置文件12345678910111213141516171819202122&amp;lt;?xml version=&amp;quot;1.0&amp;quot; enc">
+<meta property="og:locale" content="Java EE">
+<meta property="og:updated_time" content="2019-06-08T14:41:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2. MyBatis HelloWorld">
+<meta name="twitter:description" content="2.1 开发环境的准备1)导入MyBatis框架的jar包、Mysql驱动包、log4j的jar包123myBatis-3.4.1.jarmysql-connector-java-5.1.37-bin.jarlog4j.jar 2)导入log4j 的配置文件12345678910111213141516171819202122&amp;lt;?xml version=&amp;quot;1.0&amp;quot; enc">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2-1-开发环境的准备"><span class="toc-text">2.1 开发环境的准备</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-导入MyBatis框架的jar包、Mysql驱动包、log4j的jar包"><span class="toc-text">1)导入MyBatis框架的jar包、Mysql驱动包、log4j的jar包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-导入log4j-的配置文件"><span class="toc-text">2)导入log4j 的配置文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-2-创建测试表"><span class="toc-text">2.2 创建测试表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-3-创建javaBean"><span class="toc-text">2.3 创建javaBean</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-3-创建MyBatis的全局配置文件"><span class="toc-text">2.3 创建MyBatis的全局配置文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-4-创建Mybatis的sql映射文件"><span class="toc-text">2.4 创建Mybatis的sql映射文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-参考MyBatis的官方手册"><span class="toc-text">1)参考MyBatis的官方手册</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-5-测试"><span class="toc-text">2.5 测试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-参考MyBatis的官方手册-1"><span class="toc-text">1)参考MyBatis的官方手册</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-6-Mapper接口开发MyBatis-HelloWorld"><span class="toc-text">2.6 Mapper接口开发MyBatis HelloWorld</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-编写Mapper接口"><span class="toc-text">1)编写Mapper接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-完成两个绑定"><span class="toc-text">2)完成两个绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-获取Mapper接口的代理实现类对象"><span class="toc-text">3)获取Mapper接口的代理实现类对象</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-58. MyBatis HelloWorld" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">2. MyBatis HelloWorld</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.03.11</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="2-1-开发环境的准备"><a href="#2-1-开发环境的准备" class="headerlink" title="2.1 开发环境的准备"></a>2.1 开发环境的准备</h1><h2 id="1-导入MyBatis框架的jar包、Mysql驱动包、log4j的jar包"><a href="#1-导入MyBatis框架的jar包、Mysql驱动包、log4j的jar包" class="headerlink" title="1)导入MyBatis框架的jar包、Mysql驱动包、log4j的jar包"></a>1)导入MyBatis框架的jar包、Mysql驱动包、log4j的jar包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">myBatis-3.4.1.jar</span><br><span class="line">mysql-connector-java-5.1.37-bin.jar</span><br><span class="line">log4j.jar</span><br></pre></td></tr></table></figure>
+<h2 id="2-导入log4j-的配置文件"><a href="#2-导入log4j-的配置文件" class="headerlink" title="2)导入log4j 的配置文件"></a>2)导入log4j 的配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE log4j:configuration SYSTEM &quot;log4j.dtd&quot;&gt;</span><br><span class="line"> </span><br><span class="line">&lt;log4j:configuration xmlns:log4j=&quot;http://jakarta.apache.org/log4j/&quot;&gt;</span><br><span class="line"> </span><br><span class="line"> &lt;appender name=&quot;STDOUT&quot; class=&quot;org.apache.log4j.ConsoleAppender&quot;&gt;</span><br><span class="line">   &lt;param name=&quot;Encoding&quot; value=&quot;UTF-8&quot; /&gt;</span><br><span class="line">   &lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;</span><br><span class="line">    &lt;param name=&quot;ConversionPattern&quot; value=&quot;%-5p %d&#123;MM-dd HH:mm:ss,SSS&#125; %m  (%F:%L) \n&quot; /&gt;</span><br><span class="line">   &lt;/layout&gt;</span><br><span class="line"> &lt;/appender&gt;</span><br><span class="line"> &lt;logger name=&quot;java.sql&quot;&gt;</span><br><span class="line">   &lt;level value=&quot;debug&quot; /&gt;</span><br><span class="line"> &lt;/logger&gt;</span><br><span class="line"> &lt;logger name=&quot;org.apache.ibatis&quot;&gt;</span><br><span class="line">   &lt;level value=&quot;info&quot; /&gt;</span><br><span class="line"> &lt;/logger&gt;</span><br><span class="line"> &lt;root&gt;</span><br><span class="line">   &lt;level value=&quot;debug&quot; /&gt;</span><br><span class="line">   &lt;appender-ref ref=&quot;STDOUT&quot; /&gt;</span><br><span class="line"> &lt;/root&gt;</span><br><span class="line">&lt;/log4j:configuration&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="2-2-创建测试表"><a href="#2-2-创建测试表" class="headerlink" title="2.2 创建测试表"></a>2.2 创建测试表</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-- 创建库</span><br><span class="line">CREATE DATABASE test_mybatis;</span><br><span class="line">-- 使用库</span><br><span class="line">USE test_mybatis;</span><br><span class="line">-- 创建表</span><br><span class="line">CREATE TABLE tbl_employee(</span><br><span class="line">   id INT(11) PRIMARY KEY AUTO_INCREMENT,</span><br><span class="line">   last_name VARCHAR(50),</span><br><span class="line">   email VARCHAR(50),</span><br><span class="line">   gender CHAR(1)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h1 id="2-3-创建javaBean"><a href="#2-3-创建javaBean" class="headerlink" title="2.3 创建javaBean"></a>2.3 创建javaBean</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class Employee &#123;</span><br><span class="line"></span><br><span class="line">	private Integer id ; </span><br><span class="line">	private String lastName; </span><br><span class="line">	private String email ;</span><br><span class="line">	private String gender ;</span><br><span class="line">	public Integer getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setId(Integer id) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getLastName() &#123;</span><br><span class="line">		return lastName;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setLastName(String lastName) &#123;</span><br><span class="line">		this.lastName = lastName;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getEmail() &#123;</span><br><span class="line">		return email;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setEmail(String email) &#123;</span><br><span class="line">		this.email = email;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getGender() &#123;</span><br><span class="line">		return gender;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setGender(String gender) &#123;</span><br><span class="line">		this.gender = gender;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String toString() &#123;</span><br><span class="line">		return &quot;Employee [id=&quot; + id + &quot;, lastName=&quot; + lastName + &quot;, email=&quot; + email + &quot;, gender=&quot; + gender + &quot;]&quot;;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-3-创建MyBatis的全局配置文件"><a href="#2-3-创建MyBatis的全局配置文件" class="headerlink" title="2.3 创建MyBatis的全局配置文件"></a>2.3 创建MyBatis的全局配置文件</h1><p>1)参考MyBatis的官网手册</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- 数据库连接环境的配置 --&gt;</span><br><span class="line">	&lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">		&lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">			&lt;transactionManager type=&quot;JDBC&quot; /&gt;</span><br><span class="line">			</span><br><span class="line">			&lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">				&lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot; /&gt;</span><br><span class="line">				&lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/mybatis_1129&quot; /&gt;</span><br><span class="line">				&lt;property name=&quot;username&quot; value=&quot;root&quot; /&gt;</span><br><span class="line">				&lt;property name=&quot;password&quot; value=&quot;1234&quot; /&gt;</span><br><span class="line">			&lt;/dataSource&gt;</span><br><span class="line">		&lt;/environment&gt;</span><br><span class="line">	&lt;/environments&gt;</span><br><span class="line">	&lt;!-- 引入SQL映射文件,Mapper映射文件 	--&gt;</span><br><span class="line">	&lt;mappers&gt;</span><br><span class="line">		&lt;mapper resource=&quot;EmployeeMapper.xml&quot; /&gt;</span><br><span class="line">	&lt;/mappers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="2-4-创建Mybatis的sql映射文件"><a href="#2-4-创建Mybatis的sql映射文件" class="headerlink" title="2.4 创建Mybatis的sql映射文件"></a>2.4 创建Mybatis的sql映射文件</h1><h2 id="1-参考MyBatis的官方手册"><a href="#1-参考MyBatis的官方手册" class="headerlink" title="1)参考MyBatis的官方手册"></a>1)参考MyBatis的官方手册</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span><br><span class="line">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;mapper namespace=&quot;suibian&quot;&gt;</span><br><span class="line">	&lt;select id=&quot;selectEmployee&quot; resultType=&quot;com.atguigu.myabtis.helloWorld.Employee&quot;&gt;</span><br><span class="line">		select id ,last_name lastName ,email ,gender from tbl_employee where id = #&#123;id&#125;</span><br><span class="line">		&lt;!-- select * from tbl_employee  where id = #&#123;id&#125; --&gt;</span><br><span class="line">	&lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="2-5-测试"><a href="#2-5-测试" class="headerlink" title="2.5 测试"></a>2.5 测试</h1><h2 id="1-参考MyBatis的官方手册-1"><a href="#1-参考MyBatis的官方手册-1" class="headerlink" title="1)参考MyBatis的官方手册"></a>1)参考MyBatis的官方手册</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">	public void test() throws Exception &#123;</span><br><span class="line">		String resource = &quot;mybatis-config.xml&quot;;</span><br><span class="line">		InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">		SqlSessionFactory sqlSessionFactory = </span><br><span class="line">					new SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">		System.out.println(sqlSessionFactory);</span><br><span class="line">		</span><br><span class="line">		SqlSession session  = sqlSessionFactory.openSession();</span><br><span class="line">		try &#123;</span><br><span class="line">			Employee employee = </span><br><span class="line">					session.selectOne(&quot;suibian.selectEmployee&quot;, 1001);</span><br><span class="line">			System.out.println(employee);</span><br><span class="line">		&#125; finally &#123;</span><br><span class="line">			session.close();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="2-6-Mapper接口开发MyBatis-HelloWorld"><a href="#2-6-Mapper接口开发MyBatis-HelloWorld" class="headerlink" title="2.6 Mapper接口开发MyBatis HelloWorld"></a>2.6 Mapper接口开发MyBatis HelloWorld</h1><h2 id="1-编写Mapper接口"><a href="#1-编写Mapper接口" class="headerlink" title="1)编写Mapper接口"></a>1)编写Mapper接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface EmployeeMapper &#123;</span><br><span class="line">	</span><br><span class="line">	public Employee getEmployeeById(Integer id );	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-完成两个绑定"><a href="#2-完成两个绑定" class="headerlink" title="2)完成两个绑定"></a>2)完成两个绑定</h2><blockquote>
+<p>①Mapper接口与Mapper映射文件的绑定<br>在Mppper映射文件中的<mapper>标签中的namespace中必须指定Mapper接口的全类名<br>②Mapper映射文件中的增删改查标签的id必须指定成Mapper接口中的方法名.  </mapper></p>
+</blockquote>
+<h2 id="3-获取Mapper接口的代理实现类对象"><a href="#3-获取Mapper接口的代理实现类对象" class="headerlink" title="3)获取Mapper接口的代理实现类对象"></a>3)获取Mapper接口的代理实现类对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">	public void test()  throws Exception&#123;</span><br><span class="line">		String resource = &quot;mybatis-config.xml&quot;;</span><br><span class="line">		InputStream inputStream =</span><br><span class="line">                 Resources.getResourceAsStream(resource);</span><br><span class="line">		SqlSessionFactory sqlSessionFactory = </span><br><span class="line">				new SqlSessionFactoryBuilder()</span><br><span class="line">              .build(inputStream);		</span><br><span class="line">		SqlSession session = </span><br><span class="line">                         sqlSessionFactory.openSession();</span><br><span class="line">		</span><br><span class="line">		try &#123;</span><br><span class="line">			//Mapper接口:获取Mapper接口的 代理实现类对象</span><br><span class="line">			EmployeeMapper mapper =</span><br><span class="line">                 session.getMapper(EmployeeMapper.class);		</span><br><span class="line">			Employee employee = </span><br><span class="line">                  mapper.getEmployeeById(1006);</span><br><span class="line">			System.out.println(employee);</span><br><span class="line">		&#125; finally &#123;</span><br><span class="line">			session.close();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/03/09/57. MyBatis简介/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/03/14/59. MyBatis全局配置文件/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>9. SSM框架整合 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="使用过的开源框架,">
+  
+
+  <meta name="description" content="目标 基本页面开发 了解相关组件 字体图标 模态窗口 表单 …  第一章 介绍1.1 简介 Bootstrap，来自 Twitter，是目前最受欢迎的前端框架。 Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。  为什么使用 Bootstrap？ 1、移动设备优先：自 Bootstrap 3 起，框架包含了贯穿于整个库的移动设备优先的">
+<meta name="keywords" content="使用过的开源框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="9. SSM框架整合">
+<meta property="og:url" content="http://yoursite.com/2018/04/04/67. 前端_Bootstrap框架概述/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="目标 基本页面开发 了解相关组件 字体图标 模态窗口 表单 …  第一章 介绍1.1 简介 Bootstrap，来自 Twitter，是目前最受欢迎的前端框架。 Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。  为什么使用 Bootstrap？ 1、移动设备优先：自 Bootstrap 3 起，框架包含了贯穿于整个库的移动设备优先的">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205611.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205744.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205813.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205836.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205911.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205949.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210226.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210420.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210719.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210811.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210903.png">
+<meta property="og:updated_time" content="2019-06-08T15:01:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="9. SSM框架整合">
+<meta name="twitter:description" content="目标 基本页面开发 了解相关组件 字体图标 模态窗口 表单 …  第一章 介绍1.1 简介 Bootstrap，来自 Twitter，是目前最受欢迎的前端框架。 Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。  为什么使用 Bootstrap？ 1、移动设备优先：自 Bootstrap 3 起，框架包含了贯穿于整个库的移动设备优先的">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205611.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-介绍"><span class="toc-text">第一章 介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-简介"><span class="toc-text">1.1 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-HelloWorld-响应式布局"><span class="toc-text">1.2 HelloWorld(响应式布局)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-下载和导入bootstrap框架"><span class="toc-text">1.2.1 下载和导入bootstrap框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-显示案例"><span class="toc-text">1.2.2 显示案例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二章-bootstrap基本使用"><span class="toc-text">第二章 bootstrap基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-表格"><span class="toc-text">2.1 表格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-表单"><span class="toc-text">2.2 表单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-按钮"><span class="toc-text">2.3 按钮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-图标"><span class="toc-text">2.4 图标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-栅-shan-格系统"><span class="toc-text">2.5 栅(shan)格系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-导航"><span class="toc-text">2.6 导航</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-分页"><span class="toc-text">2.7 分页</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三章-Layer弹层插件"><span class="toc-text">第三章 Layer弹层插件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-介绍"><span class="toc-text">3.1 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-下载"><span class="toc-text">3.2 下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-不同的浏览器显示的提示框样子不同-不统一"><span class="toc-text">3.3 不同的浏览器显示的提示框样子不同,不统一.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-常用的弹层："><span class="toc-text">3.4 常用的弹层：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-1-提示"><span class="toc-text">3.4.1 提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-2-询问"><span class="toc-text">3.4.2 询问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-3-加载"><span class="toc-text">3.4.3 加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-小图标"><span class="toc-text">3.5 小图标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-使用layer弹层完成提示消息"><span class="toc-text">3.6 使用layer弹层完成提示消息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-1-拷贝组件到项目中"><span class="toc-text">3.6.1 拷贝组件到项目中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-2-在页面中引用组件-WEB-INF-jsp-login-jsp"><span class="toc-text">3.6.2 在页面中引用组件/WEB-INF/jsp/login.jsp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-3-代码参考"><span class="toc-text">3.6.3 代码参考</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-67. 前端_Bootstrap框架概述" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">9. SSM框架整合</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.04.04</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
+<li>基本页面开发</li>
+<li>了解相关组件</li>
+<li>字体图标</li>
+<li>模态窗口</li>
+<li>表单</li>
+<li>…</li>
+</ul>
+<h1 id="第一章-介绍"><a href="#第一章-介绍" class="headerlink" title="第一章 介绍"></a>第一章 介绍</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1 简介"></a>1.1 简介</h2><ul>
+<li>Bootstrap，来自 Twitter，是目前最受欢迎的前端框架。</li>
+<li>Bootstrap 是基于 HTML、CSS、JAVASCRIPT 的，它简洁灵活，使得 Web 开发更加快捷。 </li>
+<li>为什么使用 Bootstrap？<ul>
+<li>1、移动设备优先：自 Bootstrap 3 起，框架包含了贯穿于整个库的移动设备优先的样式。</li>
+<li>2、浏览器支持：所有的主流浏览器都支持 Bootstrap。</li>
+</ul>
+</li>
+<li>Internet Explorer、 Firefox 、Opera 、Google Chrome、 Safari <ul>
+<li>3、容易上手：只要您具备 HTML 和 CSS 的基础知识，您就可以开始学习 Bootstrap。</li>
+<li>4、响应式设计：Bootstrap 的响应式 CSS 能够自适应于台式机、平板电脑和手机。更多有关响应式设计的内容详见 Bootstrap 响应式设计。 </li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-HelloWorld-响应式布局"><a href="#1-2-HelloWorld-响应式布局" class="headerlink" title="1.2 HelloWorld(响应式布局)"></a>1.2 HelloWorld(响应式布局)</h2><h3 id="1-2-1-下载和导入bootstrap框架"><a href="#1-2-1-下载和导入bootstrap框架" class="headerlink" title="1.2.1 下载和导入bootstrap框架"></a>1.2.1 下载和导入bootstrap框架</h3><h3 id="1-2-2-显示案例"><a href="#1-2-2-显示案例" class="headerlink" title="1.2.2 显示案例"></a>1.2.2 显示案例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;title&gt;Bootstrap 实例&lt;/title&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span><br><span class="line">  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css&quot;&gt;  </span><br><span class="line">  &lt;script src=&quot;https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">  &lt;script src=&quot;https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt; </span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;jumbotron&quot;&gt;&lt;!--超大屏幕--&gt;</span><br><span class="line">    &lt;h1&gt;我的第一个 Bootstrap 页面&lt;/h1&gt;</span><br><span class="line">    &lt;p&gt;重置窗口大小，查看响应式效果！&lt;/p&gt; </span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;row&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;col-sm-4&quot;&gt;</span><br><span class="line">      &lt;h3&gt;第一列&lt;/h3&gt;</span><br><span class="line">      &lt;p&gt;学的不仅是技术，更是梦想！&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;再牛逼的梦想,也抵不住你傻逼似的坚持！&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;col-sm-4&quot;&gt;</span><br><span class="line">      &lt;h3&gt;第二列&lt;/h3&gt;</span><br><span class="line">      &lt;p&gt;学的不仅是技术，更是梦想！&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;再牛逼的梦想,也抵不住你傻逼似的坚持！&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div class=&quot;col-sm-4&quot;&gt;</span><br><span class="line">      &lt;h3&gt;第三列&lt;/h3&gt;        </span><br><span class="line">      &lt;p&gt;学的不仅是技术，更是梦想！&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;再牛逼的梦想,也抵不住你傻逼似的坚持！&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt; </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="第二章-bootstrap基本使用"><a href="#第二章-bootstrap基本使用" class="headerlink" title="第二章 bootstrap基本使用"></a>第二章 bootstrap基本使用</h1><h2 id="2-1-表格"><a href="#2-1-表格" class="headerlink" title="2.1 表格"></a>2.1 表格</h2><p><a href="https://v3.bootcss.com/css/#tables" target="_blank" rel="noopener">https://v3.bootcss.com/css/#tables</a></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205611.png" alt></p>
+<h2 id="2-2-表单"><a href="#2-2-表单" class="headerlink" title="2.2 表单"></a>2.2 表单</h2><p><a href="https://v3.bootcss.com/css/?#forms" target="_blank" rel="noopener">https://v3.bootcss.com/css/?#forms</a></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205744.png" alt></p>
+<h2 id="2-3-按钮"><a href="#2-3-按钮" class="headerlink" title="2.3 按钮"></a>2.3 按钮</h2><p><a href="https://v3.bootcss.com/css/?#buttons" target="_blank" rel="noopener">https://v3.bootcss.com/css/?#buttons</a></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205813.png" alt></p>
+<h2 id="2-4-图标"><a href="#2-4-图标" class="headerlink" title="2.4 图标"></a>2.4 图标</h2><p><a href="https://v3.bootcss.com/components/#glyphicons-examples" target="_blank" rel="noopener">https://v3.bootcss.com/components/#glyphicons-examples</a></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205836.png" alt></p>
+<h2 id="2-5-栅-shan-格系统"><a href="#2-5-栅-shan-格系统" class="headerlink" title="2.5 栅(shan)格系统"></a>2.5 栅(shan)格系统</h2><ul>
+<li>Bootstrap 提供了一套响应式、移动设备优先的流式栅格系统，随着屏幕或视口（viewport）尺寸的增加，系统会自动分为最多12列。</li>
+<li>它包含了易于使用的预定义类，还有强大的mixin 用于生成更具语义的布局。</li>
+</ul>
+<p><a href="https://v3.bootcss.com/css/" target="_blank" rel="noopener">https://v3.bootcss.com/css/</a> </p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205911.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608205949.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 原生页面写好，导入框架，只需要给相应的元素加上相应的class值就会有相应的效果 --&gt;</span><br><span class="line">&lt;!-- 所有东西都放在这个容器中，容器就是大网格 --&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">	&lt;div class=&quot;jumbotron&quot;&gt;</span><br><span class="line">		&lt;h1&gt;我的第一个 Bootstrap 页面&lt;/h1&gt;</span><br><span class="line">		&lt;p&gt;重置窗口大小，查看响应式效果！&lt;/p&gt;</span><br><span class="line">		&lt;button id=&quot;btn01&quot; class=&quot;btn btn-primary&quot;&gt;哈哈&lt;/button&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">		 </span><br><span class="line">	&lt;!-- 里面的东西放在一行 --&gt;</span><br><span class="line">	&lt;div class=&quot;row&quot;&gt;</span><br><span class="line">		&lt;div class=&quot;col-xs-12 col-sm-4 col-md-6&quot;&gt;</span><br><span class="line">			&lt;h3&gt;第一列&lt;/h3&gt;</span><br><span class="line">			&lt;p&gt;学的不仅是技术，更是梦想！&lt;/p&gt;</span><br><span class="line">			&lt;p&gt;再牛逼的梦想,也抵不住你傻逼似的坚持！&lt;/p&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">		&lt;div class=&quot;col-xs-12 col-sm-4 col-md-6&quot;&gt;</span><br><span class="line">			&lt;h3&gt;第二列&lt;/h3&gt;</span><br><span class="line">			&lt;p&gt;学的不仅是技术，更是梦想！&lt;/p&gt;</span><br><span class="line">			&lt;p&gt;再牛逼的梦想,也抵不住你傻逼似的坚持！&lt;/p&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">		&lt;div class=&quot;col-xs-12 col-sm-4 col-md-6&quot;&gt;</span><br><span class="line">			&lt;h3&gt;第三列&lt;/h3&gt;</span><br><span class="line">			&lt;p&gt;学的不仅是技术，更是梦想！&lt;/p&gt;</span><br><span class="line">			&lt;p&gt;再牛逼的梦想,也抵不住你傻逼似的坚持！&lt;/p&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-6-导航"><a href="#2-6-导航" class="headerlink" title="2.6 导航"></a>2.6 导航</h2><p><a href="https://v3.bootcss.com/components/#navbar-default" target="_blank" rel="noopener">https://v3.bootcss.com/components/#navbar-default</a></p>
+<h2 id="2-7-分页"><a href="#2-7-分页" class="headerlink" title="2.7 分页"></a>2.7 分页</h2><p><a href="https://v3.bootcss.com/components/#pagination" target="_blank" rel="noopener">https://v3.bootcss.com/components/#pagination</a></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210226.png" alt></p>
+<h1 id="第三章-Layer弹层插件"><a href="#第三章-Layer弹层插件" class="headerlink" title="第三章 Layer弹层插件"></a>第三章 Layer弹层插件</h1><h2 id="3-1-介绍"><a href="#3-1-介绍" class="headerlink" title="3.1 介绍"></a>3.1 介绍</h2><blockquote>
+<p>layer是一款近年来备受青睐的web弹层组件，她具备全方位的解决方案，致力于服务各水平段的开发人员，您的页面会轻松地拥有丰富友好的操作体验。</p>
+</blockquote>
+<h2 id="3-2-下载"><a href="#3-2-下载" class="headerlink" title="3.2 下载"></a>3.2 下载</h2><p><a href="http://layer.layui.com/hello.html" target="_blank" rel="noopener">http://layer.layui.com/hello.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">  &lt;title&gt;开始使用layer&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt; </span><br><span class="line">  </span><br><span class="line">  &lt;script src=&quot;jQuery的路径&quot;&gt;&lt;/script&gt; &lt;!-- 你必须先引入jQuery1.8或以上版本 --&gt;</span><br><span class="line">  &lt;script src=&quot;layer.js的路径&quot;&gt;&lt;/script&gt;</span><br><span class="line">  </span><br><span class="line">  &lt;script&gt;</span><br><span class="line">  </span><br><span class="line">  //弹出一个提示层</span><br><span class="line">  $(&apos;#test1&apos;).on(&apos;click&apos;, function()&#123;</span><br><span class="line">    layer.msg(&apos;hello&apos;);</span><br><span class="line">  &#125;);  </span><br><span class="line">  </span><br><span class="line">  //弹出一个页面层</span><br><span class="line">  $(&apos;#test2&apos;).on(&apos;click&apos;, function()&#123;</span><br><span class="line">    layer.open(&#123;</span><br><span class="line">      type: 1,</span><br><span class="line">      area: [&apos;600px&apos;, &apos;360px&apos;],</span><br><span class="line">      shadeClose: true, //点击遮罩关闭</span><br><span class="line">      content: &apos;\&lt;\div style=&quot;padding:20px;&quot;&gt;自定义内容\&lt;\/div&gt;&apos;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);  </span><br><span class="line">  </span><br><span class="line">  //弹出一个loading层</span><br><span class="line">  $(&apos;#test4&apos;).on(&apos;click&apos;, function()&#123;</span><br><span class="line">    var ii = layer.load();</span><br><span class="line">    //此处用setTimeout演示ajax的回调</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">      layer.close(ii);</span><br><span class="line">    &#125;, 1000);</span><br><span class="line">  &#125;);  </span><br><span class="line">  </span><br><span class="line">  //弹出一个tips层</span><br><span class="line">  $(&apos;#test5&apos;).on(&apos;click&apos;, function()&#123;</span><br><span class="line">    layer.tips(&apos;Hello tips!&apos;, &apos;#test5&apos;);</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-3-不同的浏览器显示的提示框样子不同-不统一"><a href="#3-3-不同的浏览器显示的提示框样子不同-不统一" class="headerlink" title="3.3 不同的浏览器显示的提示框样子不同,不统一."></a>3.3 不同的浏览器显示的提示框样子不同,不统一.</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210420.png" alt></p>
+<h2 id="3-4-常用的弹层："><a href="#3-4-常用的弹层：" class="headerlink" title="3.4 常用的弹层："></a>3.4 常用的弹层：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layer-v3.0.1.zip</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-1-提示"><a href="#3-4-1-提示" class="headerlink" title="3.4.1 提示"></a>3.4.1 提示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">layer.msg(提示信息, &#123;time:1000, icon:5, shift:6&#125;, 回调方法); //弹出时间，图标，特效</span><br><span class="line">layer.alert(提示信息, function(index)&#123;</span><br><span class="line">// 回调方法</span><br><span class="line">layer.close(index);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-2-询问"><a href="#3-4-2-询问" class="headerlink" title="3.4.2 询问"></a>3.4.2 询问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">layer.confirm(&quot;询问信息&quot;,  &#123;icon: 3, title:&apos;提示&apos;&#125;, function(cindex)&#123;</span><br><span class="line">layer.close(cindex);</span><br><span class="line">&#125;, function(cindex)&#123;</span><br><span class="line">layer.close(cindex);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="3-4-3-加载"><a href="#3-4-3-加载" class="headerlink" title="3.4.3 加载"></a>3.4.3 加载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var loadingIndex = layer.msg(&apos;处理中&apos;, &#123;icon: 16&#125;);</span><br><span class="line">...</span><br><span class="line">layer.close(loadingIndex); </span><br><span class="line">var index = layer.load(2, &#123;time: 10*1000&#125;);</span><br><span class="line">layer.close(index);</span><br></pre></td></tr></table></figure>
+<h3 id="3-5-小图标"><a href="#3-5-小图标" class="headerlink" title="3.5 小图标"></a>3.5 小图标</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">time:1000 显示时间</span><br><span class="line">icon:5 图标</span><br><span class="line">shift:6  抖动效果</span><br><span class="line">icon.png</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210719.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210811.png" alt></p>
+<h2 id="3-6-使用layer弹层完成提示消息"><a href="#3-6-使用layer弹层完成提示消息" class="headerlink" title="3.6 使用layer弹层完成提示消息"></a>3.6 使用layer弹层完成提示消息</h2><h3 id="3-6-1-拷贝组件到项目中"><a href="#3-6-1-拷贝组件到项目中" class="headerlink" title="3.6.1 拷贝组件到项目中"></a>3.6.1 拷贝组件到项目中</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190608210903.png" alt></p>
+<h3 id="3-6-2-在页面中引用组件-WEB-INF-jsp-login-jsp"><a href="#3-6-2-在页面中引用组件-WEB-INF-jsp-login-jsp" class="headerlink" title="3.6.2 在页面中引用组件/WEB-INF/jsp/login.jsp"></a>3.6.2 在页面中引用组件/WEB-INF/jsp/login.jsp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;$&#123;APP_PATH&#125;/jquery/layer/layer.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="3-6-3-代码参考"><a href="#3-6-3-代码参考" class="headerlink" title="3.6.3 代码参考"></a>3.6.3 代码参考</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if(loginacct.val() == &quot;&quot;)&#123;</span><br><span class="line">            //alert(&quot;登录账号不能为空,请重新输入!&quot;);//alert,confirm方法会暂停UI线程</span><br><span class="line">            layer.msg(&quot;登录账号不能为空,请重新输入!&quot;, &#123;time:2000, icon:5, shift:6&#125;, function()&#123;</span><br><span class="line">                    loginacct.focus();</span><br><span class="line">                    //return ; 只是返回当前回调函数，单击事件函数并没有返回，代码继续往下执行</span><br><span class="line">            &#125;); //弹出时间，图标，特效                    </span><br><span class="line">            return ;//单击事件函数返回</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/04/01/66. 分布式系统整体解决方案_Spring Cloud框架/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/04/09/68. 权限系统_认证授权SpringSecurity框架/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

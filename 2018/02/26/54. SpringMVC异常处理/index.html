@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>12. SpringMVC异常处理 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="SSM框架,SpringMVC框架,">
+  
+
+  <meta name="description" content="概述 HandlerExceptionResolver  在Springmvc中，不管请求是正常执行，还是抛出异常，都需要得到一个ModelAndView对象.  DefaultHandlerExceptionResolver  对一些特定的异常进行处理.  SimpleMappingExceptionResolver   可以配置异常与视图的映射, 抛出什么异常去往什么视图，并报告异常.   异">
+<meta name="keywords" content="SSM框架,SpringMVC框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12. SpringMVC异常处理">
+<meta property="og:url" content="http://yoursite.com/2018/02/26/54. SpringMVC异常处理/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概述 HandlerExceptionResolver  在Springmvc中，不管请求是正常执行，还是抛出异常，都需要得到一个ModelAndView对象.  DefaultHandlerExceptionResolver  对一些特定的异常进行处理.  SimpleMappingExceptionResolver   可以配置异常与视图的映射, 抛出什么异常去往什么视图，并报告异常.   异">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDVlff.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDV59K.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDVx9f.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDZPBj.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDZZCV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDZXqJ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDeGZj.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDegF1.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDmApV.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/06/EDmU7d.md.png">
+<meta property="og:updated_time" content="2019-06-08T14:47:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12. SpringMVC异常处理">
+<meta name="twitter:description" content="概述 HandlerExceptionResolver  在Springmvc中，不管请求是正常执行，还是抛出异常，都需要得到一个ModelAndView对象.  DefaultHandlerExceptionResolver  对一些特定的异常进行处理.  SimpleMappingExceptionResolver   可以配置异常与视图的映射, 抛出什么异常去往什么视图，并报告异常.   异">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/06/EDVlff.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#异常处理"><span class="toc-text">异常处理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1异常处理概述"><span class="toc-text">1异常处理概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-HandlerExceptionResolver"><span class="toc-text">2 HandlerExceptionResolver</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-异常处理-DefaultHandlerExceptionResolver"><span class="toc-text">3 异常处理_DefaultHandlerExceptionResolver</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-实验代码"><span class="toc-text">3.1 实验代码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-异常处理-SimpleMappingExceptionResolver"><span class="toc-text">4 异常处理_SimpleMappingExceptionResolver</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1实验代码"><span class="toc-text">4.1实验代码</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-54. SpringMVC异常处理" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">12. SpringMVC异常处理</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.02.26</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p> HandlerExceptionResolver</p>
+<ol>
+<li>在Springmvc中，不管请求是正常执行，还是抛出异常，都需要得到一个ModelAndView对象. </li>
+<li>DefaultHandlerExceptionResolver  对一些特定的异常进行处理. </li>
+<li>SimpleMappingExceptionResolver   可以配置异常与视图的映射, 抛出什么异常去往什么视图，并报告异常. </li>
+</ol>
+<h1 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h1><p>java:   throws      throw        try ..catch..finally </p>
+<p>所有系统定义的编译和运行异常都可以由系统自动抛出，称为标准异常，但是一般情况下Java 强烈地要求应用程序进行完整的异常处理，给用户友好的提示，或者修正后使程序继续执行。<br>1.用户程序自定义的异常和应用程序特定的异常,必须借助于 throws 和 throw 语句来定义抛出异常。</p>
+<p>1.1   throw是语句抛出一个异常。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：throw (异常对象);  </span><br><span class="line">         throw e;</span><br></pre></td></tr></table></figure>
+<p>1.2   throws是方法可能抛出异常的声明。(用在声明方法时，表示该方法可能要抛出异常)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法：[(修饰符)](返回值类型)(方法名)([参数列表])[throws(异常类)]&#123;......&#125;</span><br><span class="line">            public void doA(int a) throws Exception1,Exception3&#123;......&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="1异常处理概述"><a href="#1异常处理概述" class="headerlink" title="1异常处理概述"></a>1异常处理概述</h1><p>1）Spring MVC 通过 HandlerExceptionResolver  处理程序的异常，包括 Handler 映射、数据绑定以及目标方法执行时发生的异常。<br>2）SpringMVC 提供的 HandlerExceptionResolver 的实现类</p>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDVlff.png" alt="EDVlff.png"></p>
+<h1 id="2-HandlerExceptionResolver"><a href="#2-HandlerExceptionResolver" class="headerlink" title="2 HandlerExceptionResolver"></a>2 HandlerExceptionResolver</h1><p>1）DispatcherServlet  默认装配的 HandlerExceptionResolver ：<br>2）没有使用 <a href="mvc:annotation-driven/" target="_blank" rel="noopener">mvc:annotation-driven/</a> 配置：<br><img src="https://s2.ax1x.com/2019/05/06/EDV59K.png" alt="EDV59K.png"><br><img src="https://s2.ax1x.com/2019/05/06/EDVx9f.png" alt="EDVx9f.png"></p>
+<p>3）使用了 <a href="mvc:annotation-driven/" target="_blank" rel="noopener">mvc:annotation-driven/</a> 配置：<br><img src="https://s2.ax1x.com/2019/05/06/EDZPBj.png" alt="EDZPBj.png"><br><img src="https://s2.ax1x.com/2019/05/06/EDZZCV.png" alt="EDZZCV.png"></p>
+<h1 id="3-异常处理-DefaultHandlerExceptionResolver"><a href="#3-异常处理-DefaultHandlerExceptionResolver" class="headerlink" title="3 异常处理_DefaultHandlerExceptionResolver"></a>3 异常处理_DefaultHandlerExceptionResolver</h1><p>1）对一些特殊的异常进行处理，比如：</p>
+<ul>
+<li>NoSuchRequestHandlingMethodException、</li>
+<li>HttpRequestMethodNotSupportedException、</li>
+<li>HttpMediaTypeNotSupportedException、</li>
+<li>HttpMediaTypeNotAcceptableException等   </li>
+</ul>
+<p>2）javadoc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver</span><br><span class="line">Default implementation of the HandlerExceptionResolver interface that resolves standard Spring exceptions and translates them to corresponding HTTP status codes. </span><br><span class="line">This exception resolver is enabled by default in the org.springframework.web.servlet.DispatcherServlet.</span><br></pre></td></tr></table></figure>
+<h2 id="3-1-实验代码"><a href="#3-1-实验代码" class="headerlink" title="3.1 实验代码"></a>3.1 实验代码</h2><p>1）增加页面链接：GET请求</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;testDefaultHandlerExceptionResolver&quot;&gt;testDefaultHandlerExceptionResolver&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p>增加处理器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//@RequestMapping(value=&quot;/testDefaultHandlerExceptionResolver&quot;)</span><br><span class="line">@RequestMapping(value=&quot;/testDefaultHandlerExceptionResolver&quot;,method=RequestMethod.POST)  //不支持GET请求</span><br><span class="line">public String testDefaultHandlerExceptionResolver()&#123;</span><br><span class="line">System.out.println(&quot;testDefaultHandlerExceptionResolver...&quot;);</span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2）出现异常错误<br>网页错误码405<br><img src="https://s2.ax1x.com/2019/05/06/EDZXqJ.png" alt="EDZXqJ.png"></p>
+<p>3） 出现异常交给DefaultHandlerExceptionResolver处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected ModelAndView doResolveException(</span><br><span class="line">HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) &#123;</span><br><span class="line"> </span><br><span class="line">try &#123;</span><br><span class="line">if (ex instanceof NoSuchRequestHandlingMethodException) &#123;</span><br><span class="line">return handleNoSuchRequestHandlingMethod((NoSuchRequestHandlingMethodException) ex, request, response,</span><br><span class="line">handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof HttpRequestMethodNotSupportedException) &#123;</span><br><span class="line">return handleHttpRequestMethodNotSupported((HttpRequestMethodNotSupportedException) ex, request,</span><br><span class="line">response, handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof HttpMediaTypeNotSupportedException) &#123;</span><br><span class="line">return handleHttpMediaTypeNotSupported((HttpMediaTypeNotSupportedException) ex, request, response,</span><br><span class="line">handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof HttpMediaTypeNotAcceptableException) &#123;</span><br><span class="line">return handleHttpMediaTypeNotAcceptable((HttpMediaTypeNotAcceptableException) ex, request, response,</span><br><span class="line">handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof MissingServletRequestParameterException) &#123;</span><br><span class="line">return handleMissingServletRequestParameter((MissingServletRequestParameterException) ex, request,</span><br><span class="line">response, handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof ServletRequestBindingException) &#123;</span><br><span class="line">return handleServletRequestBindingException((ServletRequestBindingException) ex, request, response,</span><br><span class="line">handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof ConversionNotSupportedException) &#123;</span><br><span class="line">return handleConversionNotSupported((ConversionNotSupportedException) ex, request, response, handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof TypeMismatchException) &#123;</span><br><span class="line">return handleTypeMismatch((TypeMismatchException) ex, request, response, handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof HttpMessageNotReadableException) &#123;</span><br><span class="line">return handleHttpMessageNotReadable((HttpMessageNotReadableException) ex, request, response, handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof HttpMessageNotWritableException) &#123;</span><br><span class="line">return handleHttpMessageNotWritable((HttpMessageNotWritableException) ex, request, response, handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof MethodArgumentNotValidException) &#123;</span><br><span class="line">return handleMethodArgumentNotValidException((MethodArgumentNotValidException) ex, request, response, handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof MissingServletRequestPartException) &#123;</span><br><span class="line">return handleMissingServletRequestPartException((MissingServletRequestPartException) ex, request, response, handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof BindException) &#123;</span><br><span class="line">return handleBindException((BindException) ex, request, response, handler);</span><br><span class="line">&#125;</span><br><span class="line">else if (ex instanceof NoHandlerFoundException) &#123;</span><br><span class="line">return handleNoHandlerFoundException((NoHandlerFoundException) ex, request, response, handler);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">catch (Exception handlerException) &#123;</span><br><span class="line">logger.warn(&quot;Handling of [&quot; + ex.getClass().getName() + &quot;] resulted in Exception&quot;, handlerException);</span><br><span class="line">&#125;</span><br><span class="line">return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="4-异常处理-SimpleMappingExceptionResolver"><a href="#4-异常处理-SimpleMappingExceptionResolver" class="headerlink" title="4 异常处理_SimpleMappingExceptionResolver"></a>4 异常处理_SimpleMappingExceptionResolver</h1><p>1）如果希望对所有异常进行统一处理，可以使用 SimpleMappingExceptionResolver，它将异<br>  常类名映射为视图名，即发生异常时使用对应的视图报告异常</p>
+<p> <img src="https://s2.ax1x.com/2019/05/06/EDeGZj.png" alt="EDeGZj.png"></p>
+<h2 id="4-1实验代码"><a href="#4-1实验代码" class="headerlink" title="4.1实验代码"></a>4.1实验代码</h2><p>1）增加页面链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;testSimpleMappingExceptionResolver?i=1&quot;&gt;testSimpleMappingExceptionResolver&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<p>2）增加控制器方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/testSimpleMappingExceptionResolver&quot;)</span><br><span class="line">public String testSimpleMappingExceptionResolver(@RequestParam(&quot;i&quot;) int i)&#123;</span><br><span class="line">System.out.println(&quot;testSimpleMappingExceptionResolver...&quot;); </span><br><span class="line">String[] s = new String[10]; </span><br><span class="line">System.out.println(s[i]); </span><br><span class="line">return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3）出现异常情况：参数i的值大于10<br>错误码500</p>
+<p><a href="https://imgchr.com/i/EDegF1" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/06/EDegF1.md.png" alt="EDegF1.md.png"></a></p>
+<p>4）配置异常解析器:自动将异常对象信息，存放到request范围内</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 配置SimpleMappingExceptionResolver异常解析器 --&gt;</span><br><span class="line">&lt;bean id=&quot;simpleMappingExceptionResolver&quot;</span><br><span class="line"> class=&quot;org.springframework.web.servlet.handler.SimpleMappingExceptionResolver&quot;&gt;</span><br><span class="line">&lt;!-- exceptionAttribute默认值(通过ModelAndView传递给页面)：</span><br><span class="line">exception   -&gt;  $&#123;requestScope.exception&#125;</span><br><span class="line">public static final String DEFAULT_EXCEPTION_ATTRIBUTE = &quot;exception&quot;;</span><br><span class="line">--&gt;</span><br><span class="line">&lt;property name=&quot;exceptionAttribute&quot; value=&quot;exception&quot;&gt;&lt;/property&gt;</span><br><span class="line">&lt;property name=&quot;exceptionMappings&quot;&gt;</span><br><span class="line">&lt;props&gt;</span><br><span class="line">&lt;prop key=&quot;java.lang.ArrayIndexOutOfBoundsException&quot;&gt;error&lt;/prop&gt;</span><br><span class="line">&lt;/props&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<p>error.jsp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=UTF-8&quot;</span><br><span class="line">    pageEncoding=&quot;UTF-8&quot;%&gt;</span><br><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;</span><br><span class="line"> &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt; </span><br><span class="line">&lt;h3&gt;Error Page&lt;/h3&gt; </span><br><span class="line">$&#123;exception &#125;</span><br><span class="line">$&#123;requestScope.exception &#125; </span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.ax1x.com/2019/05/06/EDmApV.png" alt="EDmApV.png">  </p>
+<p>5）源码分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SimpleMappingExceptionResolver    L187 L339</span><br></pre></td></tr></table></figure>
+<p><a href="https://imgchr.com/i/EDmU7d" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/06/EDmU7d.md.png" alt="EDmU7d.md.png"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected ModelAndView doResolveException(HttpServletRequest request,</span><br><span class="line"> HttpServletResponse response,Object handler, Exception ex) &#123;</span><br><span class="line"> </span><br><span class="line">// Expose ModelAndView for chosen error view.</span><br><span class="line">String viewName = determineViewName(ex, request);</span><br><span class="line">if (viewName != null) &#123;</span><br><span class="line">// Apply HTTP status code for error views, if specified.</span><br><span class="line">// Only apply it if we&apos;re processing a top-level request.</span><br><span class="line">Integer statusCode = determineStatusCode(request, viewName);</span><br><span class="line">if (statusCode != null) &#123;</span><br><span class="line">applyStatusCodeIfPossible(request, response, statusCode);</span><br><span class="line">&#125;</span><br><span class="line">return getModelAndView(viewName, ex, request);</span><br><span class="line">&#125;else &#123;</span><br><span class="line">return null;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * Return a ModelAndView for the given view name and exception.</span><br><span class="line"> * &lt;p&gt;The default implementation adds the specified exception attribute.</span><br><span class="line"> * Can be overridden in subclasses.</span><br><span class="line"> * @param viewName the name of the error view</span><br><span class="line"> * @param ex the exception that got thrown during handler execution</span><br><span class="line"> * @return the ModelAndView instance</span><br><span class="line"> * @see #setExceptionAttribute</span><br><span class="line"> */</span><br><span class="line">protected ModelAndView getModelAndView(String viewName, Exception ex) &#123;</span><br><span class="line">ModelAndView mv = new ModelAndView(viewName);</span><br><span class="line">if (this.exceptionAttribute != null) &#123;</span><br><span class="line">if (logger.isDebugEnabled()) &#123;</span><br><span class="line">logger.debug(&quot;Exposing Exception as model attribute &apos;&quot; + this.exceptionAttribute + &quot;&apos;&quot;);</span><br><span class="line">&#125;</span><br><span class="line">mv.addObject(this.exceptionAttribute, ex);</span><br><span class="line">&#125;</span><br><span class="line">return mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/02/25/53. SpringMVC拦截器 /">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/03/01/55. SpringMVC运行流程图解/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

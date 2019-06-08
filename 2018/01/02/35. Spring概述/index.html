@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>1. Spring概述 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Spring框架,SSM框架,">
+  
+
+  <meta name="description" content="概述框架 SSM细解: SSM(Spring + Spring WEB  MVC  + MyBatis ) + Linux + Redis  ….统一环境: JDK1.8 +  STS3.9.2 +  Tomcat7  + MySQL5.5以上    框架:  平台 、 简化开发 、 提供标准 、 方便扩展维护 ….   现有技术在开发中存在的一些问题:   创建对象   现在: new框架: 把">
+<meta name="keywords" content="Spring框架,SSM框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1. Spring概述">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/35. Spring概述/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="概述框架 SSM细解: SSM(Spring + Spring WEB  MVC  + MyBatis ) + Linux + Redis  ….统一环境: JDK1.8 +  STS3.9.2 +  Tomcat7  + MySQL5.5以上    框架:  平台 、 简化开发 、 提供标准 、 方便扩展维护 ….   现有技术在开发中存在的一些问题:   创建对象   现在: new框架: 把">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/23/EEAQtx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/04/23/EEAHu4.png">
+<meta property="og:updated_time" content="2019-06-08T14:45:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1. Spring概述">
+<meta name="twitter:description" content="概述框架 SSM细解: SSM(Spring + Spring WEB  MVC  + MyBatis ) + Linux + Redis  ….统一环境: JDK1.8 +  STS3.9.2 +  Tomcat7  + MySQL5.5以上    框架:  平台 、 简化开发 、 提供标准 、 方便扩展维护 ….   现有技术在开发中存在的一些问题:   创建对象   现在: new框架: 把">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/04/23/EEAQtx.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简单了解框架"><span class="toc-text">简单了解框架</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Spring框架"><span class="toc-text">Spring框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Spring概述"><span class="toc-text">1.1 Spring概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-搭建Spring运行时环境"><span class="toc-text">1.2 搭建Spring运行时环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-HelloWorld"><span class="toc-text">1.3 HelloWorld</span></a></li></ol></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-35. Spring概述" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">1. Spring概述</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.01.02</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>框架 SSM<br>细解: SSM(Spring + Spring WEB  MVC  + MyBatis ) + Linux + Redis  ….<br>统一环境: JDK1.8 +  STS3.9.2 +  Tomcat7  + MySQL5.5以上   </p>
+<p>框架:  平台 、 简化开发 、 提供标准 、 方便扩展维护 ….  </p>
+<p>现有技术在开发中存在的一些问题: </p>
+<ol>
+<li>创建对象<br>   现在: new<br>框架: 把对象的创建及管理交给Spring的IOC容器管理. </li>
+<li>对象与对象的关系：  xxxServlet  —&gt; xxxService —-&gt;xxxDao(xxxJdbcDaoImpl  xxxMyBatisDaoImpl)<br>   现在:  例如在xxxService中通过new的方式创建xxxDao对象.<br>框架:  将各个组件管理到IOC容器中，IOC容器能够进行自动装配.   </li>
+<li>事务管理:<br>  现在:  将事务管理的代码写到每个JDBC方法中.  conn.setAutoCommit(false);  conn.commit();  conn.rollback();<br>  框架:  声明式事务管理（基于简单的配置+ 注解 作用到Service层）  </li>
+<li>JavaWEB：<br>  现在: 写代码时严重耦合与ServletAPI<br>  框架: SpringMVC 将ServletAPI进行了封装, 间接的依赖于ServletAPI  </li>
+<li>……..  </li>
+</ol>
+<p>一、 Spring框架简介</p>
+<ol>
+<li>开源框架</li>
+<li>简化企业级开发.  </li>
+<li>非侵入式(轻量级) 、 IOC 、 AOP 、 容器(对象工厂) 、 组件化 、 一站式 …..  </li>
+</ol>
+<p>二、 Spring  HelloWorld</p>
+<ol>
+<li>导入jar包: spring-beans  spring-core  spring-context  spring-expression  commons-logging    </li>
+<li>创建框架的配置文件: New -&gt; Spring Bean Configuration File -&gt; applicationContext.xml  </li>
+<li>在配置文件中通过<bean>配置:  <bean id class>  <property name value></property> </bean></bean></li>
+<li>在测试方法中, 创建IOC容器对象，  从容器中获取Bean对象. </li>
+</ol>
+<h1 id="简单了解框架"><a href="#简单了解框架" class="headerlink" title="简单了解框架"></a>简单了解框架</h1><blockquote>
+<p>框架，即framework。其实就是某种应用的半成品，就是一组组件，供你选用完成你自己的系统。简单说就是使用别人搭好的舞台，你来做表演。而且，框架一般是成熟的，不断升级的软件。</p>
+<p>框架是对特定应用领域中的应用系统的部分设计和实现的整体结构。</p>
+<p>因为软件系统发展到今天已经很复杂了，特别是服务器端软件，涉及到的知识，内容，问题太多。在某些方面使用别人成熟的框架，就相当于让别人帮你完成一些基础工作，你只需要集中精力完成系统的业务逻辑设计。而且框架一般是成熟，稳健的，他可以处理系统很多细节问题，比如，事务处理，安全性，数据流控制等问题。还有框架一般都经过很多人使用，所以结构很好，所以扩展性也很好，而且它是不断升级的，你可以直接享受别人升级代码带来的好处。   </p>
+</blockquote>
+<h1 id="Spring框架"><a href="#Spring框架" class="headerlink" title="Spring框架"></a>Spring框架</h1><h2 id="1-1-Spring概述"><a href="#1-1-Spring概述" class="headerlink" title="1.1 Spring概述"></a>1.1 Spring概述</h2><p>1)    Spring是一个开源框架<br>2)    Spring为简化企业级开发而生，使用Spring，JavaBean就可以实现很多以前要靠EJB才能实现的功能。同样的功能，在EJB中要通过繁琐的配置和复杂的代码才能够实现，而在Spring中却非常的优雅和简洁。<br>注: EJB即EnterpriseJavaBean，是SUN的JavaEE服务器端组件模型。在JavaEE里，EJB称为Java企业Bean，是Java的核心代码，分别是会话Bean（Session Bean），实体Bean（Entity Bean）和消息驱动Bean（MessageDriven Bean）。在EJB3.0推出以后，实体Bean被单独分了出来，形成了新的规范JPA。<br>3)    Spring是一个IOC(DI)和AOP容器框架。<br>4)    Spring的优良特性<br>①非侵入式：基于Spring开发的应用中的对象可以不依赖于Spring的API<br>②依赖注入：DI——DependencyInjection，反转控制(IOC)最经典的实现。<br>③面向切面编程：Aspect Oriented Programming——AOP<br>④容器：Spring是一个容器，因为它包含并且管理应用对象的生命周期<br>⑤   组件化：Spring实现了使用简单的组件配置组合成一个复杂的应用。在 Spring 中可以使用XML和Java注解组合这些对象。<br>⑥  一站式：在IOC和AOP的基础上可以整合各种企业应用的开源框架和优秀的第三方类库（实际上Spring 自身也提供了表述层的SpringMVC和持久层的Spring JDBC）。</p>
+<ol start="5">
+<li>Spring模块<br><img src="https://s2.ax1x.com/2019/04/23/EEAQtx.png" alt="image"></li>
+<li>Spring 官网<br><a href="https://spring.io/" target="_blank" rel="noopener">https://spring.io/</a><h2 id="1-2-搭建Spring运行时环境"><a href="#1-2-搭建Spring运行时环境" class="headerlink" title="1.2 搭建Spring运行时环境"></a>1.2 搭建Spring运行时环境</h2>1)    加入JAR包<br>① Spring自身JAR包：spring-framework-4.0.0.RELEASE\libs目录下<br>spring-beans-4.0.0.RELEASE.jar<br>spring-context-4.0.0.RELE2ASE.jar<br>spring-core-4.0.0.RELEASE.jar<br>spring-expression-4.0.0.RELEASE.jar<br>② commons-logging-1.1.1.jar<br>2)    在Spring Tool Suite工具中通过如下步骤创建Spring的配置文件<br> ① File-&gt;New-&gt;Spring Bean Configuration File<br> ② 为文件取名字 例如：applicationContext.xml   <h2 id="1-3-HelloWorld"><a href="#1-3-HelloWorld" class="headerlink" title="1.3 HelloWorld"></a>1.3 HelloWorld</h2>1)    目标：使用Spring创建对象，为属性赋值<br>2)    创建Student类<br><img src="https://s2.ax1x.com/2019/04/23/EEAHu4.png" alt="image"><br>3)    创建Spring配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 使用bean元素定义一个由IOC容器创建的对象 --&gt;</span><br><span class="line">	&lt;!-- class属性指定用于创建bean的全类名 --&gt;</span><br><span class="line">	&lt;!-- id属性指定用于引用bean实例的标识 --&gt;</span><br><span class="line">	&lt;bean id=&quot;student&quot; class=&quot;com.atguigu.helloworld.bean.Student&quot;&gt;</span><br><span class="line">		&lt;!-- 使用property子元素为bean的属性赋值 --&gt;</span><br><span class="line">		&lt;property name=&quot;studentId&quot; value=&quot;1001&quot;/&gt;</span><br><span class="line">		&lt;property name=&quot;stuName&quot; value=&quot;Tom&quot;/&gt;</span><br><span class="line">		&lt;property name=&quot;age&quot; value=&quot;20&quot;/&gt;</span><br><span class="line">	&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<p>4)    测试：通过Spring的IOC容器创建Student类实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//1.创建IOC容器对象</span><br><span class="line">ApplicationContext iocContainer = </span><br><span class="line">		new ClassPathXmlApplicationContext(&quot;helloworld.xml&quot;);</span><br><span class="line">//2.根据id值获取bean实例对象</span><br><span class="line">Student student = (Student) iocContainer.getBean(&quot;student&quot;);</span><br><span class="line">//3.打印bean</span><br><span class="line">System.out.println(student);</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/12/26/34 web-文件的上传和下载/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/01/06/36. SpringIOC容器和Bean的配置/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>

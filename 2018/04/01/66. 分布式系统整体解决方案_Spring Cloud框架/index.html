@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>分布式系统整体解决方案_Spring Cloud框架 | SomnambulistOfChina</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="使用过的开源框架,">
+  
+
+  <meta name="description" content="第一章 SpringCloud介绍1.1 概念 Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来">
+<meta name="keywords" content="使用过的开源框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式系统整体解决方案_Spring Cloud框架">
+<meta property="og:url" content="http://yoursite.com/2018/04/01/66. 分布式系统整体解决方案_Spring Cloud框架/index.html">
+<meta property="og:site_name" content="SomnambulistOfChina">
+<meta property="og:description" content="第一章 SpringCloud介绍1.1 概念 Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来">
+<meta property="og:locale" content="Java EE">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531105740.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531105823.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531105853.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531135849.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531135918.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531140438.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531140459.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531170955.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171333.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171411.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171718.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171810.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171849.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171917.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531172038.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531172118.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531172141.png">
+<meta property="og:updated_time" content="2019-06-08T15:00:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式系统整体解决方案_Spring Cloud框架">
+<meta name="twitter:description" content="第一章 SpringCloud介绍1.1 概念 Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531105740.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbeddx" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-38189205-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?99d997f72fffd95d0fd1477dd657eafc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+  
+</head>
+</html>
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">更多</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">更多</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+            搜索
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+            RSS
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一章-SpringCloud介绍"><span class="toc-text">第一章 SpringCloud介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-概念"><span class="toc-text">1.1 概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-为什么使用Spring-Cloud？"><span class="toc-text">1.2 为什么使用Spring Cloud？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-应用Spring-Cloud"><span class="toc-text">1.3 应用Spring Cloud</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-Spring-Cloud是分布式系统的整体解决方案"><span class="toc-text">1.4 Spring Cloud是分布式系统的整体解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-官方网站"><span class="toc-text">1.5 官方网站</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二章-SpringCloud-HelloWorld架构图"><span class="toc-text">第二章 SpringCloud-HelloWorld架构图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-案例图解"><span class="toc-text">2.1 案例图解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-注册中心"><span class="toc-text">2.2 注册中心</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三章-SpringCloud-HelloWorld案例开发-注册中心"><span class="toc-text">第三章 SpringCloud-HelloWorld案例开发-注册中心</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-注册中心"><span class="toc-text">3.1 注册中心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-引入eureka-server"><span class="toc-text">3.1.1 引入eureka-server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-编写application-yml"><span class="toc-text">3.1.2 编写application.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-开启Eureka注册中心功能；-EnableEurekaServer-启用注册中心服务器"><span class="toc-text">3.1.3 开启Eureka注册中心功能；@EnableEurekaServer 启用注册中心服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-4-测试"><span class="toc-text">3.1.4 测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第四章-SpringCloud-HelloWorld案例开发-电影服务"><span class="toc-text">第四章 SpringCloud-HelloWorld案例开发-电影服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-电影服务"><span class="toc-text">4.1 电影服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1-引入eureka-Discovery、web模块"><span class="toc-text">4.1.1 引入eureka-Discovery、web模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-2-创建Movie实体类-增加id-movieName属性"><span class="toc-text">4.1.2 创建Movie实体类,增加id,movieName属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-3-创建MovieDao"><span class="toc-text">4.1.3 创建MovieDao</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-6-启动测试"><span class="toc-text">4.1.6 启动测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-7-编写application-yml"><span class="toc-text">4.1.7 编写application.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-8-将自己自动注册到注册中心-EnableDiscoveryClient"><span class="toc-text">4.1.8 将自己自动注册到注册中心@EnableDiscoveryClient</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-9-启动注册中心和服务"><span class="toc-text">4.1.9 启动注册中心和服务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第五章-SpringCloud-HelloWorld案例开发-用户服务"><span class="toc-text">第五章 SpringCloud-HelloWorld案例开发-用户服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-引入eureka-Discovery、web模块"><span class="toc-text">5.1.1 引入eureka-Discovery、web模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-创建User实体类-增加id-userName属性"><span class="toc-text">5.1.2 创建User实体类,增加id,userName属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-3-创建UserDao"><span class="toc-text">5.1.3 创建UserDao</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-4-创建UserService"><span class="toc-text">5.1.4 创建UserService</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-6-编写application-yml"><span class="toc-text">5.1.6 编写application.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-7-将自己自动注册到注册中心"><span class="toc-text">5.1.7 将自己自动注册到注册中心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-8-启动注册中心和服务，查看注册中心，访问服务"><span class="toc-text">5.1.8 启动注册中心和服务，查看注册中心，访问服务</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#第六章-SpringCloud-HelloWorld案例开发-Ribbon-RestTemplate"><span class="toc-text">第六章 SpringCloud-HelloWorld案例开发-Ribbon-RestTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-Ribbon负载均衡"><span class="toc-text">6.1 Ribbon负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用Ribbon"><span class="toc-text">如何使用Ribbon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-1-用户服务项目中引入Ribbon"><span class="toc-text">6.1.1 用户服务项目中引入Ribbon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-2-RestTemplate"><span class="toc-text">6.1.2 RestTemplate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-3-使用RestTemplate远程调用（UserService中完善代码）"><span class="toc-text">6.1.3 使用RestTemplate远程调用（UserService中完善代码）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-4-启动注册中心和服务，访问服务"><span class="toc-text">6.1.4 启动注册中心和服务，访问服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-5-在电影服务（MovieService-类）中打印服务端口，方便监控服务执行情况。"><span class="toc-text">6.1.5 在电影服务（MovieService 类）中打印服务端口，方便监控服务执行情况。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-6-将电影服务项目启动多次，测试负载均衡"><span class="toc-text">6.1.6 将电影服务项目启动多次，测试负载均衡</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第七章-SpringCloud-HelloWorld案例开发-Feign-声明式调用"><span class="toc-text">第七章 SpringCloud-HelloWorld案例开发-Feign-声明式调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-Feign声明式调用"><span class="toc-text">7.1  Feign声明式调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-创建新User项目cloud-consumer-user-feign，引入eureka-Discovery、web、Feign模块"><span class="toc-text">7.2  创建新User项目cloud-consumer-user-feign，引入eureka-Discovery、web、Feign模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-1开启-EnableDiscoveryClient服务发现"><span class="toc-text">7.2.1开启@EnableDiscoveryClient服务发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-2-编写application-yml"><span class="toc-text">7.2.2 编写application.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-3-复制用户服务项目的代码：实体类，Dao，Service，Controller"><span class="toc-text">7.2.3 复制用户服务项目的代码：实体类，Dao，Service，Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-4-将RestTemplate方式改成Feign方式进行远程调用"><span class="toc-text">7.2.4 将RestTemplate方式改成Feign方式进行远程调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-5-修改UserService-代码"><span class="toc-text">7.2.5 修改UserService 代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-6-开启Feign功能-EnableFeignClients"><span class="toc-text">7.2.6 开启Feign功能@EnableFeignClients</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-7-测试调用与负载均衡效果"><span class="toc-text">7.2.7 测试调用与负载均衡效果</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第八章-SpringCloud-HelloWorld案例开发-Ribbon-Hystrix组合"><span class="toc-text">第八章 SpringCloud-HelloWorld案例开发-Ribbon+Hystrix组合</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-Hystrix服务熔断"><span class="toc-text">8.1 Hystrix服务熔断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-2-使用Ribbon-Hystrix组合"><span class="toc-text">8.2 使用Ribbon+Hystrix组合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-1-引入Hystrix"><span class="toc-text">8.2.1 引入Hystrix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-2-开启断路保护功能"><span class="toc-text">8.2.2 开启断路保护功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-4-在本类编写xxx方法，方法的参数和原来一样即可"><span class="toc-text">8.2.4 在本类编写xxx方法，方法的参数和原来一样即可</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-5-测试正常调用-amp-停止user服务，测试异常调用-amp-启动user服务过一段时间测试是否正常"><span class="toc-text">8.2.5 测试正常调用&amp;停止user服务，测试异常调用&amp;启动user服务过一段时间测试是否正常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-6-熔断器原理"><span class="toc-text">8.2.6 熔断器原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-7-我们悄悄的启动一个服务，刷刷浏览器会怎样"><span class="toc-text">8.2.7 我们悄悄的启动一个服务，刷刷浏览器会怎样?</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-3-使用Feign-Hystrix组合"><span class="toc-text">8.3 使用Feign+Hystrix组合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-1-引入Hystrix"><span class="toc-text">8.3.1 引入Hystrix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-2-开启断路保护功能"><span class="toc-text">8.3.2 开启断路保护功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-3-开启Feign对Hystrix支持"><span class="toc-text">8.3.3 开启Feign对Hystrix支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-4-Feign已经集成了Hystrix，使用起来非常简单-FeignClient-name-”provider-user”-fallback-”异常处理类”"><span class="toc-text">8.3.4 Feign已经集成了Hystrix，使用起来非常简单@FeignClient(name=”provider-user”,fallback=”异常处理类”)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-5-fallback-”异常处理类”指定的异常处理类实现这个类的接口即可，并且放在容器中"><span class="toc-text">8.3.5 fallback=”异常处理类”指定的异常处理类实现这个类的接口即可，并且放在容器中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-6-测试正常调用-amp-停止user服务，测试异常调用-amp-启动user服务过一段时间测试是否正常"><span class="toc-text">8.3.6 测试正常调用&amp;停止user服务，测试异常调用&amp;启动user服务过一段时间测试是否正常</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第九章-SpringCloud-HelloWorld案例开发-Hystrix-Dashboard"><span class="toc-text">第九章 SpringCloud-HelloWorld案例开发-Hystrix Dashboard</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-引入actuator（cloud-consumer-user-feign）"><span class="toc-text">9.1 引入actuator（cloud-consumer-user-feign）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-1-actuator是用来监控SpringBoot服务的，注意路径问题，具体的版本可能不一样，参考启动日志"><span class="toc-text">9.1.1 actuator是用来监控SpringBoot服务的，注意路径问题，具体的版本可能不一样，参考启动日志</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-修改配置文件，暴露数据监控流"><span class="toc-text">9.2 修改配置文件，暴露数据监控流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-引入HystrixDashboard"><span class="toc-text">9.3 引入HystrixDashboard</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-4-开启可视化监控功能"><span class="toc-text">9.4 开启可视化监控功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-1-EnableHystrixDashboard"><span class="toc-text">9.4.1 @EnableHystrixDashboard</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-2-访问当前项目-hystrix，将Hystrix的stream地址输入-http-localhost-7000-actuator-hystrix-stream-，点击monitor按钮即可监控"><span class="toc-text">9.4.2 访问当前项目/hystrix，将Hystrix的stream地址输入(http://localhost:7000/actuator/hystrix.stream )，点击monitor按钮即可监控</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-3-监控中，服务器正常"><span class="toc-text">9.4.3 监控中，服务器正常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-4-4-监控中，服务器重新启动，断路器打开"><span class="toc-text">9.4.4 监控中，服务器重新启动，断路器打开</span></a></li></ol></li></ol></li>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-66. 分布式系统整体解决方案_Spring Cloud框架" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">分布式系统整体解决方案_Spring Cloud框架</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.04.01</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>SomnambulistOfChina</span>
+        </span>
+      
+
+      
+  <span class="article-category">
+    <i class="icon-list"></i>
+    <a class="article-category-link" href="/categories/Java框架/">Java框架</a>
+  </span>
+
+
+
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="第一章-SpringCloud介绍"><a href="#第一章-SpringCloud介绍" class="headerlink" title="第一章 SpringCloud介绍"></a>第一章 SpringCloud介绍</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h2><ul>
+<li>Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。Spring并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过Spring Boot风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。</li>
+<li>“微服务架构”在这几年非常的火热，以至于关于微服务架构相关的开源产品被反复的提及（比如：netflix、dubbo），Spring Cloud也因Spring社区的强大知名度和影响力也被广大架构师与开发者备受关注。</li>
+<li>那么什么是“微服务架构”呢？简单的说，微服务架构就是将一个完整的应用从数据存储开始垂直拆分成多个不同的服务，每个服务都能独立部署、独立维护、独立扩展，服务与服务间通过诸如RESTful API的方式互相调用。</li>
+</ul>
+<h2 id="1-2-为什么使用Spring-Cloud？"><a href="#1-2-为什么使用Spring-Cloud？" class="headerlink" title="1.2 为什么使用Spring Cloud？"></a>1.2 为什么使用Spring Cloud？</h2><p>Spring Cloud对于中小型互联网公司来说是一种福音，因为这类公司往往没有实力或者没有足够的资金投入去开发自己的分布式系统基础设施，使用Spring Cloud一站式解决方案能在从容应对业务发展的同时大大减少开发成本。同时，随着近几年微服务架构和Docker容器概念的火爆，也会让Spring Cloud在未来越来越“云”化的软件开发风格中立有一席之地，尤其是在目前五花八门的分布式解决方案中提供了标准化的、全站式的技术方案，意义可能会堪比当前Servlet规范的诞生，有效推进服务端软件系统技术水平的进步。</p>
+<h2 id="1-3-应用Spring-Cloud"><a href="#1-3-应用Spring-Cloud" class="headerlink" title="1.3 应用Spring Cloud"></a>1.3 应用Spring Cloud</h2><blockquote>
+<p>Spring Cloud Netflix项目是Spring Cloud的子项目之一，主要内容是对Netflix公司一系列开源产品的包装，它为Spring Boot应用提供了自配置的Netflix OSS整合。通过一些简单的注解，开发者就可以快速的在应用中配置一下常用模块并构建庞大的分布式系统。它主要提供的模块包括：服务发现（Eureka），断路器（Hystrix），智能路由（Zuul），客户端负载均衡（Ribbon）等。 </p>
+</blockquote>
+<h2 id="1-4-Spring-Cloud是分布式系统的整体解决方案"><a href="#1-4-Spring-Cloud是分布式系统的整体解决方案" class="headerlink" title="1.4 Spring Cloud是分布式系统的整体解决方案"></a>1.4 Spring Cloud是分布式系统的整体解决方案</h2><ul>
+<li>SpringBoot&amp;Spring什么关系？<br>SpringBoot底层就是Spring，简化使用Spring的方式而已，多加了好多的自动配置； </li>
+<li>Spring Cloud&amp;SpringBoot什么关系？<br>Spring Cloud是分布式系统的整体解决方案，底层用的SpringBoot来构建项目，Cloud新增很多的分布式的starter，包括这些starter的自动配置；<h2 id="1-5-官方网站"><a href="#1-5-官方网站" class="headerlink" title="1.5 官方网站"></a>1.5 官方网站</h2><a href="http://spring.io/projects" target="_blank" rel="noopener">http://spring.io/projects</a><br><a href="https://projects.spring.io/spring-cloud/#quick-start" target="_blank" rel="noopener">https://projects.spring.io/spring-cloud/#quick-start</a><br><a href="https://springcloud.cc/" target="_blank" rel="noopener">https://springcloud.cc/</a><h1 id="第二章-SpringCloud-HelloWorld架构图"><a href="#第二章-SpringCloud-HelloWorld架构图" class="headerlink" title="第二章 SpringCloud-HelloWorld架构图"></a>第二章 SpringCloud-HelloWorld架构图</h1><h2 id="2-1-案例图解"><a href="#2-1-案例图解" class="headerlink" title="2.1 案例图解"></a>2.1 案例图解</h2></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531105740.png" alt></p>
+<p>默认使用轮询策略</p>
+<h2 id="2-2-注册中心"><a href="#2-2-注册中心" class="headerlink" title="2.2 注册中心"></a>2.2 注册中心</h2><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531105823.png" alt></p>
+<p>配置Region和Zone</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531105853.png" alt></p>
+<blockquote>
+<p>Region和Zone就相当于大区和机房，一个Region（大区）可以有很多的Zone（机房）<br>。在Spring Cloud中，服务消费者会优先查找在同一个Zone的服务，之后在去查找其他的服务。<br>如果该项配置使用的好，那么项目请求的响应时间将大大缩短！</p>
+</blockquote>
+<h1 id="第三章-SpringCloud-HelloWorld案例开发-注册中心"><a href="#第三章-SpringCloud-HelloWorld案例开发-注册中心" class="headerlink" title="第三章 SpringCloud-HelloWorld案例开发-注册中心"></a>第三章 SpringCloud-HelloWorld案例开发-注册中心</h1><h2 id="3-1-注册中心"><a href="#3-1-注册中心" class="headerlink" title="3.1 注册中心"></a>3.1 注册中心</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（Eureka , jar工程）-cloud-eureka-registry-center</span><br></pre></td></tr></table></figure>
+<h3 id="3-1-1-引入eureka-server"><a href="#3-1-1-引入eureka-server" class="headerlink" title="3.1.1 引入eureka-server"></a>3.1.1 引入eureka-server</h3><h3 id="3-1-2-编写application-yml"><a href="#3-1-2-编写application-yml" class="headerlink" title="3.1.2 编写application.yml"></a>3.1.2 编写application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: cloud-eureka-registry-center</span><br><span class="line"> </span><br><span class="line">server:</span><br><span class="line">  port: 8761</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: localhost</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false #自己就是注册中心，不用注册自己</span><br><span class="line">    fetch-registry: false #要不要去注册中心获取其他服务的地址</span><br><span class="line">    service-url:</span><br><span class="line">       defaultZone: http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span><br></pre></td></tr></table></figure>
+<p>多服务的话需要 etch-registry: true    A获取B的服务列表</p>
+<h3 id="3-1-3-开启Eureka注册中心功能；-EnableEurekaServer-启用注册中心服务器"><a href="#3-1-3-开启Eureka注册中心功能；-EnableEurekaServer-启用注册中心服务器" class="headerlink" title="3.1.3 开启Eureka注册中心功能；@EnableEurekaServer 启用注册中心服务器"></a>3.1.3 开启Eureka注册中心功能；@EnableEurekaServer 启用注册中心服务器</h3><h2 id="3-1-4-测试"><a href="#3-1-4-测试" class="headerlink" title="3.1.4 测试"></a>3.1.4 测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Boot Dashboard视图启动</span><br><span class="line">访问http://localhost:8761</span><br></pre></td></tr></table></figure>
+<h1 id="第四章-SpringCloud-HelloWorld案例开发-电影服务"><a href="#第四章-SpringCloud-HelloWorld案例开发-电影服务" class="headerlink" title="第四章 SpringCloud-HelloWorld案例开发-电影服务"></a>第四章 SpringCloud-HelloWorld案例开发-电影服务</h1><h2 id="4-1-电影服务"><a href="#4-1-电影服务" class="headerlink" title="4.1 电影服务"></a>4.1 电影服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（jar工程，提供查询电影功能）cloud-provider-movie</span><br></pre></td></tr></table></figure>
+<h3 id="4-1-1-引入eureka-Discovery、web模块"><a href="#4-1-1-引入eureka-Discovery、web模块" class="headerlink" title="4.1.1 引入eureka-Discovery、web模块"></a>4.1.1 引入eureka-Discovery、web模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4-1-2-创建Movie实体类-增加id-movieName属性"><a href="#4-1-2-创建Movie实体类-增加id-movieName属性" class="headerlink" title="4.1.2 创建Movie实体类,增加id,movieName属性"></a>4.1.2 创建Movie实体类,增加id,movieName属性</h2><h2 id="4-1-3-创建MovieDao"><a href="#4-1-3-创建MovieDao" class="headerlink" title="4.1.3 创建MovieDao"></a>4.1.3 创建MovieDao</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@Repository</span><br><span class="line">public class MovieDao &#123;</span><br><span class="line">public Movie getNewMovie()&#123;</span><br><span class="line">Movie movie = new Movie();</span><br><span class="line">movie.setId(1);</span><br><span class="line">movie.setMovieName(&quot;战狼&quot;);</span><br><span class="line">return movie; </span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">4.1.4 创建MovieService</span><br><span class="line">@Service</span><br><span class="line">public class MovieService &#123; </span><br><span class="line">@Autowired</span><br><span class="line">MovieDao movieDao; </span><br><span class="line">public Movie getNewMovie()&#123;</span><br><span class="line">return movieDao.getNewMovie();</span><br><span class="line">&#125; </span><br><span class="line">&#125;</span><br><span class="line">4.1.5 创建MovieController</span><br><span class="line">@RestController</span><br><span class="line">public class MovieController &#123;</span><br><span class="line"> </span><br><span class="line">@Autowired</span><br><span class="line">MovieService movieService;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">   * 获取最新电影</span><br><span class="line">   */</span><br><span class="line">@GetMapping(&quot;/movie&quot;)</span><br><span class="line">public Movie getNewMovie()&#123;</span><br><span class="line">return movieService.getNewMovie();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="4-1-6-启动测试"><a href="#4-1-6-启动测试" class="headerlink" title="4.1.6 启动测试"></a>4.1.6 启动测试</h3><p><a href="http://localhost:8080，与注册中心无关，注册中心无此服务" target="_blank" rel="noopener">http://localhost:8080，与注册中心无关，注册中心无此服务</a></p>
+<h3 id="4-1-7-编写application-yml"><a href="#4-1-7-编写application-yml" class="headerlink" title="4.1.7 编写application.yml"></a>4.1.7 编写application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: cloud-provider-movie</span><br><span class="line">    </span><br><span class="line">server:</span><br><span class="line">  port: 8000</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 指定注册到哪个注册中心</span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line">  instance:</span><br><span class="line">    prefer-ip-address: true #注册自己服务使用ip的方式</span><br></pre></td></tr></table></figure>
+<h3 id="4-1-8-将自己自动注册到注册中心-EnableDiscoveryClient"><a href="#4-1-8-将自己自动注册到注册中心-EnableDiscoveryClient" class="headerlink" title="4.1.8 将自己自动注册到注册中心@EnableDiscoveryClient"></a>4.1.8 将自己自动注册到注册中心@EnableDiscoveryClient</h3><h3 id="4-1-9-启动注册中心和服务"><a href="#4-1-9-启动注册中心和服务" class="headerlink" title="4.1.9 启动注册中心和服务"></a>4.1.9 启动注册中心和服务</h3><p>查看注册中心，访问服务 <a href="http://localhost:8000" target="_blank" rel="noopener">http://localhost:8000</a></p>
+<h1 id="第五章-SpringCloud-HelloWorld案例开发-用户服务"><a href="#第五章-SpringCloud-HelloWorld案例开发-用户服务" class="headerlink" title="第五章 SpringCloud-HelloWorld案例开发-用户服务"></a>第五章 SpringCloud-HelloWorld案例开发-用户服务</h1><p>##5.1 用户服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">（jar工程，提供查询用户，买电影票功能）cloud-consumer-user</span><br></pre></td></tr></table></figure>
+<h3 id="5-1-1-引入eureka-Discovery、web模块"><a href="#5-1-1-引入eureka-Discovery、web模块" class="headerlink" title="5.1.1 引入eureka-Discovery、web模块"></a>5.1.1 引入eureka-Discovery、web模块</h3><h3 id="5-1-2-创建User实体类-增加id-userName属性"><a href="#5-1-2-创建User实体类-增加id-userName属性" class="headerlink" title="5.1.2 创建User实体类,增加id,userName属性"></a>5.1.2 创建User实体类,增加id,userName属性</h3><h3 id="5-1-3-创建UserDao"><a href="#5-1-3-创建UserDao" class="headerlink" title="5.1.3 创建UserDao"></a>5.1.3 创建UserDao</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Repository</span><br><span class="line">public class UserDao &#123;</span><br><span class="line">public User getUser(Integer id)&#123;</span><br><span class="line">User user = new User();</span><br><span class="line">user.setId(id);</span><br><span class="line">user.setUserName(&quot;张三&quot;);</span><br><span class="line">return user;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-1-4-创建UserService"><a href="#5-1-4-创建UserService" class="headerlink" title="5.1.4 创建UserService"></a>5.1.4 创建UserService</h3><p>拷贝Movie类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class UserService &#123;</span><br><span class="line"> </span><br><span class="line">@Autowired</span><br><span class="line">UserDao userDao;</span><br><span class="line"> </span><br><span class="line">public User getUserById(Integer id)&#123;</span><br><span class="line">User user = userDao.getUser(id);</span><br><span class="line">return user;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line">   * 购买最新的电影票</span><br><span class="line">   * 传入用户id</span><br><span class="line">   */</span><br><span class="line">@HystrixCommand(fallbackMethod=&quot;hystrix&quot;)</span><br><span class="line">public Map&lt;String, Object&gt; buyMovie(Integer id)&#123;</span><br><span class="line">Map&lt;String, Object&gt;  result = new HashMap&lt;&gt;();</span><br><span class="line">//1、查询用户信息</span><br><span class="line">User user = getUserById(id);</span><br><span class="line">//2、查到最新电影票  </span><br><span class="line">result.put(&quot;user&quot;, user);</span><br><span class="line">result.put(&quot;movie&quot;, null);//暂时为null</span><br><span class="line">return result;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">5.1.5 创建UserController</span><br><span class="line">@RestController</span><br><span class="line">public class UserController &#123;</span><br><span class="line"> </span><br><span class="line">@Autowired</span><br><span class="line">UserService userService;</span><br><span class="line"> </span><br><span class="line">@GetMapping(&quot;/user&quot;)</span><br><span class="line">public User getUser(@RequestParam(&quot;id&quot;)Integer id)&#123;</span><br><span class="line">User user = userService.getUserById(id);</span><br><span class="line">return user;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@GetMapping(&quot;/buyMovie&quot;)</span><br><span class="line">public Map&lt;String, Object&gt; buyMovie(@RequestParam(&quot;id&quot;)Integer userid)&#123;</span><br><span class="line">Map&lt;String, Object&gt; map = userService.buyMovie(id);</span><br><span class="line">return map;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-1-6-编写application-yml"><a href="#5-1-6-编写application-yml" class="headerlink" title="5.1.6 编写application.yml"></a>5.1.6 编写application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: cloud-consumer-user</span><br><span class="line">    </span><br><span class="line">server:</span><br><span class="line">  port: 9000</span><br><span class="line">  </span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line">  instance:</span><br><span class="line">    prefer-ip-address: true #注册中心保存我的ip</span><br></pre></td></tr></table></figure>
+<h3 id="5-1-7-将自己自动注册到注册中心"><a href="#5-1-7-将自己自动注册到注册中心" class="headerlink" title="5.1.7 将自己自动注册到注册中心"></a>5.1.7 将自己自动注册到注册中心</h3><p>@EnableDiscoveryClient</p>
+<h3 id="5-1-8-启动注册中心和服务，查看注册中心，访问服务"><a href="#5-1-8-启动注册中心和服务，查看注册中心，访问服务" class="headerlink" title="5.1.8 启动注册中心和服务，查看注册中心，访问服务"></a>5.1.8 启动注册中心和服务，查看注册中心，访问服务</h3><p><a href="http://localhost:9000/user?id=1" target="_blank" rel="noopener">http://localhost:9000/user?id=1</a><br><a href="http://localhost:9000/buyMovie?id=1" target="_blank" rel="noopener">http://localhost:9000/buyMovie?id=1</a></p>
+<h1 id="第六章-SpringCloud-HelloWorld案例开发-Ribbon-RestTemplate"><a href="#第六章-SpringCloud-HelloWorld案例开发-Ribbon-RestTemplate" class="headerlink" title="第六章 SpringCloud-HelloWorld案例开发-Ribbon-RestTemplate"></a>第六章 SpringCloud-HelloWorld案例开发-Ribbon-RestTemplate</h1><h2 id="6-1-Ribbon负载均衡"><a href="#6-1-Ribbon负载均衡" class="headerlink" title="6.1 Ribbon负载均衡"></a>6.1 Ribbon负载均衡</h2><p>可以用于远程调用（用户服务 调用  电影服务 项目）  </p>
+<h3 id="如何使用Ribbon"><a href="#如何使用Ribbon" class="headerlink" title="如何使用Ribbon"></a>如何使用Ribbon</h3><p>1）、引入Ribbon的Starter<br>2）、配置使用Ribbon功能；底层使用 RestTemplate 的工具来给远程发送请求</p>
+<h3 id="6-1-1-用户服务项目中引入Ribbon"><a href="#6-1-1-用户服务项目中引入Ribbon" class="headerlink" title="6.1.1 用户服务项目中引入Ribbon"></a>6.1.1 用户服务项目中引入Ribbon</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 引入ribbon实现远程调用和负载均衡功能 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-cloud-starter-netflix-ribbon&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531135849.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531135918.png" alt></p>
+<h3 id="6-1-2-RestTemplate"><a href="#6-1-2-RestTemplate" class="headerlink" title="6.1.2 RestTemplate"></a>6.1.2 RestTemplate</h3><p>给容器中注入一个RestTemplate并使用Ribbon进行负载均衡调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@LoadBalanced   //负载均衡</span><br><span class="line">@Bean</span><br><span class="line">public RestTemplate restTemplate()&#123;</span><br><span class="line">return new RestTemplate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-1-3-使用RestTemplate远程调用（UserService中完善代码）"><a href="#6-1-3-使用RestTemplate远程调用（UserService中完善代码）" class="headerlink" title="6.1.3 使用RestTemplate远程调用（UserService中完善代码）"></a>6.1.3 使用RestTemplate远程调用（UserService中完善代码）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">RestTemplate restTemplate;</span><br><span class="line">/**</span><br><span class="line"> * 购买最新的电影票</span><br><span class="line"> * 传入用户id</span><br><span class="line"> */</span><br><span class="line">public Map&lt;String, Object&gt; buyMovie(Integer id)&#123;</span><br><span class="line">Map&lt;String, Object&gt;  result = new HashMap&lt;&gt;();</span><br><span class="line">//1、查询用户信息</span><br><span class="line">User user = getUserById(id);</span><br><span class="line">//2、查到最新电影票  restTemplate使用java代码来模拟发请求</span><br><span class="line">Movie movie = restTemplate.getForObject(&quot;http://CLOUD-PROVIDER-MOVIE/movie&quot;, Movie.class);</span><br><span class="line"> </span><br><span class="line">result.put(&quot;user&quot;, user);</span><br><span class="line">result.put(&quot;movie&quot;, movie);</span><br><span class="line">return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-1-4-启动注册中心和服务，访问服务"><a href="#6-1-4-启动注册中心和服务，访问服务" class="headerlink" title="6.1.4 启动注册中心和服务，访问服务"></a>6.1.4 启动注册中心和服务，访问服务</h3><p><a href="http://localhost:9000/buyMovie?id=1" target="_blank" rel="noopener">http://localhost:9000/buyMovie?id=1</a><br>显示用户和电影信息</p>
+<h3 id="6-1-5-在电影服务（MovieService-类）中打印服务端口，方便监控服务执行情况。"><a href="#6-1-5-在电影服务（MovieService-类）中打印服务端口，方便监控服务执行情况。" class="headerlink" title="6.1.5 在电影服务（MovieService 类）中打印服务端口，方便监控服务执行情况。"></a>6.1.5 在电影服务（MovieService 类）中打印服务端口，方便监控服务执行情况。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Value(&quot;$&#123;server.port&#125;&quot;)</span><br><span class="line">private String port;</span><br><span class="line"> </span><br><span class="line">public Movie getNewMovie()&#123;</span><br><span class="line">System.out.println(&quot;当前电影服务的端口：&quot;+port);</span><br><span class="line">return movieDao.getNewMovie();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-1-6-将电影服务项目启动多次，测试负载均衡"><a href="#6-1-6-将电影服务项目启动多次，测试负载均衡" class="headerlink" title="6.1.6 将电影服务项目启动多次，测试负载均衡"></a>6.1.6 将电影服务项目启动多次，测试负载均衡</h3><p> <a href="http://localhost:9000/buyMovie?id=1" target="_blank" rel="noopener">http://localhost:9000/buyMovie?id=1</a> </p>
+<ul>
+<li>打jar包方式运行 </li>
+<li>java -jar xxx.jar –server.port=8000</li>
+<li>java -jar xxx.jar –server.port=8001</li>
+<li>java -jar xxx.jar –server.port=8002</li>
+<li>IDE工具中方式运行</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531140438.png" alt></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531140459.png" alt></p>
+<h1 id="第七章-SpringCloud-HelloWorld案例开发-Feign-声明式调用"><a href="#第七章-SpringCloud-HelloWorld案例开发-Feign-声明式调用" class="headerlink" title="第七章 SpringCloud-HelloWorld案例开发-Feign-声明式调用"></a>第七章 SpringCloud-HelloWorld案例开发-Feign-声明式调用</h1><h2 id="7-1-Feign声明式调用"><a href="#7-1-Feign声明式调用" class="headerlink" title="7.1  Feign声明式调用"></a>7.1  Feign声明式调用</h2><h2 id="7-2-创建新User项目cloud-consumer-user-feign，引入eureka-Discovery、web、Feign模块"><a href="#7-2-创建新User项目cloud-consumer-user-feign，引入eureka-Discovery、web、Feign模块" class="headerlink" title="7.2  创建新User项目cloud-consumer-user-feign，引入eureka-Discovery、web、Feign模块"></a>7.2  创建新User项目cloud-consumer-user-feign，引入eureka-Discovery、web、Feign模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-cloud-starter-openfeign&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="7-2-1开启-EnableDiscoveryClient服务发现"><a href="#7-2-1开启-EnableDiscoveryClient服务发现" class="headerlink" title="7.2.1开启@EnableDiscoveryClient服务发现"></a>7.2.1开启@EnableDiscoveryClient服务发现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 1、引入feign的starter</span><br><span class="line"> * 2、写一个接口，和被调用的服务关联起来</span><br><span class="line"> * 3、开启Feign功能;@EnableFeignClients</span><br><span class="line"> */</span><br><span class="line">@EnableFeignClients</span><br><span class="line">@EnableDiscoveryClient </span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class CloudConsumerUserFeignApplication &#123;</span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">SpringApplication.run(CloudConsumerUserFeignApplication.class, args);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-2-2-编写application-yml"><a href="#7-2-2-编写application-yml" class="headerlink" title="7.2.2 编写application.yml"></a>7.2.2 编写application.yml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: cloud-consumer-user-feign</span><br><span class="line">    </span><br><span class="line">server:</span><br><span class="line">  port: 7000</span><br><span class="line">  </span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http://localhost:8761/eureka/</span><br><span class="line">  instance:</span><br><span class="line">    prefer-ip-address: true #注册中心保存我的ip</span><br><span class="line">    </span><br><span class="line">feign:</span><br><span class="line">  hystrix:</span><br><span class="line">    enabled: true #开启feign整合hystrix进行服务熔断功能</span><br></pre></td></tr></table></figure>
+<h3 id="7-2-3-复制用户服务项目的代码：实体类，Dao，Service，Controller"><a href="#7-2-3-复制用户服务项目的代码：实体类，Dao，Service，Controller" class="headerlink" title="7.2.3 复制用户服务项目的代码：实体类，Dao，Service，Controller"></a>7.2.3 复制用户服务项目的代码：实体类，Dao，Service，Controller</h3><h3 id="7-2-4-将RestTemplate方式改成Feign方式进行远程调用"><a href="#7-2-4-将RestTemplate方式改成Feign方式进行远程调用" class="headerlink" title="7.2.4 将RestTemplate方式改成Feign方式进行远程调用"></a>7.2.4 将RestTemplate方式改成Feign方式进行远程调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.feign;</span><br><span class="line"> </span><br><span class="line">import org.springframework.cloud.openfeign.FeignClient;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"> </span><br><span class="line">import com.atguigu.bean.Movie;</span><br><span class="line">import com.atguigu.feign.exception.MovieFeignExceptionHandlerService;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line"> * 调用指定服务名称 “CLOUD-PROVIDER-MOVIE” 的 @GetMapping(&quot;/movie&quot;) 映射方法</span><br><span class="line"> * 这个方法声明与电影服务端Controller映射的方法声明一致即可。</span><br><span class="line"> */</span><br><span class="line">@FeignClient(value=&quot;CLOUD-PROVIDER-MOVIE&quot;) //与被调用端的服务名称一致</span><br><span class="line">public interface MovieServiceFeign &#123; </span><br><span class="line">@GetMapping(&quot;/movie&quot;)</span><br><span class="line">public Movie getNewMovie(); //与被调用服务端的映射方法一致 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-2-5-修改UserService-代码"><a href="#7-2-5-修改UserService-代码" class="headerlink" title="7.2.5 修改UserService 代码"></a>7.2.5 修改UserService 代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class UserService &#123;</span><br><span class="line"> </span><br><span class="line">@Autowired</span><br><span class="line">UserDao userDao;</span><br><span class="line"> </span><br><span class="line">//面向接口编程</span><br><span class="line">@Autowired</span><br><span class="line">MovieServiceFeign movieServiceFeign; //调用Feign接口；其实就是调用远程服务</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line"> * 购买最新的电影票</span><br><span class="line"> * 传入用户id</span><br><span class="line">   */</span><br><span class="line">public Map&lt;String, Object&gt; buyMovie(Integer id)&#123;</span><br><span class="line">Map&lt;String, Object&gt;  result = new HashMap&lt;&gt;();</span><br><span class="line">//1、查询用户信息</span><br><span class="line">User userById = getUserById(id);</span><br><span class="line">//2、查到最新电影票  Feign方式发起远程调用</span><br><span class="line">Movie movie = movieServiceFeign.getNewMovie();</span><br><span class="line"> </span><br><span class="line">result.put(&quot;user&quot;, userById);</span><br><span class="line">result.put(&quot;movie&quot;, movie);</span><br><span class="line">return result;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-2-6-开启Feign功能-EnableFeignClients"><a href="#7-2-6-开启Feign功能-EnableFeignClients" class="headerlink" title="7.2.6 开启Feign功能@EnableFeignClients"></a>7.2.6 开启Feign功能@EnableFeignClients</h3><h3 id="7-2-7-测试调用与负载均衡效果"><a href="#7-2-7-测试调用与负载均衡效果" class="headerlink" title="7.2.7 测试调用与负载均衡效果"></a>7.2.7 测试调用与负载均衡效果</h3><p><a href="http://localhost:7000/buyMovie?id=1" target="_blank" rel="noopener">http://localhost:7000/buyMovie?id=1</a> </p>
+<h1 id="第八章-SpringCloud-HelloWorld案例开发-Ribbon-Hystrix组合"><a href="#第八章-SpringCloud-HelloWorld案例开发-Ribbon-Hystrix组合" class="headerlink" title="第八章 SpringCloud-HelloWorld案例开发-Ribbon+Hystrix组合"></a>第八章 SpringCloud-HelloWorld案例开发-Ribbon+Hystrix组合</h1><h2 id="8-1-Hystrix服务熔断"><a href="#8-1-Hystrix服务熔断" class="headerlink" title="8.1 Hystrix服务熔断"></a>8.1 Hystrix服务熔断</h2><p>目前情况：如果集群的三个电影服务都挂了，会怎样？</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531170955.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">解决：</span><br><span class="line">返回默认数据，会提示错误消息</span><br></pre></td></tr></table></figure>
+<h2 id="8-2-使用Ribbon-Hystrix组合"><a href="#8-2-使用Ribbon-Hystrix组合" class="headerlink" title="8.2 使用Ribbon+Hystrix组合"></a>8.2 使用Ribbon+Hystrix组合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloud-consumer-user</span><br></pre></td></tr></table></figure>
+<h3 id="8-2-1-引入Hystrix"><a href="#8-2-1-引入Hystrix" class="headerlink" title="8.2.1 引入Hystrix"></a>8.2.1 引入Hystrix</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--  引入hystrix进行服务熔断 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="8-2-2-开启断路保护功能"><a href="#8-2-2-开启断路保护功能" class="headerlink" title="8.2.2 开启断路保护功能"></a>8.2.2 开启断路保护功能</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableCircuitBreaker</span><br></pre></td></tr></table></figure>
+<p>8.2.3 在方法上标注@HystrixCommand(fallbackMethod=”xxx”)来指定出错时调用xx方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 购买最新的电影票</span><br><span class="line"> * 传入用户id</span><br><span class="line"> */</span><br><span class="line">@HystrixCommand(fallbackMethod=&quot;hystrix&quot;)</span><br><span class="line">public Map&lt;String, Object&gt; buyMovie(Integer id)&#123;</span><br><span class="line">Map&lt;String, Object&gt;  result = new HashMap&lt;&gt;();</span><br><span class="line">//1、查询用户信息</span><br><span class="line">User userById = getUserById(id);</span><br><span class="line">//2、查到最新电影票  restTemplate使用java代码来模拟发请求</span><br><span class="line">Movie movie = restTemplate.getForObject(&quot;http://CLOUD-PROVIDER-MOVIE/movie&quot;, Movie.class);</span><br><span class="line"> </span><br><span class="line">result.put(&quot;user&quot;, userById);</span><br><span class="line">result.put(&quot;movie&quot;, movie);</span><br><span class="line">return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="8-2-4-在本类编写xxx方法，方法的参数和原来一样即可"><a href="#8-2-4-在本类编写xxx方法，方法的参数和原来一样即可" class="headerlink" title="8.2.4 在本类编写xxx方法，方法的参数和原来一样即可"></a>8.2.4 在本类编写xxx方法，方法的参数和原来一样即可</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public Map&lt;String, Object&gt; hystrix(Integer id)&#123;</span><br><span class="line">User user = new User();</span><br><span class="line">user.setId(-1);</span><br><span class="line">user.setUserName(&quot;未知用户&quot;);</span><br><span class="line"> </span><br><span class="line">Movie movie = new Movie();</span><br><span class="line">movie.setId(-100);</span><br><span class="line">movie.setMovieName(&quot;无此电影&quot;);</span><br><span class="line"> </span><br><span class="line">Map&lt;String, Object&gt;  result = new HashMap&lt;&gt;();</span><br><span class="line">result.put(&quot;user&quot;, user);</span><br><span class="line">result.put(&quot;movie&quot;, movie);</span><br><span class="line">return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="8-2-5-测试正常调用-amp-停止user服务，测试异常调用-amp-启动user服务过一段时间测试是否正常"><a href="#8-2-5-测试正常调用-amp-停止user服务，测试异常调用-amp-启动user服务过一段时间测试是否正常" class="headerlink" title="8.2.5 测试正常调用&amp;停止user服务，测试异常调用&amp;启动user服务过一段时间测试是否正常"></a>8.2.5 测试正常调用&amp;停止user服务，测试异常调用&amp;启动user服务过一段时间测试是否正常</h3><p> <a href="http://localhost:9000/buyMovie?id=1" target="_blank" rel="noopener">http://localhost:9000/buyMovie?id=1</a></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171333.png" alt></p>
+<h3 id="8-2-6-熔断器原理"><a href="#8-2-6-熔断器原理" class="headerlink" title="8.2.6 熔断器原理"></a>8.2.6 熔断器原理</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171411.png" alt></p>
+<h3 id="8-2-7-我们悄悄的启动一个服务，刷刷浏览器会怎样"><a href="#8-2-7-我们悄悄的启动一个服务，刷刷浏览器会怎样" class="headerlink" title="8.2.7 我们悄悄的启动一个服务，刷刷浏览器会怎样?"></a>8.2.7 我们悄悄的启动一个服务，刷刷浏览器会怎样?</h3><p>让子弹飞一分钟再看结果</p>
+<h2 id="8-3-使用Feign-Hystrix组合"><a href="#8-3-使用Feign-Hystrix组合" class="headerlink" title="8.3 使用Feign+Hystrix组合"></a>8.3 使用Feign+Hystrix组合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cloud-consumer-user-feign</span><br></pre></td></tr></table></figure>
+<h3 id="8-3-1-引入Hystrix"><a href="#8-3-1-引入Hystrix" class="headerlink" title="8.3.1 引入Hystrix"></a>8.3.1 引入Hystrix</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--  引入hystrix进行服务熔断 --&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;spring-cloud-starter-netflix-hystrix&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="8-3-2-开启断路保护功能"><a href="#8-3-2-开启断路保护功能" class="headerlink" title="8.3.2 开启断路保护功能"></a>8.3.2 开启断路保护功能</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableCircuitBreaker</span><br></pre></td></tr></table></figure>
+<h3 id="8-3-3-开启Feign对Hystrix支持"><a href="#8-3-3-开启Feign对Hystrix支持" class="headerlink" title="8.3.3 开启Feign对Hystrix支持"></a>8.3.3 开启Feign对Hystrix支持</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">feign:</span><br><span class="line">  hystrix:</span><br><span class="line">    enabled: true #默认false</span><br></pre></td></tr></table></figure>
+<h3 id="8-3-4-Feign已经集成了Hystrix，使用起来非常简单-FeignClient-name-”provider-user”-fallback-”异常处理类”"><a href="#8-3-4-Feign已经集成了Hystrix，使用起来非常简单-FeignClient-name-”provider-user”-fallback-”异常处理类”" class="headerlink" title="8.3.4 Feign已经集成了Hystrix，使用起来非常简单@FeignClient(name=”provider-user”,fallback=”异常处理类”)"></a>8.3.4 Feign已经集成了Hystrix，使用起来非常简单@FeignClient(name=”provider-user”,fallback=”异常处理类”)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*使用Hystrix进行服务的熔断</span><br><span class="line"> * 1）、引入Hystrix的starter</span><br><span class="line"> * 2）、开启xxx功能 ：@EnableCircuitBreaker</span><br><span class="line"> * 3）、@FeignClient(value=&quot;CLOUD-PROVIDER-MOVIE&quot;,fallback=指定这个接口的异常处理类（异常处理类必须实现这个接口）)</span><br><span class="line"> */</span><br><span class="line">@FeignClient(value=&quot;CLOUD-PROVIDER-MOVIE&quot;,fallback=MovieFeignExceptionHandlerService.class)</span><br><span class="line">public interface MovieServiceFeign &#123;</span><br><span class="line">//  未来这个接口就会调用很多方法，定制每一个方法远程出错如何返回兜底mock数据；</span><br><span class="line">@GetMapping(&quot;/movie&quot;)</span><br><span class="line">public Movie getNewMovie();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="8-3-5-fallback-”异常处理类”指定的异常处理类实现这个类的接口即可，并且放在容器中"><a href="#8-3-5-fallback-”异常处理类”指定的异常处理类实现这个类的接口即可，并且放在容器中" class="headerlink" title="8.3.5 fallback=”异常处理类”指定的异常处理类实现这个类的接口即可，并且放在容器中"></a>8.3.5 fallback=”异常处理类”指定的异常处理类实现这个类的接口即可，并且放在容器中</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.feign.exception;</span><br><span class="line"> </span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"> </span><br><span class="line">import com.bean.Movie;</span><br><span class="line">import com.feign.MovieServiceFeign;</span><br><span class="line"> </span><br><span class="line">@Component</span><br><span class="line">public class MovieFeignExceptionHandlerService implements MovieServiceFeign&#123;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line"> * 远程这个方法调用出问题就会调用此方法</span><br><span class="line"> */</span><br><span class="line">@Override</span><br><span class="line">public Movie getNewMovie() &#123;</span><br><span class="line">Movie movie = new Movie();</span><br><span class="line">movie.setId(-100);</span><br><span class="line">movie.setMovieName(&quot;无此电影呀...&quot;);</span><br><span class="line">return movie;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="8-3-6-测试正常调用-amp-停止user服务，测试异常调用-amp-启动user服务过一段时间测试是否正常"><a href="#8-3-6-测试正常调用-amp-停止user服务，测试异常调用-amp-启动user服务过一段时间测试是否正常" class="headerlink" title="8.3.6 测试正常调用&amp;停止user服务，测试异常调用&amp;启动user服务过一段时间测试是否正常"></a>8.3.6 测试正常调用&amp;停止user服务，测试异常调用&amp;启动user服务过一段时间测试是否正常</h3><p> <a href="http://localhost:7000/buyMovie?id=1" target="_blank" rel="noopener">http://localhost:7000/buyMovie?id=1</a></p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171718.png" alt></p>
+<h1 id="第九章-SpringCloud-HelloWorld案例开发-Hystrix-Dashboard"><a href="#第九章-SpringCloud-HelloWorld案例开发-Hystrix-Dashboard" class="headerlink" title="第九章 SpringCloud-HelloWorld案例开发-Hystrix Dashboard"></a>第九章 SpringCloud-HelloWorld案例开发-Hystrix Dashboard</h1><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171810.png" alt></p>
+<p>除了隔离依赖服务的调用以外，Hystrix还提供了近实时的监控，Hystrix会实时、累加地记录所有关于HystrixCommand的执行信息，包括每秒执行多少请求，多少成功，多少失败等。Netflix通过hystrix-metrics-event-stream项目实现了对以上指标的监控</p>
+<h2 id="9-1-引入actuator（cloud-consumer-user-feign）"><a href="#9-1-引入actuator（cloud-consumer-user-feign）" class="headerlink" title="9.1 引入actuator（cloud-consumer-user-feign）"></a>9.1 引入actuator（cloud-consumer-user-feign）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="9-1-1-actuator是用来监控SpringBoot服务的，注意路径问题，具体的版本可能不一样，参考启动日志"><a href="#9-1-1-actuator是用来监控SpringBoot服务的，注意路径问题，具体的版本可能不一样，参考启动日志" class="headerlink" title="9.1.1 actuator是用来监控SpringBoot服务的，注意路径问题，具体的版本可能不一样，参考启动日志"></a>9.1.1 actuator是用来监控SpringBoot服务的，注意路径问题，具体的版本可能不一样，参考启动日志</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171849.png" alt></p>
+<p>9.1.2 可提供的监控服务为</p>
+<p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531171917.png" alt></p>
+<h2 id="9-2-修改配置文件，暴露数据监控流"><a href="#9-2-修改配置文件，暴露数据监控流" class="headerlink" title="9.2 修改配置文件，暴露数据监控流"></a>9.2 修改配置文件，暴露数据监控流</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">management:</span><br><span class="line">  endpoints:</span><br><span class="line">    web:</span><br><span class="line">      exposure:</span><br><span class="line">        include: hystrix.stream # 访问/actuator/hystrix.stream能看到不断更新的监控流</span><br></pre></td></tr></table></figure>
+<p>访问/actuator/hystrix.stream 可以看到打印</p>
+<h2 id="9-3-引入HystrixDashboard"><a href="#9-3-引入HystrixDashboard" class="headerlink" title="9.3 引入HystrixDashboard"></a>9.3 引入HystrixDashboard</h2><p><dependency><br>     <groupid>org.springframework.cloud</groupid><br>     <artifactid>spring-cloud-starter-netflix-hystrix-dashboard</artifactid><br></dependency></p>
+<h2 id="9-4-开启可视化监控功能"><a href="#9-4-开启可视化监控功能" class="headerlink" title="9.4 开启可视化监控功能"></a>9.4 开启可视化监控功能</h2><h3 id="9-4-1-EnableHystrixDashboard"><a href="#9-4-1-EnableHystrixDashboard" class="headerlink" title="9.4.1 @EnableHystrixDashboard"></a>9.4.1 @EnableHystrixDashboard</h3><h3 id="9-4-2-访问当前项目-hystrix，将Hystrix的stream地址输入-http-localhost-7000-actuator-hystrix-stream-，点击monitor按钮即可监控"><a href="#9-4-2-访问当前项目-hystrix，将Hystrix的stream地址输入-http-localhost-7000-actuator-hystrix-stream-，点击monitor按钮即可监控" class="headerlink" title="9.4.2 访问当前项目/hystrix，将Hystrix的stream地址输入(http://localhost:7000/actuator/hystrix.stream )，点击monitor按钮即可监控"></a>9.4.2 访问当前项目/hystrix，将Hystrix的stream地址输入(<a href="http://localhost:7000/actuator/hystrix.stream" target="_blank" rel="noopener">http://localhost:7000/actuator/hystrix.stream</a> )，点击monitor按钮即可监控</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531172038.png" alt></p>
+<h3 id="9-4-3-监控中，服务器正常"><a href="#9-4-3-监控中，服务器正常" class="headerlink" title="9.4.3 监控中，服务器正常"></a>9.4.3 监控中，服务器正常</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531172118.png" alt></p>
+<h3 id="9-4-4-监控中，服务器重新启动，断路器打开"><a href="#9-4-4-监控中，服务器重新启动，断路器打开" class="headerlink" title="9.4.4 监控中，服务器重新启动，断路器打开"></a>9.4.4 监控中，服务器重新启动，断路器打开</h3><p><img src="https://raw.githubusercontent.com/SomnambulistOfChina/photo_GitHub/master/photo/20190531172141.png" alt></p>
+
+    
+  </div>
+
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持forsigner</div>
+        <ul>
+        
+          <li class="item">
+            
+              <span>微信扫一扫</span>
+            
+            <img src="/images/qr-wechat.jpeg" alt>
+          </li>
+        
+          <li class="item">
+            
+              <span>支付宝扫一扫</span>
+            
+            <img src="/images/qr-alipay.jpeg" alt>
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2018/03/27/65. SSM框架整合/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2018/04/04/67. 前端_Bootstrap框架概述/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/archives/" rel="noopener noreferrer" target="_self">
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/category/" rel="noopener noreferrer" target="_self">
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/tag/" rel="noopener noreferrer" target="_self">
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/link/" rel="noopener noreferrer" target="_self">
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/about/" rel="noopener noreferrer" target="_self">
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/search/" rel="noopener noreferrer" target="_self">
+              搜索
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a class="CIRCLE" href="/atom.xml" rel="noopener noreferrer" target="_blank">
+              RSS
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"></script>
+    <div id="comment" class="vcomment"></div>
+    <script>
+        var notify = 'false' == true ? true : false;
+        var verify = 'false' == true ? true : false;
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+            return GUEST_INFO.indexOf(item) > -1
+        });
+        guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+        window.valine = new Valine({
+            el: '.vcomment',
+            notify: notify,
+            verify: verify,
+            appId: "b8cfVAxSX9whYsIOMmxwCicp-gzGzoHsz",
+            appKey: "klYDKAeEh6GPa0wnf22lQd96",
+            avatar:'identicon',
+            placeholder: "ヾﾉ≧∀≦)o 来呀！快活呀！~",
+            guest_info:guest_info,
+            pageSize:'10'
+        });
+    </script>
+  
+    
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
